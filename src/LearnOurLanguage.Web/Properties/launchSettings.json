@@ -11,12 +11,12 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "index.html",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Angular2WebpackVisualStudio": {
+    "LearnOurLanguage": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000/",
