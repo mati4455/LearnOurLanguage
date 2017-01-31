@@ -331,3 +331,4 @@ src/Angular2WebpackVisualStudio/wwwroot/favicon.ico
 src/Angular2WebpackVisualStudio/wwwroot/index.html
 /packages
 /src/LearnOurLanguage.Web/wwwroot
+/src/LearnOurLanguage.Web/appsettings.json
