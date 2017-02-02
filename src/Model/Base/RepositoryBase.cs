@@ -55,6 +55,7 @@ namespace Model.Base
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 return false;
             }
         }
@@ -69,6 +70,7 @@ namespace Model.Base
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 return false;
             }
         }
@@ -83,6 +85,7 @@ namespace Model.Base
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 return false;
             }
         }
@@ -101,6 +104,7 @@ namespace Model.Base
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 return false;
             }
         }
@@ -125,6 +129,7 @@ namespace Model.Base
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 return false;
             }
         }
@@ -143,8 +148,14 @@ namespace Model.Base
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 return false;
             }
+        }
+
+        private void LogException(Exception ex)
+        {
+            Logger.LogError($"repository db error: {ex.Message}");
         }
     }
 }

@@ -113,6 +113,7 @@ namespace LearnOurLanguage.Web
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             loggerFactory.AddFile("Logs/log-{Date}.txt");
+            loggerFactory.AddFile("Logs/error_log-{Date}.txt", LogLevel.Warning);
 
             App.LoggerFactory = loggerFactory;
             App.Logger = loggerFactory.CreateLogger("trace");
