@@ -1,10 +1,15 @@
-a {
-    color: #03A9F4;
-}
+@import "fonts.scss";
+
 body {
+    font-family: 'Roboto', sans-serif;
+    
     background: #fff;
 }
 
+a {
+    color: #03A9F4;
+}
+
 #main-container {
-    margin-top: 50px; // odstêp od menu
+    margin-top: 50px; // odstÄ™p od menu
 }
