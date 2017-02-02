@@ -37,6 +37,6 @@ i od razu je kompilował.
 ## Tworzenie front-endu
 Do tworzenia frontu będziemy używać Visual Studio Code (w żadnym wypadku pełnego Visual Studio).
 
-W repozytorium znajdują się podpięte taski pod VS Code. Aby rozpocząć pracę z tworzeniem należy uruchomić VS Code, a następnie otworzyć folder -> `src\LearnOurLanguage.Web\angular2App`
+W repozytorium znajdują się podpięte taski pod VS Code. Aby rozpocząć pracę z tworzeniem należy uruchomić VS Code, a następnie otworzyć folder -> `src/LearnOurLanguage.Web/angular2App`
 
-Będzie to nasz wejściowy folder. Po edyzji plik `app.scss` należy go skompilować -> skrót `CTRL + SHIFT + B`
+Będzie to nasz wejściowy folder. Po edycji pliku `app.scss`, wymagane jest jego skompilowanie -> skrót `CTRL + SHIFT + B`
