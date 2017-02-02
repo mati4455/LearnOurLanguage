@@ -8,7 +8,7 @@
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
     "Microsoft.AspNetCore.Localization": "1.1.0",
-    "Microsoft.AspNetCore.Mvc.Localization": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Localization": "1.1.1",
     "Microsoft.AspNetCore.Routing": "1.1.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
@@ -22,7 +22,7 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
     "Model": "1.0.0-*",
-    "Autofac": "4.2.1",
+    "Autofac": "4.3.0",
     "Autofac.Extensions.DependencyInjection": "4.0.0",
     "Swashbuckle": "6.0.0-beta902",
     "Microsoft.AspNetCore.Session": "1.1.0"
