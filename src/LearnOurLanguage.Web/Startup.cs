@@ -81,6 +81,8 @@ namespace LearnOurLanguage.Web
                     });
                 });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             // Database DI
             var connectionString = Configuration.GetConnectionString("LearnOurLanguageContext");
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
@@ -110,14 +112,17 @@ namespace LearnOurLanguage.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddFile("Logs/log-{Date}.txt");
 
+            App.LoggerFactory = loggerFactory;
+            App.Logger = loggerFactory.CreateLogger("trace");
+            
             app.UseSession();
 
             app.UseHttpException();
             app.UseDeveloperExceptionPage();
 
             app.UseMvc();
-
             app.Use(async (context, next) =>
             {
                 await next();
@@ -140,11 +145,14 @@ namespace LearnOurLanguage.Web
                 RequestPath = new PathString("/node_modules"),
                 EnableDirectoryBrowsing = false
             });
-
-            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
-
+            
             app.UseSwagger();
             app.UseSwaggerUi();
+
+            appLifetime.ApplicationStopped.Register(() =>
+            {
+                this.ApplicationContainer.Dispose();
+            });
         }
     }
 }

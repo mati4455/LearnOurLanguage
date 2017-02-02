@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model.Const;
+using Model.Core;
 using Model.Models;
 
 namespace Model.Base
@@ -12,12 +13,14 @@ namespace Model.Base
     public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel, new()
     {
         private DbSet<T> _dbSet;
+        protected ILogger<RepositoryBase<T>> Logger => App.LoggerFactory.CreateLogger<RepositoryBase<T>>();
 
         public RepositoryBase()
         {
+            Logger.LogInformation($"init repository ({typeof(T).Name})");
         }
 
-        public RepositoryBase(DatabaseContext db)
+        public RepositoryBase(DatabaseContext db) : this()
         {
             Context = db;
         }

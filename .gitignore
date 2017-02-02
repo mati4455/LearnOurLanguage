@@ -332,3 +332,5 @@ src/Angular2WebpackVisualStudio/wwwroot/index.html
 /packages
 /src/LearnOurLanguage.Web/wwwroot
 /src/LearnOurLanguage.Web/appsettings.json
+/src/LearnOurLanguage.Web/logs.txt
+/src/LearnOurLanguage.Web/Logs

@@ -6,7 +6,6 @@
       "type": "platform"
     },
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
     "Microsoft.AspNetCore.Localization": "1.1.0",
     "Microsoft.AspNetCore.Mvc.Localization": "1.1.1",
     "Microsoft.AspNetCore.Routing": "1.1.0",
@@ -25,11 +24,12 @@
     "Autofac": "4.3.0",
     "Autofac.Extensions.DependencyInjection": "4.0.0",
     "Swashbuckle": "6.0.0-beta902",
-    "Microsoft.AspNetCore.Session": "1.1.0"
-  },
+    "Microsoft.AspNetCore.Session": "1.1.0",
+    "BundlerMinifier.Core": "2.2.306",
+    "Microsoft.AspNetCore.Mvc": "1.1.1",
+    "Serilog.Extensions.Logging.File": "1.0.0"  },
 
     "tools": {
-        "BundlerMinifier.Core": "2.0.238",
         "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
         "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
         "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
