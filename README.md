@@ -2,6 +2,7 @@
 ## Wymagania wstępne
 ### Oprogramowanie
 + Visual Studio 2015 Update 3
++ Visual Studio Code -> [Pobierz tutaj](https://code.visualstudio.com/)
 + .NET Core 1.1 -> [Pobierz tutaj](https://www.microsoft.com/net/download/core#/current)
 + SQL Server 2012
 + Node.js -> [Pobierz tutaj](https://nodejs.org/en/)
@@ -31,3 +32,11 @@ Teraz pora na zbudowanie aplikacji. W tym celu będziemy uruchamiać skrypt `scr
 
 Podczas produkcji będziemy używać WebPacka a trybie `watch`. Oznacza to, że będzie on nasłuchiwał zmian w plikach 
 i od razu je kompilował.
+
+
+## Tworzenie front-endu
+Do tworzenia frontu będziemy używać Visual Studio Code (w żadnym wypadku pełnego Visual Studio).
+
+W repozytorium znajdują się podpięte taski pod VS Code. Aby rozpocząć pracę z tworzeniem należy uruchomić VS Code, a następnie otworzyć folder -> `src\LearnOurLanguage.Web\angular2App`
+
+Będzie to nasz wejściowy folder. Po edyzji plik `app.scss` należy go skompilować -> skrót `CTRL + SHIFT + B`
