@@ -81,7 +81,7 @@ namespace LearnOurLanguage.Web
                     });
                 });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Database DI
             var connectionString = Configuration.GetConnectionString("LearnOurLanguageContext");
@@ -139,7 +139,8 @@ namespace LearnOurLanguage.Web
 
             app.UseFileServer();
 
-            string libPath = Path.GetFullPath(Path.Combine(env.WebRootPath, @"..\node_modules\"));
+            var libPath = Path.Combine(env.ContentRootPath, "node_modules");
+            //Path.GetFullPath(Path.Combine(env.WebRootPath, @"..\node_modules\")); // coś się...?
             app.UseFileServer(new FileServerOptions()
             {
                 FileProvider = new PhysicalFileProvider(libPath),

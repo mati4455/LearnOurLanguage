@@ -21,13 +21,13 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
     "Model": "1.0.0-*",
-    "Autofac": "4.3.0",
     "Autofac.Extensions.DependencyInjection": "4.0.0",
     "Swashbuckle": "6.0.0-beta902",
     "Microsoft.AspNetCore.Session": "1.1.0",
     "BundlerMinifier.Core": "2.2.306",
-    "Microsoft.AspNetCore.Mvc": "1.1.1",
-    "Serilog.Extensions.Logging.File": "1.0.0"  },
+    "Serilog.Extensions.Logging.File": "1.0.0",
+    "Autofac": "4.3.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.1" },
 
     "tools": {
         "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
