@@ -13,7 +13,7 @@ namespace Model.Models
         public DbSet<Dictionary> Dictionaries { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Game> Games { get; set; }
-        public DbSet<GameSession> GamesSessions { get; set; }
+        public DbSet<GameSession> GameSessions { get; set; }
         public DbSet<GameSessionTranslation> GameSessionTranslations { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
