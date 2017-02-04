@@ -1,8 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './modules/shared/components/not-found/not-found.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
-    /*, // ≥adowanie modu≥Ûw?
+    {
+        path: '**',
+        component: NotFoundComponent
+    }
+    //{ path: '', redirectTo: 'home', pathMatch: 'full' }
+    /*, // ≈Çadowanie modu≈Ç√≥w
     {
         path: 'about', loadChildren: './modules/about/about.module#AboutModule',
     }*/

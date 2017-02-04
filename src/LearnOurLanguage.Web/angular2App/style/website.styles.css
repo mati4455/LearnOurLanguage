@@ -30,6 +30,8 @@
   src: local("Roboto Bold Italic"), local("Roboto-BoldItalic"), url("../fonts/roboto-v15-latin-700italic.woff2") format("woff2"), url("../fonts/roboto-v15-latin-700italic.woff") format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
 
+/* zmienne */
+/* koniec zmiennych */
 body {
   font-family: 'Roboto', sans-serif;
   background: #fff; }
@@ -37,5 +39,84 @@ body {
 a {
   color: #03A9F4; }
 
-#main-container {
-  margin-top: 50px; }
+span.b {
+  font-weight: 700; }
+
+span.u {
+  text-decoration: underline; }
+
+span.i {
+  font-style: italic; }
+
+.justify {
+  text-align: justify; }
+
+.center {
+  text-align: center; }
+
+.left {
+  text-align: left; }
+
+.right {
+  text-align: right; }
+
+.clearboth {
+  clear: both; }
+
+.footer {
+  margin-top: 40px;
+  border-top: 1px solid #999; }
+  .footer p {
+    padding: 20px 0;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 3px;
+    font-style: italic; }
+
+#home .title {
+  font-size: 60px;
+  color: #fff;
+  text-shadow: 0 0 10px #555;
+  margin: 30px 0; }
+
+#home .header {
+  position: relative;
+  padding: 0 0 30px;
+  background: #3f75c7;
+  box-shadow: 0 0 30px #222; }
+
+#home .content {
+  margin: 50px auto; }
+
+#home .box {
+  margin-top: 15px;
+  margin-bottom: 15px; }
+  #home .box h2 {
+    margin: 15px; }
+  #home .box .inner {
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 5px 1px #222; }
+
+#home .nav-action div > div {
+  text-align: center;
+  padding: 30px; }
+
+#home .nav-action a {
+  font-size: 40px;
+  padding: 10px 20px; }
+
+.login-box {
+  background: url("/assets/world_map.png") center center no-repeat scroll;
+  min-height: 600px; }
+  .login-box .box {
+    margin-top: 100px;
+    padding: 30px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 200px rgba(0, 0, 0, 0.5); }
+    .login-box .box h1 {
+      margin-top: 0px; }
+
+.register-box .box {
+  margin-top: 30px; }

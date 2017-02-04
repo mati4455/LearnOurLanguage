@@ -16,6 +16,8 @@ import { AppRoutes } from './app.routes';
 
 import { AppComponent } from './app.component';
 
+import { BaseHttpService } from './services';
+
 let optionsForNotification: any = {
   animate: 'flyRight',
   positionClass: 'toast-bottom-right',
@@ -25,6 +27,7 @@ let optionsForNotification: any = {
     imports: [
         BrowserModule,
         AppRoutes,
+        FormsModule,
         SlimLoadingBarModule.forRoot(),
         ToastModule.forRoot(optionsForNotification),
         SharedModule.forRoot(),
@@ -32,7 +35,8 @@ let optionsForNotification: any = {
     ],
 
     exports: [
-        SlimLoadingBarModule
+        SlimLoadingBarModule,
+        FormsModule
     ],
 
     declarations: [
@@ -42,8 +46,8 @@ let optionsForNotification: any = {
     bootstrap: [AppComponent],
 
     providers: [
-        { provide: LocationStrategy, useClass: PathLocationStrategy }/*,
-        BaseHttpService*/
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
+        BaseHttpService
     ]
 })
 

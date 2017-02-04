@@ -37,7 +37,8 @@ namespace Model.Models
                         new Language { Name = "Włoski" },
                         new Language { Name = "Szwedzki" },
                         new Language { Name = "Czeski" },
-                        new Language { Name = "Rosyjski" }
+                        new Language { Name = "Rosyjski" },
+                        new Language { Name = "Hiszpański" }
                     };
                     context.AddRange(languages);
                     context.SaveChanges();

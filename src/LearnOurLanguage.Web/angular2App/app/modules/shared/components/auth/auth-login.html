@@ -1,0 +1,22 @@
+<div class="login-box">
+    <div class="container">
+        <div class="col-xs-12 col-sm-6 col-lg-4 col-sm-push-3 col-lg-push-4">
+            <div class="box">
+                <h1>Logowanie</h1>
+                <form (ngSubmit)="logIn()">
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" name="login">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Hasło</label>
+                        <input type="password" class="form-control" id="password" required [(ngModel)]="model.password" name="password">
+                    </div>
+                    <a class="btn btn-default pull-left" routerLink="/">Powrót</a>
+                    <button type="submit" class="btn btn-primary pull-right">Zaloguj</button>
+                    <div class="clearboth"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

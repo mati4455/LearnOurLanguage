@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using LearnOurLanguage.Web.Base;
 using Microsoft.AspNetCore.Mvc;
 using Model.Auth;
@@ -66,7 +67,8 @@ namespace LearnOurLanguage.Web.Controllers.api
             data.RoleId = input.RoleId > 0 ? input.RoleId : Roles.IdUser;
             data.Salt = salt;
             data.Password = HashHelper.ComputeHash(input.Password.Trim(), salt);
-            
+            data.Date = DateTime.Now;
+
             if (!data.IsValid) return JsonHelper.Error(ExceptionConst.WrongData);
             return JsonHelper.Response(
                 UsersRepository.Insert(data) && UsersRepository.Save()
