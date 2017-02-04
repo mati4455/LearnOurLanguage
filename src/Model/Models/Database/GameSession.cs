@@ -16,7 +16,9 @@ namespace Model.Models.Database
         public virtual User User { get; set; }
 
         [Required]
-        public virtual DateTime Date { get; set; }
+        public virtual DateTime DateStart { get; set; }
+
+        public virtual DateTime? DateEnd { get; set; }
 
         [NotMapped]
         public override bool IsValid => GameId > 0 && UserId > 0;

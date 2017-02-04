@@ -17,6 +17,8 @@ namespace Model.Models.Database
         [Required]
         public virtual bool Correct { get; set; }
 
+        public virtual int Duration { get; set; }
+
         [NotMapped]
         public override bool IsValid => GameSessionId > 0 && TranslationId > 0;
     }
