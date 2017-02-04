@@ -108,7 +108,9 @@ namespace LearnOurLanguage.Web
         /// <param name="appLifetime"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
-        public void Configure(IApplicationBuilder app, IApplicationLifetime appLifetime, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        /// <param name="scopeFactory"></param>
+        public void Configure(IApplicationBuilder app, IApplicationLifetime appLifetime, 
+            IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -118,6 +120,8 @@ namespace LearnOurLanguage.Web
             App.LoggerFactory = loggerFactory;
             App.Logger = loggerFactory.CreateLogger("trace");
             
+            scopeFactory.SeedData();
+
             app.UseSession();
 
             app.UseHttpException();

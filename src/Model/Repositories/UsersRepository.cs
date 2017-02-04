@@ -16,20 +16,6 @@ namespace Model.Repositories
 
         }
 
-        public IQueryable<AppUserVo> GetBasiInfo()
-        {
-            return GetAll().Select(x => new AppUserVo
-            {
-                UserId = x.Id,
-                RoleId = x.Role.Id,
-                AccessLevel = x.Role.AccessLevel,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Email = x.Email,
-                RoleName = x.Role.Name
-            });
-        }
-
         public User PrepareData(User user)
         {
             if (user.Password.Length > 0)

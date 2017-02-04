@@ -3,7 +3,8 @@ using Model.Models.Database;
 
 namespace Model.Repositories.Interfaces
 {
-    interface IUsersRepository : IRepositoryBase<User>
+    public interface IUsersRepository : IRepositoryBase<User>
     {
+        User PrepareData(User user);
     }
 }

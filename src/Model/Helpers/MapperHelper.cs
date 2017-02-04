@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using Model.Models.Account;
+using Model.Models.Database;
 
 namespace Model.Helpers
 {
@@ -16,6 +18,9 @@ namespace Model.Helpers
                     x.CreateMap<EventVo, Event>()
                         .ForMember(dest => dest.BuildingId, opts => opts.MapFrom(src => src.Building.Id));
                 */
+                x.CreateMap<User, AppUserVo>()
+                    .ForMember(dest => dest.AccessLevel, opts => opts.MapFrom(src => src.Role.AccessLevel))
+                    .ForMember(dest => dest.RoleName, opts => opts.MapFrom(src => src.Role.Name));
             });
         }
     }
