@@ -20,7 +20,9 @@ namespace Model.Helpers
                 */
                 x.CreateMap<User, AppUserVo>()
                     .ForMember(dest => dest.AccessLevel, opts => opts.MapFrom(src => src.Role.AccessLevel))
-                    .ForMember(dest => dest.RoleName, opts => opts.MapFrom(src => src.Role.Name));
+                    .ForMember(dest => dest.RoleName, opts => opts.MapFrom(src => src.Role.Name))
+                    .ForMember(dest => dest.RoleId, opts => opts.MapFrom(src => src.Role.Id))
+                    .ForMember(dest => dest.UserId, opts => opts.MapFrom(src => src.Id));
             });
         }
     }
