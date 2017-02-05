@@ -15,6 +15,8 @@ namespace Model.Models.Database
         [MaxLength(1000)]
         public virtual string Description { get; set; }
 
+        public virtual bool Public { get; set; }
+
         [Required]
         public virtual DateTime Date { get; set; }
 

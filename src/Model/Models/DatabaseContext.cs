@@ -11,6 +11,7 @@ namespace Model.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Dictionary> Dictionaries { get; set; }
+        public DbSet<UserDictionary> UserDictionaries { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameSession> GameSessions { get; set; }
