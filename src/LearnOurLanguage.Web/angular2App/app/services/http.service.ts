@@ -9,16 +9,17 @@ import 'rxjs/Rx';
 * Bazowy serwis Http odpowiedzialny za wykonywanie żądań GET, POST, PUT oraz DELETE.
 */
 @Injectable()
-export class BaseHttpService {    
+export class BaseHttpService {
     constructor(private _http: Http, private _toast: ToastsManager, private _loader: SlimLoadingBarService) { }
 
     public get(url: string, callback: Function, scope: any, odataConfig: ODataConfig = null): void {
         let me = this;
-        var headers = me.getHeaderSettings();
+        let headers = me.getHeaderSettings();
 
         me.showLoader();
-        if (odataConfig === null)
+        if (odataConfig === null) {
             odataConfig = new ODataConfig();
+        }
 
         odataConfig.headers = headers;
         me._http.get(url, odataConfig).map(responseData => {
@@ -31,7 +32,7 @@ export class BaseHttpService {
 
     public post(url: string, object: any, callback: Function, scope: any): void {
         let me = this;
-        var headers = me.getHeaderSettings();
+        let headers = me.getHeaderSettings();
 
         me.showLoader();
         me._http.post(url, JSON.stringify(object), {headers: headers}).map(responseData => {
@@ -41,10 +42,10 @@ export class BaseHttpService {
             error => me.processError(error)
         );
     }
-    
+
     public put(url: string, object: any, callback: Function, scope: any): void {
         let me = this;
-        var headers = me.getHeaderSettings();
+        let headers = me.getHeaderSettings();
 
         me.showLoader();
         me._http.put(url, JSON.stringify(object), {headers: headers}).map(responseData => {
@@ -57,7 +58,7 @@ export class BaseHttpService {
 
     public delete(url: string, callback: Function, scope: any): void {
         let me = this;
-        var headers = me.getHeaderSettings();
+        let headers = me.getHeaderSettings();
 
         me.showLoader();
         me._http.delete(url, {headers: headers}).map(responseData => {
@@ -71,7 +72,7 @@ export class BaseHttpService {
     private processResponse(data: any, callback: Function, scope: any): void {
         let me = this;
         me.hideLoader();
-        
+
         if ((data !== undefined || data !== null) && data.success === true) {
             callback.call(scope, data.data, data.count);
         } else {
@@ -89,8 +90,8 @@ export class BaseHttpService {
     }
 
     private getHeaderSettings(): Headers {
-        var headers = new Headers();
-        
+        let headers = new Headers();
+
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         headers.append('X-Requested-With', 'XMLHttpRequest');

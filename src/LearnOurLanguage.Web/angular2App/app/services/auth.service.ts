@@ -12,12 +12,12 @@ export class AuthService extends BaseService {
         let me = this;
         me.service.get(me.api() + '/GetAccess', me.updateLocalStorage, me);
     }
-        
-    private updateLocalStorage(data: any):void {
-        let me = this;        
+
+    private updateLocalStorage(data: any): void {
+        let me = this;
         localStorage.setItem('accessLevel', data.accessLevel);
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('loggedIn', (data.accessLevel > 0) ? '1' : '0');
     }
-    
+
 }

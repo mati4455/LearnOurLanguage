@@ -13,12 +13,12 @@ import { User } from '../../../../models';
 
 export class AuthRegisterComponent {
 
-    constructor(
-        private service: UserService, 
-        private toast: ToastsManager, 
-        private router: Router) { }
-
     model: User;
+
+    constructor(
+        private service: UserService,
+        private toast: ToastsManager,
+        private router: Router) { }
 
     ngOnInit() {
         let me = this;

@@ -5,6 +5,6 @@ import { BaseService } from './base.service';
 @Injectable()
 export class UserService extends BaseService {
 
-    constructor(private serv: BaseHttpService) { super(serv, '/api/users')}
-    
+    constructor(private serv: BaseHttpService) { super(serv, '/api/users'); }
+
 }

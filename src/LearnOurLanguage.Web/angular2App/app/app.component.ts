@@ -4,7 +4,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { AuthService } from './services';
 
 // AoT compilation doesn't support 'require'.
-import "../assets/world_map.png";
+import '../assets/world_map.png';
 
 @Component({
     selector: 'my-app',
@@ -12,31 +12,29 @@ import "../assets/world_map.png";
     providers: [AuthService]
 })
 
-export class AppComponent { 
-    accessLevel : number;
+export class AppComponent {
+    accessLevel: number;
 
-    constructor(private service: AuthService, private toastr: ToastsManager, vRef: ViewContainerRef, private slimLoadingBarService: SlimLoadingBarService) { 
+    constructor(private service: AuthService, private toastr: ToastsManager,
+        vRef: ViewContainerRef, private slimLoadingBarService: SlimLoadingBarService) {
         let me = this;
         me.toastr.setRootViewContainerRef(vRef);
     }
-        
+
     ngOnInit() {
         let me = this;
         me.service.refreshSession();
     }
 
     startLoading() {
-        this.slimLoadingBarService.start(() => {
-            console.log('Loading complete');
-        });
+        this.slimLoadingBarService.start(() => {});
     }
- 
+
     stopLoading() {
         this.slimLoadingBarService.stop();
     }
- 
+
     completeLoading() {
         this.slimLoadingBarService.complete();
     }
-
 }

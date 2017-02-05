@@ -15,11 +15,11 @@ import { AppUserAuthVo } from '../../../../models';
 
 export class AuthLoginComponent {
 
-    // załadowanie przez DI serwisu do autoryzacji
-    constructor(private service: AuthService, public toast: ToastsManager, public router: Router) { }
-
     // inicjalizacja modelu formularza
     model = new AppUserAuthVo();
+
+    // załadowanie przez DI serwisu do autoryzacji
+    constructor(private service: AuthService, public toast: ToastsManager, public router: Router) { }
 
     ngOnInit() {
         let me = this;
@@ -29,12 +29,12 @@ export class AuthLoginComponent {
     }
 
     // wysłanie formularza
-    logIn():void {
+    logIn(): void {
         let me = this;
         me.service.post(me.model, me.logged, me);
     }
 
-    logInAs(login: string, password: string):void {
+    logInAs(login: string, password: string): void {
         let me = this;
         let params = {
             login: login,
@@ -44,21 +44,21 @@ export class AuthLoginComponent {
     }
 
     // metoda wywoływana po procesie autoryzacji
-    logged(data: any):void {
+    logged(data: any): void {
         let me = this;
         localStorage.setItem('accessLevel', data.accessLevel);
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('loggedIn', (data.accessLevel > 0) ? '1' : '0');
-               
+
         if (data.accessLevel > 0) {
-            me.toast.success("Zostałeś zalogowany");
+            me.toast.success('Zostałeś zalogowany');
             me.navigateToPanel();
         } else {
-            me.toast.error("Podane dane są błędne");
+            me.toast.error('Podane dane są błędne');
         }
     }
 
-    private navigateToPanel():void {
+    private navigateToPanel(): void {
         let me = this;
         me.router.navigate([me.getAccountLink()]);
     }
@@ -77,7 +77,9 @@ export class AuthLoginComponent {
         let me = this;
         let data = me.getAccessLevel();
 
-        if (data == 100) return '/user';
+        if (data == 100) {
+            return '/user';
+        }
 
         return '/';
     }
