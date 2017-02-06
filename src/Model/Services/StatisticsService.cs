@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Model.Helpers;
 using Model.Models;
 using Model.Models.Database;
 using Model.Models.Statistics;
-using Model.Models.Statistics.Charts;
 using Model.Services.Interfaces;
 
 namespace Model.Services
