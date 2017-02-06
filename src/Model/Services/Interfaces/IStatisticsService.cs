@@ -10,10 +10,6 @@ namespace Model.Services.Interfaces
 {
     public interface IStatisticsService
     {
-        PieChartData GetGamesStatisticPieChartForUser(IList<GameStatistic> data);
-        LineChartData GetSummaryStatistics(IList<Statistics> data);
-        PieChartData GetBasicStatistics(Statistics data);
-        LineChartData GetDetailsStatisticsForDictionary(IList<TranslationStatistics> data);
         IList<GameStatistic> GetGamesStatisticsForUser(int userId, int? langId);
         IList<Statistics> GetStatisticsForUserPeriod(int userId, DateTime startDate, DateTime endDate, int? langId);
         Statistics GetStatisticsForGameSession(int gameSessionId);
