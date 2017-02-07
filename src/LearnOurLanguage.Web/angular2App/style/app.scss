@@ -122,27 +122,30 @@ span.i { font-style: italic; }
 
 .static-background {    
     background: url('/assets/world_map.png') center center no-repeat scroll;
+
+    & > div {
+        background: rgba(255, 255,255, .8);
+    }
 }
 
 #userModule {
-    min-height: 700px;
+    min-height: 600px;
     margin-top: $margin;
     margin-bottom: $margin;
-    background: rgba(255, 255,255, .8);
 
     .header {
         margin-top: $margin;
     }
 
     .tile {
-        background: rgba(255, 255, 255, .85);
-        box-shadow: 1px 1px 3px #666;
+        background: rgba(255, 255, 255, .6);
+        box-shadow: 1px 1px 3px #555;
     }
 
     .menu-tiles {
         a {
             @extend .tile;
-            
+
             display: block;
             font-size: 36px;
             text-decoration: none;

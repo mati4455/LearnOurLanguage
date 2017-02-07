@@ -2333,23 +2333,25 @@ span.i {
 
 .static-background {
   background: url("/assets/world_map.png") center center no-repeat scroll; }
+  .static-background > div {
+    background: rgba(255, 255, 255, 0.8); }
 
 #userModule {
-  min-height: 700px;
+  min-height: 600px;
   margin-top: 30px;
-  margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.8); }
+  margin-bottom: 30px; }
   #userModule .header {
     margin-top: 30px; }
+  #userModule .tile, #userModule .menu-tiles a {
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 1px 1px 3px #555; }
   #userModule .menu-tiles a {
     display: block;
-    background: rgba(255, 255, 255, 0.85);
     font-size: 36px;
     text-decoration: none;
     color: #333;
     line-height: 80px;
     padding: 0 30px;
-    box-shadow: 1px 1px 3px #666;
     margin: 0 0 30px; }
     #userModule .menu-tiles a i {
       margin-right: 15px; }
