@@ -2,12 +2,14 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Autofac.Extras.Moq": "4.1.0-rc5-246",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Microsoft.NETCore.App": {
       "version": "1.1.0",
       "type": "platform"
     },
     "Model": "1.0.0-*",
+    "Moq": "4.6.38-alpha",
     "xunit": "2.2.0-beta5-build3474"
   },
   "testRunner": "xunit",

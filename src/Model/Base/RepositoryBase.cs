@@ -13,11 +13,11 @@ namespace Model.Base
     public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel, new()
     {
         private DbSet<T> _dbSet;
-        protected ILogger<RepositoryBase<T>> Logger => App.LoggerFactory.CreateLogger<RepositoryBase<T>>();
+        //protected ILogger<RepositoryBase<T>> Logger => App.LoggerFactory.CreateLogger<RepositoryBase<T>>();
 
         public RepositoryBase()
         {
-            Logger.LogInformation($"init repository ({typeof(T).Name})");
+            //Logger.LogInformation($"init repository ({typeof(T).Name})");
         }
 
         public RepositoryBase(DatabaseContext db) : this()
@@ -155,7 +155,7 @@ namespace Model.Base
 
         private void LogException(Exception ex)
         {
-            Logger.LogError($"repository db error: {ex.Message}");
+            //Logger.LogError($"repository db error: {ex.Message}");
         }
     }
 }
