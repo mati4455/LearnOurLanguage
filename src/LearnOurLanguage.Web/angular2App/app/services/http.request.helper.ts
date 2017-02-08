@@ -3,8 +3,8 @@ import {Http, Headers, RequestOptions, URLSearchParams, BaseRequestOptions} from
 /**
 * Klasa pomocnicza dla żądań HTTP.
 */
-export class HttpRequestHelper {   
-    
+export class HttpRequestHelper {
+
     static getErrorMessage(status: number): string {
         switch (status) {
             case 403:
@@ -19,7 +19,7 @@ export class HttpRequestHelper {
 }
 
 export class ODataConfig extends RequestOptions { // BaseRequestOptions
-    private options: RequestOptions; 
+    private options: RequestOptions;
     private params: URLSearchParams;
 
     // parametry wyszukiwania
@@ -54,43 +54,45 @@ export class ODataConfig extends RequestOptions { // BaseRequestOptions
         this.params = new URLSearchParams();
 
         // filtrowanie
-        var filterString = "";
-        var filters = new Array<string>();
+        let filterString = '';
+        let filters = new Array<string>();
 
         //filters.push(this.filterEqualsString);
         //filters.push(this.filterContainsString);
         //filters.push(this.filterDateString);
 
-        filterString = filters.filter(item => item !== "").join(' and ');
+        filterString = filters.filter(item => item !== '').join(' and ');
 
-        if (filterString !== "")
-            this.params.append("$filter", filterString);
+        if (filterString !== '') {
+            this.params.append('$filter', filterString);
+        }
 
         // top
         if (this.top !== undefined && this.top !== null && this.top > 0) {
-            if (!this.params.has("$top")) {
-                this.params.append("$top", this.top.toString());
+            if (!this.params.has('$top')) {
+                this.params.append('$top', this.top.toString());
             } else {
-                this.params.set("$top", this.top.toString());
+                this.params.set('$top', this.top.toString());
             }
         }
 
         // skip
         if (this.skip !== undefined && this.skip !== null) {
-            if (!this.params.has("$skip")) {
-                this.params.append("$skip", this.skip.toString());
+            if (!this.params.has('$skip')) {
+                this.params.append('$skip', this.skip.toString());
             } else {
-                this.params.set("$skip", this.skip.toString());
+                this.params.set('$skip', this.skip.toString());
             }
         }
 
         // dzięki temu mamy ilość wszystkich rekordów (przed filtrowaniem, topem, skipem itd.!)
-        if (this.count)
-            this.params.append("$count", "true");
+        if (this.count) {
+            this.params.append('$count', 'true');
+        }
 
         // sortowanie
         if (this.orderByParam) {
-            this.params.append("$orderby",
+            this.params.append('$orderby',
                 (this.orderByType !== undefined ? `${this.orderByParam} ${OrderType[this.orderByType]}` : `${this.orderByParam}`));
         }
 

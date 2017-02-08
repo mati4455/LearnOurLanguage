@@ -19,16 +19,16 @@ export class AuthLogoutComponent {
         me.service.getAll(me.logout, me);
     }
 
-    logout(data: any):void {
+    logout(data: any): void {
         let me = this;
 
         // usunięcie informacji o aktualnym statusie zalogowania
         localStorage.removeItem('accessLevel');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('userId');
-        
-        me.toast.info("Zostałeś wylogowany");
-        
+
+        me.toast.info('Zostałeś wylogowany');
+
         // przekiewoanie na stronę główną
         me.router.navigate(['/']);
     }

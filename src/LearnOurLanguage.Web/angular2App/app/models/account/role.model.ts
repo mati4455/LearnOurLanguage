@@ -1,8 +1,8 @@
 export class Role {
 
     constructor(
-        public id: number = 0,
-        public name: string = '',
+        public id = 0,
+        public name = '',
         public accessLevel: number = -1
     ) { }
 

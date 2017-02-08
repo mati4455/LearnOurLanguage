@@ -1,18 +1,18 @@
 export abstract class BaseService {
-    
+
     constructor(public service: any, private apiUrl: string) { }
 
-    protected api(id: any = ''):string {
+    protected api(id: any = ''): string {
         let me = this;
         return +id > 0 ? me.apiUrl + '/' + id : me.apiUrl;
     }
 
-    getAll(callback: Function, scope: any):any {
+    getAll(callback: Function, scope: any): any {
         let me = this;
         me.service.get(me.api(), callback, scope);
     }
 
-    get(id: number, callback: Function, scope: any):any {
+    get(id: number, callback: Function, scope: any): any {
         let me = this;
         me.service.get(me.api(id), callback, scope);
     }

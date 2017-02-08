@@ -8,7 +8,7 @@ import { AuthLoginComponent } from '../../shared/components/auth/auth-login.comp
     providers: [AuthService, AuthLoginComponent]
 })
 
-export class HomeComponent {    
+export class HomeComponent {
     public isLogged: boolean;
     public accessLevel: number;
 

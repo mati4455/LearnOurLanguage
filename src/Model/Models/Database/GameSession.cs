@@ -12,6 +12,10 @@ namespace Model.Models.Database
         public virtual Game Game { get; set; }
 
         [Required]
+        public virtual int DictionaryId { get; set; }
+        public virtual Dictionary Dictionary { get; set; }
+
+        [Required]
         public virtual int UserId { get; set; }
         public virtual User User { get; set; }
 

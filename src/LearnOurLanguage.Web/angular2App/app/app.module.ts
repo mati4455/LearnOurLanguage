@@ -10,6 +10,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 import { SharedModule } from './modules/shared/shared.module';
 import { HomeModule } from './modules/home/home.module';
+import { UserModule } from './modules/user/user.module';
 
 import { Configuration } from './app.constants';
 import { AppRoutes } from './app.routes';
@@ -31,7 +32,8 @@ let optionsForNotification: any = {
         SlimLoadingBarModule.forRoot(),
         ToastModule.forRoot(optionsForNotification),
         SharedModule.forRoot(),
-        HomeModule
+        HomeModule,
+        UserModule
     ],
 
     exports: [
