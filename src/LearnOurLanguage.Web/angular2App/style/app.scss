@@ -157,12 +157,78 @@ span.i { font-style: italic; }
             i {
                 margin-right: $half-margin;
             }
+        }
 
-            &:nth-child(1):hover { i { color: $menu_hover_board; } }
-            &:nth-child(2):hover { i { color: $menu_hover_dictionaries; } }
-            &:nth-child(3):hover { i { color: $menu_hover_games; } }
-            &:nth-child(4):hover { i { color: $menu_hover_statistics; } }
-            &:nth-child(5):hover { i { color: $menu_hover_logout; } }
+        &.text-color {
+            a {
+                &:nth-child(1) { &:hover, &.active { i { color: $menu_hover_board; } } }
+                &:nth-child(2) { &:hover, &.active { i { color: $menu_hover_dictionaries; } } }
+                &:nth-child(3) { &:hover, &.active { i { color: $menu_hover_games; } } }
+                &:nth-child(4) { &:hover, &.active { i { color: $menu_hover_statistics; } } }
+                &:nth-child(5) { &:hover, &.active { i { color: $menu_hover_logout; } } }
+            }
+        }
+        
+        &.background-color {
+            a {
+                &:hover, &.active { color: #fff; text-shadow: 1px 1px 3px #000; }
+                &:nth-child(1) { &:hover, &.active { background: $menu_hover_board; } }
+                &:nth-child(2) { &:hover, &.active { background: $menu_hover_dictionaries; } }
+                &:nth-child(3) { &:hover, &.active { background: $menu_hover_games; } }
+                &:nth-child(4) { &:hover, &.active { background: $menu_hover_statistics; } }
+                &:nth-child(5) { &:hover, &.active { background: $menu_hover_logout; } }
+            }
+        }
+    }
+}
+
+#userModule.layout-v2 {
+    position: relative;
+    a {
+        margin-left: $half-margin;
+        margin-right: $half-margin;
+        background: rgba(255, 255, 255, .5);
+        transition: width .3s, background .3s;
+    }
+
+    @media (min-width: 768px) { 
+        padding-left: (80 + $margin);
+        .menu-tiles {
+            z-index: 2000;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            a {
+                padding: 0;
+                margin-left: 0;
+                margin-right: 0;
+                width: 80px;
+                height: 80px;
+                overflow-x: hidden;
+                text-align: left;
+
+                i {
+                    padding: 0 25px 0 25px;
+                    margin-right: 0;
+                }
+                span {
+                    display: inline-block;
+                    width: 190px;
+                    opacity: 0;
+                    transition: opacity .3s;
+                }
+                div {
+                    width: 285px;
+                }
+
+                &:hover {
+                    width: 285px;
+                    span {
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
 }

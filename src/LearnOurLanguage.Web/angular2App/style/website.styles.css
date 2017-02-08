@@ -2355,13 +2355,64 @@ span.i {
     margin: 0 0 30px; }
     #userModule .menu-tiles a i {
       margin-right: 15px; }
-    #userModule .menu-tiles a:nth-child(1):hover i {
-      color: #c16126; }
-    #userModule .menu-tiles a:nth-child(2):hover i {
-      color: #a5294d; }
-    #userModule .menu-tiles a:nth-child(3):hover i {
-      color: #146485; }
-    #userModule .menu-tiles a:nth-child(4):hover i {
-      color: #7fa339; }
-    #userModule .menu-tiles a:nth-child(5):hover i {
-      color: #688691; }
+  #userModule .menu-tiles.text-color a:nth-child(1):hover i, #userModule .menu-tiles.text-color a:nth-child(1).active i {
+    color: #c16126; }
+  #userModule .menu-tiles.text-color a:nth-child(2):hover i, #userModule .menu-tiles.text-color a:nth-child(2).active i {
+    color: #a5294d; }
+  #userModule .menu-tiles.text-color a:nth-child(3):hover i, #userModule .menu-tiles.text-color a:nth-child(3).active i {
+    color: #146485; }
+  #userModule .menu-tiles.text-color a:nth-child(4):hover i, #userModule .menu-tiles.text-color a:nth-child(4).active i {
+    color: #7fa339; }
+  #userModule .menu-tiles.text-color a:nth-child(5):hover i, #userModule .menu-tiles.text-color a:nth-child(5).active i {
+    color: #688691; }
+  #userModule .menu-tiles.background-color a:hover, #userModule .menu-tiles.background-color a.active {
+    color: #fff;
+    text-shadow: 1px 1px 3px #000; }
+  #userModule .menu-tiles.background-color a:nth-child(1):hover, #userModule .menu-tiles.background-color a:nth-child(1).active {
+    background: #c16126; }
+  #userModule .menu-tiles.background-color a:nth-child(2):hover, #userModule .menu-tiles.background-color a:nth-child(2).active {
+    background: #a5294d; }
+  #userModule .menu-tiles.background-color a:nth-child(3):hover, #userModule .menu-tiles.background-color a:nth-child(3).active {
+    background: #146485; }
+  #userModule .menu-tiles.background-color a:nth-child(4):hover, #userModule .menu-tiles.background-color a:nth-child(4).active {
+    background: #7fa339; }
+  #userModule .menu-tiles.background-color a:nth-child(5):hover, #userModule .menu-tiles.background-color a:nth-child(5).active {
+    background: #688691; }
+
+#userModule.layout-v2 {
+  position: relative; }
+  #userModule.layout-v2 a {
+    margin-left: 15px;
+    margin-right: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: width .3s, background .3s; }
+  @media (min-width: 768px) {
+    #userModule.layout-v2 {
+      padding-left: 110px; }
+      #userModule.layout-v2 .menu-tiles {
+        z-index: 2000;
+        position: absolute;
+        top: 0;
+        left: 0; }
+        #userModule.layout-v2 .menu-tiles a {
+          padding: 0;
+          margin-left: 0;
+          margin-right: 0;
+          width: 80px;
+          height: 80px;
+          overflow-x: hidden;
+          text-align: left; }
+          #userModule.layout-v2 .menu-tiles a i {
+            padding: 0 25px 0 25px;
+            margin-right: 0; }
+          #userModule.layout-v2 .menu-tiles a span {
+            display: inline-block;
+            width: 190px;
+            opacity: 0;
+            transition: opacity .3s; }
+          #userModule.layout-v2 .menu-tiles a div {
+            width: 285px; }
+          #userModule.layout-v2 .menu-tiles a:hover {
+            width: 285px; }
+            #userModule.layout-v2 .menu-tiles a:hover span {
+              opacity: 1; } }

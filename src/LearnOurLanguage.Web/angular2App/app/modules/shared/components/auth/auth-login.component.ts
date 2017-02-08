@@ -78,7 +78,7 @@ export class AuthLoginComponent {
         let data = me.getAccessLevel();
 
         if (data == 100) {
-            return '/user';
+            return '/user/home';
         }
 
         return '/';
