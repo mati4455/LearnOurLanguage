@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'my-app',
-    template: 'Lista słowników',
+    selector: 'user-dictionaries',
+    templateUrl: 'dictionaries.list.component.html',
     providers: [
 
     ]
