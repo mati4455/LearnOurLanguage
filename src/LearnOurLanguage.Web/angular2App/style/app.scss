@@ -121,7 +121,7 @@ span.i { font-style: italic; }
 }
 
 .static-background {    
-    background: url('/assets/world_map.png') center center no-repeat scroll;
+    background: url('/assets/world_map.png') center center no-repeat fixed;
 
     & > div {
         background: rgba(255, 255,255, .8);
@@ -143,6 +143,10 @@ span.i { font-style: italic; }
     }
 
     .menu-tiles {
+        &.affix {
+            position: static;
+        }
+
         a {
             @extend .tile;
 
@@ -183,6 +187,8 @@ span.i { font-style: italic; }
 }
 
 #userModule.layout-v2 {
+    $menu_margin: (80 + $margin);
+
     position: relative;
     a {
         margin-left: $half-margin;
@@ -192,12 +198,19 @@ span.i { font-style: italic; }
     }
 
     @media (min-width: 768px) { 
-        padding-left: (80 + $margin);
+        padding-left: $menu_margin;
         .menu-tiles {
             z-index: 2000;
             position: absolute;
             top: 0;
             left: 0;
+
+            &.affix {
+                position: fixed;
+                left: auto;
+                margin-left: -95px;
+                top: $margin;
+            }
 
             a {
                 padding: 0;
