@@ -1,4 +1,5 @@
-import { Configuration } from './../../app.constants';
+import { Configuration } from 'lol/app.constants';
+
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule, ModuleWithProviders } from '@angular/core';

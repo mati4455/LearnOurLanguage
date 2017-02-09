@@ -27,7 +27,10 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html']
+        extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+		alias: {
+			"lol": path.resolve('./angular2App/app')
+		}
     },
 
     devServer: {
@@ -60,11 +63,26 @@ module.exports = {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
             },/*
+			{
+				test: /\.scss$/,
+				exclude: /node_modules/,
+				loaders: ['raw-loader', 'sass-loader?includePaths[]=' + path.resolve(__dirname, 'angular2App/style')]
+			},*/
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: ['style-loader', 'css-loader', 'sass-loader']
-            },*/
+                use: [
+					{
+						loader: 'style-loader'
+					},
+					{
+						loader: 'css-loader'
+					},
+					{
+						loader: 'sass-loader?includePaths[]=' + path.resolve(__dirname, 'angular2App/style')
+					}
+				]
+            },
             {
                 test: /\.html$/,
                 loader: 'raw-loader'

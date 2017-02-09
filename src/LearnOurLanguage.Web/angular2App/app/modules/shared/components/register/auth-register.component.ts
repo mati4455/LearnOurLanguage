@@ -1,9 +1,10 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { UserService } from 'lol/services';
+import { User } from 'lol/models';
+
+import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router } from '@angular/router';
-import { UserService } from '../../../../services';
-import { User } from '../../../../models';
 
 @Component({
     selector: 'my-app',

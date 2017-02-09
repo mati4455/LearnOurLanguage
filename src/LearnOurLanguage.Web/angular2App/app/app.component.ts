@@ -4,7 +4,13 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { AuthService } from './services';
 
 // AoT compilation doesn't support 'require'.
+
+// globalne zdjęcia
 import '../assets/world_map.png';
+
+import '../style/fonts.scss';
+import '../style/font-awesome.min.scss';
+import '../style/app.scss';
 
 @Component({
     selector: 'my-app',

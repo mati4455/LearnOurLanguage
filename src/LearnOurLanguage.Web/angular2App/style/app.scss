@@ -1,23 +1,4 @@
-@import "fonts.scss";
-@import "font-awesome.min.scss";
-
-/* zmienne */
-    $margin: 30px;
-    $half-margin: $margin / 2;
-    $shadow: #222;
-    $text_color: #333;
-        
-    $menu_hover_board: #c16126;
-    $menu_hover_dictionaries: #a5294d;
-    $menu_hover_games: #146485;
-    $menu_hover_statistics: #7fa339;
-    $menu_hover_logout: #688691;
-
-    $home_header_background: #3f75c7;
-    $home_title_color: #fff;
-    $home_title_shadow: #555;
-    $home_header_shadow: $shadow;
-/* koniec zmiennych */
+@import "common";
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -52,48 +33,11 @@ span.i { font-style: italic; }
     }
 }
 
+.static-background {    
+    background: url('/assets/world_map.png') center $margin no-repeat fixed;
 
-#home {
-    .title {
-        font-size: 60px;
-        color: $home_title_color;
-        text-shadow: 0 0 10px $home_title_shadow;
-        margin: $margin 0;
-    }
-    .header {
-        position: relative;
-        padding: 0 0 $margin;
-        background: $home_header_background;
-        box-shadow: 0 0 $margin $home_header_shadow;
-    }
-    .content {
-        margin: 50px auto;
-    }
-
-    .box {
-        margin-top: $half-margin;
-        margin-bottom: $half-margin;
-
-        h2 {
-            margin: $half-margin;
-        }
-        .inner {
-            padding: $half-margin;
-            border-radius: 6px;
-            box-shadow: 0px 0px 5px 1px $shadow;
-        }
-    }
-
-    .nav-action {
-        div > div {
-            text-align: center;
-            padding: $margin;
-        }
-
-        a {
-            font-size: 40px;
-            padding: 10px 20px;
-        }
+    & > div {
+        background: rgba(255, 255,255, .8);
     }
 }
 
@@ -117,131 +61,5 @@ span.i { font-style: italic; }
 .register-box {
     .box {
         margin-top: $margin;
-    }
-}
-
-.static-background {    
-    background: url('/assets/world_map.png') center center no-repeat fixed;
-
-    & > div {
-        background: rgba(255, 255,255, .8);
-    }
-}
-
-#userModule {
-    min-height: 600px;
-    margin-top: $margin;
-    margin-bottom: $margin;
-
-    .header {
-        margin-top: $margin;
-    }
-
-    .tile {
-        background: rgba(255, 255, 255, .6);
-        box-shadow: 1px 1px 3px #555;
-    }
-
-    .menu-tiles {
-        &.affix {
-            position: static;
-        }
-
-        a {
-            @extend .tile;
-
-            display: block;
-            font-size: 36px;
-            text-decoration: none;
-            color: $text_color;
-            line-height: 80px;
-            padding: 0 $margin;
-            margin: 0 0 $margin;
-
-            i {
-                margin-right: $half-margin;
-            }
-        }
-
-        &.text-color {
-            a {
-                &:nth-child(1) { &:hover, &.active { i { color: $menu_hover_board; } } }
-                &:nth-child(2) { &:hover, &.active { i { color: $menu_hover_dictionaries; } } }
-                &:nth-child(3) { &:hover, &.active { i { color: $menu_hover_games; } } }
-                &:nth-child(4) { &:hover, &.active { i { color: $menu_hover_statistics; } } }
-                &:nth-child(5) { &:hover, &.active { i { color: $menu_hover_logout; } } }
-            }
-        }
-        
-        &.background-color {
-            a {
-                &:hover, &.active { color: #fff; text-shadow: 1px 1px 3px #000; }
-                &:nth-child(1) { &:hover, &.active { background: $menu_hover_board; } }
-                &:nth-child(2) { &:hover, &.active { background: $menu_hover_dictionaries; } }
-                &:nth-child(3) { &:hover, &.active { background: $menu_hover_games; } }
-                &:nth-child(4) { &:hover, &.active { background: $menu_hover_statistics; } }
-                &:nth-child(5) { &:hover, &.active { background: $menu_hover_logout; } }
-            }
-        }
-    }
-}
-
-#userModule.layout-v2 {
-    $menu_margin: (80 + $margin);
-
-    position: relative;
-    a {
-        margin-left: $half-margin;
-        margin-right: $half-margin;
-        background: rgba(255, 255, 255, .5);
-        transition: width .3s, background .3s;
-    }
-
-    @media (min-width: 768px) { 
-        padding-left: $menu_margin;
-        .menu-tiles {
-            z-index: 2000;
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            &.affix {
-                position: fixed;
-                left: auto;
-                margin-left: -95px;
-                top: $margin;
-            }
-
-            a {
-                padding: 0;
-                margin-left: 0;
-                margin-right: 0;
-                width: 80px;
-                height: 80px;
-                overflow-x: hidden;
-                text-align: left;
-
-                i {
-                    padding: 0 25px 0 25px;
-                    margin-right: 0;
-                }
-                span {
-                    display: inline-block;
-                    width: 190px;
-                    opacity: 0;
-                    transition: opacity .3s;
-                }
-                div {
-                    width: 285px;
-                }
-
-                &:hover {
-                    width: 285px;
-                    span {
-                        opacity: 1;
-                    }
-                }
-            }
-        }
     }
 }
