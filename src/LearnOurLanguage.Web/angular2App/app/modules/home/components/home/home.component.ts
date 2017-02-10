@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services';
-import { AuthLoginComponent } from '../../shared/components/auth/auth-login.component';
+import { AuthService } from 'lol/services';
+import { AuthLoginComponent } from 'shared/components/auth/auth-login.component';
+
+import './home.scss';
 
 @Component({
     selector: 'home-page',

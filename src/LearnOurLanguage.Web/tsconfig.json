@@ -15,11 +15,15 @@
     ],
     "types": [
       "node"
-    ]
+    ],
+	"baseUrl": ".",
+	"paths": {
+		"lol/*": ["./angular2App/app/*"],
+    "shared/*": ["./angular2App/app/modules/shared/*"]    
+	}
   },
   "files": [
     "angular2App/app/app.module.ts",
-    "angular2App/app/modules/about/about.module.ts",
     "angular2App/main.ts"
   ],
   "awesomeTypescriptLoaderOptions": {

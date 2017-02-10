@@ -1,0 +1,45 @@
+@import "common";
+
+#home {
+    .title {
+        font-size: 60px;
+        color: $home_title_color;
+        text-shadow: 0 0 10px $home_title_shadow;
+        margin: $margin 0;
+    }
+    .header {
+        position: relative;
+        padding: 0 0 $margin;
+        background: $home_header_background;
+        box-shadow: 0 0 $margin $home_header_shadow;
+    }
+    .content {
+        margin: 50px auto;
+    }
+
+    .box {
+        margin-top: $half-margin;
+        margin-bottom: $half-margin;
+
+        h2 {
+            margin: $half-margin;
+        }
+        .inner {
+            padding: $half-margin;
+            border-radius: 6px;
+            box-shadow: 0px 0px 5px 1px $shadow;
+        }
+    }
+
+    .nav-action {
+        div > div {
+            text-align: center;
+            padding: $margin;
+        }
+
+        a {
+            font-size: 40px;
+            padding: 10px 20px;
+        }
+    }
+}

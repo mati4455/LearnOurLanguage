@@ -1,8 +1,8 @@
+import { AuthService } from 'lol/services';
+
 import { Injectable, Component } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router } from '@angular/router';
-
-import { AuthService } from '../../../../services';
 
 @Injectable()
 @Component({
