@@ -18,7 +18,8 @@
     ],
 	"baseUrl": ".",
 	"paths": {
-		"lol/*": ["./angular2App/app/*"]
+		"lol/*": ["./angular2App/app/*"],
+    "shared/*": ["./angular2App/app/modules/shared/*"]    
 	}
   },
   "files": [

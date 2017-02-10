@@ -25,7 +25,11 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html']
+        extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+		alias: {
+			"lol": path.resolve('./angular2App/app'),
+            "shared": path.resolve('./angular2App/app/modules/shared')
+		}
     },
 
     devServer: {

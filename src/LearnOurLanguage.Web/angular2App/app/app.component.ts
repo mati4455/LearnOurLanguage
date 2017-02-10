@@ -5,9 +5,7 @@ import { AuthService } from './services';
 
 // AoT compilation doesn't support 'require'.
 
-// globalne zdjęcia
-import '../assets/world_map.png';
-
+// globalne style
 import '../style/fonts.scss';
 import '../style/font-awesome.min.scss';
 import '../style/app.scss';

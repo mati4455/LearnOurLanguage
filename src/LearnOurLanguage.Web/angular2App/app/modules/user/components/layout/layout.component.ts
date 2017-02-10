@@ -1,12 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import './user.layout.scss';
 
 @Component({
     selector: 'user-layout',
     templateUrl: 'layoutv2.component.html',
-    styles: [
-        String(require('./user.layout.scss'))
-    ],
     providers: [
 
     ]
@@ -14,8 +12,12 @@ import './user.layout.scss';
 
 export class LayoutComponent {
 
-    constructor() {
+    constructor(private router: Router) {
         let me = this;
+        let access = localStorage.getItem('accessLevel') === '100';
+        if (!access) {
+            me.router.navigate(['/auth/login']);
+        }
     }
 
 }

@@ -29,7 +29,8 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
 		alias: {
-			"lol": path.resolve('./angular2App/app')
+			"lol": path.resolve('./angular2App/app'),
+            "shared": path.resolve('./angular2App/app/modules/shared')
 		}
     },
 
@@ -79,7 +80,11 @@ module.exports = {
 						loader: 'css-loader'
 					},
 					{
-						loader: 'sass-loader?includePaths[]=' + path.resolve(__dirname, 'angular2App/style')
+						loader: 'sass-loader',
+                        options: {
+                            includePaths: [path.resolve(__dirname, 'angular2App/style')],
+                            sourceMap: true
+                        }
 					}
 				]
             },
