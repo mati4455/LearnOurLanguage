@@ -19,6 +19,10 @@ const routes: Routes = [
             {
                 path: 'dictionaries',
                 component: DictionariesListComponent
+            },
+            {
+                path: 'games',
+                loadChildren: './games/games.module#GamesModule'
             }
         ]
     }

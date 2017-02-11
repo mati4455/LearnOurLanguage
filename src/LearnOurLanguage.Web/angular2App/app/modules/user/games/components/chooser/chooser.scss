@@ -1,0 +1,13 @@
+/** style dla strony głównej panelu gier **/
+@import "common";
+
+.box-game {
+    text-align: center;
+    font-size: 50px;
+    margin: $margin 0;
+
+    i {
+        display: block;
+        font-size: 100px;
+    }
+}
