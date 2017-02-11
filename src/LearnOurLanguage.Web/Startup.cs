@@ -142,15 +142,16 @@ namespace LearnOurLanguage.Web
             });
 
             app.UseFileServer();
-
-            var libPath = Path.Combine(env.ContentRootPath, "node_modules");
+            
+            // używając webpacka nie jest potrzebne przekirowanie pakietów node na ścieżkę webową
+            //var libPath = Path.Combine(env.ContentRootPath, "node_modules");
             //Path.GetFullPath(Path.Combine(env.WebRootPath, @"..\node_modules\")); // coś się...?
-            app.UseFileServer(new FileServerOptions()
-            {
-                FileProvider = new PhysicalFileProvider(libPath),
-                RequestPath = new PathString("/node_modules"),
-                EnableDirectoryBrowsing = false
-            });
+            //app.UseFileServer(new FileServerOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(libPath),
+            //    RequestPath = new PathString("/node_modules"),
+            //    EnableDirectoryBrowsing = false
+            //});
             
             app.UseSwagger();
             app.UseSwaggerUi();
