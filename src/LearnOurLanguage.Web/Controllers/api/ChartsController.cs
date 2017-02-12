@@ -25,21 +25,22 @@ namespace LearnOurLanguage.Web.Controllers.api
             StatisticsService = statisticsService;
             ChartsService = chartsService;
         }
-        
+
         /// <summary>
         /// Dane do wykresu dla użytkownika, w podanym zakresie, dla wybranego (lub wszystkich) języka
         /// </summary>
         /// <param name="userId">Id użytkownika</param>
         /// <param name="langId">Id języka (null - wszystkie języki)</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <param name="startDate">Data początkowa statystyk</param>
         /// <param name="endDate">Data końcowa statystyk</param>
         /// <returns>Obiekt opisujący wykres</returns>
         [HttpGet("GetChartForUserByPeriod/{userId}/{langId}/{startDate}/{endDate}")]
-        public ActionResult GetChartForUserByPeriod(int userId, int? langId, DateTime startDate, DateTime endDate)
+        public ActionResult GetChartForUserByPeriod(int userId, int? langId, int? gameId, DateTime startDate, DateTime endDate)
         {
             AccessGuardian(Roles.AccessUser, userId);
 
-            var data = StatisticsService.GetStatisticsForUserPeriod(userId, startDate, endDate, langId);
+            var data = StatisticsService.GetStatisticsForUserPeriod(userId, startDate, endDate, langId, gameId);
             var chartData = ChartsService.GetSummaryStatistics(data);
             return JsonHelper.Success(chartData);
         }
@@ -80,13 +81,14 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>
         /// <param name="userId">Id użytkownika</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Obiekt opisujący wykres</returns>
         [HttpGet("GetStatisticsForDictionary/{dictionaryId}/{userId}")]
-        public ActionResult GetStatisticsForDictionary(int dictionaryId, int userId)
+        public ActionResult GetStatisticsForDictionary(int dictionaryId, int userId, int? gameId)
         {
             AccessGuardian(Roles.AccessEveryone);
 
-            var data = StatisticsService.GetSummaryStatisticsForDictionary(dictionaryId, userId);
+            var data = StatisticsService.GetSummaryStatisticsForDictionary(dictionaryId, userId, gameId);
             var chartData = ChartsService.GetBasicStatistics(data);
             return JsonHelper.Success(chartData);
         }
@@ -96,13 +98,14 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>
         /// <param name="userId">Id użytkownika</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Obiekt opisujący wykres</returns>
         [HttpGet("GetDetailsStatisticsForDictionary/{dictionaryId}/{userId}")]
-        public ActionResult GetDetailsStatisticsForDictionary(int dictionaryId, int userId)
+        public ActionResult GetDetailsStatisticsForDictionary(int dictionaryId, int userId, int? gameId)
         {
             AccessGuardian(Roles.AccessEveryone);
 
-            var data = StatisticsService.GetDetailsStatisticsForDictionary(dictionaryId, userId);
+            var data = StatisticsService.GetDetailsStatisticsForDictionary(dictionaryId, userId, gameId);
             var chartData = ChartsService.GetDetailsStatisticsForDictionary(data);
             return JsonHelper.Success(chartData);
         }
