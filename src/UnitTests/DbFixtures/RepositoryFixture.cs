@@ -19,14 +19,14 @@ namespace UnitTests.DbFixtures
         [Fact]
         public void DbInsertsItemAndSavesChanges()
         {
-            var dbSetMock = new Mock<DbSet<Role>>();
-
-            var dbMock = new Mock<DatabaseContext>();
-            dbMock.Setup(x => x.Roles).Returns(dbSetMock.Object);
+            Mock<DbSet<Role>> dbSetMock = new Mock<DbSet<Role>>();
+            Mock<Logger<RolesRepository>> loggerMock = new Mock<Logger<RolesRepository>>();
+            Mock<DatabaseContext> dbMock = new Mock<DatabaseContext>();
+            dbMock.Setup(context => context.Set<Role>()).Returns(dbSetMock.Object);
 
 
             RolesRepository repository = new RolesRepository(dbMock.Object);
-            
+
             repository.Insert(new Role
             {
                 Name = "Admin",
@@ -34,6 +34,7 @@ namespace UnitTests.DbFixtures
             });
             repository.Save();
             
+            dbSetMock.Verify(set => set.Add(It.IsAny<Role>()), Times.Once);
             dbMock.Verify(context => context.SaveChanges(), Times.Once);
         }
         
