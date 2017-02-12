@@ -70,13 +70,15 @@ namespace Model.Services
         /// <param name="startDate">Data początkowa</param>
         /// <param name="endDate">Data końcowa</param>
         /// <param name="langId">Id języka (null - dla wszystkich języków)</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Lista statystyka na konkretny dzień z wybranego zakresu</returns>
-        public IList<Statistics> GetStatisticsForUserPeriod(int userId, DateTime startDate, DateTime endDate, int? langId)
+        public IList<Statistics> GetStatisticsForUserPeriod(int userId, DateTime startDate, DateTime endDate, int? langId, int? gameId)
         {
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.UserId == userId)
                 .Where(gst => langId == null || langId == gst.GameSession.Dictionary.SecondLanguageId)
+                .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
                 .Where(gst => gst.GameSession.DateStart.Date >= startDate.Date)
                 .Where(gst => gst.GameSession.DateStart.Date <= endDate.Date)
                 .ToList();
@@ -117,12 +119,14 @@ namespace Model.Services
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>
         /// <param name="userId">Id użytkownika</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Statystyka słownika</returns>
-        public Statistics GetSummaryStatisticsForDictionary(int dictionaryId, int userId)
+        public Statistics GetSummaryStatisticsForDictionary(int dictionaryId, int userId, int? gameId)
         {
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.Dictionary.Id == dictionaryId)
+                .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
                 .ToList();
             return ConvertGameSessionsToStatistics(data);
         }
@@ -134,10 +138,11 @@ namespace Model.Services
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>
         /// <param name="userId">Id użytkownika</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Statystyki dla słówek</returns>
-        public IList<TranslationStatistics> GetDetailsStatisticsForDictionary(int dictionaryId, int userId)
+        public IList<TranslationStatistics> GetDetailsStatisticsForDictionary(int dictionaryId, int userId, int? gameId)
         {
-            var data = GetGameSessionDataForDictionary(dictionaryId, userId);
+            var data = GetGameSessionDataForDictionary(dictionaryId, userId, gameId);
             var groups = data.GroupBy(x => x.TranslationId, (key, list) =>
                 {
                     var dataList = list as IList<GameSessionTranslation> ?? list.ToList();
@@ -162,13 +167,15 @@ namespace Model.Services
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>
         /// <param name="userId">Id użytkownika</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Lista danych ze wszystkich sesji dla danego słownika</returns>
-        private IList<GameSessionTranslation> GetGameSessionDataForDictionary(int dictionaryId, int userId)
+        private IList<GameSessionTranslation> GetGameSessionDataForDictionary(int dictionaryId, int userId, int? gameId)
         {
             return Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.UserId == userId)
                 .Where(gst => gst.GameSession.Dictionary.Id == dictionaryId)
+                .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
                 .OrderBy(gst => gst.Translation.SecondLangWord)
                 .ToList();
         }
