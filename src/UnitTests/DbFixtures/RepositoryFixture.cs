@@ -17,25 +17,25 @@ namespace UnitTests.DbFixtures
     public class RepositoryFixture
     {
         [Fact]
-        public void Test()
+        public void DbInsertsItemAndSavesChanges()
         {
-            var mockUsers = new Mock<DbSet<Role>>();
+            var dbSetMock = new Mock<DbSet<Role>>();
 
-            var dbContext = new Mock<DatabaseContext>();
-            dbContext.Setup(x => x.Roles).Returns(mockUsers.Object);
+            var dbMock = new Mock<DatabaseContext>();
+            dbMock.Setup(x => x.Roles).Returns(dbSetMock.Object);
 
 
-            var repoMoq = new RolesRepository(dbContext.Object);
+            RolesRepository repository = new RolesRepository(dbMock.Object);
             
-           // var repo = new RolesRepository(dbContext.Object);
-            repoMoq.Insert(new Role
+            repository.Insert(new Role
             {
                 Name = "Admin",
                 AccessLevel = 300
             });
-            repoMoq.Save();
-
-            var test = repoMoq.GetAll().ToList();
+            repository.Save();
+            
+            dbMock.Verify(context => context.SaveChanges(), Times.Once);
         }
+        
     }
 }
