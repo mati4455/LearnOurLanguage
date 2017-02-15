@@ -2,7 +2,10 @@ $margin: 30px;
 $half-margin: $margin / 2;
 $shadow: #222;
 $text_color: #333;
-    
+
+$box_tile_background: rgba(255, 255, 255, .6);
+$box_tile_shadow: 1px 1px 3px $shadow;
+
 $menu_hover_board: #c16126;
 $menu_hover_dictionaries: #a5294d;
 $menu_hover_games: #146485;
@@ -13,3 +16,8 @@ $home_header_background: #3f75c7;
 $home_title_color: #fff;
 $home_title_shadow: #555;
 $home_header_shadow: $shadow;
+
+$dictionary_link_background: rgba(230, 230, 230, .7);
+$dictionary_link_color: #333;
+$dictionary_link_background_hover: lighter($menu_hover_statistics, 15%);
+$dictionary_link_color_hover: #fff;
