@@ -1,0 +1,27 @@
+<div class="col-xs-12 col-md-4">
+
+    <!-- tutaj będzie lista -->
+    <h1 class="page-title">Twoje słowniki</h1>
+    <div class="form-group">
+        <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" 
+            [(value)]="queryString" (keyup)="filterList($event)">
+    </div>
+
+    <div *ngIf="dictionaries.length == 0">
+        <p>nie znaleziono słowników</p>
+    </div>
+    
+    <div class="list">
+        <div *ngFor="let dictionary of dictionaries">
+            <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
+        </div>
+    </div>
+
+    <div class="buttons">
+        
+    </div>
+</div>
+
+<div class="col-xs-12 col-md-8">
+    <router-outlet></router-outlet>
+</div> 

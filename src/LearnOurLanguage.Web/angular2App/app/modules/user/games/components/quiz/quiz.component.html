@@ -1,9 +1,18 @@
 <h1>Quiz</h1>
 
 <!-- formularz z parametrami gry -->
-<div *ngIf="!model">
+<div *ngIf="!model" class="col-xs-12 col-md-5 col-md-push-3">
     <h3>Parametry</h3>
     <form (ngSubmit)="startGame()">
+        <div class="form-group">
+            <label for="dictionaryId">Słownik:</label>
+            <select [ngModel]="parameters.dictionaryId" name="dictionaryId"
+                class="form-control" id="dictionaryId" placeholder="wybierz słownik">
+                <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+                    {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
+                </option>
+            </select>
+        </div>
         <div class="form-group">
             <label for="maxNumberOfQuestions">Maksymalna liczba pytań:</label>
             <input [ngModel]="parameters.maxNumberOfQuestions" name="maxNumberOfQuestions" min="3"

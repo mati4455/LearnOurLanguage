@@ -1,0 +1,30 @@
+@import "common";
+
+.list {
+    max-height: 500px;
+    overflow-y: auto;
+
+    & > div {
+        a {
+            display: block;
+            color: #333;
+            background: #ddd;
+            //color: $dictionary_link_color;
+            //background: $dictionary_link_background;
+            font-size: 1.3em;
+            padding: $half_margin;
+            margin-bottom: $half_margin;
+
+            &:hover,
+            &.active {
+                color: #fff;
+                text-shadow: #333;
+                background: #7fa339;
+                text-decoration: none;
+                //color: $dictionary_link_color_hover;
+                //background: $dictionary_link_background_hover;
+                //text-shadow: $shadow;
+            }
+        }
+    }
+}

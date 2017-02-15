@@ -82,8 +82,7 @@ module.exports = {
 					{
 						loader: 'sass-loader',
                         options: {
-                            includePaths: [path.resolve(__dirname, 'angular2App/style')],
-                            sourceMap: true
+                            includePaths: [path.resolve(__dirname, 'angular2App/style')]
                         }
 					}
 				]

@@ -63,3 +63,13 @@ span.i { font-style: italic; }
         margin-top: $margin;
     }
 }
+
+.page-title {
+    margin: 0 0 $half_margin;
+}
+
+.box-tile {
+    padding: $margin;
+    background: $box_tile_background;
+    box-shadow: $box_tile_shadow;
+}
