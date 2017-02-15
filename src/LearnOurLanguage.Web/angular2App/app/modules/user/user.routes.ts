@@ -1,8 +1,10 @@
+import { DictionariesListComponent } from './components/dictionaries/list/dictionaries.list.components';
+import { DictionariesFormComponent } from './components/dictionaries/form/dictionaries.form.component';
+import { DictionariesComponent } from './components/dictionaries/layout/dictionaries.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DictionariesListComponent } from './components/dictionaries/dictionaries.list.component';
 
 const routes: Routes = [
     {
@@ -18,7 +20,19 @@ const routes: Routes = [
             },
             {
                 path: 'dictionaries',
-                component: DictionariesListComponent
+                component: DictionariesComponent,
+                children: [
+                    {
+                        path: '',
+                        component: DictionariesListComponent,
+                        children: [
+                            {
+                                path: ':dictionaryId',
+                                component: DictionariesFormComponent
+                            }
+                        ]
+                    }
+                ]
             },
             {
                 path: 'games',

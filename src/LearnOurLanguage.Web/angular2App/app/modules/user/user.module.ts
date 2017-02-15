@@ -1,3 +1,6 @@
+import { DictionariesFormComponent } from './components/dictionaries/form/dictionaries.form.component';
+import { DictionariesListComponent } from './components/dictionaries/list/dictionaries.list.components';
+import { DictionariesComponent } from './components/dictionaries/layout/dictionaries.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
@@ -6,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { UserRoutes } from './user.routes';
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DictionariesListComponent } from './components/dictionaries/dictionaries.list.component';
 
 
 @NgModule({
@@ -20,13 +22,17 @@ import { DictionariesListComponent } from './components/dictionaries/dictionarie
     declarations: [
         LayoutComponent,
         DashboardComponent,
-        DictionariesListComponent
+        DictionariesComponent,
+        DictionariesListComponent,
+        DictionariesFormComponent        
     ],
 
     exports: [
         LayoutComponent,
         DashboardComponent,
-        DictionariesListComponent
+        DictionariesComponent,
+        DictionariesListComponent,
+        DictionariesFormComponent        
     ]
 })
 

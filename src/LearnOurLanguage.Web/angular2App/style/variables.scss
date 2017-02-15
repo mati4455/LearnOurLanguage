@@ -13,3 +13,8 @@ $home_header_background: #3f75c7;
 $home_title_color: #fff;
 $home_title_shadow: #555;
 $home_header_shadow: $shadow;
+
+$dictionary_link_background: rgba(230, 230, 230, .7);
+$dictionary_link_color: #333;
+$dictionary_link_background_hover: lighter($menu_hover_statistics, 15%);
+$dictionary_link_color_hover: #fff;
