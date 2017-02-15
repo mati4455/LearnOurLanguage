@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'my-app',
+    selector: 'games-layout',
     templateUrl: 'layout.component.html',
     providers: [
 

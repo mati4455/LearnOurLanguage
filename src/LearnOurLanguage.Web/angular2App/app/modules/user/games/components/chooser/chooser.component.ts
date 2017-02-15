@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import './chooser.scss';
 
 @Component({
-    selector: 'my-app',
+    selector: 'game-chooser',
     templateUrl: 'chooser.component.html',
     providers: [
 
@@ -15,4 +15,7 @@ export class ChooserComponent {
         let me = this;
     }
 
+    getGameUrl(gameName: string): string {
+        return '/user/games/' + gameName;
+    }
 }

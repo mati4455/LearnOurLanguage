@@ -1,3 +1,4 @@
+import { QuizComponent } from './components/quiz/quiz.component';
 import { ChooserComponent } from './components/chooser/chooser.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { GamesRoutes } from './games.routes';
@@ -16,12 +17,14 @@ import { FormsModule } from '@angular/forms';
 
     declarations: [
         LayoutComponent,
-        ChooserComponent
+        ChooserComponent,
+        QuizComponent
     ],
 
     exports: [
         LayoutComponent,
-        ChooserComponent
+        ChooserComponent,
+        QuizComponent
     ]
 })
 

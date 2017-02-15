@@ -4,3 +4,4 @@ export { BaseService } from './base.service';
 
 export { AuthService } from './auth.service';
 export { UserService } from './user.service';
+export { GamesService } from './games.service';

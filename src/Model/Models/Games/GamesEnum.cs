@@ -2,9 +2,9 @@
 {
     public enum GamesEnum
     {
-        Fiszki = 1,
-        Test,
+        Flashcards = 1,
+        Quiz,
         Memo,
-        Wisielec,
+        Hangman,
     }
 }

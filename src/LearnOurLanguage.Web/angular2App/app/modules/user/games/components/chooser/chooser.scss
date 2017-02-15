@@ -6,8 +6,21 @@
     font-size: 50px;
     margin: $margin 0;
 
-    i {
-        display: block;
-        font-size: 100px;
+    a {
+        display: inline-block;
+        color: $text_color;
+        text-decoration: none;
+        transition: scale .3s, transform .3s, color .3s;
+        
+        i {
+            display: block;
+            font-size: 100px;
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: lighten($menu_hover_games, 10%);
+            transform: scale(1.2) rotate(5deg);
+        }
     }
 }

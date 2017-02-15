@@ -1,7 +1,8 @@
-import { Routes, RouterModule } from '@angular/router';
-
+import { QuizComponent } from './components/quiz/quiz.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ChooserComponent } from './components/chooser/chooser.component';
+
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
                 path: '',
                 component: ChooserComponent
             },
+            {
+                path: 'quiz',
+                component: QuizComponent
+            }
             /*
             {
                 path: 'hangman',
@@ -19,10 +24,6 @@ const routes: Routes = [
             },
             {
                 path: 'memo',
-                component:
-            },
-            {
-                path: 'quiz',
                 component:
             },
             {

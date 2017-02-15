@@ -62,11 +62,14 @@
     $menu_margin: (80 + $margin);
 
     position: relative;
-    a {
-        margin-left: $half-margin;
-        margin-right: $half-margin;
-        background: rgba(255, 255, 255, .5);
-        transition: width .3s, background .3s;
+    
+    .menu-tiles {
+        a {
+            margin-left: $half-margin;
+            margin-right: $half-margin;
+            background: rgba(255, 255, 255, .5);
+            transition: width .3s, background .3s;
+        }
     }
 
     @media (min-width: 768px) { 
