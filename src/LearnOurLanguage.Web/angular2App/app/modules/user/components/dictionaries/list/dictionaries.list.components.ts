@@ -43,7 +43,7 @@ export class DictionariesListComponent {
 
     filterList(event: Event) {
         let me = this;
-        me.queryString = event.target.value;
+        //me.queryString = event.target.value;
         
         me.dictionaries = me.dictionariesBase.filter((element) => element.name.includes(me.queryString));
     }

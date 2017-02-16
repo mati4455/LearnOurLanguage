@@ -2,7 +2,7 @@
 
 #wrap {
    width:600px;
-   
+   max-height: 500px;
    a {
             display: block;
             color: $dictionary_link_color;
@@ -39,6 +39,9 @@
 }
 .buttons{
     width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-left: 5px;
     & > button{
         width: 97px;
          background: rgba(255, 255, 255, .65);
