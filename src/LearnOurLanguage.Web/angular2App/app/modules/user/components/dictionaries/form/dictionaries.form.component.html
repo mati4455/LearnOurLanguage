@@ -1,5 +1,12 @@
 <h2 class="page-title">{{dictionary.name}}</h2>
 
 <div *ngFor="let translation of translations">
-    <p>{{translation.firstLangWord}} -> {{translation.secondLangWord}}</p>
+    <div id="wrap">
+        <div id="left_col">
+            {{translation.firstLangWord}}
+        </div>   
+        <div id="right_col">
+         {{translation.secondLangWord}}
+        </div>
+    </div>
 </div>

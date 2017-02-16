@@ -4,6 +4,7 @@ import { TranslationModel } from 'lol/models/dictionary';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import './dictionaries.form.scss';
 @Component({
     selector: 'dictionaries-form',
     templateUrl: 'dictionaries.form.component.html',
