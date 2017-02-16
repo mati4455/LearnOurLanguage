@@ -3,6 +3,6 @@
     public class QuestionPair
     {
         public int TranslationId { get; set; }
-        public int GameSessionTranslationId { get; set; }
+        public int GameSessionId { get; set; }
     }
 }

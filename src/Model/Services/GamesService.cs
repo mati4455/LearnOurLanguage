@@ -56,53 +56,63 @@ namespace Model.Services
             GameSessionsRepository.Save();
 
             // wstawienie wylosowanych pytań
-            var gst = new List<GameSessionTranslation>();
-            questions.ForEach(q =>
-            {
-                gst.Add(new GameSessionTranslation
-                {
-                    GameSessionId = gameSession.Id,
-                    TranslationId = q,
-                    Correct = false,
-                    Duration = 0
-                });
-            });
-            GameSessionTranslationsRepository.Insert(gst);
-            GameSessionTranslationsRepository.Save();
+            //var gst = new List<GameSessionTranslation>();
+            //questions.ForEach(q =>
+            //{
+            //    gst.Add(new GameSessionTranslation
+            //    {
+            //        GameSessionId = gameSession.Id,
+            //        TranslationId = q,
+            //        Correct = false,
+            //        Duration = 0
+            //    });
+            //});
+            //GameSessionTranslationsRepository.Insert(gst);
+            //GameSessionTranslationsRepository.Save();
 
-            return Mapper.Map<List<QuestionPair>>(gst);
+            var result = questions.Select(x => new QuestionPair
+            {
+                GameSessionId = gameSession.Id,
+                TranslationId = x
+            })
+            .ToList();
+
+            return result; //Mapper.Map<List<QuestionPair>>(questions);
         }
 
-        public bool UpdateQuestions(IList<AnswerUpdateModel> answers)
+        public bool InsertAnswers(IList<AnswerUpdateModel> answers)
         {
             var gst = new List<GameSessionTranslation>();
             answers.ToList().ForEach(abs =>
             {
                 gst.Add(new GameSessionTranslation
                 {
-                    Id = abs.GameSessionTranslationId,
+                    GameSessionId = abs.GameSessionId,
+                    TranslationId = abs.TranslationId,
                     Correct = abs.Correct,
                     Duration = abs.Duration
                 });
             });
 
-            gst.ForEach(x =>
-            {
-                Context.GameSessionTranslations.Attach(x);
-                Context.Entry(x).Property(y => y.Correct).IsModified = true;
-                Context.Entry(x).Property(y => y.Duration).IsModified = true;
-            });
+            return GameSessionTranslationsRepository.Insert(gst) &&
+                   GameSessionTranslationsRepository.Save();
 
-            try
-            {
-                Context.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError($"[error] GamesServices: {ex.Message}");
-                return false;
-            }
+            // gst.ForEach(x =>
+            // {
+            //     Context.GameSessionTranslations.Attach(x);
+            //     Context.Entry(x).Property(y => y.Correct).IsModified = true;
+            //     Context.Entry(x).Property(y => y.Duration).IsModified = true;
+            // });
+            // try
+            // {
+            //     Context.SaveChanges();
+            //     return true;
+            // }
+            // catch (Exception ex)
+            // {
+            //     Logger.LogError($"[error] GamesServices: {ex.Message}");
+            //     return false;
+            // }
         }
 
         public void FinishGameSession(int gameSessionId)

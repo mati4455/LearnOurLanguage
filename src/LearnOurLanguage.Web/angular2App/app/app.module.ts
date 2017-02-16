@@ -7,6 +7,7 @@ import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { SharedModule } from './modules/shared/shared.module';
 import { HomeModule } from './modules/home/home.module';
@@ -31,6 +32,7 @@ let optionsForNotification: any = {
         FormsModule,
         SlimLoadingBarModule.forRoot(),
         ToastModule.forRoot(optionsForNotification),
+        ChartsModule,
         SharedModule.forRoot(),
         HomeModule,
         UserModule

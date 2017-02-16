@@ -30,15 +30,15 @@ namespace Model.Models
                 {
                     var languages = new List<Language>
                     {
-                        new Language { Name = "Polski" },
-                        new Language { Name = "Angielski" },
-                        new Language { Name = "Niemiecki" },
-                        new Language { Name = "Francuski" },
-                        new Language { Name = "Włoski" },
-                        new Language { Name = "Szwedzki" },
-                        new Language { Name = "Czeski" },
-                        new Language { Name = "Rosyjski" },
-                        new Language { Name = "Hiszpański" }
+                        new Language { Name = "Polski", Code="pl-PL" },
+                        new Language { Name = "Angielski", Code="en-US" },
+                        new Language { Name = "Niemiecki", Code="de-DE" },
+                        new Language { Name = "Francuski", Code="fd-FR" },
+                        new Language { Name = "Włoski", Code="it-IT" },
+                        new Language { Name = "Szwedzki", Code="sv-SE" },
+                        new Language { Name = "Czeski", Code="cs-CZ" },
+                        new Language { Name = "Rosyjski", Code="ru-RU" },
+                        new Language { Name = "Hiszpański", Code="es-ES" }
                     };
                     context.AddRange(languages);
                     context.SaveChanges();

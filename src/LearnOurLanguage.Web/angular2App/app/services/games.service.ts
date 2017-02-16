@@ -8,14 +8,14 @@ export class GamesService extends BaseService {
 
     constructor(private serv: BaseHttpService) { super(serv, '/api/games'); }
 
-    initializeGameQuiz(callback: Function, scope: any) {
+    initializeGameQuiz(params: any, callback: Function, scope: any) {
         let me = this;
-        me.service.post(me.api() + '/InitializeQuizGame', callback, scope);
+        me.service.post(me.api() + '/InitializeQuizGame', params, callback, scope);
     }
 
-    updateAnswers(callback: Function, scope: any) {
+    insertAnswers(params: any, callback: Function, scope: any) {
         let me = this;
-        me.service.put(me.api() + '/UpdateAnswers', callback, scope);
+        me.service.post(me.api() + '/InsertAnswers', params, callback, scope);
     }
 
     finishGameSession(gameSessionId: number, callback: Function, scope: any) {

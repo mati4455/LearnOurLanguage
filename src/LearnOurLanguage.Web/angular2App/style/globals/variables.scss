@@ -1,5 +1,5 @@
 $margin: 30px;
-$half-margin: $margin / 2;
+$half_margin: $margin / 2;
 $shadow: #222;
 $text_color: #333;
 
@@ -21,3 +21,12 @@ $dictionary_link_background: rgba(230, 230, 230, .7);
 $dictionary_link_color: #333;
 $dictionary_link_background_hover: lighter($menu_hover_statistics, 15%);
 $dictionary_link_color_hover: #fff;
+
+$quiz_question_size: 30px;
+$quiz_button_background: rgba(235, 235, 235, 0.75);
+$quiz_button_background_hover: $menu_hover_games;
+$quiz_button_color: #333;
+$quiz_button_color_hover: #fff;
+$quiz_button_shadow_hover: 1px 1px 2px $shadow;
+$quiz_correct_background: #82b95a;
+$quiz_wrong_background: #c75959;

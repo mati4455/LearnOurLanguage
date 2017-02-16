@@ -27,16 +27,16 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Success(QuizService.InitializeQuestions(param));
         }
 
-        [HttpPut("UpdateAnswers")]
-        public ActionResult UpdateAnswers([FromBody] IList<AnswerUpdateModel> answers)
+        [HttpPost("InsertAnswers")]
+        public ActionResult InsertAnswers([FromBody] IList<AnswerUpdateModel> answers)
         {
             AccessGuardian(Roles.AccessUser);
 
-            return JsonHelper.Response(GamesService.UpdateQuestions(answers));
+            return JsonHelper.Response(GamesService.InsertAnswers(answers));
         }
 
         [HttpPut("FinishGameSession/{gameSessionId}")]
-        public ActionResult UpdateAnswers(int gameSessionId)
+        public ActionResult FinishGameSession(int gameSessionId)
         {
             AccessGuardian(Roles.AccessUser);
             GamesService.FinishGameSession(gameSessionId);

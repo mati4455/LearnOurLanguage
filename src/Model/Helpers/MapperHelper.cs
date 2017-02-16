@@ -25,8 +25,8 @@ namespace Model.Helpers
                     .ForMember(dest => dest.RoleId, opts => opts.MapFrom(src => src.Role.Id))
                     .ForMember(dest => dest.UserId, opts => opts.MapFrom(src => src.Id));
 
-                x.CreateMap<GameSessionTranslation, QuestionPair>()
-                    .ForMember(dest => dest.GameSessionTranslationId, opts => opts.MapFrom(src => src.Id));
+                //x.CreateMap<GameSessionTranslation, QuestionPair>()
+                //    .ForMember(dest => dest.GameSessionTranslationId, opts => opts.MapFrom(src => src.Id));
             });
         }
     }

@@ -15,3 +15,5 @@ import 'ng2-toastr/ng2-toastr.css';
 
 import 'ng2-slim-loading-bar';
 import 'ng2-slim-loading-bar/bundles/style.css';
+
+import 'chart.js';
