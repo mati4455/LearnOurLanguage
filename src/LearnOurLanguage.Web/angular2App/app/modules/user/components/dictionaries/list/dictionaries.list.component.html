@@ -2,11 +2,12 @@
 
     <!-- tutaj będzie lista -->
     <h1 class="page-title">Twoje słowniki</h1>
+    <div class="has-error">
     <div class="form-group">
         <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" 
             [(value)]="queryString" (keyup)="filterList($event)">
     </div>
-
+    </div>
     <div *ngIf="dictionaries.length == 0">
         <p>nie znaleziono słowników</p>
     </div>
