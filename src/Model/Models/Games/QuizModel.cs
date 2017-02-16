@@ -5,7 +5,7 @@ namespace Model.Models.Games
 {
     public class QuizModel
     {
-        public int GameSessionTranslationId { get; set; }
+        public int GameSessionId { get; set; }
         public Translation Translation { get; set; }
         public IList<string> Answers { get; set; }
     }

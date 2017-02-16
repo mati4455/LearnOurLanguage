@@ -41,7 +41,7 @@ export class DictionariesListComponent {
         me.dictionariesBase = data;
     }
 
-    filterList(event: Event) {
+    filterList(event: any) {
         let me = this;
         //me.queryString = event.target.value;
         

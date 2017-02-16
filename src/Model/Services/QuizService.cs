@@ -24,25 +24,28 @@ namespace Model.Services
             var translations = GamesService.GetDictionaryTranslations(param.DictionaryId);
             var questionsIds = GamesService.InitializeGame(param.DictionaryId, param.UserId, GamesEnum.Quiz, param.MaxNumberOfQuestions);
             
-            return GetQuestions(param.MaxNumberOfQuestions, translations, questionsIds);
+            return GetQuestions(param.MaxNumberOfAnswers, translations, questionsIds);
         }
 
         private IList<QuizModel> GetQuestions(int maxNumberOfAnswers, IList<Translation> translations, IList<QuestionPair> questionsIds)
         {
-            var maxAns = Math.Min(translations.Count - 1, maxNumberOfAnswers);
+            var maxAns = Math.Min(translations.Count - 1, maxNumberOfAnswers - 1);
 
-            return questionsIds.Select(q => new QuizModel
+            var questions = questionsIds.Select(q => new QuizModel
             {
-                GameSessionTranslationId = q.GameSessionTranslationId,
+                GameSessionId = q.GameSessionId,
                 Translation = translations.Single(x => x.Id == q.TranslationId),
                 Answers = translations
                     .Where(x => x.Id != q.TranslationId)
                     .Select(x => x.SecondLangWord)
-                    .OrderBy(x => Guid.NewGuid())
                     .Take(maxAns)
                     .ToList()
             })
             .ToList();
+
+            questions.ForEach(q => q.Answers.Add(q.Translation.SecondLangWord));
+
+            return questions;
         }
     }
 }

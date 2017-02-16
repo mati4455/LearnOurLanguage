@@ -1,7 +1,8 @@
 export class AnswerUpdateModel {
 
     constructor(
-        public gameSessionTranslationId = 0,
+        public gameSessionId = 0,
+        public translationId = 0,
         public correct = false,
         public duration = 0
     ) { }

@@ -21,6 +21,7 @@ namespace Model.Repositories
                 .Include(x => x.FirstLanguage)
                 .Include(x => x.SecondLanguage)
                 .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.Date)
                 .ToList();
         }
         public IList<Dictionary> GetAllPublic()

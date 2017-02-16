@@ -2,8 +2,9 @@
 {
     public class AnswerUpdateModel
     {
-        public int GameSessionTranslationId { get; set; }
+        public int GameSessionId { get; set; }
+        public int TranslationId { get; set; }
         public bool Correct { get; set; }
-        public int Duration { get; set; }
+        public decimal Duration { get; set; }
     }
 }

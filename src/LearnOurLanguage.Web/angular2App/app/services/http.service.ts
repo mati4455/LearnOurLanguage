@@ -74,7 +74,8 @@ export class BaseHttpService {
         me.hideLoader();
 
         if ((data !== undefined || data !== null) && data.success === true) {
-            callback.call(scope, data.data, data.count);
+            if (callback.call)
+                callback.call(scope, data.data, data.count);            
         } else {
             me.processError(data.data);
         }
