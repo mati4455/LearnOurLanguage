@@ -78,6 +78,23 @@ namespace LearnOurLanguage.Web.Controllers.api
         }
 
         /// <summary>
+        /// Dane do wykresu dla pojedynczej sesji (ostatniej użytkownika)
+        /// </summary>
+        /// <param name="userId">Id użytkownika</param>
+        /// <returns>Obiekt opisujący wykres</returns>
+        [HttpGet("GetLastSessionStatistics")]
+        public ActionResult GetLastSessionStatistics(int userId)
+        {
+            AccessGuardian(Roles.AccessEveryone);
+
+            var data = StatisticsService.GetStatisticsForLastUserGameSession(userId);
+            var chartData = ChartsService.GetBasicStatistics(data);
+            return JsonHelper.Success(chartData);
+        }
+
+        
+
+        /// <summary>
         /// Podstawowe dane do wykresu dla słownika
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>

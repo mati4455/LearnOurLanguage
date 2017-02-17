@@ -39,7 +39,11 @@ namespace Model.Services
         /// <returns>Dane w formacie dla wykresu Pie Chart</returns>
         public PieChartData GetGamesStatisticPieChartForUser(IList<GameStatistic> data)
         {
-            var result = new PieChartData();
+            var result = new PieChartData
+            {
+                Data = new List<decimal>(),
+                Labels = new List<string>()
+            };
             foreach (var row in data)
             {
                 result.Labels.Add(row.GameName);

@@ -3,6 +3,8 @@ import { DictionaryModel, QuizModel, QuizParameters,
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { PieChartColors } from 'lol/consts';
+
 import './quiz.scss';
 
 var $ = require('jquery');
@@ -42,12 +44,8 @@ export class QuizComponent {
 
     animationTime: number = 300;
 
-    chartColors: any = [
-        {
-            backgroundColor: ['#7fa339','#a5294d','#146485','#c16126','#688691']
-        }
-    ];
-
+    chartColors = PieChartColors;
+    
     constructor(
         private dictionariesService: DictionariesService, 
         private chartsService: ChartsService, 

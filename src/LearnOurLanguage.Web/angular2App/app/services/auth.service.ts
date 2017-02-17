@@ -10,7 +10,7 @@ export class AuthService extends BaseService {
 
     refreshSession() {
         let me = this;
-        me.service.get(me.api() + '/GetAccess', me.updateLocalStorage, me);
+        me.service.get(me.api() + '/GetAccess', null, me.updateLocalStorage, me);
     }
 
     private updateLocalStorage(data: any): void {

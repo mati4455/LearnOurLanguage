@@ -92,7 +92,7 @@ namespace Model.Services
                         Game = firstEl.GameSession.Game,
                         CorrectAnswers = dataList.Count(d => d.Correct),
                         WrongAnswers = dataList.Count(d => !d.Correct),
-                        AverageTime = (decimal) dataList.Average(d => d.Duration)
+                        AverageTime = Math.Round(dataList.Average(d => d.Duration), 1)
                     };
                 })
                 .OrderBy(x => x.Date)
@@ -110,6 +110,26 @@ namespace Model.Services
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.Id == gameSessionId)
+                .ToList();
+            return ConvertGameSessionsToStatistics(data);
+        }
+
+        /// <summary>
+        /// Statystyki dla konkretnej sesji (ostatniej użytkownika)
+        /// </summary>
+        /// <param name="userId">Id użytkownika</param>
+        /// <returns>Statystyka sesji</returns>
+        public Statistics GetStatisticsForLastUserGameSession(int userId)
+        {
+            var lastSession = Context.GameSessions
+                .OrderByDescending(gs => gs.Id)
+                .FirstOrDefault(gs => gs.UserId == userId);
+
+            if (lastSession == null) return new Statistics();
+            
+            var data = Context.GameSessionTranslations
+                .Include(gst => gst.GameSession.Game)
+                .Where(gst => gst.GameSession.Id == lastSession.Id)
                 .ToList();
             return ConvertGameSessionsToStatistics(data);
         }

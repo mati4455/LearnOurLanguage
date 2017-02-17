@@ -40,7 +40,8 @@ let optionsForNotification: any = {
 
     exports: [
         SlimLoadingBarModule,
-        FormsModule
+        FormsModule,
+        ChartsModule
     ],
 
     declarations: [

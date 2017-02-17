@@ -15,4 +15,19 @@ export class ChartsService extends BaseService {
         };
         me.service.get(me.api() + '/GetStatisticsForGameSession', params, callback, scope);
     }
+    
+    getChartForUserByPeriod(params: any, callback: Function, scope: any) {
+        let me = this;
+        me.service.get(me.api() + '/GetChartForUserByPeriod', params, callback, scope);
+    }
+
+    getLastSessionStatistics(params: any, callback: Function, scope: any) {
+        let me = this;
+        me.service.get(me.api() + '/GetLastSessionStatistics', params, callback, scope);
+    }
+
+    getGamesStatisticsForUser(params: any, callback: Function, scope: any) {
+        let me = this;
+        me.service.get(me.api() + '/GetGamesStatisticsForUser', params, callback, scope);
+    }
 }
