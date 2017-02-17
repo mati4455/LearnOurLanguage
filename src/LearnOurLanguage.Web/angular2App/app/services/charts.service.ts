@@ -10,6 +10,9 @@ export class ChartsService extends BaseService {
 
     getStatisticsForGameSession(gameSessionId: number, callback: Function, scope: any) {
         let me = this;
-        me.service.get(me.api() + '/GetStatisticsForGameSession/' + gameSessionId, callback, scope);
+        let params = {
+            gameSessionId: gameSessionId
+        };
+        me.service.get(me.api() + '/GetStatisticsForGameSession', params, callback, scope);
     }
 }

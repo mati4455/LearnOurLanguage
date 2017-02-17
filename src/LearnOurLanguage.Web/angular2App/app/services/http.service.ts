@@ -12,7 +12,7 @@ import 'rxjs/Rx';
 export class BaseHttpService {
     constructor(private _http: Http, private _toast: ToastsManager, private _loader: SlimLoadingBarService) { }
 
-    public get(url: string, callback: Function, scope: any, odataConfig: ODataConfig = null): void {
+    public get(url: string, paramObject: any, callback: Function, scope: any, odataConfig: ODataConfig = null): void {
         let me = this;
         let headers = me.getHeaderSettings();
 
@@ -20,6 +20,7 @@ export class BaseHttpService {
         if (odataConfig === null) {
             odataConfig = new ODataConfig();
         }
+        url = me.getUrl(url, paramObject);
 
         odataConfig.headers = headers;
         me._http.get(url, odataConfig).map(responseData => {
@@ -108,5 +109,17 @@ export class BaseHttpService {
     private hideLoader() {
         let me = this;
         me._loader.complete();
+    }
+
+    private getUrl(url: string, params: any) {
+        let me = this;
+        let str = "";
+        for (var key in params) {
+            if (str != "") {
+                str += "&";
+            }
+            str += key + "=" + encodeURIComponent(params[key]);
+        }
+        return str.length > 0 ? url + "?" + str : url;
     }
 }

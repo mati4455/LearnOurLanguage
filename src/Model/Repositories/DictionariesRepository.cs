@@ -15,6 +15,14 @@ namespace Model.Repositories
             
         }
 
+        public override Dictionary GetById(int id)
+        {
+            return GetAll()
+               .Include(x => x.FirstLanguage)
+               .Include(x => x.SecondLanguage)
+               .FirstOrDefault(x => x.Id == id);
+        }
+        
         public IList<Dictionary> GetForUser(int userId)
         {
             return GetAll()

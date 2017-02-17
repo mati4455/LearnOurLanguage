@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Http;
 using LearnOurLanguage.Web.Base;
 using Microsoft.AspNetCore.Mvc;
 using Model.Const;
@@ -35,7 +36,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// <param name="startDate">Data początkowa statystyk</param>
         /// <param name="endDate">Data końcowa statystyk</param>
         /// <returns>Obiekt opisujący wykres</returns>
-        [HttpGet("GetChartForUserByPeriod/{userId}/{langId}/{startDate}/{endDate}")]
+        [HttpGet("GetChartForUserByPeriod")]
         public ActionResult GetChartForUserByPeriod(int userId, int? langId, int? gameId, DateTime startDate, DateTime endDate)
         {
             AccessGuardian(Roles.AccessUser, userId);
@@ -51,7 +52,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// <param name="userId">Id użytkownika</param>
         /// <param name="langId">Id języka</param>
         /// <returns>Obiekt opisujący wykres</returns>
-        [HttpGet("GetGamesStatisticsForUser/{userId}/{langId}")]
+        [HttpGet("GetGamesStatisticsForUser")]
         public ActionResult GetGamesStatisticsForUser(int userId, int? langId)
         {
             AccessGuardian(Roles.AccessUser, userId);
@@ -66,7 +67,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// </summary>
         /// <param name="gameSessionId">Id sesji</param>
         /// <returns>Obiekt opisujący wykres</returns>
-        [HttpGet("GetStatisticsForGameSession/{gameSessionId}")]
+        [HttpGet("GetStatisticsForGameSession")]
         public ActionResult GetStatisticsForGameSession(int gameSessionId)
         {
             AccessGuardian(Roles.AccessEveryone);
@@ -83,7 +84,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// <param name="userId">Id użytkownika</param>
         /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Obiekt opisujący wykres</returns>
-        [HttpGet("GetStatisticsForDictionary/{dictionaryId}/{userId}")]
+        [HttpGet("GetStatisticsForDictionary")]
         public ActionResult GetStatisticsForDictionary(int dictionaryId, int userId, int? gameId)
         {
             AccessGuardian(Roles.AccessEveryone);
@@ -100,7 +101,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// <param name="userId">Id użytkownika</param>
         /// <param name="gameId">Id gry (null - wszystkie gry)</param>
         /// <returns>Obiekt opisujący wykres</returns>
-        [HttpGet("GetDetailsStatisticsForDictionary/{dictionaryId}/{userId}")]
+        [HttpGet("GetDetailsStatisticsForDictionary")]
         public ActionResult GetDetailsStatisticsForDictionary(int dictionaryId, int userId, int? gameId)
         {
             AccessGuardian(Roles.AccessEveryone);

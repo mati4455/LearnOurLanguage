@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 using System.Security.Authentication;
+using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,12 +14,12 @@ namespace LearnOurLanguage.Web.Base
     /// <summary>
     /// Bazowy kontroler świadczący obsługę kontroli dostępu
     /// </summary>
-    public class BaseController : Controller
+    public class BaseController : ApiController
     {
         /// <summary>
         /// Aktualny context Http / Sesja
         /// </summary>
-        protected ISession Session => HttpContext.Session;
+        protected ISession Session => Context.Session; // HttpContext.Session;
 
         /// <summary>
         /// Inizjalizacja logera do obsługi komunikatów
@@ -38,13 +39,13 @@ namespace LearnOurLanguage.Web.Base
 
             if (currentAccessLevel == -1)
             {
-                HttpContext.Response.StatusCode = 401;
-                HttpContext.Response.Body = Stream.Null;
+                Context.Response.StatusCode = 401;
+                Context.Response.Body = Stream.Null;
             }
             else if (currentAccessLevel < accessLevel)
             {
-                HttpContext.Response.StatusCode = 403;
-                HttpContext.Response.Body = Stream.Null;
+                Context.Response.StatusCode = 403;
+                Context.Response.Body = Stream.Null;
             }
 
             if (!accepted)
@@ -62,8 +63,8 @@ namespace LearnOurLanguage.Web.Base
 
             if (GetCurrentUserId(Session) != userId)
             {
-                HttpContext.Response.StatusCode = 403;
-                HttpContext.Response.Body = Stream.Null;
+                Context.Response.StatusCode = 403;
+                Context.Response.Body = Stream.Null;
 
                 Logger.LogWarning($"{LoggingConst.AccessGuardian}: {ExceptionConst.AccessDenied}");
                 throw new AuthenticationException(ExceptionConst.AccessDenied);
@@ -87,8 +88,8 @@ namespace LearnOurLanguage.Web.Base
 
             if (!accepted && (currentUser == null))
             {
-                status = HttpContext.Response.StatusCode = 401;
-                HttpContext.Response.Body = Stream.Null;
+                status = Context.Response.StatusCode = 401;
+                Context.Response.Body = Stream.Null;
 
                 Logger.LogWarning($"{LoggingConst.AccessGuardian}: {ExceptionConst.Unauthorized}");
                 throw new HttpException(HttpStatusCode.Unauthorized, ExceptionConst.Unauthorized);
@@ -96,8 +97,8 @@ namespace LearnOurLanguage.Web.Base
 
             if (!accepted && (currentUser > -1))
             {
-                status = HttpContext.Response.StatusCode = 403;
-                HttpContext.Response.Body = Stream.Null;
+                status = Context.Response.StatusCode = 403;
+                Context.Response.Body = Stream.Null;
 
                 Logger.LogWarning($"{LoggingConst.AccessGuardian}: {ExceptionConst.Forbidden}");
                 throw new HttpException(HttpStatusCode.Forbidden, ExceptionConst.Forbidden);

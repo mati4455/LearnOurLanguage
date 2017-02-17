@@ -18,8 +18,8 @@ namespace Model.Repositories
         public IEnumerable<Translation> GetTranslationsForDictionary(int dictionaryId)
         {
             return GetAll()
-                .Include(x => x.Dictionary.FirstLanguage)
-                .Include(x => x.Dictionary.SecondLanguage)
+                //.Include(x => x.Dictionary.FirstLanguage)
+                //.Include(x => x.Dictionary.SecondLanguage)
                 .Where(x => x.DictionaryId == dictionaryId);
         }
     }

@@ -79,7 +79,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// Aktualizacja użytkownika
         /// </summary>
         /// <param name="data">Klasa z pełnymi informacjami o użytkowniku</param>
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult Put([FromBody] User data)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser, data.Id));

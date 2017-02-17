@@ -31,7 +31,9 @@ export class QuizComponent {
     saved: boolean = false;
     stats: PieChartData = null;
     showNav: boolean = false;
+    speechSupport: boolean = false;
     questionIndex: number = 0;
+    selectedDictionary: DictionaryModel;
 
     startTime: number = 0;
     endTime: number = 0;
@@ -39,6 +41,12 @@ export class QuizComponent {
     interval: any = null;
 
     animationTime: number = 300;
+
+    chartColors: any = [
+        {
+            backgroundColor: ['#7fa339','#a5294d','#146485','#c16126','#688691']
+        }
+    ];
 
     constructor(
         private dictionariesService: DictionariesService, 
@@ -50,11 +58,12 @@ export class QuizComponent {
         let me = this;
         me.userId = +localStorage.getItem('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
+        me.speechSupport = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
     }
 
     ngOnDestroy() {
         let me = this;
-        if (!me.saved) {
+        if (!me.saved && me.model) {
             me.endSession(false);
         }
     }
@@ -76,6 +85,7 @@ export class QuizComponent {
         me.questions = data;
         me.questions.forEach((item) => me.countAnswers[item.translation.id] = 0 );
         me.gameSessionId = me.questions[0].gameSessionId;
+        me.selectedDictionary = me.dictionaries.find( (item) => item.id == me.parameters.dictionaryId);
 
         me.nextQuestion();
     }
@@ -151,17 +161,14 @@ export class QuizComponent {
 
     endSession(loadStats: boolean) {
         let me = this;
-        me.model = null;
         
-        if (loadStats) {
-            me.gamesService.insertAnswers(me.answers, me.getStatistics, me);
-            me.gamesService.finishGameSession(me.gameSessionId, () => { }, me);
-        }
+        me.gamesService.finishGameSession(me.gameSessionId, () => { }, me);
+        me.gamesService.insertAnswers(me.answers, me.getStatistics, me);        
     }
 
     getStatistics(data: any) {
         let me = this;
-        if (!data) return;       
+        if (!data) return;
 
         // załadowanie statystyk
         me.chartsService.getStatisticsForGameSession(me.gameSessionId, me.showCharts, me);
@@ -169,6 +176,7 @@ export class QuizComponent {
 
     showCharts(data: any) {
         let me = this;
+        me.model = null;
         me.stats = data;
     }
 
@@ -188,23 +196,34 @@ export class QuizComponent {
         return me.calculateDuration();
     }
 
-    shuffle(a: any) {
-        let j: number;
-        let x: any;
-        let i: number;
-        for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
+    shuffle(array: any) {
+        let currentIndex = array.length,
+            temporaryValue: any, 
+            randomIndex: any;
+
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
+
+        return array;
     }
 
     ttsPlay() {
         let me = this;
-        let voice = new SpeechSynthesisUtterance(me.model.translation.secondLangWord);
-        voice.lang = me.model.translation.dictionary.secondLanguage.code;
+        if (!me.speechSupport) return;
+
+        let win = (<any>window);
+        let voice = new win.SpeechSynthesisUtterance();
+        voice.text = me.model.translation.secondLangWord;
+        voice.lang = me.selectedDictionary.secondLanguage.code;
         voice.rate = 0.7;
-        window.speechSynthesis.speak(voice);
+
+        //win.speechSynthesis.stop();
+        win.speechSynthesis.speak(voice);
     }
 }

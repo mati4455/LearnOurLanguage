@@ -25,7 +25,7 @@ namespace LearnOurLanguage.Web.Controllers.api
 
             return JsonHelper.Success(DictionariesRepository.GetAll().ToList());
         }
-        
+
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -42,7 +42,7 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Success(DictionariesRepository.GetAllPublic());
         }
 
-        [HttpGet("GetForUser/{userId}")]
+        [HttpGet("GetForUser")]
         public ActionResult GetForUser(int userId)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser, userId));
@@ -60,7 +60,7 @@ namespace LearnOurLanguage.Web.Controllers.api
             );
         }
         
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult Put([FromBody] Dictionary data)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser, data.Id));

@@ -8,7 +8,7 @@
             [(value)]="queryString" (keyup)="filterList($event)">
     </div>
     </div>
-    <div *ngIf="dictionaries.length == 0">
+    <div *ngIf="!dictionaries || dictionaries.length == 0">
         <p>nie znaleziono słowników</p>
     </div>
     

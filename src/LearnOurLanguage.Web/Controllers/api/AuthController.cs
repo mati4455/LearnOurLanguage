@@ -33,8 +33,8 @@ namespace LearnOurLanguage.Web.Controllers.api
         public ActionResult Login([FromBody] AppUserAuthVo user)
         {
             var accessLevel = AuthService.CheckAuthorization(user);
-            HttpContext.Session.SetInt32(ParametersConst.AccessTokenName, accessLevel.AccessLevel);
-            HttpContext.Session.SetInt32(ParametersConst.UserIdToken, accessLevel.UserId);
+            Context.Session.SetInt32(ParametersConst.AccessTokenName, accessLevel.AccessLevel);
+            Context.Session.SetInt32(ParametersConst.UserIdToken, accessLevel.UserId);
             return JsonHelper.Success(new
             {
                 accessLevel = accessLevel.AccessLevel,
@@ -48,10 +48,10 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpGet]
         public ActionResult Logout()
         {
-            HttpContext.Session.SetInt32(ParametersConst.AccessTokenName, -1);
-            HttpContext.Session.SetInt32(ParametersConst.UserIdToken, -1);
-            HttpContext.Session.Remove(ParametersConst.AccessTokenName);
-            HttpContext.Session.Remove(ParametersConst.UserIdToken);
+            Context.Session.SetInt32(ParametersConst.AccessTokenName, -1);
+            Context.Session.SetInt32(ParametersConst.UserIdToken, -1);
+            Context.Session.Remove(ParametersConst.AccessTokenName);
+            Context.Session.Remove(ParametersConst.UserIdToken);
 
             return JsonHelper.Success(string.Empty);
         }
@@ -62,8 +62,8 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpGet("GetAccess")]
         public ActionResult GetAccess()
         {
-            var accessLevel = HttpContext.Session.GetInt32(ParametersConst.AccessTokenName) ?? -1;
-            var userId = HttpContext.Session.GetInt32(ParametersConst.UserIdToken) ?? -1;
+            var accessLevel = Context.Session.GetInt32(ParametersConst.AccessTokenName) ?? -1;
+            var userId = Context.Session.GetInt32(ParametersConst.UserIdToken) ?? -1;
             return JsonHelper.Success(new { accessLevel, userId });
         }
     }

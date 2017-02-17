@@ -10,6 +10,9 @@ export class TranslationsService extends BaseService {
     
     getForDictionary(dictionaryId: number, callback: Function, scope: any) {
         let me = this;
-        me.service.get(me.api() + '/GetForDictionary/' + dictionaryId, callback, scope);
+        let params = {
+            dictionaryId: dictionaryId
+        };
+        me.service.get(me.api() + '/GetForDictionary', params, callback, scope);
     }
 }

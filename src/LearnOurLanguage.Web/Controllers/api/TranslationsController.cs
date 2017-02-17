@@ -30,10 +30,10 @@ namespace LearnOurLanguage.Web.Controllers.api
         {
             AccessGuardian(new AccessRole(Roles.AccessUser));
 
-            return JsonHelper.Success(TranslationsRepository.GetById(id));
+            return JsonHelper.Success(TranslationsRepository.GetById(id));  
         }
         
-        [HttpGet("GetForDictionary/{dictionaryId}")]
+        [HttpGet("GetForDictionary")]
         public ActionResult GetForDictionary(int dictionaryId)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser));

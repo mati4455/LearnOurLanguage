@@ -10,6 +10,9 @@ export class DictionariesService extends BaseService {
 
     getForUser(userId: number, callback: Function, scope: any) {
         let me = this;
-        me.service.get(me.api() + '/GetForUser/' + userId, callback, scope);
+        let params = {
+            userId: userId
+        };
+        me.service.get(me.api() + '/GetForUser', params, callback, scope);
     }
 }
