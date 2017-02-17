@@ -113,13 +113,13 @@ export class BaseHttpService {
 
     private getUrl(url: string, params: any) {
         let me = this;
-        let str = "";
+        let str = '';
         for (var key in params) {
-            if (str != "") {
+            if (str != '') {
                 str += "&";
             }
-            str += key + "=" + encodeURIComponent(params[key]);
+            str += key + '=' + encodeURIComponent(params[key]);
         }
-        return str.length > 0 ? url + "?" + str : url;
+        return str.length > 0 ? url + '?' + str : url;
     }
 }

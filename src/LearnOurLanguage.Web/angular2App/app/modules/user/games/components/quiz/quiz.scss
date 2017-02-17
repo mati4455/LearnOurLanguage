@@ -83,4 +83,14 @@
 
 .animation {
     transition: all .3s ease-in-out;
+
+    &.down {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    &.up {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

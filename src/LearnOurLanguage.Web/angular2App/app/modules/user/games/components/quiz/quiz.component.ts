@@ -1,4 +1,4 @@
-import { DictionaryModel, QuizModel, QuizParameters, 
+import { DictionaryModel, QuizModel, QuizParameters,
          AnswerUpdateModel, PieChartData } from 'lol/models';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { PieChartColors } from 'lol/consts';
 
 import './quiz.scss';
 
-var $ = require('jquery');
+let $ = require('jquery');
 
 @Component({
     selector: 'game-quiz',
@@ -45,11 +45,11 @@ export class QuizComponent {
     animationTime: number = 300;
 
     chartColors = PieChartColors;
-    
+
     constructor(
-        private dictionariesService: DictionariesService, 
-        private chartsService: ChartsService, 
-        private gamesService: GamesService, 
+        private dictionariesService: DictionariesService,
+        private chartsService: ChartsService,
+        private gamesService: GamesService,
         public router: Router) { }
 
     ngOnInit() {
@@ -95,8 +95,8 @@ export class QuizComponent {
 
         let correct = me.equalsWords(me.model.translation.secondLangWord, answer);
         me.answers.push(new AnswerUpdateModel(
-            me.model.gameSessionId, 
-            me.model.translation.id, 
+            me.model.gameSessionId,
+            me.model.translation.id,
             correct,
             me.calculateDuration()
         ));
@@ -127,16 +127,13 @@ export class QuizComponent {
     }
 
     nextQuestion() {
-        let me = this;        
+        let me = this;
         me.shuffle(me.questions);
 
-        $('.animation').css({
-            'opacity': '0',
-            'transform': 'scale(0)'
-        });
+        $('.animation').removeClass('up').addClass('down');
 
-        setTimeout(function(){ 
-            
+        setTimeout(function() {
+
             $('.answers button').removeClass('correct wrong');
             me.showNav = false;
             me.questionIndex++;
@@ -144,10 +141,7 @@ export class QuizComponent {
             me.shuffle(me.model.answers);
             me.startTime = new Date().getTime();
 
-            $('.animation').css({
-                'opacity': '1',
-                'transform': 'scale(1)'
-            });
+            $('.animation').removeClass('down').addClass('up');
 
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();

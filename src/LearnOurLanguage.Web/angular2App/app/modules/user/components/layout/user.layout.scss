@@ -64,6 +64,8 @@
     position: relative;
     
     .menu-tiles {
+        position: static;
+        
         a {
             margin-left: $half-margin;
             margin-right: $half-margin;
@@ -76,16 +78,11 @@
         padding-left: $menu_margin;
         .menu-tiles {
             z-index: 2000;
-            position: absolute;
-            top: 0;
-            left: 0;
 
-            &.affix {
-                position: fixed;
-                left: auto;
-                margin-left: -95px;
-                top: $margin;
-            }
+            position: fixed;
+            left: auto;
+            margin-left: -95px;
+            top: $margin;
 
             a {
                 padding: 0;

@@ -64,8 +64,18 @@ span.i { font-style: italic; }
     }
 }
 
+.section-title {
+    margin: 0 0 $half_margin;
+}
+
 .page-title {
     margin: 0 0 $half_margin;
+    padding-bottom: $half_margin;
+    border-bottom: 1px solid #a29e9e;
+    text-align: center;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px #c5c5c5;
 }
 
 .box-tile {

@@ -22,7 +22,7 @@ export class DictionariesFormComponent {
     constructor(
         private translationsService: TranslationsService,
         private dictionaryService: DictionariesService,
-        private router: Router, 
+        private router: Router,
         private route: ActivatedRoute) {
     }
 

@@ -9,7 +9,7 @@ import './dictionaries.list.scss';
     selector: 'dictionaries-list',
     templateUrl: 'dictionaries.list.component.html',
     providers: [
-        DictionariesService        
+        DictionariesService
     ]
 })
 
@@ -18,7 +18,7 @@ export class DictionariesListComponent {
     public queryString: string = '';
     public dictionaries: Array<DictionaryModel> = [];
     public dictionariesBase: Array<DictionaryModel> = [];
-    
+
     constructor(
         private dictionariesService: DictionariesService,
         private router: Router, 

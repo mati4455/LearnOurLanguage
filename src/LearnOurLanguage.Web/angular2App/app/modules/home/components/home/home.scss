@@ -2,14 +2,14 @@
 
 #home {
     .title {
-        font-size: 60px;
+        font-size: 70px;
         color: $home_title_color;
         text-shadow: 0 0 10px $home_title_shadow;
-        margin: $margin 0;
+        margin: $margin 0 (1.5 * $margin);
     }
     .header {
         position: relative;
-        padding: 0 0 $margin;
+        padding: $margin 0 0;
         background: $home_header_background;
         box-shadow: 0 0 $margin $home_header_shadow;
     }
@@ -18,8 +18,9 @@
     }
 
     .box {
-        margin-top: $half-margin;
-        margin-bottom: $half-margin;
+        box-shadow: none;
+        margin: 0;
+        padding: $half_margin;
 
         h2 {
             margin: $half-margin;

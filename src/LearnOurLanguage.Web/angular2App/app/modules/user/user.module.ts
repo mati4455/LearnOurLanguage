@@ -26,7 +26,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         DashboardComponent,
         DictionariesComponent,
         DictionariesListComponent,
-        DictionariesFormComponent        
+        DictionariesFormComponent
     ],
 
     exports: [
@@ -34,7 +34,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         DashboardComponent,
         DictionariesComponent,
         DictionariesListComponent,
-        DictionariesFormComponent        
+        DictionariesFormComponent
     ]
 })
 
