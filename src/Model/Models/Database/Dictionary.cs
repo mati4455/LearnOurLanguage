@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Model.Base;
@@ -35,10 +34,10 @@ namespace Model.Models.Database
         public virtual Language SecondLanguage { get; set; }
 
         [NotMapped]
-        public override bool IsValid => 
+        public override bool IsValid =>
             !string.IsNullOrWhiteSpace(Name) &&
-            UserId > 0 && 
-            FirstLanguageId > 0 && 
+            UserId > 0 &&
+            FirstLanguageId > 0 &&
             SecondLanguageId > 0;
     }
 }

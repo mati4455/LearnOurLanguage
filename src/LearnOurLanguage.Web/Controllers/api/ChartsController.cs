@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Http;
 using LearnOurLanguage.Web.Base;
 using Microsoft.AspNetCore.Mvc;
 using Model.Const;

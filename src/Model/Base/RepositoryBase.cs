@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Model.Const;
-using Model.Core;
 using Model.Models;
 
 namespace Model.Base

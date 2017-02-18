@@ -3,7 +3,6 @@ using System.Net;
 using System.Security.Authentication;
 using System.Web.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model.Auth;
 using Model.Const;

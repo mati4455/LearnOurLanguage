@@ -2,29 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": ".NET Core Build",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceRoot}/src/LearnOurLanguage.Web/bin/Debug/netcoreapp1.1/LearnOurLanguage.Web.dll",
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/src/LearnOurLanguage.Web/",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
-            "launchBrowser": {
-                "enabled": true,
-                "args": "${auto-detect-url}",
-                "windows": {
-                    "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
-                },
-                "osx": {
-                    "command": "open"
-                },
-                "linux": {
-                    "command": "xdg-open"
-                }
-            },
+
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
@@ -37,6 +24,64 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command.pickProcess}"
+        },
+        {
+            "name": ".NET Core Launch (Web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/src/LearnOurLanguage.Web/bin/Debug/netcoreapp1.1/LearnOurLanguage.Web.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/src/LearnOurLanguage.Web/",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceRoot}/Views"
+            },
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url} --remote-debugging-port=9222",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url} --remote-debugging-port=9222"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                },
+                "type": "chrome",
+                "webRoot": "${workspaceRoot}/src/LearnOurLanguage.Web/wwwroot/",
+                "sourceMaps": true,
+                "diagnosticLogging": true,
+                "sourceMapPathOverrides": { "webpack:///./angular2App/*": "${workspaceRoot}/src/LearnOurLanguage.Web/angular2App/*" }
+            }
+        },
+        {
+            "name": "Launch Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}/src/LearnOurLanguage.Web/wwwroot/",
+            "sourceMaps": true,
+            "diagnosticLogging": true,
+            "sourceMapPathOverrides": { "webpack:///./angular2App/*": "${workspaceRoot}/src/LearnOurLanguage.Web/angular2App/*" }
+        },
+        {
+            "name": "Attach Chrome",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}/src/LearnOurLanguage.Web/wwwroot/",
+            "sourceMaps": true,
+            "diagnosticLogging": true,
+            "sourceMapPathOverrides": { "webpack:///./angular2App/*": "${workspaceRoot}/src/LearnOurLanguage.Web/angular2App/*" }
         }
     ]
 }

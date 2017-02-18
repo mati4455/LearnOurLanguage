@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Model.Models.Account;
 using Model.Models.Database;
-using Model.Models.Games;
 
 namespace Model.Helpers
 {
@@ -15,7 +13,7 @@ namespace Model.Helpers
                 /* examples
                     x.CreateMap<Ticket, TicketVo>();
                     x.CreateMap<TicketVo, Ticket>();
-                
+
                     x.CreateMap<EventVo, Event>()
                         .ForMember(dest => dest.BuildingId, opts => opts.MapFrom(src => src.Building.Id));
                 */

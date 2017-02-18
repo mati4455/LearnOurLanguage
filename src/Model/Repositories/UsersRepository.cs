@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Model.Base;
 using Model.Helpers;
 using Model.Models;
-using Model.Models.Account;
 using Model.Models.Database;
 using Model.Repositories.Interfaces;
 

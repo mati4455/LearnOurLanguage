@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using Model.Base;
 using Model.Models;
 using Model.Models.Database;
@@ -12,7 +11,7 @@ namespace Model.Repositories
     {
         public TranslationsRepository(DatabaseContext db) : base(db)
         {
-            
+
         }
 
         public IEnumerable<Translation> GetTranslationsForDictionary(int dictionaryId)

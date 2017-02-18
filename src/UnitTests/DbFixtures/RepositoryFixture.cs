@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Autofac.Extras.Moq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model.Models;
 using Model.Models.Database;
 using Model.Repositories;
-using Model.Repositories.Interfaces;
 using Moq;
 using Xunit;
 
@@ -33,10 +27,10 @@ namespace UnitTests.DbFixtures
                 AccessLevel = 300
             });
             repository.Save();
-            
+
             dbSetMock.Verify(set => set.Add(It.IsAny<Role>()), Times.Once);
             dbMock.Verify(context => context.SaveChanges(), Times.Once);
         }
-        
+
     }
 }

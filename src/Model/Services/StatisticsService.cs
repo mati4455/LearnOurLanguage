@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Model.Models;
 using Model.Models.Database;
 using Model.Models.Statistics;
@@ -15,9 +14,9 @@ namespace Model.Services
         #region Opis serwisu
         /*
          * Serwis do obsługi statystyk w aplikacji
-         * 
+         *
          * Jako słówko, którego się uczymy traktujemy SecondLangWord (ono będzie najważniejsze w statystyce)
-         * 
+         *
          */
         #endregion
 
@@ -31,7 +30,7 @@ namespace Model.Services
         }
 
         #endregion
-        
+
         #region Pobieranie danych statystycznych
 
         /// <summary>
@@ -151,7 +150,7 @@ namespace Model.Services
                 .FirstOrDefault(gs => gs.UserId == userId);
 
             if (lastSession == null) return new Statistics();
-            
+
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.Id == lastSession.Id)
@@ -178,7 +177,7 @@ namespace Model.Services
 
         /// <summary>
         /// Szczegółowe statystyki słownika (dla użytkownika)
-        /// Procent poprawnych odpowiedzi dla każdego słówka w słowniku 
+        /// Procent poprawnych odpowiedzi dla każdego słówka w słowniku
         /// Dotyczy słówek, na które została udzielona przynajmniej jedna odpowiedź
         /// </summary>
         /// <param name="dictionaryId">Id słownika</param>
@@ -259,7 +258,7 @@ namespace Model.Services
         private Statistics ConvertGameSessionsToStatistics(IList<GameSessionTranslation> data)
         {
             if (data.Count == 0) return new Statistics();
-            
+
             return new Statistics
             {
                 Date = data.First().GameSession.DateStart,

@@ -51,12 +51,13 @@
     },
 
     "buildOptions": {
+        "debugType": "portable",
         "emitEntryPoint": true,
         "preserveCompilationContext": true,
-      "compile": {
-        "exclude": [ "node_modules" ]
-      },
-      "xmlDoc": true
+        "compile": {
+            "exclude": [ "node_modules" ]
+        },
+        "xmlDoc": true
     },
 
     "runtimeOptions": {

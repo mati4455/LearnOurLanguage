@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Model.Helpers;
+﻿using Model.Helpers;
 using Xunit;
 
 namespace UnitTests.Fixtures

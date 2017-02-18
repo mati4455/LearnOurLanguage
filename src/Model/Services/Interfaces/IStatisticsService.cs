@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Model.Models.Database;
 using Model.Models.Statistics;
-using Model.Models.Statistics.Charts;
 
 namespace Model.Services.Interfaces
 {

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Model.Base;
-using Model.Models.Games;
 
 namespace Model.Models.Database
 {

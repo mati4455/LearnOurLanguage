@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -12,7 +11,6 @@ using Autofac.Extensions.DependencyInjection;
 using LearnOurLanguage.Web.Base;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using Model.Core;
 using Model.Models;
 using Swashbuckle.Swagger.Model;
@@ -109,7 +107,7 @@ namespace LearnOurLanguage.Web
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
         /// <param name="scopeFactory"></param>
-        public void Configure(IApplicationBuilder app, IApplicationLifetime appLifetime, 
+        public void Configure(IApplicationBuilder app, IApplicationLifetime appLifetime,
             IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -119,7 +117,7 @@ namespace LearnOurLanguage.Web
 
             App.LoggerFactory = loggerFactory;
             App.Logger = loggerFactory.CreateLogger("trace");
-            
+
             scopeFactory.SeedData();
 
             app.UseSession();
@@ -142,7 +140,7 @@ namespace LearnOurLanguage.Web
             });
 
             app.UseFileServer();
-            
+
             // używając webpacka nie jest potrzebne przekirowanie pakietów node na ścieżkę webową
             //var libPath = Path.Combine(env.ContentRootPath, "node_modules");
             //Path.GetFullPath(Path.Combine(env.WebRootPath, @"..\node_modules\")); // coś się...?
@@ -152,7 +150,7 @@ namespace LearnOurLanguage.Web
             //    RequestPath = new PathString("/node_modules"),
             //    EnableDirectoryBrowsing = false
             //});
-            
+
             app.UseSwagger();
             app.UseSwaggerUi();
 

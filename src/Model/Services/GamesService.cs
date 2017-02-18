@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using Microsoft.Extensions.Logging;
-using Model.Base;
 using Model.Core;
 using Model.Models;
 using Model.Models.Database;
 using Model.Models.Games;
-using Model.Repositories;
 using Model.Repositories.Interfaces;
 using Model.Services.Interfaces;
 
