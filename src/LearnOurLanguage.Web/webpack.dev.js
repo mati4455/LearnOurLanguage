@@ -47,7 +47,7 @@ module.exports = {
                 loaders: [
                     'awesome-typescript-loader',
                     'angular-router-loader',
-                    'angular2-template-loader',        
+                    'angular2-template-loader',
                     'source-map-loader',
                     'tslint-loader'
                 ]
@@ -103,6 +103,22 @@ module.exports = {
                 './wwwroot/assets'
             ]
         ),
+
+        /*
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            },
+            sourceMap: false
+        }),
+        new webpack.optimize.CommonsChunkPlugin(
+            {
+                name: ['vendor', 'polyfills']
+            }),
+        */
 
         new HtmlWebpackPlugin({
             filename: 'index.html',

@@ -17,7 +17,10 @@ let $ = require('jquery');
         GamesService,
         DictionariesService,
         ChartsService
-    ]
+    ],
+    host: {
+        '(document:keydown)': 'handleKeyboardEvents($event)'
+    }
 })
 
 export class QuizComponent {
@@ -69,6 +72,28 @@ export class QuizComponent {
         let me = this;
         if (!me.saved && me.model) {
             me.endSession(false);
+        }
+    }
+
+    handleKeyboardEvents(event: KeyboardEvent) {
+        let me = this;
+        let key = event.which || event.keyCode;
+        let one = 49;
+        let nine = 57;
+
+        if (key >= one && key <= nine) {
+            let index = key - one;
+            if (index < me.model.answers.length) {
+                $('.answers button')[index].click();
+            }
+        }
+
+        if (key == 13 && me.isNextQuestion()) {
+            me.nextQuestion();
+        }
+
+        if (key == 32 && me.showNav) {
+            me.ttsPlay();
         }
     }
 
