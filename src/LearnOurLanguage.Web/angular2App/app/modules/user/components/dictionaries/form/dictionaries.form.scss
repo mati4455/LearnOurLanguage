@@ -23,7 +23,7 @@
    background: rgba(255, 255, 255, .65);
     padding: $half_margin;
             margin-bottom: $half_margin;
-  
+
 }
 #right_col {
    float:right;
@@ -32,25 +32,18 @@
    background: rgba(255, 255, 255, .65);
     padding: $half_margin;
             margin-bottom: $half_margin;
-            
-            
-}
+            }
         }
 }
-.buttons{
-    width: 300px;
-    max-height: 500px;
-    overflow-y: auto;
-    margin-left: 5px;
-    & > button{
-        width: 97px;
-         background: rgba(255, 255, 255, .65);
-        padding: $half_margin;
-        margin-top: $half_margin;
-         &:hover,
-            &.active {
+
+.buttons button {
+width: 100%;
+background: rgba(255, 255, 255, .65);
+padding: $half_margin;
+margin-top: $half_margin;
+        &:hover,
+        &.active {
                 background: #6E6E6E;
                 color:#fff;
                 }
-    }
 }
