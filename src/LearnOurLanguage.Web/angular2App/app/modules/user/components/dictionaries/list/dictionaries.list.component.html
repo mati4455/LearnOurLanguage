@@ -2,27 +2,33 @@
     <!-- tutaj będzie lista -->
     <div class="has-error">
     <div class="form-group">
-        <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" 
+        <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString"
             [(value)]="queryString" (keyup)="filterList($event)">
     </div>
     </div>
     <div *ngIf="!dictionaries || dictionaries.length == 0">
         <p>nie znaleziono słowników</p>
     </div>
-    
+
     <div class="list">
         <div *ngFor="let dictionary of dictionaries">
             <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
         </div>
     </div>
 
-    <div class="buttons">
-        <button type="button" class="btn btn-default">Dodaj</button>
-        <button type="button" class="btn btn-default">Edytuj</button>
-        <button type="button" class="btn btn-default">Usuń</button>
-    </div>
+    <div class="buttons row">
+<div class="col-xs-4">
+<button type="button" class="btn btn-default">Dodaj</button>
+</div>
+<div class="col-xs-4">
+<button type="button" class="btn btn-default">Edytuj</button>
+</div>
+<div class="col-xs-4">
+<button type="button" class="btn btn-default">Usuń</button>
+</div>
+</div>
 </div>
 
 <div class="col-xs-12 col-md-8">
     <router-outlet></router-outlet>
-</div> 
+</div>

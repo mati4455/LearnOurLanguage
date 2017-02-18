@@ -21,7 +21,7 @@ export class DictionariesListComponent {
 
     constructor(
         private dictionariesService: DictionariesService,
-        private router: Router, 
+        private router: Router,
         private route: ActivatedRoute) {
         let me = this;
     }
@@ -43,8 +43,8 @@ export class DictionariesListComponent {
 
     filterList(event: any) {
         let me = this;
-        //me.queryString = event.target.value;
-        
+        me.queryString = event.target.value;
+
         me.dictionaries = me.dictionariesBase.filter((element) => element.name.includes(me.queryString));
     }
 
