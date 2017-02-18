@@ -4,7 +4,8 @@ import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import {Http, Headers, RequestOptions, URLSearchParams, BaseRequestOptions} from '@angular/http';
 import {HttpRequestHelper, ODataConfig} from './http.request.helper';
 import 'rxjs/Rx';
-var $ = require('jquery');
+let $ = require('jquery');
+let interval: any;
 
 /**
 * Bazowy serwis Http odpowiedzialny za wykonywanie żądań GET, POST, PUT oraz DELETE.
@@ -110,9 +111,10 @@ export class BaseHttpService {
 
     private hideLoader() {
         let me = this;
-        setTimeout(function() {
-            $('#loader').fadeOut(250);
-        }, 250);
+        if (interval) clearInterval(interval);
+        interval = setTimeout(function() {
+            $('#loader').fadeOut(100);
+        }, 100);
         //me._loader.complete();
     }
 
