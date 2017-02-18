@@ -22,10 +22,6 @@
     "shared/*": ["./angular2App/app/modules/shared/*"]    
 	}
   },
-  "files": [
-    "angular2App/app/app.module.ts",
-    "angular2App/main.ts"
-  ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true
   },

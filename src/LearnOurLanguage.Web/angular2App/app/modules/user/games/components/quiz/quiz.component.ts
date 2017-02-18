@@ -139,7 +139,7 @@ export class QuizComponent {
             $('.answers button').removeClass('correct wrong');
             me.showNav = false;
             me.questionIndex++;
-            me.model = me.questions.shift();        
+            me.model = me.questions.shift();
             me.model.answers = me.gamesHelper.shuffle(me.model.answers);
             me.startTime = new Date().getTime();
 

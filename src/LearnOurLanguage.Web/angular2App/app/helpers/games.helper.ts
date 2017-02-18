@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GamesHelper {
@@ -22,7 +22,7 @@ export class GamesHelper {
 
     shuffle(array: any) {
         let currentIndex = array.length,
-            temporaryValue: any, 
+            temporaryValue: any,
             randomIndex: any;
 
         while (0 !== currentIndex) {
