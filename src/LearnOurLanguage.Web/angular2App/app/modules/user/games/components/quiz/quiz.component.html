@@ -9,8 +9,8 @@
         <form (ngSubmit)="startGame()">
             <div class="form-group">
                 <label for="dictionaryId">Słownik:</label>
-                <select [(ngModel)]="parameters.dictionaryId" required name="dictionaryId"
-                    class="form-control" id="dictionaryId" placeholder="wybierz słownik">
+                <select [(ngModel)]="parameters.dictionaryId" required name="dictionaryId" data-style="btn-default"
+                    class="form-control selectpicker" data-live-search="true" id="dictionaryId" placeholder="wybierz słownik">
                     <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
                         {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
                     </option>
@@ -18,18 +18,18 @@
             </div>
             <div class="form-group">
                 <label for="maxNumberOfQuestions">Maksymalna liczba pytań:</label>
-                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3"
-                    type="number" class="form-control" id="maxNumberOfQuestions" placeholder="liczba pytań">
+                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3" type="number" class="form-control"
+                    id="maxNumberOfQuestions" placeholder="liczba pytań">
             </div>
             <div class="form-group">
                 <label for="maxNumberOfAnswers">Maksymalna liczba odpowiedzi:</label>
-                <input [(ngModel)]="parameters.maxNumberOfAnswers" required name="maxNumberOfAnswers" min="3"
-                    type="number" class="form-control" id="maxNumberOfAnswers" placeholder="liczba odpowiedzi">
+                <input [(ngModel)]="parameters.maxNumberOfAnswers" required name="maxNumberOfAnswers" min="3" type="number" class="form-control"
+                    id="maxNumberOfAnswers" placeholder="liczba odpowiedzi">
             </div>
             <div class="form-group">
                 <label for="maxNumberOfRepeats">Maksymalna liczba powtórzeń:</label>
-                <input [(ngModel)]="parameters.maxNumberOfRepeats" required name="maxNumberOfRepeats" min="2"
-                    type="number" class="form-control" id="maxNumberOfRepeats" placeholder="liczba powtórzeń">
+                <input [(ngModel)]="parameters.maxNumberOfRepeats" required name="maxNumberOfRepeats" min="2" type="number" class="form-control"
+                    id="maxNumberOfRepeats" placeholder="liczba powtórzeń">
             </div>
             <div class="right">
                 <button type="submit" class="btn btn-primary">rozpocznij grę</button>
@@ -54,7 +54,8 @@
             <h2 class="question">{{model.translation.firstLangWord}}</h2>
 
             <div class="answers {{showNav ? 'disabled' : ' '}}">
-                <button *ngFor="let ans of model.answers" type="button" class="btn {{ans == model.translation.secondLangWord ? 'correctAnswer' : ''}}" (click)="confirmAnswer(ans, $event)">{{ans}}</button>
+                <button *ngFor="let ans of model.answers" type="button" class="btn {{ans == model.translation.secondLangWord ? 'correctAnswer' : ''}}"
+                    (click)="confirmAnswer(ans, $event)">{{ans}}</button>
             </div>
         </div>
 
@@ -75,11 +76,7 @@
         <h3>Podsumowanie sesji</h3>
         <div class="row">
             <div class="col-xs-12 col-md-8 col-md-push-2">
-                <canvas baseChart
-                    [data]="stats.data"
-                    [labels]="stats.labels"
-                    [colors]="chartColors"
-                    chartType="pie"></canvas>
+                <canvas baseChart [data]="stats.data" [labels]="stats.labels" [colors]="chartColors" chartType="pie"></canvas>
             </div>
         </div>
     </div>

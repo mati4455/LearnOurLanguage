@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
@@ -30,7 +29,6 @@ let optionsForNotification: any = {
         BrowserModule,
         AppRoutes,
         FormsModule,
-        SlimLoadingBarModule.forRoot(),
         ToastModule.forRoot(optionsForNotification),
         ChartsModule,
         SharedModule.forRoot(),
@@ -39,7 +37,6 @@ let optionsForNotification: any = {
     ],
 
     exports: [
-        SlimLoadingBarModule,
         FormsModule,
         ChartsModule
     ],

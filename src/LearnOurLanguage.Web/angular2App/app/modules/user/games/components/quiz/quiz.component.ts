@@ -59,6 +59,10 @@ export class QuizComponent {
         me.userId = +localStorage.getItem('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
+
+        setTimeout( () => {
+            $('.selectpicker').selectpicker();
+        }, 100);
     }
 
     ngOnDestroy() {
@@ -148,7 +152,7 @@ export class QuizComponent {
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
             }, 100);
-            
+
             me.questions = me.gamesHelper.shuffle(me.questions);
 
         }, me.animationTime);
@@ -156,9 +160,9 @@ export class QuizComponent {
 
     endSession(loadStats: boolean) {
         let me = this;
-        
+
         me.gamesService.finishGameSession(me.gameSessionId, () => { }, me);
-        me.gamesService.insertAnswers(me.answers, me.getStatistics, me);        
+        me.gamesService.insertAnswers(me.answers, me.getStatistics, me);
     }
 
     getStatistics(data: any) {

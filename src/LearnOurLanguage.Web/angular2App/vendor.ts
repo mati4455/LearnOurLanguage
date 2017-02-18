@@ -2,7 +2,6 @@
 import 'bootstrap/dist/js/bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import '../favicon.ico';
 
@@ -13,7 +12,8 @@ import '../favicon.ico';
 import 'ng2-toastr/ng2-toastr.js';
 import 'ng2-toastr/ng2-toastr.css';
 
-import 'ng2-slim-loading-bar';
-import 'ng2-slim-loading-bar/bundles/style.css';
-
 import 'chart.js';
+
+import 'bootstrap-select/dist/css/bootstrap-select.min.css';
+import 'bootstrap-select/dist/js/bootstrap-select.min.js';
+import 'bootstrap-select/dist/js/i18n/defaults-pl_PL.min.js';

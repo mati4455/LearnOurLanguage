@@ -11,7 +11,6 @@ import { UserRoutes } from './user.routes';
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-
 @NgModule({
     imports: [
         CommonModule,
@@ -19,6 +18,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         HttpModule,
         UserRoutes,
         ChartsModule
+    ],
+
+    providers: [
     ],
 
     declarations: [

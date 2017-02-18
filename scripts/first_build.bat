@@ -1,2 +1,2 @@
 cd "../src/LearnOurLanguage.Web"
-npm install ng2-charts --save && npm install chart.js --save && npm install sass-loader node-sass webpack -g && npm install sass-loader node-sass webpack --save-dev && npm install
+npm install sass-loader node-sass webpack -g && npm install

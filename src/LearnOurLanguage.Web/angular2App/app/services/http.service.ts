@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
-import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import {Http, Headers, RequestOptions, URLSearchParams, BaseRequestOptions} from '@angular/http';
 import {HttpRequestHelper, ODataConfig} from './http.request.helper';
 import 'rxjs/Rx';
@@ -12,7 +11,7 @@ let interval: any;
 */
 @Injectable()
 export class BaseHttpService {
-    constructor(private _http: Http, private _toast: ToastsManager, private _loader: SlimLoadingBarService) { }
+    constructor(private _http: Http, private _toast: ToastsManager) { }
 
     public get(url: string, paramObject: any, callback: Function, scope: any, odataConfig: ODataConfig = null): void {
         let me = this;
@@ -106,7 +105,6 @@ export class BaseHttpService {
 
     private showLoader() {
         let me = this;
-        //me._loader.start();
         $('#loader').css('display', 'flex');
     }
 
@@ -116,9 +114,8 @@ export class BaseHttpService {
             clearInterval(interval);
         }
         interval = setTimeout(function() {
-            $('#loader').fadeOut(100);
+            $('#loader').fadeOut(150);
         }, 100);
-        //me._loader.complete();
     }
 
     private getUrl(url: string, params: any) {

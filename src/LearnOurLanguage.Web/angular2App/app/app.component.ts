@@ -1,5 +1,4 @@
 ﻿import { Component, ViewContainerRef } from '@angular/core';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { AuthService } from './services';
 
