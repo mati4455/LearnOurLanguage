@@ -222,7 +222,7 @@ namespace Model.Services
             var result = new DailyStatistics
             {
                 GamesCount = data.GroupBy(x => x.GameSessionId).Count(),
-                AnswersRate = Math.Round((decimal) data.Count(x => x.Correct) / data.Count(x => !x.Correct), 0),
+                AnswersRate = Math.Round((decimal) data.Count(x => x.Correct) / data.Count() * 100, 0),
                 AverageTime = Math.Round(data.Average(x => x.Duration), 1),
                 TotalTime = Math.Round(data.Sum(x => x.Duration))
             };
