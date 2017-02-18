@@ -1,8 +1,8 @@
-var color1 = '#7fa339';
-var color2 = '#a5294d';
-var color3 = '#146485';
-var color4 = '#c16126';
-var color5 = '#688691';
+let color1 = '#7fa339';
+let color2 = '#a5294d';
+let color3 = '#146485';
+let color4 = '#c16126';
+let color5 = '#688691';
 
 export const PieChartColors: any = [
     {

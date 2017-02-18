@@ -4,6 +4,7 @@ import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PieChartColors } from 'lol/consts';
+import { GamesHelper } from 'lol/helpers';
 
 import './quiz.scss';
 
@@ -33,9 +34,9 @@ export class QuizComponent {
     saved: boolean = false;
     stats: PieChartData = null;
     showNav: boolean = false;
-    speechSupport: boolean = false;
     questionIndex: number = 0;
     selectedDictionary: DictionaryModel;
+    speechSupport: boolean;
 
     startTime: number = 0;
     endTime: number = 0;
@@ -47,6 +48,7 @@ export class QuizComponent {
     chartColors = PieChartColors;
 
     constructor(
+        private gamesHelper: GamesHelper,
         private dictionariesService: DictionariesService,
         private chartsService: ChartsService,
         private gamesService: GamesService,
@@ -56,7 +58,7 @@ export class QuizComponent {
         let me = this;
         me.userId = +localStorage.getItem('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
-        me.speechSupport = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+        me.speechSupport = me.gamesHelper.speechSupport;
     }
 
     ngOnDestroy() {
@@ -91,9 +93,11 @@ export class QuizComponent {
     confirmAnswer(answer: string, event: Event) {
         let me = this;
         me.endTime = new Date().getTime();
-        if (me.interval) clearInterval(me.interval);
+        if (me.interval) {
+            clearInterval(me.interval);
+        }
 
-        let correct = me.equalsWords(me.model.translation.secondLangWord, answer);
+        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, answer);
         me.answers.push(new AnswerUpdateModel(
             me.model.gameSessionId,
             me.model.translation.id,
@@ -128,8 +132,6 @@ export class QuizComponent {
 
     nextQuestion() {
         let me = this;
-        me.shuffle(me.questions);
-
         $('.animation').removeClass('up').addClass('down');
 
         setTimeout(function() {
@@ -138,7 +140,7 @@ export class QuizComponent {
             me.showNav = false;
             me.questionIndex++;
             me.model = me.questions.shift();        
-            me.shuffle(me.model.answers);
+            me.model.answers = me.gamesHelper.shuffle(me.model.answers);
             me.startTime = new Date().getTime();
 
             $('.animation').removeClass('down').addClass('up');
@@ -146,9 +148,10 @@ export class QuizComponent {
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
             }, 100);
+            
+            me.questions = me.gamesHelper.shuffle(me.questions);
 
         }, me.animationTime);
-
     }
 
     endSession(loadStats: boolean) {
@@ -160,7 +163,9 @@ export class QuizComponent {
 
     getStatistics(data: any) {
         let me = this;
-        if (!data) return;
+        if (!data) {
+            return;
+        }
 
         // załadowanie statystyk
         me.chartsService.getStatisticsForGameSession(me.gameSessionId, me.showCharts, me);
@@ -172,50 +177,21 @@ export class QuizComponent {
         me.stats = data;
     }
 
-    equalsWords(s1: string, s2: string) {
-        let me = this;
-        return s1.toUpperCase() == s2.toUpperCase();
-    }
-
-    calculateDuration() {
-        let me = this;
-        return Math.round((me.endTime - me.startTime) / 1000 * 100) / 100;
-    }
-
     liveTime() {
         let me = this;
         me.endTime = new Date().getTime();
         return me.calculateDuration();
     }
 
-    shuffle(array: any) {
-        let currentIndex = array.length,
-            temporaryValue: any, 
-            randomIndex: any;
-
-        while (0 !== currentIndex) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
+    calculateDuration() {
+        let me = this;
+        return me.gamesHelper.calculateDuration(me.startTime, me.endTime);
     }
 
     ttsPlay() {
         let me = this;
-        if (!me.speechSupport) return;
-
-        let win = (<any>window);
-        let voice = new win.SpeechSynthesisUtterance();
-        voice.text = me.model.translation.secondLangWord;
-        voice.lang = me.selectedDictionary.secondLanguage.code;
-        voice.rate = 0.7;
-
-        //win.speechSynthesis.stop();
-        win.speechSynthesis.speak(voice);
+        me.gamesHelper.ttsPlay(
+            me.model.translation.secondLangWord,
+            me.selectedDictionary.secondLanguage.code);
     }
 }

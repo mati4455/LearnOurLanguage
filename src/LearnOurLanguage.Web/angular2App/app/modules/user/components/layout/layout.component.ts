@@ -14,7 +14,7 @@ export class LayoutComponent {
 
     constructor(private router: Router) {
         let me = this;
-        let access = localStorage.getItem('accessLevel') === '100';
+        let access = localStorage.getItem('accessLevel') == '100' && +localStorage.getItem('userId') > 0;
         if (!access) {
             me.router.navigate(['/auth/login']);
         }

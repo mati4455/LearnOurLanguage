@@ -77,8 +77,9 @@ export class BaseHttpService {
         me.hideLoader();
 
         if ((data !== undefined || data !== null) && data.success === true) {
-            if (callback.call)
-                callback.call(scope, data.data, data.count);            
+            if (callback.call) {
+                callback.call(scope, data.data, data.count);
+            }
         } else {
             me.processError(data.data);
         }
@@ -111,7 +112,9 @@ export class BaseHttpService {
 
     private hideLoader() {
         let me = this;
-        if (interval) clearInterval(interval);
+        if (interval) {
+            clearInterval(interval);
+        }
         interval = setTimeout(function() {
             $('#loader').fadeOut(100);
         }, 100);
@@ -121,9 +124,9 @@ export class BaseHttpService {
     private getUrl(url: string, params: any) {
         let me = this;
         let str = '';
-        for (var key in params) {
+        for (let key in params) {
             if (str != '') {
-                str += "&";
+                str += '&';
             }
             str += key + '=' + encodeURIComponent(params[key]);
         }

@@ -20,7 +20,7 @@ export class AppComponent {
     accessLevel: number;
 
     constructor(private service: AuthService, private toastr: ToastsManager,
-        vRef: ViewContainerRef, private slimLoadingBarService: SlimLoadingBarService) {
+        vRef: ViewContainerRef) {
         let me = this;
         me.toastr.setRootViewContainerRef(vRef);
     }
@@ -28,17 +28,5 @@ export class AppComponent {
     ngOnInit() {
         let me = this;
         me.service.refreshSession();
-    }
-
-    startLoading() {
-        this.slimLoadingBarService.start(() => {});
-    }
-
-    stopLoading() {
-        this.slimLoadingBarService.stop();
-    }
-
-    completeLoading() {
-        this.slimLoadingBarService.complete();
     }
 }
