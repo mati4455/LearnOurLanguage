@@ -103,7 +103,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpGet("GetLastSessionStatistics")]
         public ActionResult GetLastSessionStatistics(int userId)
         {
-            AccessGuardian(Roles.AccessEveryone);
+            AccessGuardian(Roles.AccessUser, userId);
 
             var data = StatisticsService.GetStatisticsForLastUserGameSession(userId);
             var chartData = ChartsService.GetBasicStatistics(data);

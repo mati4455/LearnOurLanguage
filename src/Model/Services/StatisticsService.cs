@@ -217,6 +217,8 @@ namespace Model.Services
                 .Where(x => x.GameSession.DateStart.Date == date.Date)
                 .ToList();
 
+            if (data.Count == 0) return new DailyStatistics();
+
             var result = new DailyStatistics
             {
                 GamesCount = data.GroupBy(x => x.GameSessionId).Count(),
