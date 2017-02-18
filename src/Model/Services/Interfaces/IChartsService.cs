@@ -8,6 +8,7 @@ namespace Model.Services.Interfaces
     {
         PieChartData GetGamesStatisticPieChartForUser(IList<GameStatistic> data);
         LineChartData GetSummaryStatistics(IList<Statistics> data);
+        LineChartData GetSummaryTimeStatistics(IList<TimeStatistics> data);
         PieChartData GetBasicStatistics(Statistics data);
         LineChartData GetDetailsStatisticsForDictionary(IList<TranslationStatistics> data);
     }

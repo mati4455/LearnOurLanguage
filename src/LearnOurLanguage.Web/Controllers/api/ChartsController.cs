@@ -47,6 +47,25 @@ namespace LearnOurLanguage.Web.Controllers.api
         }
 
         /// <summary>
+        /// Dane do wykresu dla użytkownika, w podanym zakresie, dla wybranego (lub wszystkich) języka
+        /// </summary>
+        /// <param name="userId">Id użytkownika</param>
+        /// <param name="langId">Id języka (null - wszystkie języki)</param>
+        /// <param name="gameId">Id gry (null - wszystkie gry)</param>
+        /// <param name="startDate">Data początkowa statystyk</param>
+        /// <param name="endDate">Data końcowa statystyk</param>
+        /// <returns>Obiekt opisujący wykres</returns>
+        [HttpGet("GetTimeChartForUserByPeriod")]
+        public ActionResult GetTimeChartForUserByPeriod(int userId, int? langId, int? gameId, DateTime startDate, DateTime endDate)
+        {
+            AccessGuardian(Roles.AccessUser, userId);
+
+            var data = StatisticsService.GetTimeStatisticsForUserPeriod(userId, startDate, endDate, langId, gameId);
+            var chartData = ChartsService.GetSummaryTimeStatistics(data);
+            return JsonHelper.Success(chartData);
+        }
+
+        /// <summary>
         /// Dane do wykresu dla użytkownika (statystyka popularności gier), dla wybranego (lub wszystkich) języka
         /// </summary>
         /// <param name="userId">Id użytkownika</param>
@@ -92,8 +111,6 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Success(chartData);
         }
 
-        
-
         /// <summary>
         /// Podstawowe dane do wykresu dla słownika
         /// </summary>
@@ -126,6 +143,21 @@ namespace LearnOurLanguage.Web.Controllers.api
             var data = StatisticsService.GetDetailsStatisticsForDictionary(dictionaryId, userId, gameId);
             var chartData = ChartsService.GetDetailsStatisticsForDictionary(data);
             return JsonHelper.Success(chartData);
+        }
+
+        /// <summary>
+        /// Statystyki użytkownika z jednego dnia
+        /// </summary>
+        /// <param name="userId">Id użytkownika</param>
+        /// <param name="date">Dzień (null - dziejszy dzień)</param>
+        /// <returns>Statystyki z zadanego dnia</returns>
+        [HttpGet("GetDailyStatisticsForUser")]
+        public ActionResult GetDailyStatisticsForUser(int userId, DateTime? date)
+        {
+            AccessGuardian(Roles.AccessUser, userId);
+
+            var data = StatisticsService.GetDailyStatisticsForUser(userId, date);
+            return JsonHelper.Success(data);
         }
     }
 }

@@ -9,6 +9,11 @@ body {
 a {
     color: #03A9F4;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 $half_margin;
+}
+
 span.b { font-weight: 700; }
 span.u { text-decoration: underline; }
 span.i { font-style: italic; }
@@ -19,6 +24,41 @@ span.i { font-style: italic; }
 .right { text-align: right; }
 
 .clearboth { clear: both; }
+
+.sep-hm { height: $half_margin; }
+.sep-m { height: $margin; }
+.sep-2m { height: 2*$margin; }
+
+.hr {
+    display: block;
+    margin: $margin 0;
+    height: 1px;
+    background: $hr_color;
+}
+.hr-home {
+    @extend .hr;
+    border-radius: 50%;
+    background: $menu_hover_board;
+    box-shadow: 0 0 3px 1px $menu_hover_board;
+}
+.hr-dictionaries {
+    @extend .hr;
+    border-radius: 50%;
+    background: $menu_hover_dictionaries;
+    box-shadow: 0 0 3px 1px $menu_hover_dictionaries;
+}
+.hr-games {
+    @extend .hr;
+    border-radius: 50%;
+    background: $menu_hover_games;
+    box-shadow: 0 0 3px 1px $menu_hover_games;
+}
+.hr-stats {
+    @extend .hr;
+    border-radius: 50%;
+    background: $menu_hover_statistics;
+    box-shadow: 0 0 3px 1px $menu_hover_statistics;
+}
 
 .footer {
     margin-top: 40px;
@@ -84,7 +124,8 @@ span.i { font-style: italic; }
     box-shadow: $box_tile_shadow;
 }
 
-
-.chart-height {
-    max-height: 320px;
-}
+.background-1 { background: $menu_hover_statistics; }
+.background-2 { background: $menu_hover_dictionaries; }
+.background-3 { background: $menu_hover_games; }
+.background-4 { background: $menu_hover_board; }
+.background-5 { background: $menu_hover_logout; }

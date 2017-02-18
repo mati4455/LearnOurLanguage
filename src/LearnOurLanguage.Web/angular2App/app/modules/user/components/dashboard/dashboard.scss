@@ -1,0 +1,33 @@
+@import "common";
+
+.small-tile {
+    position: relative;
+    padding: 0.8*$margin $margin;
+    margin-bottom: $margin;
+    color: #fff;
+    text-shadow: 2px 2px 5px #444;
+    box-shadow: $box_tile_shadow;
+
+    h3, 
+    h4,
+    span {
+        display: block;
+        margin: 0;
+        text-align: left;
+        padding: 0;
+    }
+
+    h3 {
+        font-size: 22px;
+        text-transform: uppercase;
+    }
+
+    h4 {
+        font-size: 64px;
+        margin: 5px 0;
+    }
+
+    span {
+        font-size: 14px;
+    }
+}

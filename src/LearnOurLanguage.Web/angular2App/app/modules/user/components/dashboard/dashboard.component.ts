@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartsService } from 'lol/services';
-import { LineChartData, PieChartData } from 'lol/models';
+import { LineChartData, PieChartData, DailyStatistics } from 'lol/models';
 import { BarChartColors, BasicChartOptions, PieChartColors } from 'lol/consts';
+import './dashboard.scss';
 
 @Component({
     selector: 'my-app',
@@ -14,8 +15,10 @@ import { BarChartColors, BasicChartOptions, PieChartColors } from 'lol/consts';
 export class DashboardComponent {
 
     periodStatistics: LineChartData;
+    periodTimeStatistics: LineChartData;
     lastSessionStatistics: PieChartData;
     gamesRankStatistics: PieChartData;
+    dailyStatistics: DailyStatistics;
 
     barChartColors = BarChartColors;
     pieChartColors = PieChartColors;
@@ -31,9 +34,23 @@ export class DashboardComponent {
         let me = this;
         me.userId = +localStorage.getItem('userId');
 
+        me.initDailyStatistics();
         me.initLastSessionChart();
         me.initGamesRankChart();
         me.initPeriodChart();
+        me.initPeriodTimeChart();
+    }
+
+    initDailyStatistics() {
+        let me = this;
+        me.chartsService.getDailyStatistics({
+            userId: me.userId
+        }, me.loadDailyStatistics, me);
+    }
+
+    loadDailyStatistics(data: any) {
+        let me = this;
+        me.dailyStatistics = data;
     }
 
     initLastSessionChart() {
@@ -79,6 +96,26 @@ export class DashboardComponent {
     loadPeriodChart(data: any) {
         let me = this;
         me.periodStatistics = data;
+    }
+
+    initPeriodTimeChart() {
+        let me = this;
+        let start = new Date();
+        start.setDate(start.getDate() - 6);
+        let end = new Date();
+
+        me.chartsService.getTimeChartForUserByPeriod({
+            userId: me.userId,
+            langId: null,
+            gameId: null,
+            startDate: me.dateFormat(start),
+            endDate: me.dateFormat(end)
+        }, me.loadPeriodTimeChart, me);
+    }
+
+    loadPeriodTimeChart(data: any) {
+        let me = this;
+        me.periodTimeStatistics = data;
     }
     
     dateFormat(date: Date) {

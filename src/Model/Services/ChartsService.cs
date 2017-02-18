@@ -13,6 +13,8 @@ namespace Model.Services
         #region Stałe, Etykiety
         const string NumberOfCorrectAnswers = "Poprawne odpowiedzi";
         const string NumberOfWrongAnswers = "Błędne odpowiedzi";
+        const string MinTime = "Minimalny czas odpowiedzi";
+        const string MaxTime = "Maksymalny czas odpowiedzi";
         const string AverageTime = "Średni czas odpowiedzi";
         const string WordName = "Słówka";
         #endregion
@@ -73,11 +75,38 @@ namespace Model.Services
                     {
                        Label = NumberOfWrongAnswers,
                        Data = data.Select(x => x.WrongAnswers).ToList()
+                    }
+                }
+            };
+            return result;
+        }
+
+        /// <summary>
+        /// Przekształcenie danych o statystykach użytkownika na format wykresów
+        /// </summary>
+        /// <param name="data">Dane statystyczne</param>
+        /// <returns>Dane w formacie dla wykresu Line Bar Chart</returns>
+        public LineChartData GetSummaryTimeStatistics(IList<TimeStatistics> data)
+        {
+            var result = new LineChartData
+            {
+                Labels = data.Select(x => FormatHelper.DateFormat(x.Date)).ToList(),
+                Data = new List<SingleSerieData>
+                {
+                    new SingleSerieData
+                    {
+                       Label = MinTime,
+                       Data = data.Select(x => x.MinDuration).ToList()
                     },
                     new SingleSerieData
                     {
                        Label = AverageTime,
-                       Data = data.Select(x => x.AverageTime).ToList()
+                       Data = data.Select(x => x.AvgDuration).ToList()
+                    },
+                    new SingleSerieData
+                    {
+                       Label = MaxTime,
+                       Data = data.Select(x => x.MaxDuration).ToList()
                     }
                 }
             };
