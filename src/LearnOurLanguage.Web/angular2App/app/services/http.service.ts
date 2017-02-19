@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {Http, Headers, RequestOptions, URLSearchParams, BaseRequestOptions} from '@angular/http';
 import {HttpRequestHelper, ODataConfig} from './http.request.helper';
+import {Router} from '@angular/router';
 import 'rxjs/Rx';
 let $ = require('jquery');
 let interval: any;
@@ -11,7 +12,7 @@ let interval: any;
 */
 @Injectable()
 export class BaseHttpService {
-    constructor(private _http: Http, private _toast: ToastsManager) { }
+    constructor(private _http: Http, private _toast: ToastsManager, private _router: Router) { }
 
     public get(url: string, paramObject: any, callback: Function, scope: any, odataConfig: ODataConfig = null): void {
         let me = this;
@@ -88,9 +89,12 @@ export class BaseHttpService {
     private processError(error: any): void {
         let me = this;
         me.hideLoader();
-        let message: string = HttpRequestHelper.getErrorMessage(error.status);
-        me._toast.error(error);
-        console.error(error);
+        if (error.status == 401) {
+            me._router.navigate(['auth', 'login']);
+        } else {
+            let message: string = HttpRequestHelper.getErrorMessage(error.status);
+            me._toast.error(message);
+        }
     }
 
     private getHeaderSettings(): Headers {

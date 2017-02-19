@@ -21,7 +21,7 @@ import { BaseHttpService } from './services';
 
 let optionsForNotification: any = {
   animate: 'flyRight',
-  positionClass: 'toast-bottom-right',
+  positionClass: 'toast-top-right',
 };
 
 @NgModule({

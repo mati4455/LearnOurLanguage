@@ -14,7 +14,9 @@ export abstract class BaseService {
 
     get(id: number, callback: Function, scope: any): any {
         let me = this;
-        me.service.get(me.api() + '/' + id, null, callback, scope);
+        if (id > 0) {
+            me.service.get(me.api() + '/' + id, null, callback, scope);
+        }
     }
 
     post(model: any, callback: Function, scope: any): any {

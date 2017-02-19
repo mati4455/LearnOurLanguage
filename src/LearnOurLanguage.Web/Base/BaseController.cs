@@ -29,26 +29,35 @@ namespace LearnOurLanguage.Web.Base
         /// Metoda sprawdzająca dostęp do metody kontrolera
         /// </summary>
         /// <param name="accessLevel">Minimalny, wymagalny poziom dostępu</param>
-        protected void AccessGuardian(int accessLevel)
+        protected bool AccessGuardian(int accessLevel)
         {
             var currentAccessLevel = GetCurrentUserProperties(Session);
             var accepted = currentAccessLevel >= accessLevel;
 
-            if (accepted) return;
+            if (accepted) return true;
+
+            int statusCode = Context.Response.StatusCode;
 
             if (currentAccessLevel == -1)
             {
-                Context.Response.StatusCode = 401;
+                Context.Response.StatusCode = statusCode = 401;
                 Context.Response.Body = Stream.Null;
             }
             else if (currentAccessLevel < accessLevel)
             {
-                Context.Response.StatusCode = 403;
+                Context.Response.StatusCode = statusCode = 403;
                 Context.Response.Body = Stream.Null;
             }
 
-            if (!accepted)
-                throw new AuthenticationException(ExceptionConst.AccessDenied);
+            if (!accepted) {
+                //var msg = new System.Net.Http.HttpResponseMessage() {
+                //    StatusCode = statusCode == 401 ? HttpStatusCode.Unauthorized : HttpStatusCode.Forbidden,
+                //    ReasonPhrase = ExceptionConst.AccessDenied
+                //};
+                //throw new HttpResponseException(msg);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -56,25 +65,26 @@ namespace LearnOurLanguage.Web.Base
         /// </summary>
         /// <param name="accessLevel">Minimalny, wymagalny poziom dostępu</param>
         /// <param name="userId">Id użytkownika, który ma prawo do edytowanego obiektu</param>
-        protected void AccessGuardian(int accessLevel, int userId)
+        protected bool AccessGuardian(int accessLevel, int userId)
         {
-            AccessGuardian(accessLevel);
-
-            if (GetCurrentUserId(Session) != userId)
+            if (AccessGuardian(accessLevel) && GetCurrentUserId(Session) != userId)
             {
                 Context.Response.StatusCode = 403;
                 Context.Response.Body = Stream.Null;
 
                 Logger.LogWarning($"{LoggingConst.AccessGuardian}: {ExceptionConst.AccessDenied}");
-                throw new AuthenticationException(ExceptionConst.AccessDenied);
+                //var msg = new System.Net.Http.HttpResponseMessage(HttpStatusCode.Forbidden) { ReasonPhrase = ExceptionConst.AccessDenied };
+                //throw new HttpResponseException(msg);
+                return false;
             }
+            return true;
         }
 
         /// <summary>
         /// Metoda sprawdzająca dostęp do metody kontrolera
         /// </summary>
         /// <param name="roles">Tablica ról opisujący, kto ma dostęp do danej metody kontrolera</param>
-        protected void AccessGuardian(params AccessRole[] roles)
+        protected bool AccessGuardian(params AccessRole[] roles)
         {
             var accepted = false;
             var currentAccessLevel = GetCurrentUserProperties(Session);
@@ -91,7 +101,9 @@ namespace LearnOurLanguage.Web.Base
                 Context.Response.Body = Stream.Null;
 
                 Logger.LogWarning($"{LoggingConst.AccessGuardian}: {ExceptionConst.Unauthorized}");
-                throw new HttpException(HttpStatusCode.Unauthorized, ExceptionConst.Unauthorized);
+
+                //var msg = new System.Net.Http.HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = ExceptionConst.Unauthorized };
+                //throw new HttpResponseException(msg);
             }
 
             if (!accepted && (currentUser > -1))
@@ -100,7 +112,8 @@ namespace LearnOurLanguage.Web.Base
                 Context.Response.Body = Stream.Null;
 
                 Logger.LogWarning($"{LoggingConst.AccessGuardian}: {ExceptionConst.Forbidden}");
-                throw new HttpException(HttpStatusCode.Forbidden, ExceptionConst.Forbidden);
+                //var msg = new System.Net.Http.HttpResponseMessage(HttpStatusCode.Forbidden) { ReasonPhrase = ExceptionConst.Forbidden };
+                //throw new HttpResponseException(msg);
             }
 
             if (!accepted)
@@ -110,6 +123,8 @@ namespace LearnOurLanguage.Web.Base
                 //HttpContext.Response.Com();
                 //throw new AuthenticationException(ExceptionConst.AccessDenied);
             }
+
+            return accepted;
         }
 
         private static int GetCurrentUserProperties(ISession session)
