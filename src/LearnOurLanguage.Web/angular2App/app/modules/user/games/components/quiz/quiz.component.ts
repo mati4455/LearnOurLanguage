@@ -1,14 +1,11 @@
-import {
-    DictionaryModel, QuizModel, QuizParameters,
-    AnswerUpdateModel, PieChartData
-} from 'lol/models';
+import './quiz.scss';
+import { DictionaryModel, QuizModel, QuizParameters,
+    AnswerUpdateModel, PieChartData } from 'lol/models';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PieChartColors } from 'lol/consts';
 import { GamesHelper } from 'lol/helpers';
-
-import './quiz.scss';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 let $ = require('jquery');
