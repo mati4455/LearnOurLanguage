@@ -1,6 +1,8 @@
 import './quiz.scss';
-import { DictionaryModel, QuizModel, QuizParameters,
-    AnswerUpdateModel, PieChartData } from 'lol/models';
+import {
+    DictionaryModel, QuizModel, QuizParameters,
+    AnswerUpdateModel, PieChartData, KeysEnum
+} from 'lol/models';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -76,21 +78,19 @@ export class QuizComponent {
     handleKeyboardEvents(event: KeyboardEvent) {
         let me = this;
         let key = event.which || event.keyCode;
-        let one = 49;
-        let nine = 57;
 
-        if (key >= one && key <= nine) {
-            let index = key - one;
+        if (key >= KeysEnum.NUM1 && key <= KeysEnum.NUM9) {
+            let index = key - KeysEnum.NUM1;
             if (index < me.model.answers.length) {
                 $('.answers button')[index].click();
             }
         }
 
-        if (key == 13 && me.showNav && me.isNextQuestion()) {
+        if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
             me.nextQuestion();
         }
 
-        if (key == 32 && me.showNav) {
+        if (key == KeysEnum.SPACE && me.showNav) {
             me.ttsPlay();
         }
     }
