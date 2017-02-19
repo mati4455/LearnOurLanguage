@@ -7,8 +7,9 @@ export class HttpRequestHelper {
 
     static getErrorMessage(status: number): string {
         switch (status) {
+            case 401:
             case 403:
-                return 'Brak uprawnień do wykonania operacji';
+                return 'Brak wymaganych uprawnień';
             case 404:
             case 500:
                 return 'Wystąpił błąd podczas komunikacji z serwerem';

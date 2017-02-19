@@ -38,6 +38,7 @@ export class QuizComponent {
     stats: PieChartData = null;
     showNav: boolean = false;
     questionIndex: number = 0;
+    selDictionaryList: any;
     selectedDictionary: DictionaryModel;
     speechSupport: boolean;
 
@@ -63,10 +64,6 @@ export class QuizComponent {
         me.userId = +localStorage.getItem('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
-
-        setTimeout(() => {
-            $('.selectpicker').selectpicker();
-        }, 100);
     }
 
     ngOnDestroy() {
@@ -101,8 +98,9 @@ export class QuizComponent {
     startGame() {
         let me = this;
         me.parameters.userId = me.userId;
-
-        me.gamesService.initializeGameQuiz(me.parameters, me.initializeGame, me);
+        me.parameters.dictionaryId = me.selDictionaryList[0].id;
+        console.log(me.parameters);
+       // me.gamesService.initializeGameQuiz(me.parameters, me.initializeGame, me);
     }
 
     loadDictionaries(data: any) {
