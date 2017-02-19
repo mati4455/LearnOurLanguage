@@ -5,7 +5,7 @@
 }
 
 .counter {
-    
+
 }
 
 .answers {
@@ -14,7 +14,7 @@
             pointer-events: none;
         }
     }
-    
+
     button {
         display: block;
         font-size: 20px;
@@ -24,7 +24,7 @@
         color: $quiz_button_color;
         background: $quiz_button_background;
         box-shadow: 1px 1px 4px $shadow;
-        
+
         &:hover {
             box-shadow: 1px 1px 3px $shadow;
             text-shadow: $quiz_button_shadow_hover;
@@ -32,7 +32,7 @@
             background: $quiz_button_background_hover;
         }
     }
-    
+
     button {
         &.correct,
         &.correct:hover,
@@ -92,5 +92,15 @@
     &.up {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+.legend {
+    margin: $margin 0;
+    color: $text_gray;
+
+    & > span {
+        display: inline-block;
+        margin-right: $margin;
     }
 }

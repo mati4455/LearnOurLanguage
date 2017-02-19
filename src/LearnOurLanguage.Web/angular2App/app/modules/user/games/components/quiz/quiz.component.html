@@ -9,13 +9,14 @@
         <form (ngSubmit)="startGame()">
             <div class="form-group">
                 <label for="dictionaryId">Słownik:</label>
-                <!--<select [(ngModel)]="parameters.dictionaryId" required name="dictionaryId" class="form-control" id="dictionaryId" placeholder="wybierz słownik">
-                    <option *ngFor="let dictionary of dictionaries" [ngValue]="dictionary.id">
-                        {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
+                <select [(ngModel)]="parameters.dictionaryId" required name="dictionaryId" class="form-control" id="dictionaryId" placeholder="wybierz słownik">
+                    <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+                        {{dictionary.name}}
                     </option>
-                </select>-->
-                <ng-select [(ngModel)]="selDictionaryList" name="dictionaryId" [allowClear]="false" [items]="dictionaries" idField="id" textField="name" placeholder="wybierz słownik">
-                </ng-select>
+                </select>
+                <!--
+                <ng-select [(ngModel)]="selDictionaryList" required name="dictionaryId" [allowClear]="false" [items]="dictionaries" idField="id" textField="name" placeholder="wybierz słownik">
+                </ng-select>-->
             </div>
             <div class="form-group">
                 <label for="maxNumberOfQuestions">Maksymalna liczba pytań:</label>
@@ -47,7 +48,7 @@
                 <div class="timer">Czas: {{diffTime}}s</div>
             </div>
             <div class="col-xs-6 right">
-                <div class="counter">Pytanie {{questionIndex}}</div>
+                <div class="counter">Pytanie {{questionIndex}} z {{questionsCount}}</div>
             </div>
         </div>
 
@@ -60,9 +61,15 @@
             </div>
         </div>
 
+        <div class="legend">
+            <span><span class="b">klawisze 1-9</span> - wybór odpowiedzi</span>
+            <span><span class="b">spacja</span> - przeczytaj</span>
+            <span><span class="b">enter</span> - następne pytanie</span>
+        </div>
+
         <div class="nav" *ngIf="showNav">
             <div class="pull-left left">
-                <button *ngIf="speechSupport" type="button" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i> przeczytaj</button>
+                <button *ngIf="speechSupport" type="button" tabIndex="-1" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i> przeczytaj</button>
                 <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
             </div>
             <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">następne pytanie</button>

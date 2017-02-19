@@ -31,13 +31,13 @@ export class QuizComponent {
     gameSessionId: number;
 
     questions: Array<QuizModel> = [];
-    countAnswers: Array<number> = [];
     answers: Array<AnswerUpdateModel> = [];
     model: QuizModel;
     saved: boolean = false;
     stats: PieChartData = null;
     showNav: boolean = false;
     questionIndex: number = 0;
+    questionsCount: number = 0;
     selDictionaryList: any;
     selectedDictionary: DictionaryModel;
     speechSupport: boolean;
@@ -98,9 +98,8 @@ export class QuizComponent {
     startGame() {
         let me = this;
         me.parameters.userId = me.userId;
-        me.parameters.dictionaryId = me.selDictionaryList[0].id;
-        console.log(me.parameters);
-       // me.gamesService.initializeGameQuiz(me.parameters, me.initializeGame, me);
+        // me.parameters.dictionaryId = me.selDictionaryList[0].id;
+        me.gamesService.initializeGameQuiz(me.parameters, me.initializeGame, me);
     }
 
     loadDictionaries(data: any) {
@@ -111,12 +110,12 @@ export class QuizComponent {
     initializeGame(data: any) {
         let me = this;
         me.questions = data;
-        me.questions.forEach((item) => me.countAnswers[item.translation.id] = 0);
 
         if (me.questions.length > 0) {
             me.gameSessionId = me.questions[0].gameSessionId;
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
 
+            me.prepareQuestions();
             me.nextQuestion();
         } else {
             me._toast.warning('Wybrany słownik nie zawiera słówek. Wybierz inny słownik.');
@@ -138,24 +137,23 @@ export class QuizComponent {
             me.calculateDuration()
         ));
 
-        me.checkToAddNewQuestion();
         me.showNav = true;
         me.ttsPlay();
 
         $(event.target).addClass(correct ? 'correct' : 'wrong');
+        $(event.target).blur();
     }
 
-    checkToAddNewQuestion() {
+    prepareQuestions() {
         let me = this;
-        me.countAnswers[me.model.translation.id]++;
-        if (me.countAnswers[me.model.translation.id] < me.parameters.maxNumberOfRepeats) {
-            me.repeatQuestion();
+        let size = me.questions.length;
+        for (let i = 0; i < size; i++) {
+            for (let j = 1; j < me.parameters.maxNumberOfRepeats; j++) {
+                me.questions.push(me.questions[i]);
+            }
         }
-    }
-
-    repeatQuestion() {
-        let me = this;
-        me.questions.push(me.model);
+        me.questionsCount = me.questions.length;
+        me.questions = me.gamesHelper.shuffle(me.questions);
     }
 
     isNextQuestion() {
@@ -181,8 +179,6 @@ export class QuizComponent {
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
             }, 100);
-
-            me.questions = me.gamesHelper.shuffle(me.questions);
 
         }, me.animationTime);
     }
