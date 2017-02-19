@@ -1,5 +1,7 @@
-import { DictionaryModel, QuizModel, QuizParameters,
-         AnswerUpdateModel, PieChartData } from 'lol/models';
+import {
+    DictionaryModel, QuizModel, QuizParameters,
+    AnswerUpdateModel, PieChartData
+} from 'lol/models';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +9,7 @@ import { PieChartColors } from 'lol/consts';
 import { GamesHelper } from 'lol/helpers';
 
 import './quiz.scss';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 let $ = require('jquery');
 
@@ -55,6 +58,7 @@ export class QuizComponent {
         private dictionariesService: DictionariesService,
         private chartsService: ChartsService,
         private gamesService: GamesService,
+        private _toast: ToastsManager,
         public router: Router) { }
 
     ngOnInit() {
@@ -63,7 +67,7 @@ export class QuizComponent {
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
 
-        setTimeout( () => {
+        setTimeout(() => {
             $('.selectpicker').selectpicker();
         }, 100);
     }
@@ -112,11 +116,16 @@ export class QuizComponent {
     initializeGame(data: any) {
         let me = this;
         me.questions = data;
-        me.questions.forEach((item) => me.countAnswers[item.translation.id] = 0 );
-        me.gameSessionId = me.questions[0].gameSessionId;
-        me.selectedDictionary = me.dictionaries.find( (item) => item.id == me.parameters.dictionaryId);
+        me.questions.forEach((item) => me.countAnswers[item.translation.id] = 0);
 
-        me.nextQuestion();
+        if (me.questions.length > 0) {
+            me.gameSessionId = me.questions[0].gameSessionId;
+            me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
+
+            me.nextQuestion();
+        } else {
+            me._toast.warning('Wybrany słownik nie zawiera słówek. Wybierz inny słownik.');
+        }
     }
 
     confirmAnswer(answer: string, event: Event) {
@@ -163,7 +172,7 @@ export class QuizComponent {
         let me = this;
         $('.animation').removeClass('up').addClass('down');
 
-        setTimeout(function() {
+        setTimeout(function () {
 
             $('.answers button').removeClass('correct wrong');
             me.showNav = false;
