@@ -1,6 +1,5 @@
 import { DictionaryModel } from 'lol/models/dictionary';
-import { TranslationsService, DictionariesService } from 'lol/services';
-import { TranslationModel } from 'lol/models/dictionary';
+import { DictionariesService } from 'lol/services';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -23,6 +22,12 @@ userId: number;
         let me = this;
     }
 
+    ngOnInit() {
+        let me = this;
+        me.userId = +localStorage.getItem('userId');
+       // me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
+    }
+
     createDictionary() {
         let me = this;
         me.parameters.userId = me.userId;
@@ -30,6 +35,11 @@ userId: number;
     }
 
        initializeDictionary(data: any) {
+        let me = this;
+        me.dictionaries = data;
+    }
+
+    loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
     }

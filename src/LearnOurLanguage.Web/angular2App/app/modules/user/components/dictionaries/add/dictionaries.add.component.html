@@ -1,5 +1,42 @@
 <div class="row">
     <div class="col-xs-12">
         <h2 class="section-title">Tworzenie nowego słownika</h2>
-    </div>
+              <form>
+            <div class="form-group">
+                <label>Nazwa słownika:</label>
+                <input name="name" min="3" type="text" class="form-control"
+                    id="name" placeholder="nazwa słownika">
+            </div>
+
+            <div class="form-group">
+                <label >Pierwszy język:</label>
+                <select  name="firstLanguage" data-style="btn-default"
+                    class="form-control selectpicker" data-live-search="true" id="firstLanguage" placeholder="wybierz język">
+                    <option *ngFor="let dictionary of dictionaries">
+                        {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
+                    </option>
+                </select>
+            </div>
+
+             <div class="form-group">
+                <label>Drugi język:</label>
+                <select name="secondLanguage" data-style="btn-default"
+                    class="form-control selectpicker" data-live-search="true" id="secondLanguage" placeholder="wybierz język">
+                    <option *ngFor="let dictionary of dictionaries">
+                        {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
+                    </option>
+                </select>
+            </div>
+
+               <div class="form-group">
+                <label>Opis słownika:</label>
+                <input name="description" min="3" type="text" class="form-control"
+                    id="description" placeholder="opis słownika">
+            </div>
+
+            <div class="right">
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+            </form>
+     </div>
 </div>
