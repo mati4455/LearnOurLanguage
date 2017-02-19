@@ -17,33 +17,21 @@
                 text-shadow: $shadow;
             }
             #left_col {
-   float:left;
-   width:300px;
-   font-size: 20px;
-   background: rgba(255, 255, 255, .65);
-    padding: $half_margin;
-            margin-bottom: $half_margin;
+        float:left;
+        width:300px;
+        font-size: 20px;
+        background: rgba(255, 255, 255, .65);
+        padding: $half_margin;
+        margin-bottom: $half_margin;
 
 }
 #right_col {
-   float:right;
-   width:300px;
-   font-size: 20px;
-   background: rgba(255, 255, 255, .65);
-    padding: $half_margin;
-            margin-bottom: $half_margin;
+        float:right;
+        width:300px;
+        font-size: 20px;
+        background: rgba(255, 255, 255, .65);
+        padding: $half_margin;
+        margin-bottom: $half_margin;
             }
         }
-}
-
-.buttons button {
-width: 100%;
-background: rgba(255, 255, 255, .65);
-padding: $half_margin;
-margin-top: $half_margin;
-        &:hover,
-        &.active {
-                background: #6E6E6E;
-                color:#fff;
-                }
 }
