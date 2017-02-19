@@ -86,7 +86,7 @@ export class QuizComponent {
             }
         }
 
-        if (key == 13 && me.isNextQuestion()) {
+        if (key == 13 && me.showNav && me.isNextQuestion()) {
             me.nextQuestion();
         }
 
