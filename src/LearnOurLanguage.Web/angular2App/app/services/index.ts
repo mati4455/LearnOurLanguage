@@ -8,3 +8,4 @@ export { GamesService } from './games.service';
 export { DictionariesService } from './dictionaries.service';
 export { TranslationsService } from './translations.service';
 export { ChartsService } from './charts.service';
+export { LanguageService } from './language.service'

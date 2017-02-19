@@ -12,8 +12,8 @@
                 <label >Pierwszy język:</label>
                 <select  name="firstLanguage" data-style="btn-default"
                     class="form-control selectpicker" data-live-search="true" id="firstLanguage" placeholder="wybierz język">
-                    <option *ngFor="let dictionary of dictionaries">
-                        {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
+                    <option *ngFor="let language of languages">
+                        {{language.name}}
                     </option>
                 </select>
             </div>
@@ -21,9 +21,9 @@
              <div class="form-group">
                 <label>Drugi język:</label>
                 <select name="secondLanguage" data-style="btn-default"
-                    class="form-control selectpicker" data-live-search="true" id="secondLanguage" placeholder="wybierz język">
-                    <option *ngFor="let dictionary of dictionaries">
-                        {{dictionary.name}} ({{dictionary.firstLanguage.name}} -> {{dictionary.secondLanguage.name}})
+                    class="form-control selectpicker"  data-live-search="true" id="secondLanguage" placeholder="wybierz język">
+                    <option *ngFor="let language of languages">
+                        {{language.name}}
                     </option>
                 </select>
             </div>

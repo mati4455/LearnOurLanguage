@@ -1,5 +1,6 @@
 import { DictionaryModel } from 'lol/models/dictionary';
-import { DictionariesService } from 'lol/services';
+import { DictionariesService, LanguageService } from 'lol/services';
+import { LanguageModel } from 'lol/models/dictionary';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'dictionaries-add',
     templateUrl: 'dictionaries.add.component.html',
     providers: [
-        DictionariesService
+        DictionariesService, LanguageService
     ]
 })
 
@@ -15,17 +16,19 @@ export class DictionariesAddComponent {
 
 parameters: DictionaryModel = new DictionaryModel();
 dictionaries: Array<DictionaryModel> = [];
+languages: Array<LanguageModel> = [];
 userId: number;
 
 
-    constructor(private dictionariesService: DictionariesService) {
+    constructor(private dictionariesService: DictionariesService, private languageService:LanguageService) {
         let me = this;
     }
 
     ngOnInit() {
         let me = this;
         me.userId = +localStorage.getItem('userId');
-       // me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
+        me.languageService.getAll(me.loadLanguages,me);
+        me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
     }
 
     createDictionary() {
@@ -42,6 +45,11 @@ userId: number;
     loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
+    }
+
+    loadLanguages(data: any){
+        let me = this;
+        me.languages = data;
     }
 
 }
