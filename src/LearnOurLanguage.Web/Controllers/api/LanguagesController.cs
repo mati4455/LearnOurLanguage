@@ -20,15 +20,15 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpGet]
         public ActionResult Get()
         {
-            AccessGuardian(new AccessRole(Roles.AccessUser));
+            AccessGuardian(new AccessRole(Roles.AccessEveryone));
 
-            return JsonHelper.Success(LanguagesRepository.GetAll().OrderBy(x=>x.Name).ToList());
+            return JsonHelper.Success(LanguagesRepository.GetSortedLanguages().ToList());
         }
 
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            AccessGuardian(new AccessRole(Roles.AccessUser));
+            AccessGuardian(new AccessRole(Roles.AccessEveryone));
 
             return JsonHelper.Success(LanguagesRepository.GetById(id));
         }
@@ -36,7 +36,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpPost]
         public ActionResult Post([FromBody] Language input)
         {
-            AccessGuardian(new AccessRole(Roles.AccessEveryone));
+            AccessGuardian(new AccessRole(Roles.AccessUser));
 
             return JsonHelper.Response(
                 LanguagesRepository.Insert(input) && LanguagesRepository.Save()
@@ -46,7 +46,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpPut]
         public ActionResult Put([FromBody] Language data)
         {
-            AccessGuardian(new AccessRole(Roles.AccessUser, data.Id));
+            AccessGuardian(new AccessRole(Roles.AccessUser));
 
             if (!data.IsValid) return JsonHelper.Error(ExceptionConst.OwnerAccess);
             return JsonHelper.Response(
