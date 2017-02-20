@@ -28,7 +28,7 @@ const routes: Routes = [
                         component: DictionariesListComponent,
                         children: [
                             {
-                                path: 'addnew',
+                                path: 'add',
                                 component: DictionariesAddComponent
                             },
                             {
