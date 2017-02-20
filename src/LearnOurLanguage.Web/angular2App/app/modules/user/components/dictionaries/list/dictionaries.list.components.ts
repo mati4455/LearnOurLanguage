@@ -47,5 +47,4 @@ export class DictionariesListComponent {
 
         me.dictionaries = me.dictionariesBase.filter((element) => element.name.includes(me.queryString));
     }
-
 }

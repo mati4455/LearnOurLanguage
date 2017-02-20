@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { TabsModule } from 'ng2-bootstrap/tabs';
 
 import { UserRoutes } from './user.routes';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -18,7 +19,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         FormsModule,
         HttpModule,
         UserRoutes,
-        ChartsModule
+        ChartsModule,
+        TabsModule.forRoot()
     ],
 
     providers: [
