@@ -37,7 +37,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpGet("GetAllPublic")]
         public ActionResult GetAllPublic()
         {
-            AccessGuardian(new AccessRole(Roles.AccessEveryone));
+            AccessGuardian(Roles.AccessUser);
 
             return JsonHelper.Success(DictionariesRepository.GetAllPublic());
         }
