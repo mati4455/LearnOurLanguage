@@ -3,6 +3,7 @@ using System.Net;
 using System.Security.Authentication;
 using System.Web.Http;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model.Auth;
 using Model.Const;
@@ -13,6 +14,7 @@ namespace LearnOurLanguage.Web.Base
     /// <summary>
     /// Bazowy kontroler świadczący obsługę kontroli dostępu
     /// </summary>
+    [Route("api/[controller]")]
     public class BaseController : ApiController
     {
         /// <summary>

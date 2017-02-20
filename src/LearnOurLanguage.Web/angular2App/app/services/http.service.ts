@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ToastsManager} from 'ng2-toastr/ng2-toastr';
-import {Http, Headers, RequestOptions, URLSearchParams, BaseRequestOptions} from '@angular/http';
-import {HttpRequestHelper, ODataConfig} from './http.request.helper';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Http, Headers, RequestOptions, URLSearchParams, BaseRequestOptions } from '@angular/http';
+import { HttpRequestHelper, ODataConfig } from './http.request.helper';
+import { Router } from '@angular/router';
 import 'rxjs/Rx';
 let $ = require('jquery');
 let interval: any;
@@ -30,20 +30,33 @@ export class BaseHttpService {
         }).subscribe(
             data => me.processResponse(data, callback, scope),
             error => me.processError(error)
-        );
+            );
     }
 
     public post(url: string, object: any, callback: Function, scope: any): void {
         let me = this;
-        let headers = me.getHeaderSettings();
+        let headers = me.getHeaderSettings(true);
 
         me.showLoader();
-        me._http.post(url, JSON.stringify(object), {headers: headers}).map(responseData => {
+        me._http.post(url, JSON.stringify(object), { headers: headers }).map(responseData => {
             return responseData.json();
         }).subscribe(
             data => me.processResponse(data, callback, scope),
             error => me.processError(error)
-        );
+            );
+    }
+
+    public postFile(url: string, formDataObject: any, callback: Function, scope: any): void {
+        let me = this;
+        let headers = me.getHeaderSettings(false);
+
+        me.showLoader();
+        me._http.post(url, formDataObject, { headers: headers }).map(responseData => {
+            return responseData.json();
+        }).subscribe(
+            data => me.processResponse(data, callback, scope),
+            error => me.processError(error)
+            );
     }
 
     public put(url: string, object: any, callback: Function, scope: any): void {
@@ -51,12 +64,12 @@ export class BaseHttpService {
         let headers = me.getHeaderSettings();
 
         me.showLoader();
-        me._http.put(url, JSON.stringify(object), {headers: headers}).map(responseData => {
+        me._http.put(url, JSON.stringify(object), { headers: headers }).map(responseData => {
             return responseData.json();
         }).subscribe(
             data => me.processResponse(data, callback, scope),
             error => me.processError(error)
-        );
+            );
     }
 
     public delete(url: string, callback: Function, scope: any): void {
@@ -64,12 +77,12 @@ export class BaseHttpService {
         let headers = me.getHeaderSettings();
 
         me.showLoader();
-        me._http.delete(url, {headers: headers}).map(responseData => {
+        me._http.delete(url, { headers: headers }).map(responseData => {
             return responseData.json();
         }).subscribe(
             data => me.processResponse(data, callback, scope),
             error => me.processError(error)
-        );
+            );
     }
 
     private processResponse(data: any, callback: Function, scope: any): void {
@@ -97,12 +110,15 @@ export class BaseHttpService {
         }
     }
 
-    private getHeaderSettings(): Headers {
+    private getHeaderSettings(json: boolean = true): Headers {
         let headers = new Headers();
-
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('X-Requested-With', 'XMLHttpRequest');
+        if (json) {
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+            headers.append('X-Requested-With', 'XMLHttpRequest');
+        } else {
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        }
 
         return headers;
     }
@@ -117,7 +133,7 @@ export class BaseHttpService {
         if (interval) {
             clearInterval(interval);
         }
-        interval = setTimeout(function() {
+        interval = setTimeout(function () {
             $('#loader').fadeOut(150);
         }, 100);
     }
