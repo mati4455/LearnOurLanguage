@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using LearnOurLanguage.Web.Base;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Const;
 using Model.Repositories.Interfaces;
@@ -20,7 +15,6 @@ namespace LearnOurLanguage.Web.Controllers.api
     /// </summary>
     public class DataExchangeController : BaseController
     {
-        private IHostingEnvironment HostingEnvironment { get; }
         private IDictionariesRepository DictionariesRepository { get; }
         private IDataExchangeService DataExchangeService { get; }
 
@@ -29,10 +23,8 @@ namespace LearnOurLanguage.Web.Controllers.api
         /// </summary>
         /// <param name="dataExchangeService"></param>
         /// <param name="dictionariesRepository"></param>
-        /// <param name="hostingEnvironment"></param>
-        public DataExchangeController(IDataExchangeService dataExchangeService, IDictionariesRepository dictionariesRepository, IHostingEnvironment hostingEnvironment)
+        public DataExchangeController(IDataExchangeService dataExchangeService, IDictionariesRepository dictionariesRepository)
         {
-            HostingEnvironment = hostingEnvironment;
             DataExchangeService = dataExchangeService;
             DictionariesRepository = dictionariesRepository;
         }
@@ -77,7 +69,6 @@ namespace LearnOurLanguage.Web.Controllers.api
             };
 
             return result;
-
         }
 
         /// <summary>

@@ -11,7 +11,6 @@ export class DictionariesService extends BaseService {
  	getAllPublic(callback: Function, scope: any){
         let me = this;
         me.service.get(me.api() + '/GetAllPublic', null, callback, scope);
-        console.log(me.api() + '/GetAllPublic');
     }
 
     getForUser(userId: number, callback: Function, scope: any) {
@@ -21,8 +20,10 @@ export class DictionariesService extends BaseService {
         };
         me.service.get(me.api() + '/GetForUser', params, callback, scope);
     }
-	
+
 	importDictionary(dictionaryId: number, formData: any, callback: Function, scope: any) {
         let me = this;
         me.service.postFile('/api/DataExchange/Import/' + dictionaryId, formData, callback, scope);
-    }}
+    }
+
+}
