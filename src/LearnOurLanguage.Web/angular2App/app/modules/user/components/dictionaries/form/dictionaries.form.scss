@@ -4,34 +4,62 @@
    width:600px;
    max-height: 500px;
    a {
-            display: block;
-            color: $dictionary_link_color;
-            background: $dictionary_link_background;
-            font-size: 1.3em;
+        display: block;
+        color: $dictionary_link_color;
+        background: $dictionary_link_background;
+        font-size: 1.3em;
 
-            &:hover,
-            &.active {
-                text-decoration: none;
-                color: $menu_hover_dictionaries;
-                background: $dictionary_link_background_hover;
-                text-shadow: $shadow;
-            }
-            #left_col {
-        float:left;
-        width:300px;
-        font-size: 20px;
-        background: rgba(255, 255, 255, .65);
-        padding: $half_margin;
-        margin-bottom: $half_margin;
-
+        &:hover,
+        &.active {
+            text-decoration: none;
+            color: $menu_hover_dictionaries;
+            background: $dictionary_link_background_hover;
+            text-shadow: $shadow;
+        }
+   }
+}
+#left_col {
+    float:left;
+    width:300px;
+    font-size: 20px;
+    background: rgba(255, 255, 255, .65);
+    padding: $half_margin;
+    margin-bottom: $half_margin;
 }
 #right_col {
-        float:right;
-        width:300px;
-        font-size: 20px;
-        background: rgba(255, 255, 255, .65);
-        padding: $half_margin;
-        margin-bottom: $half_margin;
-            }
+    float:right;
+    width:300px;
+    font-size: 20px;
+    background: rgba(255, 255, 255, .65);
+    padding: $half_margin;
+    margin-bottom: $half_margin;
+}
+
+
+.exchange-nav {
+    label, button {
+        &:focus,
+        &.active,
+        &.active:focus {
+            outline: none;
         }
+    }
+    .link {
+        margin: 0 0 $half_margin 0;
+        outline: none;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .exchange-panel {
+        button, label {
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            width: 100%;
+            padding: $half_margin;
+        }
+    }
 }

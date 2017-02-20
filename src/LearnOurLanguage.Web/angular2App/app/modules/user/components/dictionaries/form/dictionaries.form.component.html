@@ -1,14 +1,36 @@
 <h2 class="section-title">{{dictionary.name}}</h2>
 
-<div *ngFor="let translation of translations">
-    <div id="wrap">
-         <a routerLinkActive="active">
-            <div class = "text-center" id="left_col">
-            {{translation.firstLangWord}}
-             </div>
-             <div class = "text-center"  id="right_col">
-         {{translation.secondLangWord}}
-            </div>
-        </a> 
+<div class="exchange-nav">
+    <div class="right">
+        <button type="button" class="btn btn-link link" (click)="isCollapsed = !isCollapsed">import / eksport słówek</button>
     </div>
-</div>
+    <div class="exchange-panel well well-lg" [collapse]="isCollapsed">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div id="uploadSpace">
+                    <form action="/api/DataExchange/Import/{{dictionary.id}}" method="post" enctype="multipart/form-data">
+                        <div>
+                            <h3><label for="fileChooser" class="btn btn-default">Importuj słówka</label></h3>
+                            <input type="file" required id="fileChooser" class="hidden" name="files" (change)="sendFile($event)" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label class="btn btn-default" (click)="exportDictionary()">Eksportuj słówka</label>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let translation of translations">
+        <div id="wrap">
+            <a routerLinkActive="active">
+                <div class="text-center" id="left_col">
+                    {{translation.firstLangWord}}
+                </div>
+                <div class="text-center" id="right_col">
+                    {{translation.secondLangWord}}
+                </div>
+            </a>
+        </div>
+    </div>
