@@ -18,6 +18,7 @@ export class DictionariesListComponent {
     public queryString: string = '';
     public dictionaries: Array<DictionaryModel> = [];
     public dictionariesBase: Array<DictionaryModel> = [];
+    public dictionariesPublic: Array<DictionaryModel> = [];
 
     constructor(
         private dictionariesService: DictionariesService,
@@ -30,15 +31,23 @@ export class DictionariesListComponent {
         let me = this;
         let userId = +localStorage.getItem('userId');
 
+        me.dictionariesService.getAllPublic(me.loadPublicDictionaries,me);
+
         if (userId > 0) {
             me.dictionariesService.getForUser(userId, me.loadDictionaries, me);
         }
+        
     }
 
     loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
         me.dictionariesBase = data;
+    }
+
+    loadPublicDictionaries(data: any){
+        let me = this;
+        me.dictionariesPublic = data;
     }
 
     filterList(event: any) {

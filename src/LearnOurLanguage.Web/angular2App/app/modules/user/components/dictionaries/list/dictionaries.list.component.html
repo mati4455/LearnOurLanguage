@@ -32,7 +32,32 @@
         </tab>
 
         <tab heading="Publiczne">
-            a tutaj będą publiczne
+                  <div class="has-error">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
+                        (keyup)="filterList($event)">
+                </div>
+            </div>
+            <div *ngIf="!dictionariesPublic || dictionariesPublic.length == 0">
+                <p>nie znaleziono słowników</p>
+            </div>
+            <div class="list">
+                <div *ngFor="let dictionary of dictionariesPublic">
+                    <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
+                </div>
+            </div>
+
+            <div class="buttons row">
+                <div class="col-xs-4">
+                    <a routerLink="/user/dictionaries/addnew" type="button" class="btn btn-default">Dodaj</a>
+                </div>
+                <div class="col-xs-4">
+                    <a type="button" class="btn btn-default">Edytuj</a>
+                </div>
+                <div class="col-xs-4">
+                    <a type="button" class="btn btn-default">Usuń</a>
+                </div>
+            </div>
         </tab>
     </tabset>
 </div>

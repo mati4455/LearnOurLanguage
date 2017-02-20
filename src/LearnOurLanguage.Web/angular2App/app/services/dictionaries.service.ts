@@ -8,6 +8,12 @@ export class DictionariesService extends BaseService {
 
     constructor(private serv: BaseHttpService) { super(serv, '/api/dictionaries'); }
 
+ getAllPublic(callback: Function, scope: any){
+        let me = this;
+        me.service.get(me.api() + '/GetAllPublic', null, callback, scope);
+        console.log(me.api() + '/GetAllPublic');
+    }
+
     getForUser(userId: number, callback: Function, scope: any) {
         let me = this;
         let params = {
@@ -15,4 +21,6 @@ export class DictionariesService extends BaseService {
         };
         me.service.get(me.api() + '/GetForUser', params, callback, scope);
     }
+
+   
 }
