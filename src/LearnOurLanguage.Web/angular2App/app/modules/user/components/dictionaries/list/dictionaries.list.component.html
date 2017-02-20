@@ -35,7 +35,7 @@
                   <div class="has-error">
                 <div class="form-group">
                     <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
-                        (keyup)="filterList($event)">
+                        (keyup)="filterListPublic($event)">
                 </div>
             </div>
             <div *ngIf="!dictionariesPublic || dictionariesPublic.length == 0">

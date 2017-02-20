@@ -19,6 +19,7 @@ export class DictionariesListComponent {
     public dictionaries: Array<DictionaryModel> = [];
     public dictionariesBase: Array<DictionaryModel> = [];
     public dictionariesPublic: Array<DictionaryModel> = [];
+    public dictionariesPublicBase: Array<DictionaryModel> = [];
 
     constructor(
         private dictionariesService: DictionariesService,
@@ -48,6 +49,7 @@ export class DictionariesListComponent {
     loadPublicDictionaries(data: any){
         let me = this;
         me.dictionariesPublic = data;
+        me.dictionariesPublicBase = data;
     }
 
     filterList(event: any) {
@@ -55,5 +57,12 @@ export class DictionariesListComponent {
         me.queryString = event.target.value;
 
         me.dictionaries = me.dictionariesBase.filter((element) => element.name.includes(me.queryString));
+    }
+
+    filterListPublic(event: any) {
+        let me = this;
+        me.queryString = event.target.value;
+
+        me.dictionariesPublic = me.dictionariesPublicBase.filter((element) => element.name.includes(me.queryString));
     }
 }
