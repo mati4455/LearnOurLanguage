@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Model.Models.Database;
 using Model.Models.DataExchange;
 using Model.Services.Interfaces;
@@ -11,26 +12,25 @@ namespace Model.Services
     {
         public MemoryStream CreateCsv(List<TranslationPair> list)
         {
-            var output = new MemoryStream();
             if (list.Count == 0)
             {
-                return output;
+                return new MemoryStream();
             }
-            using (var writer = new StreamWriter(output))
-            { 
-                foreach (var translation in list)
-                {
-                    writer.WriteLine($"{translation.FirstLanguageWord};{translation.SecondLanguageWord}");
-                }
+            var stringBuilder = new StringBuilder();
+            foreach (var translation in list)
+            {
+                stringBuilder.AppendLine($"{translation.FirstLanguageWord};{translation.SecondLanguageWord}");
             }
-            return output;
+            var encodedString = Encoding.UTF8.GetBytes(stringBuilder.ToString());
+            return new MemoryStream(encodedString);
         }
 
         public List<TranslationPair> FormatCsv(MemoryStream file)
         {
             List<TranslationPair> list = new List<TranslationPair>();
+            file.Position = 0;
 
-            using (var streamReader = new StreamReader(file))
+            using (var streamReader = new StreamReader(file, Encoding.UTF8))
             {
                 var headers = streamReader.ReadLine();
                 while (!streamReader.EndOfStream)
