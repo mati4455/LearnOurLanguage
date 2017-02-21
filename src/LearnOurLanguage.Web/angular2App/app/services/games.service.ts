@@ -20,6 +20,6 @@ export class GamesService extends BaseService {
 
     finishGameSession(gameSessionId: number, callback: Function, scope: any) {
         let me = this;
-        me.service.put(me.api() + '/FinishGameSession/' + gameSessionId, callback, scope);
+        me.service.post(me.api() + '/FinishGameSession/' + gameSessionId, callback, scope);
     }
 }
