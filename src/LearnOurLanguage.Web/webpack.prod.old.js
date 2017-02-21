@@ -11,18 +11,16 @@ console.log('@@@@@@@@@ USING PRODUCTION @@@@@@@@@@@@@@@');
 
 module.exports = {
 
-    devtool: 'source-map',
-    performance: {
-        hints: false
-    },
     entry: {
-        'app': './angular2App/main.ts'
+        'vendor': './angular2App/vendor.ts',
+        'polyfills': './angular2App/polyfills.ts',
+        'app': './angular2App/main-aot.ts' // AoT compilation
     },
 
     output: {
         path: './wwwroot/',
-        filename: 'dist/[name].bundle.js',
-        chunkFilename: 'dist/[id].chunk.js',
+        filename: 'dist/[name].[hash].bundle.js',
+        chunkFilename: 'dist/[id].[hash].chunk.js',
         publicPath: '/'
     },
 
@@ -46,10 +44,7 @@ module.exports = {
                 test: /\.ts$/,
                 loaders: [
                     'awesome-typescript-loader',
-                    'angular-router-loader',
-                    'angular2-template-loader',
-                    'source-map-loader',
-                    'tslint-loader'
+                    'angular-router-loader?aot=true&genDir=aot/'
                 ]
             },
             {
@@ -80,10 +75,7 @@ module.exports = {
 						loader: 'css-loader'
 					},
 					{
-						loader: 'sass-loader',
-                        options: {
-                            includePaths: [path.resolve(__dirname, 'angular2App/style')]
-                        }
+						loader: 'sass-loader?includePaths[]=' + path.resolve(__dirname, 'angular2App/style')
 					}
 				]
             },
@@ -94,16 +86,15 @@ module.exports = {
         ],
         exprContextCritical: false
     },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'polyfills']}),
 
+    plugins: [
         new CleanWebpackPlugin(
             [
                 './wwwroot/dist',
                 './wwwroot/assets'
             ]
         ),
-        
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -116,7 +107,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin(
             {
                 name: ['vendor', 'polyfills']
-            }),        
+            }),
 
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -128,6 +119,5 @@ module.exports = {
             { from: './angular2App/images/*.*', to: 'assets/', flatten: true }
         ])
     ]
-
 };
 
