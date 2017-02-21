@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="page-title">Wisielec</h1>
+    </div>
+
+    <!-- formularz z parametrami gry -->
+    <div *ngIf="!model && !stats" class="col-xs-12 col-md-6 col-md-push-3">
+        <h3>Parametry</h3>
+        <form (ngSubmit)="startGame()">
+            <div class="form-group">
+                <label for="dictionaryId">Słownik:</label>
+                <select [(ngModel)]="parameters.dictionaryId" required name="dictionaryId" class="form-control" id="dictionaryId" placeholder="wybierz słownik">
+                    <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+                        {{dictionary.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="maxNumberOfQuestions">Maksymalna liczba pytań:</label>
+                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3" type="number" class="form-control"
+                    id="maxNumberOfQuestions" placeholder="liczba pytań">
+            </div>
+            <div class="right">
+                <button type="submit" class="btn btn-primary">rozpocznij grę</button>
+            </div>
+        </form>
+    </div>
+    <!-- koniec formularza -->
+
+    <!-- główna gra -->
+    <div *ngIf="model && !stats" class="game-area col-xs-12 col-md-8 col-md-push-2">
+
+        <div class="row header-info">
+            <div class="col-xs-6 left">
+                <div class="timer">Czas: {{diffTime}}s</div>
+            </div>
+            <div class="col-xs-6 right">
+                <div class="counter">Pytanie {{questionIndex}} z {{questionsCount}}</div>
+            </div>
+        </div>
+
+        <div class="animation">
+            <div class="questionMask">
+                <label *ngFor="let mask of answerMask">{{mask}}</label>
+            </div>
+
+            <div class="answer center" *ngIf="showNav">
+                <h2 class="question">{{model.translation.secondLangWord}} - {{model.translation.firstLangWord}}</h2>
+            </div>
+
+            <div class="availableChars" *ngIf="availableCharacters">
+                <label *ngFor="let char of availableCharacters" (click)="confirmAnswer(char, $event)">{{char}}</label>
+            </div>
+
+            <div class="hangmanArea">
+                {{wrongAnswers}}
+            </div>
+        </div>
+
+        <div class="legend">
+            <span><span class="b">klawisze a-z</span> - wybór literki</span>
+            <span><span class="b">spacja</span> - przeczytaj</span>
+            <span><span class="b">enter</span> - następne pytanie</span>
+        </div>
+
+        <div class="nav" *ngIf="showNav">
+            <div class="pull-left left">
+                <button *ngIf="speechSupport" type="button" tabIndex="-1" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i> przeczytaj</button>
+                <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
+            </div>
+            <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">następne pytanie</button>
+            <button type="button" class="btn btn-primary" (click)="endSession(true)">zakończ sesję</button>
+        </div>
+
+    </div>
+    <!-- koniec gry -->
+
+    <!-- podsumowanie gry -->
+    <div *ngIf="!model && stats" class="game-stats col-xs-12 col-md-10 col-md-push-1">
+        <h3>Podsumowanie sesji</h3>
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-push-2">
+                <canvas baseChart [data]="stats.data" [labels]="stats.labels" [colors]="chartColors" chartType="pie"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- koniec gry -->
+</div>

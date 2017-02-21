@@ -1,8 +1,9 @@
 @import "common";
+@import "common-games";
 
 body {
     font-family: 'Roboto', sans-serif;
-    
+
     background: #fff;
 }
 
@@ -73,7 +74,7 @@ span.i { font-style: italic; }
     }
 }
 
-.static-background {    
+.static-background {
     background: url('/assets/world_map.png') center $margin no-repeat fixed;
 
     & > div {
@@ -91,7 +92,7 @@ span.i { font-style: italic; }
         border-radius: 12px;
         background: rgba(255,255,255, .85);
         box-shadow: 0 0 200px rgba(0,0,0,.5);
-        
+
         h1 {
             margin-top: 0px;
         }

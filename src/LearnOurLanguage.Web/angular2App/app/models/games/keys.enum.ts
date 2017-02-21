@@ -15,5 +15,10 @@ export enum KeysEnum {
   NUM6 = 54,
   NUM7 = 55,
   NUM8 = 56,
-  NUM9 = 57
+  NUM9 = 57,
+
+  CHAR_A = 65,
+  CHAR_Z = 90,
+  CHAR_A_SMALL = 97,
+  CHAR_Z_SMALL = 122
 }

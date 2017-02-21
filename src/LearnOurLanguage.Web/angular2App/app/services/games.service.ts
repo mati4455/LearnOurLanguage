@@ -13,6 +13,11 @@ export class GamesService extends BaseService {
         me.service.post(me.api() + '/InitializeQuizGame', params, callback, scope);
     }
 
+    initializeGameHangman(params: any, callback: Function, scope: any) {
+        let me = this;
+        me.service.post(me.api() + '/InitializeHangmanGame', params, callback, scope);
+    }
+
     insertAnswers(params: any, callback: Function, scope: any) {
         let me = this;
         me.service.post(me.api() + '/InsertAnswers', params, callback, scope);
