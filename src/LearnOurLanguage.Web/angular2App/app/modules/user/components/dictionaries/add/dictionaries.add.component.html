@@ -4,7 +4,7 @@
         <form>
             <div class="form-group">
                 <label>Nazwa słownika:</label>
-                <input name="name" min="3" type="text" class="form-control" id="name" value="{{dictionary.name}}"placeholder="nazwa słownika">
+                <input name="name" min="3" type="text" class="form-control" id="name" value="{{dictionary.name}}" placeholder="nazwa słownika">
             </div>
 
             <div class="form-group">
@@ -36,12 +36,15 @@
             <div *ngFor="let translation of translations">
                 <div class="row top-buffer">
                     <div class="col-xs-6">
-                        <input name="name" min="3" type="text" class="form-control" id="name" value="{{translation.firstLangWord}}">
+                        <input name="name" min="3" type="text" class="form-control" id="name" value="{{translation.firstLangWord}}" placeholder="słówko">
                     </div>
                     <div class="col-xs-6">
-                        <input name="name" min="3" type="text" class="form-control" id="name" value="{{translation.secondLangWord}}">
+                        <input name="name" min="3" type="text" class="form-control" id="name" value="{{translation.secondLangWord}}" placeholder="tłumaczenie">
                     </div>
                 </div>
+            </div>
+            <div class="right">
+                <a type="submit" type="button" (click)="addNewTranslation()" class="btn btn-primary">Nowe słówko</a>
             </div>
 
             <div class="right">

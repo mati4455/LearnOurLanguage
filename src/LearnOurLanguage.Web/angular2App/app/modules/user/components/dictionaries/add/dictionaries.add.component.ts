@@ -16,7 +16,7 @@ export class DictionariesAddComponent {
 
     dictionary: DictionaryModel = new DictionaryModel();
     dictionaries: Array<DictionaryModel> = [];
-    translations: Array<TranslationModel> =[];
+    translations: Array<TranslationModel> = [];
     languages: Array<LanguageModel> = [];
     userId: number;
 
@@ -65,6 +65,11 @@ export class DictionariesAddComponent {
     loadTranslations(data: any) {
         let me = this;
         me.translations = data;
+    }
+
+    addNewTranslation() {
+        let me = this;
+        me.translations.push(new TranslationModel());
     }
 
 }
