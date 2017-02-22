@@ -1,6 +1,3 @@
-import { QuizComponent } from './components/quiz/quiz.component';
-import { ChooserComponent } from './components/chooser/chooser.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { GamesRoutes } from './games.routes';
 import { GamesHelper } from 'lol/helpers';
 import { NgModule } from '@angular/core';
@@ -9,6 +6,10 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SelectModule } from 'ng2-select';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { ChooserComponent } from './components/chooser/chooser.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { HangmanComponent } from './components/hangman/hangman.component';
 
 @NgModule({
     imports: [
@@ -27,13 +28,15 @@ import { SelectModule } from 'ng2-select';
     declarations: [
         LayoutComponent,
         ChooserComponent,
-        QuizComponent
+        QuizComponent,
+        HangmanComponent
     ],
 
     exports: [
         LayoutComponent,
         ChooserComponent,
-        QuizComponent
+        QuizComponent,
+        HangmanComponent
     ]
 })
 

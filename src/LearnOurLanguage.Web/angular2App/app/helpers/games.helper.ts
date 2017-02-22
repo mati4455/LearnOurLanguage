@@ -6,6 +6,11 @@ export class GamesHelper {
     public speechSupport = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
     private window = (<any>window);
 
+    public alphabet: Array<string> = [
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    ];
+
     ttsPlay(word: string, lang: string) {
         let me = this;
         if (!me.speechSupport) {
@@ -47,4 +52,13 @@ export class GamesHelper {
         return Math.round((d2 - d1) / 1000 * 100) / 100;
     }
 
+    uniqueArray(a: Array<any>, b: any = null, c: any = null): Array<any> { // array, placeholder, placeholder
+        b = a.length;
+        while (c = --b) while (c--) a[b] !== a[c] || a.splice(c, 1);
+        return a;
+    }
+
+    isLetter(letter: string) {
+        return letter.toLowerCase() != letter.toUpperCase();
+    }
 }

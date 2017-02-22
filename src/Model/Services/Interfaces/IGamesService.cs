@@ -7,6 +7,7 @@ namespace Model.Services.Interfaces
     public interface IGamesService
     {
         IList<Translation> GetDictionaryTranslations(int dictionaryId);
+        IList<Translation> GetTranslationsById(IEnumerable<int> ids);
         IList<QuestionPair> InitializeGame(int dictionaryId, int userId, GamesEnum gameId, int count);
         bool InsertAnswers(IList<AnswerUpdateModel> answers);
         void FinishGameSession(int gameSessionId);

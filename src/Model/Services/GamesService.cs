@@ -37,6 +37,12 @@ namespace Model.Services
             return TranslationsRepository.GetTranslationsForDictionary(dictionaryId).ToList();
         }
 
+
+        public IList<Translation> GetTranslationsById(IEnumerable<int> ids) {
+            var idsList = ids.ToList();
+            return TranslationsRepository.GetAll().Where(x => idsList.Contains(x.Id)).ToList();
+        }
+
         public IList<QuestionPair> InitializeGame(int dictionaryId, int userId, GamesEnum gameId, int count)
         {
             var questions = GetQuestionsIds(dictionaryId, userId, gameId, count).ToList();

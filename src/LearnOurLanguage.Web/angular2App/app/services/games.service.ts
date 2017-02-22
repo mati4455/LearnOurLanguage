@@ -13,6 +13,11 @@ export class GamesService extends BaseService {
         me.service.post(me.api() + '/InitializeQuizGame', params, callback, scope);
     }
 
+    initializeGameHangman(params: any, callback: Function, scope: any) {
+        let me = this;
+        me.service.post(me.api() + '/InitializeHangmanGame', params, callback, scope);
+    }
+
     insertAnswers(params: any, callback: Function, scope: any) {
         let me = this;
         me.service.post(me.api() + '/InsertAnswers', params, callback, scope);
@@ -20,6 +25,6 @@ export class GamesService extends BaseService {
 
     finishGameSession(gameSessionId: number, callback: Function, scope: any) {
         let me = this;
-        me.service.put(me.api() + '/FinishGameSession/' + gameSessionId, callback, scope);
+        me.service.post(me.api() + '/FinishGameSession/' + gameSessionId, callback, scope);
     }
 }

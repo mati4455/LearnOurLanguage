@@ -12,11 +12,13 @@ namespace LearnOurLanguage.Web.Controllers.api
     {
         private IGamesService GamesService { get; }
         private IQuizService QuizService { get; }
+        private IHangmanService HangmanService { get; }
 
-        public GamesController(IGamesService gamesService, IQuizService quizService)
+        public GamesController(IGamesService gamesService, IQuizService quizService, IHangmanService hangmanService)
         {
             GamesService = gamesService;
             QuizService = quizService;
+            HangmanService = hangmanService;
         }
 
         [HttpPost("InitializeQuizGame")]
@@ -27,6 +29,14 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Success(QuizService.InitializeQuestions(param));
         }
 
+        [HttpPost("InitializeHangmanGame")]
+        public ActionResult InitializeHangmanGame([FromBody] HangmanParameters param)
+        {
+            AccessGuardian(Roles.AccessUser, param.UserId);
+
+            return JsonHelper.Success(HangmanService.InitializeQuestions(param));
+        }
+
         [HttpPost("InsertAnswers")]
         public ActionResult InsertAnswers([FromBody] IList<AnswerUpdateModel> answers)
         {
@@ -35,7 +45,7 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Response(GamesService.InsertAnswers(answers));
         }
 
-        [HttpPut("FinishGameSession/{gameSessionId}")]
+        [HttpPost("FinishGameSession/{gameSessionId}")]
         public ActionResult FinishGameSession(int gameSessionId)
         {
             AccessGuardian(Roles.AccessUser);
