@@ -4,6 +4,8 @@ import { LanguageModel } from 'lol/models/dictionary';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+let store = require('store2');
+
 @Component({
     selector: 'dictionaries-add',
     templateUrl: 'dictionaries.add.component.html',
@@ -34,7 +36,7 @@ export class DictionariesAddComponent {
 
     ngOnInit() {
         let me = this;
-        me.userId = +localStorage.getItem('userId');
+        me.userId = +store('userId');
 
         me.route.params.forEach((params: Params) => {
             let id = +params['dictionaryId'];
