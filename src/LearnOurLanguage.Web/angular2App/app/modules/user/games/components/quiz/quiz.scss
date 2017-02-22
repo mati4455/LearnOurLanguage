@@ -8,75 +8,77 @@
 
 }
 
-.answers {
-    &.disabled {
+.quiz {
+    .answers {
+        &.disabled {
+            button {
+                pointer-events: none;
+            }
+        }
+
         button {
-            pointer-events: none;
+            display: block;
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            margin: $half_margin 0;
+            color: $quiz_button_color;
+            background: $quiz_button_background;
+            box-shadow: 1px 1px 4px $shadow;
+
+            &:hover {
+                box-shadow: 1px 1px 3px $shadow;
+                text-shadow: $quiz_button_shadow_hover;
+                color: $quiz_button_color_hover;
+                background: $quiz_button_background_hover;
+            }
         }
-    }
 
-    button {
-        display: block;
-        font-size: 20px;
-        width: 100%;
-        text-align: center;
-        margin: $half_margin 0;
-        color: $quiz_button_color;
-        background: $quiz_button_background;
-        box-shadow: 1px 1px 4px $shadow;
+        button {
+            &.correct,
+            &.correct:hover,
+            &.wrong,
+            &.wrong:hover {
+                color: #fff;
+                text-shadow: 1px 1px 2px #333;
+            }
 
-        &:hover {
-            box-shadow: 1px 1px 3px $shadow;
-            text-shadow: $quiz_button_shadow_hover;
-            color: $quiz_button_color_hover;
-            background: $quiz_button_background_hover;
+            &.correct,
+            &.correct:hover {
+                background: $quiz_correct_background;
+            }
+
+            &.wrong,
+            &.wrong:hover {
+                background: $quiz_wrong_background;
+            }
         }
-    }
 
-    button {
-        &.correct,
-        &.correct:hover,
-        &.wrong,
-        &.wrong:hover {
+        &.disabled .correctAnswer {
             color: #fff;
             text-shadow: 1px 1px 2px #333;
-        }
-
-        &.correct,
-        &.correct:hover {
             background: $quiz_correct_background;
         }
-
-        &.wrong,
-        &.wrong:hover {
-            background: $quiz_wrong_background;
-        }
     }
 
-    &.disabled .correctAnswer {
-        color: #fff;
-        text-shadow: 1px 1px 2px #333;
-        background: $quiz_correct_background;
+    .nav {
+        text-align: right;
+        margin: $margin 0;
     }
-}
 
-.nav {
-    text-align: right;
-    margin: $margin 0;
-}
+    .question {
+        margin: 30px 0;
+        font-size: 30px;
+        font-weight: 700;
+        font-style: italic;
+        letter-spacing: 4px;
+    }
 
-.question {
-    margin: 30px 0;
-    font-size: 30px;
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: 4px;
-}
+    .right-margin {
+        margin-right: $half_margin;
+    }
 
-.right-margin {
-    margin-right: $half_margin;
-}
-
-.header-info {
-    font-size: 24px;
+    .header-info {
+        font-size: 24px;
+    }
 }
