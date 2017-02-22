@@ -5,6 +5,7 @@ import { HttpRequestHelper, ODataConfig } from './http.request.helper';
 import { Router } from '@angular/router';
 import 'rxjs/Rx';
 let $ = require('jquery');
+let store = require('store2');
 let interval: any;
 
 /**
@@ -103,7 +104,7 @@ export class BaseHttpService {
         let me = this;
         me.hideLoader();
         if (error.status == 401) {
-            localStorage.clear();
+            store(false); // localStorage.clear()
             me._router.navigate(['auth', 'login']);
         } else {
             let message: string = HttpRequestHelper.getErrorMessage(error.status);
