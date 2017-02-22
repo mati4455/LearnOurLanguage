@@ -52,6 +52,10 @@
     text-align: center;
     margin: $margin 0;
 
+    &.disabled {
+        pointer-events: none;
+    }
+
     label {
         display: inline-block;
         font-size: 19px;
@@ -90,17 +94,33 @@
 }
 
 .hangmanArea {
-    max-width: 100%;
-    @media (min-width: 768px) { max-width: 300px; }
+    width: 300px;
     height: 300px;
     margin: 0 auto;
 
-    border: 3px dotted $shadow;
+    border: 6px dotted $shadow;
     border-radius: 10px;
     background: rgba(255, 255, 255, .6);
 
-    // tymczasowo
-    text-align: center;
-    padding-top: $margin;
-    font-size: 30px;
+    padding: 50px 0 0 80px;
+
+    &.correct {
+        border-color: $quiz_correct_background;
+        background: rgba($quiz_correct_background, .2);
+    }
+
+    &.wrong {
+        border-color: $quiz_wrong_background;
+        background: rgba($quiz_wrong_background, .2);
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+        transform: scale(1.4);
+        path {
+            fill: $hangman_color;
+            stroke: $hangman_color;
+        }
+    }
 }

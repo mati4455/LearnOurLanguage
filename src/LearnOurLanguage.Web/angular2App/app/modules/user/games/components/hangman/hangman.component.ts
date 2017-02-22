@@ -48,9 +48,9 @@ export class HangmanComponent {
     usedCharacters: any = [];
     answerMask: Array<string> = [];
     letterMask: string = '_';
-    limitWrongAnswers: number = 0;
+    incrementSize: number = 0;
     wordLengthLimit: number = 5;
-    hangmanParts: number = 10;
+    hangmanParts: number = 9;
     wrongAnswers: number = 0;
 
     startTime: number = 0;
@@ -97,8 +97,9 @@ export class HangmanComponent {
         }
 
         if (index >= 0) {
-            var el = $('.availableChars label')[index];
-            if (!$(el).hasClass('selected')) {
+            index = index + KeysEnum.CHAR_A;
+            var el = $('.availableChars #char-' + key);
+            if (el && !$(el).hasClass('selected')) {
                 $(el).click();
             }
         }
@@ -132,6 +133,7 @@ export class HangmanComponent {
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
+            me.prepareCharacters();
 
             me.nextQuestion();
         } else {
@@ -153,10 +155,7 @@ export class HangmanComponent {
             me.questionIndex++;
 
             me.model = me.questions.shift();
-            me.limitWrongAnswers = me.model.translation.secondLangWord.length > me.wordLengthLimit
-                ? me.hangmanParts
-                : me.hangmanParts / 2;
-            me.prepareCharacters();
+            me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
             me.prepareAnswerMask();
             me.startTime = new Date().getTime();
             me.usedCharacters = [];
@@ -164,6 +163,7 @@ export class HangmanComponent {
 
             $('.availableChars label').removeClass('selected');
             $('.animation').removeClass('down').addClass('up');
+            $('.hangmanArea').removeClass('wrong correct');
 
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
@@ -175,10 +175,13 @@ export class HangmanComponent {
     prepareCharacters(): void {
         let me = this;
         let tempChars = me.gamesHelper.alphabet;
-        let upperWord = me.model.translation.secondLangWord.toUpperCase();
-        for (let i = 0; i < upperWord.length; i++) {
-            if (me.gamesHelper.isLetter(upperWord[i])) {
-                tempChars.push(upperWord[i]);
+
+        for (let q = 0; q < me.questions.length; q++) {
+            let upperWord = me.questions[q].translation.secondLangWord.toUpperCase();
+            for (let i = 0; i < upperWord.length; i++) {
+                if (me.gamesHelper.isLetter(upperWord[i])) {
+                    tempChars.push(upperWord[i]);
+                }
             }
         }
         me.availableCharacters = me.gamesHelper.uniqueArray(tempChars).sort();
@@ -202,7 +205,7 @@ export class HangmanComponent {
                 me.fillAnswer(char);
             } else {
                 me.usedCharacters[char] = true;
-                me.wrongAnswers++;
+                me.wrongAnswers += me.incrementSize;
             }
         }
 
@@ -211,7 +214,7 @@ export class HangmanComponent {
 
         let checkAnswer = me.model.translation.secondLangWord.toUpperCase() == me.answerMask.join('').toUpperCase();
 
-        if (me.wrongAnswers == me.limitWrongAnswers || checkAnswer) {
+        if (me.wrongAnswers >= me.hangmanParts || checkAnswer) {
             me.completeAnswer(checkAnswer);
         }
     }
@@ -228,6 +231,8 @@ export class HangmanComponent {
             correct,
             me.calculateDuration()
         ));
+
+        $('.hangmanArea').addClass(correct ? 'correct' : 'wrong');
 
         me.showNav = true;
         me.ttsPlay();

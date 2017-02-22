@@ -103,6 +103,7 @@ export class BaseHttpService {
         let me = this;
         me.hideLoader();
         if (error.status == 401) {
+            localStorage.clear();
             me._router.navigate(['auth', 'login']);
         } else {
             let message: string = HttpRequestHelper.getErrorMessage(error.status);
