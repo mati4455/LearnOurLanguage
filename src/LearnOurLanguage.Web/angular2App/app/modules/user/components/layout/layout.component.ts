@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import './user.layout.scss';
+let store = require('store2');
 
 @Component({
     selector: 'user-layout',
@@ -14,7 +15,7 @@ export class LayoutComponent {
 
     constructor(private router: Router) {
         let me = this;
-        let access = localStorage.getItem('accessLevel') == '100' && +localStorage.getItem('userId') > 0;
+        let access = store('accessLevel') == '100' && +store('userId') > 0;
         if (!access) {
             me.router.navigate(['/auth/login']);
         }

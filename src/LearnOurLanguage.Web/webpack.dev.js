@@ -28,10 +28,10 @@ module.exports = {
 
     resolve: {
         extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
-		alias: {
-			"lol": path.resolve('./angular2App/app'),
+        alias: {
+            "lol": path.resolve('./angular2App/app'),
             "shared": path.resolve('./angular2App/app/modules/shared')
-		}
+        }
     },
 
     devServer: {
@@ -73,19 +73,19 @@ module.exports = {
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 use: [
-					{
-						loader: 'style-loader'
-					},
-					{
-						loader: 'css-loader'
-					},
-					{
-						loader: 'sass-loader',
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'sass-loader',
                         options: {
                             includePaths: [path.resolve(__dirname, 'angular2App/style')]
                         }
-					}
-				]
+                    }
+                ]
             },
             {
                 test: /\.html$/,
@@ -95,7 +95,7 @@ module.exports = {
         exprContextCritical: false
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'polyfills']}),
+        new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'polyfills'] }),
 
         new CleanWebpackPlugin(
             [

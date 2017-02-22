@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router } from '@angular/router';
 
+let store = require('store2');
+
 @Injectable()
 @Component({
     selector: 'my-app',
@@ -46,9 +48,9 @@ export class AuthLoginComponent {
     // metoda wywoływana po procesie autoryzacji
     logged(data: any): void {
         let me = this;
-        localStorage.setItem('accessLevel', data.accessLevel);
-        localStorage.setItem('userId', data.userId);
-        localStorage.setItem('loggedIn', (data.accessLevel > 0) ? '1' : '0');
+        store('accessLevel', data.accessLevel);
+        store('userId', data.userId);
+        store('loggedIn', (data.accessLevel > 0) ? '1' : '0');
 
         if (data.accessLevel > 0) {
             me.toast.success('Zostałeś zalogowany');
@@ -65,12 +67,12 @@ export class AuthLoginComponent {
 
     // pobranie statusu autoryzacji
     public getLoggedIn() {
-        return (localStorage.getItem('loggedIn') || '0') == '1';
+        return (store('loggedIn') || '0') == '1';
     }
 
     // pobranie poziomu dostępu użytkownika
     public getAccessLevel() {
-        return +localStorage.getItem('accessLevel') || -1;
+        return +store('accessLevel') || -1;
     }
 
     public getAccountLink() {

@@ -4,6 +4,8 @@ import { LineChartData, PieChartData, DailyStatistics } from 'lol/models';
 import { BarChartColors, BasicChartOptions, PieChartColors } from 'lol/consts';
 import './dashboard.scss';
 
+let store = require('store2');
+
 @Component({
     selector: 'my-app',
     templateUrl: 'dashboard.component.html',
@@ -32,7 +34,7 @@ export class DashboardComponent {
 
     ngOnInit() {
         let me = this;
-        me.userId = +localStorage.getItem('userId');
+        me.userId = +store('userId');
 
         me.initDailyStatistics();
         me.initLastSessionChart();

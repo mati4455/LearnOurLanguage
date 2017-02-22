@@ -40,6 +40,7 @@
     "reflect-metadata": "0.1.9",
     "rxjs": "5.0.3",
     "speak-tts": "^1.0.2",
+    "store2": "^2.5.0",
     "zone.js": "^0.7.4"
   },
   "devDependencies": {

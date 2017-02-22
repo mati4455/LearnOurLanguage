@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import './dictionaries.form.scss';
 let $ = require('jquery');
+let store = require('store2');
 
 @Component({
     selector: 'dictionaries-form',
@@ -31,7 +32,7 @@ export class DictionariesFormComponent {
 
     ngOnInit() {
         let me = this;
-        let userId = +localStorage.getItem('userId');
+        let userId = +store('userId');
 
         me.route.params.forEach((params: Params) => {
             let id = +params['dictionaryId'];

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import './dictionaries.list.scss';
+let store = require('store2');
 
 @Component({
     selector: 'dictionaries-list',
@@ -30,14 +31,14 @@ export class DictionariesListComponent {
 
     ngOnInit() {
         let me = this;
-        let userId = +localStorage.getItem('userId');
+        let userId = +store('userId');
 
         me.dictionariesService.getAllPublic(me.loadPublicDictionaries,me);
 
         if (userId > 0) {
             me.dictionariesService.getForUser(userId, me.loadDictionaries, me);
         }
-        
+
     }
 
     loadDictionaries(data: any) {

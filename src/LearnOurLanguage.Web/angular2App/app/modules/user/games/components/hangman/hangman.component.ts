@@ -11,6 +11,7 @@ import { GamesHelper } from 'lol/helpers';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 let $ = require('jquery');
+let store = require('store2');
 
 @Component({
     selector: 'game-hangman',
@@ -73,7 +74,7 @@ export class HangmanComponent {
 
     ngOnInit() {
         let me = this;
-        me.userId = +localStorage.getItem('userId');
+        me.userId = +store('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
     }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseHttpService } from './http.service';
 import { BaseService } from './base.service';
 
+let store = require('store2');
 
 @Injectable()
 export class AuthService extends BaseService {
@@ -15,9 +16,9 @@ export class AuthService extends BaseService {
 
     private updateLocalStorage(data: any): void {
         let me = this;
-        localStorage.setItem('accessLevel', data.accessLevel);
-        localStorage.setItem('userId', data.userId);
-        localStorage.setItem('loggedIn', (data.accessLevel > 0) ? '1' : '0');
+        store('accessLevel', data.accessLevel);
+        store('userId', data.userId);
+        store('loggedIn', (data.accessLevel > 0) ? '1' : '0');
     }
 
 }

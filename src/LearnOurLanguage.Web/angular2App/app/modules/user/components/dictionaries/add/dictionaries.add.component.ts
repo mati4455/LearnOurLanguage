@@ -4,6 +4,8 @@ import { LanguageModel } from 'lol/models/dictionary';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+let store = require('store2');
+
 @Component({
     selector: 'dictionaries-add',
     templateUrl: 'dictionaries.add.component.html',
@@ -26,7 +28,7 @@ userId: number;
 
     ngOnInit() {
         let me = this;
-        me.userId = +localStorage.getItem('userId');
+        me.userId = +store('userId');
         me.languageService.getAll(me.loadLanguages,me);
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
     }
