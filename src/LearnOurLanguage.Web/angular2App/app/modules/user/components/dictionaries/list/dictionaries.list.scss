@@ -29,9 +29,18 @@
     }
 }
 
-.buttons a {
+.buttons {
+    a {
         width: 100%;
         background: rgba(255, 255, 255, .65);
         padding: $half_margin;
         margin-top: $half_margin;
+        }
+        
+    button {
+        width: 100%;
+        background: rgba(255, 255, 255, .65);
+        padding: $half_margin;
+        margin-top: $half_margin;
+        }
 }
