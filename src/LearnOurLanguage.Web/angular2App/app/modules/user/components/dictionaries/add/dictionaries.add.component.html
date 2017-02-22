@@ -1,42 +1,58 @@
 <div class="row">
     <div class="col-xs-12">
         <h2 class="section-title">Tworzenie nowego słownika</h2>
-              <form>
+        <form>
             <div class="form-group">
-                <label>Nazwa słownika:</label>
-                <input name="name" min="3" type="text" class="form-control"
-                    id="name" placeholder="nazwa słownika">
+                <label for="name">Nazwa słownika:</label>
+                <input name="name" min="3" type="text" class="form-control" id="name" [(value)]="dictionary.name" placeholder="nazwa słownika">
             </div>
 
             <div class="form-group">
-                <label >Pierwszy język:</label>
-                <select  name="firstLanguage" data-style="btn-default"
-                    class="form-control selectpicker" data-live-search="true" id="firstLanguage" placeholder="wybierz język">
-                    <option *ngFor="let language of languages">
+                <label for="firstLanguage">Pierwszy język:</label>
+                <select *ngIf="languages" name="firstLanguage" id="firstLanguage" class="form-control" [(ngModel)]="dictionary.firstLanguage.id"
+                    required placeholder="wybierz język">
+                    <option *ngFor="let language of languages" [value]="language.id">
                         {{language.name}}
                     </option>
-                </select>
+                    </select>
             </div>
 
-             <div class="form-group">
-                <label>Drugi język:</label>
-                <select name="secondLanguage" data-style="btn-default"
-                    class="form-control selectpicker"  data-live-search="true" id="secondLanguage" placeholder="wybierz język">
-                    <option *ngFor="let language of languages">
+            <div class="form-group">
+                <label for="secondLanguage">Drugi język:</label>
+                <select *ngIf="languages" name="secondLanguage" id="secondLanguage" class="form-control" [(ngModel)]="dictionary.secondLanguage.id"
+                    required placeholder="wybierz język">
+                    <option *ngFor="let language of languages" [value]="language.id">
                         {{language.name}}
                     </option>
-                </select>
+                    </select>
             </div>
 
-               <div class="form-group">
-                <label>Opis słownika:</label>
-                <input name="description" min="3" type="text" class="form-control"
-                    id="description" placeholder="opis słownika">
+            <div class="form-group">
+                <label for="description">Opis słownika:</label>
+                <input name="description" min="3" type="text" class="form-control" id="description" value="{{dictionary.description}}" placeholder="opis słownika">
             </div>
 
-            <div class="right">
+            <div *ngIf="translations.length != 0">
+                <label for="translationWords">Słówka:</label>
+            </div>
+
+            <div *ngFor="let translation of translations" class="form-group">
+                <div class="row top-buffer" id="translationWords">
+                    <div class="col-xs-6">
+                        <input name="firstLangWord" min="3" type="text" class="form-control" id="firstLangWord" value="{{translation.firstLangWord}}" placeholder="słówko">
+                    </div>
+                    <div class="col-xs-6">
+                        <input name="secondLangWord" min="3" type="text" class="form-control" id="secondLangWord" value="{{translation.secondLangWord}}" placeholder="tłumaczenie">
+                    </div>
+                </div>
+            </div>
+            <div class="right form-group">
+                <a type="submit" type="button" (click)="addNewTranslation()" class="btn btn-primary">Nowe słówko</a>
+            </div>
+
+            <div class="right form-group">
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             </div>
-            </form>
-     </div>
+        </form>
+    </div>
 </div>

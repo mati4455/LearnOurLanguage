@@ -21,6 +21,9 @@ export class DictionariesListComponent {
     public dictionariesBase: Array<DictionaryModel> = [];
     public dictionariesPublic: Array<DictionaryModel> = [];
     public dictionariesPublicBase: Array<DictionaryModel> = [];
+    public flagAdd: boolean = false;
+    public flagEdit: boolean = true;
+    public dictionaryId: number = 0;
 
     constructor(
         private dictionariesService: DictionariesService,
@@ -33,7 +36,7 @@ export class DictionariesListComponent {
         let me = this;
         let userId = +store('userId');
 
-        me.dictionariesService.getAllPublic(me.loadPublicDictionaries,me);
+        me.dictionariesService.getAllPublic(me.loadPublicDictionaries, me);
 
         if (userId > 0) {
             me.dictionariesService.getForUser(userId, me.loadDictionaries, me);
@@ -47,10 +50,16 @@ export class DictionariesListComponent {
         me.dictionariesBase = data;
     }
 
-    loadPublicDictionaries(data: any){
+    loadPublicDictionaries(data: any) {
         let me = this;
         me.dictionariesPublic = data;
         me.dictionariesPublicBase = data;
+    }
+
+    deleteDictionary(id: any) {
+        let me = this;
+        console.log(id[0]);
+        me.dictionariesService.delete(id[0], me.loadDictionaries, me);
     }
 
     filterList(event: any) {
@@ -65,5 +74,23 @@ export class DictionariesListComponent {
         me.queryString = event.target.value;
 
         me.dictionariesPublic = me.dictionariesPublicBase.filter((element) => element.name.includes(me.queryString));
+    }
+
+    setAddFlag() {
+        let me = this;
+        me.flagAdd = !me.flagAdd;
+    }
+
+    setEditFlag() {
+        let me = this;
+        me.flagEdit = !me.flagEdit;
+    }
+
+    setDictionaryId(id: any) {
+        console.log(id);
+        let me = this;
+        me.dictionaryId = id;
+        me.flagAdd = false;
+        me.flagEdit = false;
     }
 }
