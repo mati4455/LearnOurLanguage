@@ -1,5 +1,5 @@
-import { DictionaryModel } from 'lol/models/dictionary';
-import { DictionariesService, LanguageService } from 'lol/services';
+import { DictionaryModel, TranslationModel } from 'lol/models/dictionary';
+import { DictionariesService, LanguageService, TranslationsService } from 'lol/services';
 import { LanguageModel } from 'lol/models/dictionary';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -8,38 +8,43 @@ import { Component, OnInit } from '@angular/core';
     selector: 'dictionaries-add',
     templateUrl: 'dictionaries.add.component.html',
     providers: [
-        DictionariesService, LanguageService
+        DictionariesService, LanguageService, TranslationsService
     ]
 })
 
 export class DictionariesAddComponent {
 
-parameters: DictionaryModel = new DictionaryModel();
-dictionaries: Array<DictionaryModel> = [];
-languages: Array<LanguageModel> = [];
-userId: number;
+    dictionary: DictionaryModel = new DictionaryModel();
+    dictionaries: Array<DictionaryModel> = [];
+    translations: Array<TranslationModel> =[];
+    languages: Array<LanguageModel> = [];
+    userId: number;
 
 
-    constructor(private dictionariesService: DictionariesService, private languageService:LanguageService) {
+    constructor(
+        private dictionariesService: DictionariesService,
+        private languageService: LanguageService,
+        private translationsService: TranslationsService,
+        private router: Router,
+        private route: ActivatedRoute) {
         let me = this;
     }
 
     ngOnInit() {
         let me = this;
         me.userId = +localStorage.getItem('userId');
-        me.languageService.getAll(me.loadLanguages,me);
+
+        me.route.params.forEach((params: Params) => {
+            let id = +params['dictionaryId'];
+            console.log(id);
+            if (me.userId > 0 && id > 0) {
+                me.dictionariesService.get(id, me.loadDictionary, me);
+                me.translationsService.getForDictionary(id, me.loadTranslations, me);
+            }
+        });
+
+        me.languageService.getAll(me.loadLanguages, me);
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
-    }
-
-    createDictionary() {
-        let me = this;
-        me.parameters.userId = me.userId;
-        me.dictionariesService.post(me.parameters,me.initializeDictionary,me);
-    }
-
-       initializeDictionary(data: any) {
-        let me = this;
-        me.dictionaries = data;
     }
 
     loadDictionaries(data: any) {
@@ -47,9 +52,19 @@ userId: number;
         me.dictionaries = data;
     }
 
-    loadLanguages(data: any){
+    loadDictionary(data: any) {
+        let me = this;
+        me.dictionary = data;
+    }
+
+    loadLanguages(data: any) {
         let me = this;
         me.languages = data;
+    }
+
+    loadTranslations(data: any) {
+        let me = this;
+        me.translations = data;
     }
 
 }

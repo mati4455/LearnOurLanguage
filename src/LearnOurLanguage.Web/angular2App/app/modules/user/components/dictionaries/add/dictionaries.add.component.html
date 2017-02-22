@@ -1,42 +1,52 @@
 <div class="row">
     <div class="col-xs-12">
         <h2 class="section-title">Tworzenie nowego słownika</h2>
-              <form>
+        <form>
             <div class="form-group">
                 <label>Nazwa słownika:</label>
-                <input name="name" min="3" type="text" class="form-control"
-                    id="name" placeholder="nazwa słownika">
+                <input name="name" min="3" type="text" class="form-control" id="name" value="{{dictionary.name}}"placeholder="nazwa słownika">
             </div>
 
             <div class="form-group">
-                <label >Pierwszy język:</label>
-                <select  name="firstLanguage" data-style="btn-default"
-                    class="form-control selectpicker" data-live-search="true" id="firstLanguage" placeholder="wybierz język">
+                <label>Pierwszy język:</label>
+                <select name="firstLanguage" data-style="btn-default" class="form-control selectpicker" data-live-search="true" id="firstLanguage"
+                    placeholder="wybierz język">
                     <option *ngFor="let language of languages">
                         {{language.name}}
                     </option>
-                </select>
+                    </select>
             </div>
 
-             <div class="form-group">
+            <div class="form-group">
                 <label>Drugi język:</label>
-                <select name="secondLanguage" data-style="btn-default"
-                    class="form-control selectpicker"  data-live-search="true" id="secondLanguage" placeholder="wybierz język">
+                <select name="secondLanguage" data-style="btn-default" class="form-control selectpicker" data-live-search="true" id="secondLanguage"
+                    placeholder="wybierz język">
                     <option *ngFor="let language of languages">
                         {{language.name}}
                     </option>
-                </select>
+                    </select>
             </div>
 
-               <div class="form-group">
+            <div class="form-group">
                 <label>Opis słownika:</label>
-                <input name="description" min="3" type="text" class="form-control"
-                    id="description" placeholder="opis słownika">
+                <input name="description" min="3" type="text" class="form-control" id="description" placeholder="opis słownika">
+            </div>
+
+            <label>Słówka:</label>
+            <div *ngFor="let translation of translations">
+                <div class="row top-buffer">
+                    <div class="col-xs-6">
+                        <input name="name" min="3" type="text" class="form-control" id="name" value="{{translation.firstLangWord}}">
+                    </div>
+                    <div class="col-xs-6">
+                        <input name="name" min="3" type="text" class="form-control" id="name" value="{{translation.secondLangWord}}">
+                    </div>
+                </div>
             </div>
 
             <div class="right">
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             </div>
-            </form>
-     </div>
+        </form>
+    </div>
 </div>

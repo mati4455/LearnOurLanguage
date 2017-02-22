@@ -14,13 +14,13 @@
             </div>
             <div class="list">
                 <div *ngFor="let dictionary of dictionaries">
-                    <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
+                    <a (click)="dictionaryId=[dictionary.id]" [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
                 </div>
             </div>
 
             <div class="buttons row">
                 <div class="col-xs-4">
-                    <a routerLink="/user/dictionaries/add" type="button" class="btn btn-default">Dodaj</a>
+                    <a routerLink="/user/dictionaries/add/{{dictionaryId}}" type="button" class="btn btn-default">Dodaj</a>
                 </div>
                 <div class="col-xs-4">
                     <a type="button" class="btn btn-default">Edytuj</a>
