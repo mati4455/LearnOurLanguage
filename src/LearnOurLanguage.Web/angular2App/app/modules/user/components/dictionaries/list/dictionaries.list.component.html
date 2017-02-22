@@ -20,13 +20,13 @@
 
             <div class="buttons row">
                 <div class="col-xs-4">
-                    <a routerLink="/user/dictionaries/add/{{dictionaryId}}" type="button" class="btn btn-default">Dodaj</a>
+                    <a routerLink="/user/dictionaries/add/0" type="button" class="btn btn-default">Dodaj</a>
                 </div>
                 <div class="col-xs-4">
-                    <a type="button" class="btn btn-default">Edytuj</a>
+                    <a routerLink="/user/dictionaries/add/{{dictionaryId}}" type="button" class="btn btn-default">Edytuj</a>
                 </div>
                 <div class="col-xs-4">
-                    <a type="button" class="btn btn-default">Usuń</a>
+                    <a type="button" (click)="deleteDictionary(dictionaryId)"class="btn btn-default">Usuń</a>
                 </div>
             </div>
         </tab>

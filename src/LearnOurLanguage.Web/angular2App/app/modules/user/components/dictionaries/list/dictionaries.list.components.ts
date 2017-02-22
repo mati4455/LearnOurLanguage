@@ -20,6 +20,9 @@ export class DictionariesListComponent {
     public dictionariesBase: Array<DictionaryModel> = [];
     public dictionariesPublic: Array<DictionaryModel> = [];
     public dictionariesPublicBase: Array<DictionaryModel> = [];
+    public flagEdit: boolean = false;
+    public flagAdd: boolean = true;
+    public dictionaryId: number = 0;
 
     constructor(
         private dictionariesService: DictionariesService,
@@ -32,12 +35,12 @@ export class DictionariesListComponent {
         let me = this;
         let userId = +localStorage.getItem('userId');
 
-        me.dictionariesService.getAllPublic(me.loadPublicDictionaries,me);
+        me.dictionariesService.getAllPublic(me.loadPublicDictionaries, me);
 
         if (userId > 0) {
             me.dictionariesService.getForUser(userId, me.loadDictionaries, me);
         }
-        
+
     }
 
     loadDictionaries(data: any) {
@@ -46,10 +49,16 @@ export class DictionariesListComponent {
         me.dictionariesBase = data;
     }
 
-    loadPublicDictionaries(data: any){
+    loadPublicDictionaries(data: any) {
         let me = this;
         me.dictionariesPublic = data;
         me.dictionariesPublicBase = data;
+    }
+
+    deleteDictionary(id : any) {
+        let me = this;
+        console.log(id[0]);
+        me.dictionariesService.delete(id[0], me.loadDictionaries, me);
     }
 
     filterList(event: any) {
