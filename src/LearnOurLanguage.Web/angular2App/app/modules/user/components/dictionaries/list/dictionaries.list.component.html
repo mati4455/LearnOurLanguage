@@ -23,7 +23,8 @@
                     <button [disabled]="flagAdd" (click)="setEditFlag()" routerLink="/user/dictionaries/add/0" type="button" class="btn btn-default">Dodaj</button>
                 </div>
                 <div class="col-xs-4">
-                    <button [disabled]="dictionaryId==0 || flagEdit" (click)="setAddFlag()" routerLink="/user/dictionaries/add/{{dictionaryId}}" class="btn btn-default">Edytuj</button>
+                    <button [disabled]="dictionaryId==0 || flagEdit" (click)="setAddFlag()" routerLink="/user/dictionaries/add/{{dictionaryId}}"
+                        class="btn btn-default">Edytuj</button>
                 </div>
                 <div class="col-xs-4">
                     <button [disabled]="dictionaryId==0 || flagEdit" type="button" (click)="deleteDictionary(dictionaryId)" class="btn btn-default">Usuń</button>

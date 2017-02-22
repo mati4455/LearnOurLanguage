@@ -80,7 +80,7 @@ export class DictionariesListComponent {
         me.flagAdd = !me.flagAdd;
     }
 
-     setEditFlag() {
+    setEditFlag() {
         let me = this;
         me.flagEdit = !me.flagEdit;
     }

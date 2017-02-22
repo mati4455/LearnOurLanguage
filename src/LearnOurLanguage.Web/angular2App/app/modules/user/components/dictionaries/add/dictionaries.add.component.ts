@@ -28,6 +28,8 @@ export class DictionariesAddComponent {
         private router: Router,
         private route: ActivatedRoute) {
         let me = this;
+        me.dictionary.firstLanguage = new LanguageModel();
+        me.dictionary.secondLanguage = new LanguageModel();
     }
 
     ngOnInit() {
