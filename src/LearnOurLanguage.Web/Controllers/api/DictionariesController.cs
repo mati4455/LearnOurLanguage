@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Model.Auth;
 using Model.Const;
 using Model.Models.Database;
+using Model.Models.Dictionaries;
 using Model.Repositories.Interfaces;
+using Model.Services.Interfaces;
 
 namespace LearnOurLanguage.Web.Controllers.api
 {
@@ -13,9 +15,12 @@ namespace LearnOurLanguage.Web.Controllers.api
     public class DictionariesController : BaseController
     {
         private IDictionariesRepository DictionariesRepository { get; }
-        public DictionariesController(IDictionariesRepository repo)
+        private IDictionariesService DictionariesService { get; }
+
+        public DictionariesController(IDictionariesRepository repo, IDictionariesService dictionariesService)
         {
             DictionariesRepository = repo;
+            DictionariesService = dictionariesService;
         }
 
         [HttpGet]
@@ -51,34 +56,19 @@ namespace LearnOurLanguage.Web.Controllers.api
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Dictionary input)
+        public ActionResult Post([FromBody] DictionaryDTO input)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser));
 
-            return JsonHelper.Response(
-                DictionariesRepository.Insert(input) && DictionariesRepository.Save()
-            );
+            return JsonHelper.Response(DictionariesService.InsertOrUpdate(input));
         }
-
-        [HttpPut]
-        public ActionResult Put([FromBody] Dictionary data)
-        {
-            AccessGuardian(new AccessRole(Roles.AccessUser, data.UserId));
-
-            if (!data.IsValid) return JsonHelper.Error(ExceptionConst.OwnerAccess);
-            return JsonHelper.Response(
-                DictionariesRepository.Update(data) && DictionariesRepository.Save()
-            );
-        }
-
+        
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser, DictionariesRepository.GetById(id).UserId));
 
-            return JsonHelper.Response(
-                DictionariesRepository.Delete(id) && DictionariesRepository.Save()
-            );
+            return JsonHelper.Response(DictionariesService.Delete(id));
         }
     }
 }
