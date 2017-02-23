@@ -76,4 +76,10 @@ export class DictionariesAddComponent {
         me.translations.push(new TranslationModel());
     }
 
+    updateDictionary() {
+        let me = this;
+        me.dictionary.userId = me.userId;
+        console.log(me.dictionary);
+        console.log(me.translations);
+    }
 }
