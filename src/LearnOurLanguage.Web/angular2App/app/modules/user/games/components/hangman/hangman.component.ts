@@ -97,7 +97,7 @@ export class HangmanComponent {
             index = key - KeysEnum.CHAR_A_SMALL;
         }
 
-        if (index >= 0) {
+        if (index >= 0 && !me.showNav) {
             index = index + KeysEnum.CHAR_A;
             var el = $('.availableChars #char-' + key);
             if (el && !$(el).hasClass('selected')) {
@@ -156,7 +156,8 @@ export class HangmanComponent {
             me.questionIndex++;
 
             me.model = me.questions.shift();
-            me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
+            me.incrementSize = 1; // przy wiekszych slownikach nie da sie odgadnac slowek. zawsze zabiera po jednym zyciu
+            // me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
             me.prepareAnswerMask();
             me.startTime = new Date().getTime();
             me.usedCharacters = [];
