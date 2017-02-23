@@ -1,4 +1,4 @@
-import { DictionaryModel, TranslationModel } from 'lol/models/dictionary';
+import { DictionaryModel, TranslationModel, DictionaryVoModel } from 'lol/models/dictionary';
 import { DictionariesService, LanguageService, TranslationsService } from 'lol/services';
 import { LanguageModel } from 'lol/models/dictionary';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -16,6 +16,7 @@ let store = require('store2');
 
 export class DictionariesAddComponent {
 
+    dictionaryVo: DictionaryVoModel = new DictionaryVoModel();
     dictionary: DictionaryModel = new DictionaryModel();
     dictionaries: Array<DictionaryModel> = [];
     translations: Array<TranslationModel> = [];
@@ -78,8 +79,14 @@ export class DictionariesAddComponent {
 
     updateDictionary() {
         let me = this;
-        me.dictionary.userId = me.userId;
-        console.log(me.dictionary);
-        console.log(me.translations);
+        me.dictionaryVo.userId = me.userId;
+        me.dictionaryVo.id = me.dictionary.id;
+        me.dictionaryVo.name = me.dictionary.name;
+        me.dictionaryVo.description = me.dictionary.description;
+        me.dictionaryVo.translationsList = me.translations;
+        me.dictionaryVo.firstLanguage = me.dictionary.firstLanguage;
+        me.dictionaryVo.secondLanguage = me.dictionary.secondLanguage;
+        console.log(me.dictionaryVo);
+        me.dictionariesService.post(me.dictionaryVo,null,me);
     }
 }
