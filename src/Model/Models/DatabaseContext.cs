@@ -11,7 +11,7 @@ namespace Model.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Dictionary> Dictionaries { get; set; }
-        public virtual DbSet<UserDictionary> UserDictionaries { get; set; }
+        //public virtual DbSet<UserDictionary> UserDictionaries { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<GameSession> GameSessions { get; set; }

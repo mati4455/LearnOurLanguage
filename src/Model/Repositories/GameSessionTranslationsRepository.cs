@@ -1,4 +1,5 @@
-﻿using Model.Base;
+﻿using System.Linq;
+using Model.Base;
 using Model.Models;
 using Model.Models.Database;
 using Model.Repositories.Interfaces;
@@ -10,7 +11,11 @@ namespace Model.Repositories
     {
         public GameSessionTranslationsRepository(DatabaseContext db) : base(db)
         {
-            
+        }
+        public void DeleteByDictionaryId(int dictionaryId)
+        {
+            var gst = GetAll().Where(x => x.GameSession.DictionaryId == dictionaryId).ToList();
+            Delete(gst);
         }
     }
 }

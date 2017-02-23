@@ -23,6 +23,8 @@ namespace Model.Models.Database
         public virtual int UserId { get; set; }
         public virtual User User { get; set; }
 
+        public virtual int? ParentDictionaryId { get; set; }
+
         [Required]
         public virtual int FirstLanguageId { get; set; }
         [ForeignKey("FirstLanguageId")]

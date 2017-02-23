@@ -23,5 +23,15 @@ namespace Model.Models.Database
             DictionaryId > 0 &&
             !string.IsNullOrWhiteSpace(FirstLangWord) &&
             !string.IsNullOrWhiteSpace(SecondLangWord);
+
+        public override bool Equals(object obj)
+        {
+            return ((Translation) obj).Id == Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Model.Models.Account;
 using Model.Models.Database;
+using Model.Models.Dictionaries;
 
 namespace Model.Helpers
 {
@@ -25,6 +26,9 @@ namespace Model.Helpers
 
                 //x.CreateMap<GameSessionTranslation, QuestionPair>()
                 //    .ForMember(dest => dest.GameSessionTranslationId, opts => opts.MapFrom(src => src.Id));
+
+
+                x.CreateMap<DictionaryDTO, Dictionary>();
             });
         }
     }

@@ -21,5 +21,11 @@ namespace Model.Repositories
                 //.Include(x => x.Dictionary.SecondLanguage)
                 .Where(x => x.DictionaryId == dictionaryId);
         }
+
+        public void DeleteByDictionaryId(int dictionaryId)
+        {
+            var trans = GetAll().Where(x => x.DictionaryId == dictionaryId);
+            Delete(trans);
+        }
     }
 }
