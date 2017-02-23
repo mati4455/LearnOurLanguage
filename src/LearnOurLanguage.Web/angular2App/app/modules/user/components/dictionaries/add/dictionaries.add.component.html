@@ -1,10 +1,11 @@
 <div class="row">
     <div class="col-xs-12">
         <h2 class="section-title">Tworzenie nowego słownika</h2>
-        <form>
+        <form (ngSubmit)="updateDictionary()">
             <div class="form-group">
                 <label for="name">Nazwa słownika:</label>
-                <input name="name" min="3" type="text" class="form-control" id="name" [(value)]="dictionary.name" placeholder="nazwa słownika">
+                <input [(ngModel)]="dictionary.name" required name="name" min="3" type="text" class="form-control" id="name" [value]="dictionary.name"
+                    placeholder="nazwa słownika">
             </div>
 
             <div class="form-group">
@@ -29,7 +30,8 @@
 
             <div class="form-group">
                 <label for="description">Opis słownika:</label>
-                <input name="description" min="3" type="text" class="form-control" id="description" value="{{dictionary.description}}" placeholder="opis słownika">
+                <input [(ngModel)]="dictionary.description" required name="description" min="3" type="text" class="form-control" id="description"
+                    [value]="dictionary.description" placeholder="opis słownika">
             </div>
 
             <div *ngIf="translations.length != 0">
@@ -39,15 +41,17 @@
             <div *ngFor="let translation of translations" class="form-group">
                 <div class="row top-buffer" id="translationWords">
                     <div class="col-xs-6">
-                        <input name="firstLangWord" min="3" type="text" class="form-control" id="firstLangWord" value="{{translation.firstLangWord}}" placeholder="słówko">
+                        <input [(ngModel)]="translation.firstLangWord" name="firstLangWord" min="3" type="text" class="form-control" id="firstLangWord" [value]="translation.firstLangWord"
+                            placeholder="słówko">
                     </div>
                     <div class="col-xs-6">
-                        <input name="secondLangWord" min="3" type="text" class="form-control" id="secondLangWord" value="{{translation.secondLangWord}}" placeholder="tłumaczenie">
+                        <input [(ngModel)]="translation.secondLangWord" name="secondLangWord" min="3" type="text" class="form-control" id="secondLangWord" [value]="translation.secondLangWord"
+                            placeholder="tłumaczenie">
                     </div>
                 </div>
             </div>
             <div class="right form-group">
-                <a type="submit" type="button" (click)="addNewTranslation()" class="btn btn-primary">Nowe słówko</a>
+                <a type="button" (click)="addNewTranslation()" class="btn btn-primary">Nowe słówko</a>
             </div>
 
             <div class="right form-group">
