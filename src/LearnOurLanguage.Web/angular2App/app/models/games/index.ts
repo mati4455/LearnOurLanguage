@@ -10,3 +10,6 @@ export { QuizParameters } from './quiz-parameters.model';
 
 export { HangmanModel } from './hangman.model';
 export { HangmanParameters } from './hangman-parameters.model';
+
+export { FlashcardsModel } from './flashcards.model';
+export { FlashcardsParameters } from './flashcards-parameters.model';
