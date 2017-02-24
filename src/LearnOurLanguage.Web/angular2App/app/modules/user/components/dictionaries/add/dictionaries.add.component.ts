@@ -87,6 +87,6 @@ export class DictionariesAddComponent {
         me.dictionaryVo.firstLanguage = me.dictionary.firstLanguage;
         me.dictionaryVo.secondLanguage = me.dictionary.secondLanguage;
         console.log(me.dictionaryVo);
-        me.dictionariesService.post(me.dictionaryVo,null,me);
+      //  me.dictionariesService.post(me.dictionaryVo,null,me);
     }
 }

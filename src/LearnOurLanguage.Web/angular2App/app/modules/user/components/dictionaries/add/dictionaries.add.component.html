@@ -38,15 +38,15 @@
                 <label for="translationWords">Słówka:</label>
             </div>
 
-            <div *ngFor="let translation of translations" class="form-group">
+            <div *ngFor="let translation of translations; let i = index;" class="form-group">
                 <div class="row top-buffer" id="translationWords">
                     <div class="col-xs-6">
-                        <input [(ngModel)]="translation.firstLangWord" name="firstLangWord" min="3" type="text" class="form-control" id="firstLangWord" [value]="translation.firstLangWord"
-                            placeholder="słówko">
+                        <input [(ngModel)]="translation.firstLangWord" required name="firstLangWord-{{i}}" min="3" type="text" 
+                        class="form-control" id="firstLangWord" [value]="translation.firstLangWord" placeholder="słówko">
                     </div>
                     <div class="col-xs-6">
-                        <input [(ngModel)]="translation.secondLangWord" name="secondLangWord" min="3" type="text" class="form-control" id="secondLangWord" [value]="translation.secondLangWord"
-                            placeholder="tłumaczenie">
+                        <input [(ngModel)]="translation.secondLangWord" required name="secondLangWord-{{i}}" min="3" type="text" 
+                        class="form-control" id="secondLangWord" [value]="translation.secondLangWord" placeholder="tłumaczenie">
                     </div>
                 </div>
             </div>
