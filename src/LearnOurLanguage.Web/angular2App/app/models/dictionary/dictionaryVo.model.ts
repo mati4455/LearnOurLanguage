@@ -12,7 +12,7 @@ export class DictionaryVoModel {
         public userId = 0,
         public firstLanguageId: number = null,
         public secondLanguageId: number = null,
-        public translationsList: Array<TranslationModel> = []
+        public translationList: Array<TranslationModel> = []
     ) { }
 
 }
