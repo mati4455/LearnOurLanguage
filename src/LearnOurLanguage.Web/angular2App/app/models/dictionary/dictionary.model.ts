@@ -7,7 +7,7 @@ export class DictionaryModel {
         public name = '',
         public description = '',
         public Public = false, // public zarezerwowane - pomyślimy później
-        public Date: number = null,
+        public Date: Date = null,
         public userId = 0,
         public firstLanguage: LanguageModel = null,
         public secondLanguage: LanguageModel = null
