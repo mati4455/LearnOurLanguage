@@ -8,11 +8,11 @@ export class DictionaryVoModel {
         public name = '',
         public description = '',
         public Public = false,
-        public Date: number = null,
+        public date: Date = null,
         public userId = 0,
-        public firstLanguage: LanguageModel = null,
-        public secondLanguage: LanguageModel = null,
-        public translationsList: Array<TranslationModel> = []
+        public firstLanguageId: number = null,
+        public secondLanguageId: number = null,
+        public translationList: Array<TranslationModel> = []
     ) { }
 
 }

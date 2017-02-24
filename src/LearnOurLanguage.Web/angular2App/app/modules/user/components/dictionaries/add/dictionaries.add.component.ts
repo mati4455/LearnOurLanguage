@@ -83,10 +83,10 @@ export class DictionariesAddComponent {
         me.dictionaryVo.id = me.dictionary.id;
         me.dictionaryVo.name = me.dictionary.name;
         me.dictionaryVo.description = me.dictionary.description;
-        me.dictionaryVo.translationsList = me.translations;
-        me.dictionaryVo.firstLanguage = me.dictionary.firstLanguage;
-        me.dictionaryVo.secondLanguage = me.dictionary.secondLanguage;
+        me.dictionaryVo.translationList = me.translations;
+        me.dictionaryVo.firstLanguageId = me.dictionary.firstLanguage.id;
+        me.dictionaryVo.secondLanguageId = me.dictionary.secondLanguage.id;
         console.log(me.dictionaryVo);
-        me.dictionariesService.post(me.dictionaryVo,null,me);
+        me.dictionariesService.post(me.dictionaryVo,me.loadDictionaries,me);
     }
 }

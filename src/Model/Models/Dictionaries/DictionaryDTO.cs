@@ -10,7 +10,7 @@ namespace Model.Models.Dictionaries
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual bool Public { get; set; }
-        public virtual DateTime Date { get; set; }
+        public virtual DateTime? Date { get; set; }
         public virtual int UserId { get; set; }
         public virtual int FirstLanguageId { get; set; }
         public virtual int SecondLanguageId { get; set; }
