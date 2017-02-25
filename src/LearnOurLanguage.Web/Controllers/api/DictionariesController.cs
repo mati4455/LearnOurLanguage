@@ -55,6 +55,14 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Success(DictionariesRepository.GetForUser(userId));
         }
 
+        [HttpGet("CopyDictionary")]
+        public ActionResult CopyDictionary(int dictionaryId, int userId)
+        {
+            AccessGuardian(new AccessRole(Roles.AccessUser));
+
+            return JsonHelper.Success(DictionariesService.CopyDictionary(dictionaryId,userId));
+        }
+
         [HttpPost]
         public ActionResult Post([FromBody] DictionaryDTO input)
         {

@@ -44,7 +44,7 @@
             </div>
             <div class="list">
                 <div *ngFor="let dictionary of dictionariesPublic">
-                    <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
+                    <a (click)="setDictionaryId([dictionary.id])" [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                     <a type="button" class="btn btn-default">Przypnij</a>
                 </div>
                 <div class="col-xs-6">
-                    <a type="button" class="btn btn-default">Kopiuj</a>
+                    <a type="button" class="btn btn-default" (click)="copyDictionary()">Kopiuj</a>
                 </div>
             </div>
         </tab>

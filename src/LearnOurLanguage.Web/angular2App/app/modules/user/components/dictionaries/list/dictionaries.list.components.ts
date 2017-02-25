@@ -93,4 +93,10 @@ export class DictionariesListComponent {
         me.flagAdd = false;
         me.flagEdit = false;
     }
+
+    copyDictionary(){
+        let me = this;
+        let userId = +store('userId');
+         me.dictionariesService.copyDictionary(userId, me.dictionaryId, me.loadDictionaries, me);
+    }
 }
