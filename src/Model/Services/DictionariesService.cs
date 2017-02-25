@@ -50,6 +50,8 @@ namespace Model.Services
                         DictionariesRepository.Insert(dictionary);
                     DictionariesRepository.Save();
 
+                    dictionaryVo.TranslationList.ToList().ForEach(x => x.DictionaryId = dictionary.Id);
+
                     var translations = dictionaryVo.TranslationList.Select(x => x.Id).ToList();
                     var currentTranslations = TranslationsRepository
                         .GetAll()
