@@ -21,7 +21,7 @@
                     id="maxNumberOfQuestions" placeholder="liczba pytań">
             </div>
             <div class="right">
-                <button type="submit" class="btn btn-primary">rozpocznij grę</button>
+                <button type="submit" class="btn btn-primary">Rozpocznij grę</button>
             </div>
         </form>
     </div>
@@ -64,7 +64,7 @@
                 <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
             </div>
             <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">następne pytanie</button>
-            <button type="button" class="btn btn-primary" (click)="endSession(true)">zakończ sesję</button>
+            <button type="button" class="btn btn-primary" (click)="endSession(true)">Zakończ sesję</button>
         </div>
 
     </div>

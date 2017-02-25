@@ -10,6 +10,7 @@ import { QuizComponent } from './components/quiz/quiz.component';
 import { ChooserComponent } from './components/chooser/chooser.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HangmanComponent } from './components/hangman/hangman.component';
+import { FlashcardsComponent } from './components/flashcards/flashcards.component';
 
 @NgModule({
     imports: [
@@ -29,15 +30,18 @@ import { HangmanComponent } from './components/hangman/hangman.component';
         LayoutComponent,
         ChooserComponent,
         QuizComponent,
-        HangmanComponent
+        HangmanComponent,
+        FlashcardsComponent
     ],
 
     exports: [
         LayoutComponent,
         ChooserComponent,
         QuizComponent,
-        HangmanComponent
+        HangmanComponent,
+        FlashcardsComponent
     ]
+
 })
 
 export class GamesModule { }
