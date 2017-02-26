@@ -3,6 +3,7 @@ import { DictionariesService, LanguageService, TranslationsService } from 'lol/s
 import { LanguageModel } from 'lol/models/dictionary';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 let store = require('store2');
 
@@ -29,7 +30,8 @@ export class DictionariesAddComponent {
         private languageService: LanguageService,
         private translationsService: TranslationsService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private toast: ToastsManager,) {
         let me = this;
         me.dictionary.firstLanguage = new LanguageModel();
         me.dictionary.secondLanguage = new LanguageModel();
@@ -88,5 +90,7 @@ export class DictionariesAddComponent {
         me.dictionaryVo.secondLanguageId = me.dictionary.secondLanguage.id;
         console.log(me.dictionaryVo);
         me.dictionariesService.post(me.dictionaryVo,me.loadDictionaries,me);
+        me.toast.success('Operacja przebiegła pomyślnie.');
+        me.router.navigate(['dictionaries']);
     }
 }
