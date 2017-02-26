@@ -34,6 +34,17 @@
     padding: $half_margin;
     margin-bottom: $half_margin;
 }
+#common_col{
+    font-size: 20px;
+    padding: $half_margin;
+    margin-bottom: $half_margin;
+    background: rgba(255, 255, 255, .65);
+    div{
+        font-size: 20px;
+        padding: 1px;
+        margin-bottom: 1px;
+    }
+}
 
 
 .exchange-nav {
