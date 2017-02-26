@@ -26,12 +26,12 @@
 <div>
     <div class="col-xs-12" id="common_col">
         <h3>Szczegóły:</h3>
-         <div class="col-xs-12">
+        <div class="col-xs-12">
             <div class="col-xs-6">
                 <div>Języki:</div>
             </div>
             <div class="col-xs-6">
-                <div>{{dictionary.firstLanguage.name}}</div>
+                <div>{{dictionary.firstLanguage.name}} - {{dictionary.secondLanguage.name}}</div>
             </div>
         </div>
         <div class="col-xs-12">
@@ -62,18 +62,16 @@
 
     <div class="col-xs-12">
         <h3>Słówka:</h3>
-        <div class="col-xs-12">
-            <div *ngFor="let translation of translations">
-                <div id="wrap">
-                    <a routerLinkActive="active">
-                        <div class="text-center" id="left_col">
-                            {{translation.firstLangWord}}
-                        </div>
-                        <div class="text-center" id="right_col">
-                            {{translation.secondLangWord}}
-                        </div>
-                    </a>
-                </div>
+        <div *ngFor="let translation of translations">
+            <div id="wrap">
+                <a routerLinkActive="active">
+                    <div class="text-center" id="left_col">
+                        {{translation.firstLangWord}}
+                    </div>
+                    <div class="text-center" id="right_col">
+                        {{translation.secondLangWord}}
+                    </div>
+                </a>
             </div>
         </div>
     </div>
