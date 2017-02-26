@@ -79,6 +79,11 @@ export class DictionariesAddComponent {
         me.translations.push(new TranslationModel());
     }
 
+    deleteTranslation() {
+        let me = this;
+        me.translations.pop();
+    }
+
     updateDictionary() {
         let me = this;
         me.dictionaryVo.userId = me.userId;
