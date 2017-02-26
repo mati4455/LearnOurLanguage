@@ -1,4 +1,4 @@
-import { DictionaryModel } from 'lol/models/dictionary';
+import { DictionaryModel, LanguageModel } from 'lol/models/dictionary';
 import { TranslationsService, DictionariesService } from 'lol/services';
 import { TranslationModel } from 'lol/models/dictionary';
 import { Component, OnInit } from '@angular/core';
@@ -28,6 +28,9 @@ export class DictionariesFormComponent {
         private dictionaryService: DictionariesService,
         private router: Router,
         private route: ActivatedRoute) {
+        let me = this;
+        me.dictionary.firstLanguage = new LanguageModel();
+        me.dictionary.secondLanguage = new LanguageModel();
     }
 
     ngOnInit() {
