@@ -96,7 +96,7 @@ export class FlashcardsComponent {
         }
 
         if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
-            //me.nextQuestion();
+            me.nextQuestion();
         }
 
         if (key == KeysEnum.SPACE && me.showNav) {
@@ -107,12 +107,38 @@ export class FlashcardsComponent {
     startGame() {
         let me = this;
         me.parameters.userId = me.userId;
-        me.gamesService.initializeGameHangman(me.parameters, me.initializeGame, me);
+        me.gamesService.initializeGameFlashcards(me.parameters, me.initializeGame, me);
     }
 
     loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
+    }
+
+
+    initializeGame(data: any) {
+        let me = this;
+        me.questions = data;
+
+        if (me.questions.length > 0) {
+            me.gameSessionId = me.questions[0].gameSessionId;
+            me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
+            me.questions = me.gamesHelper.shuffle(me.questions);
+            me.questionsCount = me.questions.length;
+
+            me.nextQuestion();
+        } else {
+            me._toast.warning('Wybrany słownik nie zawiera słówek. Wybierz inny słownik.');
+        }
+    }
+
+ nextQuestion() {
+        let me = this;
+        me.showNav = false;
+        me.questionIndex++;
+        me.model = me.questions.shift();
+        me.startTime = new Date().getTime();
+        
     }
 
 
