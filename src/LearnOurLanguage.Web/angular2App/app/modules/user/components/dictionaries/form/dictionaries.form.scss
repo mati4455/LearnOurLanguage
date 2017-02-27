@@ -1,9 +1,7 @@
 @import "common";
 
-#wrap {
-   width:600px;
-   max-height: 500px;
-   a {
+.wrap {
+    a {
         display: block;
         color: $dictionary_link_color;
         background: $dictionary_link_background;
@@ -16,24 +14,18 @@
             background: $dictionary_link_background_hover;
             text-shadow: $shadow;
         }
-   }
+    }
+
+    .col {
+        font-size: 20px;
+        background: rgba(255, 255, 255, .65);
+        padding-top: $half_margin;
+        padding-bottom: $half_margin;
+        margin-bottom: $half_margin;
+        text-align: center;
+    }
 }
-#left_col {
-    float:left;
-    width:300px;
-    font-size: 20px;
-    background: rgba(255, 255, 255, .65);
-    padding: $half_margin;
-    margin-bottom: $half_margin;
-}
-#right_col {
-    float:right;
-    width:300px;
-    font-size: 20px;
-    background: rgba(255, 255, 255, .65);
-    padding: $half_margin;
-    margin-bottom: $half_margin;
-}
+
 #common_col{
     font-size: 20px;
     padding: $half_margin;
@@ -45,7 +37,6 @@
         margin-bottom: 1px;
     }
 }
-
 
 .exchange-nav {
     label, button {
