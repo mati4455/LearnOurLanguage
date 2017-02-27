@@ -45,12 +45,17 @@ export class FlashcardsComponent {
     selDictionaryList: any;
     selectedDictionary: DictionaryModel;
     speechSupport: boolean;
+    showQuestion: boolean;
+    answerChecked: boolean = false;
+    answerValue: string = '';
 
     startTime: number = 0;
     endTime: number = 0;
     diffTime: number = 0;
     interval: any = null;
 
+    animationTime: number = 300;
+    updateTimeInterval: number = 1000;
 
     chartColors = PieChartColors;
 
@@ -115,6 +120,28 @@ export class FlashcardsComponent {
         me.dictionaries = data;
     }
 
+    confirmAnswer(answer: string){
+        let me = this;
+        me.answerChecked = true;
+        me.showQuestion = false;
+        me.endTime = new Date().getTime();
+        if (me.interval) {
+            clearInterval(me.interval);
+        }
+        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, answer);
+        me.answers.push(new AnswerUpdateModel(
+            me.model.gameSessionId,
+            me.model.translation.id,
+            correct,
+            me.calculateDuration()
+        ));
+        me.showNav = true;
+        $('.question').addClass(correct ? 'correct' : 'wrong');
+        $('.question').blur();
+        me.ttsPlay();
+
+
+    }
 
     initializeGame(data: any) {
         let me = this;
@@ -125,26 +152,45 @@ export class FlashcardsComponent {
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
-
             me.nextQuestion();
         } else {
             me._toast.warning('Wybrany słownik nie zawiera słówek. Wybierz inny słownik.');
         }
     }
 
- nextQuestion() {
+nextQuestion() {
         let me = this;
-        me.showNav = false;
-        me.questionIndex++;
-        me.model = me.questions.shift();
-        me.startTime = new Date().getTime();
-        
+
+        setTimeout(function () {
+            me.showNav = false;
+            me.questionIndex++;
+
+            me.model = me.questions.shift();
+            //me.incrementSize = 1; // przy wiekszych slownikach nie da sie odgadnac slowek. zawsze zabiera po jednym zyciu
+            // me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
+
+            me.startTime = new Date().getTime();
+            me.showQuestion = true;
+            me.answerChecked = false;
+            me.answerValue = '';
+            $('.question').removeClass('wrong correct');
+
+            me.interval = setInterval(() => {
+                me.diffTime = me.liveTime();
+            }, me.updateTimeInterval);
+
+        }, me.animationTime);
     }
 
 
     isNextQuestion() {
         let me = this;
         return me.questions.length > 0;
+    }
+
+    isChecked() {
+        let me = this;
+        return me.answerChecked;
     }
 
     
