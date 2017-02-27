@@ -3,7 +3,7 @@ import {
     DictionaryModel, FlashcardsModel, FlashcardsParameters,
     AnswerUpdateModel, PieChartData, KeysEnum
 } from 'lol/models';
-
+import { trigger, state, style, transition, animate} from '@angular/core';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -21,6 +21,18 @@ let store = require('store2');
         GamesService,
         DictionariesService,
         ChartsService
+    ],
+    animations: [
+        trigger('flipState', [
+        state('active', style({
+            transform: 'rotateY(179.9deg)'
+        })),
+        state('inactive', style({
+            transform: 'rotateY(0)'
+        })),
+        transition('active => inactive', animate('500ms ease-out')),
+        transition('inactive => active', animate('500ms ease-in'))
+        ])  
     ],
     host: {
         '(document:keydown)': 'handleKeyboardEvents($event)'
@@ -45,12 +57,20 @@ export class FlashcardsComponent {
     selDictionaryList: any;
     selectedDictionary: DictionaryModel;
     speechSupport: boolean;
+    showQuestion: boolean;
+    answerChecked: boolean = false;
+    answerValue: string = '';
+    answerClass: string = '';
+    flip: string = 'inactive';
+    frontReversed: string = 'notReversed';
 
     startTime: number = 0;
     endTime: number = 0;
     diffTime: number = 0;
     interval: any = null;
 
+    animationTime: number = 300;
+    updateTimeInterval: number = 1000;
 
     chartColors = PieChartColors;
 
@@ -81,25 +101,20 @@ export class FlashcardsComponent {
         let key = event.which || event.keyCode;
         let index = -1;
 
-        if (key >= KeysEnum.CHAR_A && key <= KeysEnum.CHAR_Z) {
-            index = key - KeysEnum.CHAR_A;
-        } else if (key >= KeysEnum.CHAR_A_SMALL && key <= KeysEnum.CHAR_Z_SMALL) {
-            index = key - KeysEnum.CHAR_A_SMALL;
+        if (key == KeysEnum.ENTER && !me.showNav) {
+            me.confirmAnswer();
         }
 
-        if (index >= 0 && !me.showNav) {
-            index = index + KeysEnum.CHAR_A;
-            var el = $('.availableChars #char-' + key);
-            if (el && !$(el).hasClass('selected')) {
-                $(el).click();
-            }
+        else if(key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
+            me.nextQuestion();
         }
 
-        if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
-            //me.nextQuestion();
+        else if(key == KeysEnum.ENTER && me.showNav && !me.isNextQuestion()) {
+            me.endSession(true);
         }
 
-        if (key == KeysEnum.SPACE && me.showNav) {
+
+        else if (key == KeysEnum.SPACE && me.showNav) {
             me.ttsPlay();
         }
     }
@@ -107,7 +122,7 @@ export class FlashcardsComponent {
     startGame() {
         let me = this;
         me.parameters.userId = me.userId;
-        me.gamesService.initializeGameHangman(me.parameters, me.initializeGame, me);
+        me.gamesService.initializeGameFlashcards(me.parameters, me.initializeGame, me);
     }
 
     loadDictionaries(data: any) {
@@ -115,10 +130,85 @@ export class FlashcardsComponent {
         me.dictionaries = data;
     }
 
+    confirmAnswer(){
+        let me = this;
+        me.answerChecked = true;
+        me.showQuestion = false;
+        me.endTime = new Date().getTime();
+        if (me.interval) {
+            clearInterval(me.interval);
+        }
+        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
+        me.answers.push(new AnswerUpdateModel(
+            me.model.gameSessionId,
+            me.model.translation.id,
+            correct,
+            me.calculateDuration()
+        ));
+        me.showNav = true;
+        //$('.question').addClass(correct ? 'correct' : 'wrong');
+        //$('.question').blur();
+        debugger;
+        me.answerClass = (correct ? 'correct' : 'wrong');
+        me.flip = 'active';
+        me.frontReversed = 'reversed';
+        me.ttsPlay();
+
+
+    }
+
+    initializeGame(data: any) {
+        let me = this;
+        me.questions = data;
+
+        if (me.questions.length > 0) {
+            me.gameSessionId = me.questions[0].gameSessionId;
+            me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
+            me.questions = me.gamesHelper.shuffle(me.questions);
+            me.questionsCount = me.questions.length;
+            me.nextQuestion();
+        } else {
+            me._toast.warning('Wybrany słownik nie zawiera słówek. Wybierz inny słownik.');
+        }
+    }
+
+nextQuestion() {
+        let me = this;
+
+        setTimeout(function () {
+            me.showNav = false;
+            me.questionIndex++;
+
+            me.model = me.questions.shift();
+            //me.incrementSize = 1; // przy wiekszych slownikach nie da sie odgadnac slowek. zawsze zabiera po jednym zyciu
+            // me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
+
+            me.startTime = new Date().getTime();
+            me.flip = 'inactive';
+            me.frontReversed = 'notReversed';
+            me.showQuestion = true;
+            me.answerChecked = false;
+            debugger;
+            me.answerValue = '';
+            //$('.question').removeClass('wrong correct');
+            me.answerClass = '';
+
+            me.interval = setInterval(() => {
+                me.diffTime = me.liveTime();
+            }, me.updateTimeInterval);
+
+        }, me.animationTime);
+    }
+
 
     isNextQuestion() {
         let me = this;
         return me.questions.length > 0;
+    }
+
+    isChecked() {
+        let me = this;
+        return me.answerChecked;
     }
 
     

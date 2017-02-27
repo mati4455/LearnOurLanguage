@@ -39,23 +39,23 @@
             </div>
         </div>
 
-        <div class="animation">
-            <div class="question">
+        <div class="flipper {{answerClass}}" [@flipState]="flip">          
+            <div class="front {{frontReversed}}">
                 <label>{{model.translation.firstLangWord}}</label>
             </div>
 
-            <div class="questionMask">
-                <label *ngFor="let mask of answerMask">{{mask}}</label>
+            <div class="back">
+                <label>{{model.translation.secondLangWord}}</label>
             </div>
 
-            <div class="answer center" *ngIf="showNav">
-                <h2 class="question">{{model.translation.secondLangWord}} - {{model.translation.firstLangWord}}</h2>
-            </div>
+        </div>
 
-            <div class="availableChars {{showNav ? 'disabled' : ''}}" *ngIf="availableCharacters">
-                <label *ngFor="let char of availableCharacters" id="char-{{char.charCodeAt(0)}}" (click)="confirmAnswer(char, $event)">{{char}}</label>
-            </div>
-
+        <div class = "answerInput">
+            <form class="form-group">
+                <label for="answer">Odpowiedź:</label> 
+                <input type="text" [(ngModel)]="answerValue" name="answerButton" id="answerButton" class="form-control" required autofocus>
+                <input type="button" [disabled]="isChecked()" class="btn btn-primary right-margin" value="Sprawdź" id = "answerButton" (click) = 'confirmAnswer()'>
+            </form>
         </div>
 
         <div class="nav" *ngIf="showNav">
@@ -63,8 +63,8 @@
                 <button *ngIf="speechSupport" type="button" tabIndex="-1" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i> przeczytaj</button>
                 <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
             </div>
-            <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">następne pytanie</button>
-            <button type="button" class="btn btn-primary" (click)="endSession(true)">Zakończ sesję</button>
+            <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">Następne pytanie</button>
+            <button typse="button" class="btn btn-primary right-margin" (click)="endSession(true)">Zakończ sesję</button>
         </div>
 
     </div>

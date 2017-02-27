@@ -1,0 +1,78 @@
+@import "common";
+
+/* flip speed goes here */
+.flipper {
+	transition: transform 1s;
+	transform-style: preserve-3d;
+
+	position: relative;
+
+    margin: 30px 80px;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    border: 1px solid #146485;
+    padding: 15px 30px;
+    box-shadow: 0px 0px 10px #146485;
+    background: rgba(255,255,255,.8);
+    border-radius: 10px;
+}
+
+.flipper {   
+    &.correct {
+        border-color: $quiz_correct_background;
+        background: rgba($quiz_correct_background, .2);
+        
+    }
+
+    &.wrong {
+        border-color: $quiz_wrong_background;
+        background: rgba($quiz_wrong_background, .2);
+        
+    }
+}
+
+
+.nav {
+    text-align: right;
+    margin-top: 63px;
+}
+
+
+
+/* hide back of pane during swap */
+.front, .back {
+    
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	//z-index: 2;
+	/* for firefox 31 */
+    &.reversed{
+        transform: rotateY(180deg);
+        transition: transform 500ms;
+    }
+    &.notReversed{
+        transform: rotateY(0deg);
+        transition: transform 500ms;
+    }
+} 
+
+/* back, initially hidden pane */
+.back {
+    backface-visibility: hidden;
+	transform: rotateY(180deg);
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+#answerButton {
+    margin-top: 15px;
+    margin-left: 3px;
+    float: right;
+}
