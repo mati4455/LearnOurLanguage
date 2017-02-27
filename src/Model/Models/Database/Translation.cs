@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Model.Base;
 
@@ -26,12 +27,14 @@ namespace Model.Models.Database
 
         public override bool Equals(object obj)
         {
-            return ((Translation) obj).Id == Id;
+            var tr = (Translation) obj;
+            return tr.FirstLangWord.ToUpper().Equals(FirstLangWord.ToUpper()) &&
+                   tr.SecondLangWord.ToUpper().Equals(SecondLangWord.ToUpper());
         }
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
+            return FirstLangWord.ToUpper().GetHashCode() ^ SecondLangWord.ToUpper().GetHashCode();
         }
     }
 }

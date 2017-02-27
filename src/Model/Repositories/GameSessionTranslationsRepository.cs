@@ -17,5 +17,11 @@ namespace Model.Repositories
             var gst = GetAll().Where(x => x.GameSession.DictionaryId == dictionaryId).ToList();
             Delete(gst);
         }
+
+        public void DeleteByTranslationId(int translationId)
+        {
+            var gst = GetAll().Where(x => x.TranslationId == translationId).ToList();
+            Delete(gst);
+        }
     }
 }

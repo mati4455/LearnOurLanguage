@@ -35,27 +35,32 @@
             </div>
 
             <div *ngIf="translations.length != 0">
-                <label for="translationWords">Słówka:</label>
+                <label>Słówka:</label>
             </div>
 
-            <div *ngFor="let translation of translations; let i = index;" class="form-group">
-                <div class="row top-buffer" id="translationWords">
-                    <div class="col-xs-5">
-                        <input [(ngModel)]="translation.firstLangWord" required name="firstLangWord-{{i}}" min="3" type="text" class="form-control"
-                            id="firstLangWord" [value]="translation.firstLangWord" placeholder="słówko">
-                    </div>
-                    <div class="col-xs-5">
-                        <input [(ngModel)]="translation.secondLangWord" required name="secondLangWord-{{i}}" min="3" type="text" class="form-control"
-                            id="secondLangWord" [value]="translation.secondLangWord" placeholder="tłumaczenie">
-                    </div>
-                    <div class="col-xs-1">
-                        <a type="button" (click)="deleteTranslation(i)" class="btn btn-default">
-                            <i class="glyphicon glyphicon-remove"></i></a>
-                    </div>
+            <div *ngFor="let translation of translations; let i = index;" class="form-group translationWords">
+                <div class="leftWord">
+                    <input [(ngModel)]="translation.firstLangWord" required name="firstLangWord-{{i}}" min="3" type="text" class="form-control"
+                        [value]="translation.firstLangWord" placeholder="słówko">
+                </div>
+                <div class="rightWord">
+                    <input [(ngModel)]="translation.secondLangWord" required name="secondLangWord-{{i}}" min="3" type="text" class="form-control"
+                        [value]="translation.secondLangWord" placeholder="tłumaczenie">
+                </div>
+                <div class="removeWord">
+                    <a type="button" (click)="deleteTranslation(i)" class="btn btn-default">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
                 </div>
             </div>
+
+            <!-- do poprawki -> jakas grupa button albo cos -->
             <div class="right form-group">
                 <a type="button" (click)="addNewTranslation()" class="btn btn-primary">Nowe słówko</a>
+            </div>
+
+            <div class="right form-group" *ngIf="dictionary.parentDictionaryId > 0">
+                <a type="button" (click)="updateFromParentDictionary()" class="btn btn-primary">Aktualizuj (ze słownika publicznego)</a>
             </div>
 
             <div class="right form-group">

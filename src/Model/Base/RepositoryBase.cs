@@ -94,8 +94,13 @@ namespace Model.Base
                 foreach (var id in ids)
                 {
                     var e = new T {Id = id};
-                    Context.Attach(e);
-                    Context.Remove(e);
+                    try {
+                        Context.Attach(e);
+                        Context.Remove(e);
+                    } catch (Exception ex) {
+                        Context.Entry(e).State = EntityState.Deleted;
+                        // Logger.LogError("Obiekt jest już podpięty. Usuniecie przez State na modelu.");
+                    }
                 }
                 return true;
             }
