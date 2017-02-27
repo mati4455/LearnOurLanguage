@@ -101,25 +101,20 @@ export class FlashcardsComponent {
         let key = event.which || event.keyCode;
         let index = -1;
 
-        if (key >= KeysEnum.CHAR_A && key <= KeysEnum.CHAR_Z) {
-            index = key - KeysEnum.CHAR_A;
-        } else if (key >= KeysEnum.CHAR_A_SMALL && key <= KeysEnum.CHAR_Z_SMALL) {
-            index = key - KeysEnum.CHAR_A_SMALL;
+        if (key == KeysEnum.ENTER && !me.showNav) {
+            me.confirmAnswer();
         }
 
-        if (index >= 0 && !me.showNav) {
-            index = index + KeysEnum.CHAR_A;
-            var el = $('.availableChars #char-' + key);
-            if (el && !$(el).hasClass('selected')) {
-                $(el).click();
-            }
-        }
-
-        if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
+        else if(key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
             me.nextQuestion();
         }
 
-        if (key == KeysEnum.SPACE && me.showNav) {
+        else if(key == KeysEnum.ENTER && me.showNav && !me.isNextQuestion()) {
+            me.endSession(true);
+        }
+
+
+        else if (key == KeysEnum.SPACE && me.showNav) {
             me.ttsPlay();
         }
     }

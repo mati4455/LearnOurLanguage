@@ -51,9 +51,11 @@
         </div>
 
         <div class = "answerInput">
-            <label for="answer">Odpowiedź:</label> 
-            <input type="text" [(ngModel)]="answerValue" name="answer" id="answer" required autofocus>
-            <input type="button" [disabled]="isChecked()" class="btn btn-primary pull-right" value="Sprawdź" (click) = 'confirmAnswer()'>
+            <form class="form-group">
+                <label for="answer">Odpowiedź:</label> 
+                <input type="text" [(ngModel)]="answerValue" name="answerButton" id="answerButton" class="form-control" required autofocus>
+                <input type="button" [disabled]="isChecked()" class="btn btn-primary right-margin" value="Sprawdź" id = "answerButton" (click) = 'confirmAnswer()'>
+            </form>
         </div>
 
         <div class="nav" *ngIf="showNav">
@@ -62,7 +64,7 @@
                 <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
             </div>
             <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">Następne pytanie</button>
-            <button typse="button" class="btn btn-primary" (click)="endSession(true)">Zakończ sesję</button>
+            <button typse="button" class="btn btn-primary right-margin" (click)="endSession(true)">Zakończ sesję</button>
         </div>
 
     </div>
