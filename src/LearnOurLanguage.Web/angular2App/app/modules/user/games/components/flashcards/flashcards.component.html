@@ -39,21 +39,21 @@
             </div>
         </div>
 
-        <div class="animation">
-            <div class="question" *ngIf="showQuestion">
+        <div class="flipper {{answerClass}}" [@flipState]="flip">          
+            <div class="front {{frontReversed}}">
                 <label>{{model.translation.firstLangWord}}</label>
             </div>
 
-            <div class="question" *ngIf="showNav">
-                <h2>{{model.translation.secondLangWord}} - {{model.translation.firstLangWord}}</h2>
+            <div class="back">
+                <label>{{model.translation.secondLangWord}}</label>
             </div>
 
         </div>
 
         <div class = "answerInput">
             <label for="answer">Odpowiedź:</label> 
-            <input type="text" [value]="answerValue" name="answer" id="answer" required #answerUserInput>
-            <input type="button" [disabled]="isChecked()" class="btn btn-primary pull-right" value="Sprawdź" (click) = 'confirmAnswer(answerUserInput.value)'>
+            <input type="text" [(ngModel)]="answerValue" name="answer" id="answer" required autofocus>
+            <input type="button" [disabled]="isChecked()" class="btn btn-primary pull-right" value="Sprawdź" (click) = 'confirmAnswer()'>
         </div>
 
         <div class="nav" *ngIf="showNav">

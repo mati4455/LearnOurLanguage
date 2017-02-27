@@ -3,7 +3,7 @@ import {
     DictionaryModel, FlashcardsModel, FlashcardsParameters,
     AnswerUpdateModel, PieChartData, KeysEnum
 } from 'lol/models';
-
+import { trigger, state, style, transition, animate} from '@angular/core';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -21,6 +21,18 @@ let store = require('store2');
         GamesService,
         DictionariesService,
         ChartsService
+    ],
+    animations: [
+        trigger('flipState', [
+        state('active', style({
+            transform: 'rotateY(179.9deg)'
+        })),
+        state('inactive', style({
+            transform: 'rotateY(0)'
+        })),
+        transition('active => inactive', animate('500ms ease-out')),
+        transition('inactive => active', animate('500ms ease-in'))
+        ])  
     ],
     host: {
         '(document:keydown)': 'handleKeyboardEvents($event)'
@@ -48,6 +60,9 @@ export class FlashcardsComponent {
     showQuestion: boolean;
     answerChecked: boolean = false;
     answerValue: string = '';
+    answerClass: string = '';
+    flip: string = 'inactive';
+    frontReversed: string = 'notReversed';
 
     startTime: number = 0;
     endTime: number = 0;
@@ -120,7 +135,7 @@ export class FlashcardsComponent {
         me.dictionaries = data;
     }
 
-    confirmAnswer(answer: string){
+    confirmAnswer(){
         let me = this;
         me.answerChecked = true;
         me.showQuestion = false;
@@ -128,7 +143,7 @@ export class FlashcardsComponent {
         if (me.interval) {
             clearInterval(me.interval);
         }
-        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, answer);
+        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
         me.answers.push(new AnswerUpdateModel(
             me.model.gameSessionId,
             me.model.translation.id,
@@ -136,8 +151,12 @@ export class FlashcardsComponent {
             me.calculateDuration()
         ));
         me.showNav = true;
-        $('.question').addClass(correct ? 'correct' : 'wrong');
-        $('.question').blur();
+        //$('.question').addClass(correct ? 'correct' : 'wrong');
+        //$('.question').blur();
+        debugger;
+        me.answerClass = (correct ? 'correct' : 'wrong');
+        me.flip = 'active';
+        me.frontReversed = 'reversed';
         me.ttsPlay();
 
 
@@ -170,10 +189,14 @@ nextQuestion() {
             // me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
 
             me.startTime = new Date().getTime();
+            me.flip = 'inactive';
+            me.frontReversed = 'notReversed';
             me.showQuestion = true;
             me.answerChecked = false;
+            debugger;
             me.answerValue = '';
-            $('.question').removeClass('wrong correct');
+            //$('.question').removeClass('wrong correct');
+            me.answerClass = '';
 
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
