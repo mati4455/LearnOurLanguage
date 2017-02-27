@@ -2,7 +2,7 @@
     <!-- tutaj będzie lista -->
 
     <tabset [justified]="true">
-        <tab heading="Moje">
+        <tab id="ownDictionaries" class="dictionariesTab" heading="Moje">
             <div class="has-error">
                 <div class="form-group">
                     <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
@@ -32,7 +32,7 @@
             </div>
         </tab>
 
-        <tab heading="Publiczne">
+        <tab id="publicDictionaries" class="dictionariesTab" heading="Publiczne">
             <div class="has-error">
                 <div class="form-group">
                     <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
@@ -49,11 +49,8 @@
             </div>
 
             <div class="buttons row">
-                <div class="col-xs-6">
-                    <a type="button" class="btn btn-default">Przypnij</a>
-                </div>
-                <div class="col-xs-6">
-                    <button [disabled]="dictionaryId==0 || flagEdit" type="button" class="btn btn-default" (click)="copyDictionary()">Kopiuj</button>
+                <div class="col-xs-12">
+                    <button [disabled]="dictionaryId == 0 || flagEdit" type="button" class="btn btn-default" (click)="copyDictionary()">Kopiuj zaznaczony</button>
                 </div>
             </div>
         </tab>

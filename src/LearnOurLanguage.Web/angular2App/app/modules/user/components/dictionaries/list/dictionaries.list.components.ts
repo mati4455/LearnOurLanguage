@@ -4,7 +4,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import './dictionaries.list.scss';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 let store = require('store2');
+let $ = require('jquery');
 
 @Component({
     selector: 'dictionaries-list',
@@ -25,29 +27,36 @@ export class DictionariesListComponent {
     public flagEdit: boolean = true;
     public dictionaryId: number = 0;
 
+    public publicTabActive: boolean = false;
+
     constructor(
         private dictionariesService: DictionariesService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private toast: ToastsManager) {
         let me = this;
     }
 
     ngOnInit() {
         let me = this;
-        let userId = +store('userId');
-
         me.dictionariesService.getAllPublic(me.loadPublicDictionaries, me);
+        me.loadOwnDictionaries();
+    }
 
+    loadOwnDictionaries() {
+        let me = this;
+        let userId = +store('userId');
         if (userId > 0) {
             me.dictionariesService.getForUser(userId, me.loadDictionaries, me);
         }
-
     }
 
     loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
         me.dictionariesBase = data;
+
+        me.setTabAndScroll();
     }
 
     loadPublicDictionaries(data: any) {
@@ -59,7 +68,18 @@ export class DictionariesListComponent {
     deleteDictionary(id: any) {
         let me = this;
         console.log(id[0]);
-        me.dictionariesService.delete(id[0], me.loadDictionaries, me);
+        me.dictionariesService.delete(id[0], me.deleteSuccessfully, me);
+    }
+
+    deleteSuccessfully(data: any) {
+        let me = this;
+        if (data) {
+            me.toast.success('Słownik został usunięty poprawnie');
+            me.router.navigate(['dictionaries']);
+            me.loadOwnDictionaries();
+        } else {
+            me.toast.warning('Wystąpił problem podczas usuwania słownika');
+        }
     }
 
     filterList(event: any) {
@@ -94,9 +114,36 @@ export class DictionariesListComponent {
         me.flagEdit = false;
     }
 
-    copyDictionary(){
+    copyDictionary() {
         let me = this;
         let userId = +store('userId');
-         me.dictionariesService.copyDictionary(userId, me.dictionaryId, me.loadDictionaries, me);
+        me.dictionariesService.copyDictionary(userId, me.dictionaryId, me.finalizeCopy, me);
+    }
+
+    finalizeCopy(data: any) {
+        let me = this;
+
+        if (data > 0) {
+            me.toast.success('Słownik został skopiowany poprawnie');
+            me.router.navigate(['dictionaries', data]);
+            me.loadOwnDictionaries();
+        } else {
+            me.toast.warning('Wystąpił problem podczas kopiowania słownika');
+        }
+    }
+
+    setTabAndScroll() {
+        let me = this;
+
+        // setTimeout(() => {
+        //     var container = $('#ownDictionaries .list, #publicDictionaries .list'),
+        //         scrollTo = $('.dictionariesTab .list a.active');
+        //     if (!container || !scrollTo) return;
+
+        //     container.scrollTop(
+        //         scrollTo.offset().top - container.offset().top + container.scrollTop()
+        //     );
+        // }, 200);
+
     }
 }
