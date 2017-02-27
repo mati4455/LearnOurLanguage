@@ -79,9 +79,10 @@ export class DictionariesAddComponent {
         me.translations.push(new TranslationModel());
     }
 
-    deleteTranslation() {
+    deleteTranslation(id : any) {
         let me = this;
-        me.translations.pop();
+        me.translations.splice(id,1);
+       // me.translations.pop();
     }
 
     updateDictionary() {
