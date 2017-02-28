@@ -27,7 +27,7 @@
     </div>
     <!-- koniec formularza -->
 
-    <!-- główna gra -->
+        <!-- główna gra -->
     <div *ngIf="model && !stats" class="game-area col-xs-12 col-md-8 col-md-push-2">
 
         <div class="row header-info">
@@ -39,11 +39,10 @@
             </div>
         </div>
 
-        <div class="flipper {{answerClass}}" [@flipState]="flip">
+        <div class="flipper {{answerClass}}" [@flipState]="flip">          
             <div class="front">
-                <div class="word"s>{{model.translation.firstLangWord}}</div>
+                <div class="word">{{model.translation.firstLangWord}}</div>
             </div>
-
             <div class="back">
                 <div class="word" *ngIf="isChecked()">{{model.translation.firstLangWord}} - {{model.translation.secondLangWord}}</div>
             </div>
@@ -52,14 +51,14 @@
 
         <div class="answerInput">
             <form class="form-group right">
-                <input type="text" [(ngModel)]="answerValue" placeholder="Twoja odpowiedź" name="answerInput"  class="form-control" required autofocus>
-                <input type="button" [disabled]="isChecked()" class="btn btn-primary" value="Sprawdź" id="answerButton" (click)='confirmAnswer()'>
+                <input type="text" [(ngModel)]="answerValue" name="answerInput" id="answerInput" placeholder="Twoja odpowiedż" class="form-control" required autofocus>
+                <input type="button" [disabled]="isChecked()" class="btn btn-primary" value="Sprawdź" id = "answerButton" (click) = 'confirmAnswer()'>
             </form>
         </div>
 
         <div class="nav" *ngIf="showNav">
             <div class="pull-left left">
-                <button *ngIf="speechSupport" type="button" tabIndex="-1" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i> przeczytaj</button>
+                <button *ngIf="speechSupport" type="button" tabIndex="-1" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i>Przeczytaj</button>
                 <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
             </div>
             <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">Następne pytanie</button>
