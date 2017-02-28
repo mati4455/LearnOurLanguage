@@ -3,7 +3,7 @@ import {
     DictionaryModel, FlashcardsModel, FlashcardsParameters,
     AnswerUpdateModel, PieChartData, KeysEnum
 } from 'lol/models';
-import { trigger, state, style, transition, animate} from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/core';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -24,15 +24,15 @@ let store = require('store2');
     ],
     animations: [
         trigger('flipState', [
-        state('active', style({
-            transform: 'rotateY(179.9deg)'
-        })),
-        state('inactive', style({
-            transform: 'rotateY(0)'
-        })),
-        transition('active => inactive', animate('500ms ease-out')),
-        transition('inactive => active', animate('500ms ease-in'))
-        ])  
+            state('active', style({
+                transform: 'rotateY(179.9deg)'
+            })),
+            state('inactive', style({
+                transform: 'rotateY(0)'
+            })),
+            transition('active => inactive', animate('500ms ease-out')),
+            transition('inactive => active', animate('500ms ease-in'))
+        ])
     ],
     host: {
         '(document:keydown)': 'handleKeyboardEvents($event)'
@@ -57,20 +57,16 @@ export class FlashcardsComponent {
     selDictionaryList: any;
     selectedDictionary: DictionaryModel;
     speechSupport: boolean;
-    showQuestion: boolean;
     answerChecked: boolean = false;
     answerValue: string = '';
     answerClass: string = '';
     flip: string = 'inactive';
-    frontReversed: string = 'notReversed';
 
     startTime: number = 0;
     endTime: number = 0;
     diffTime: number = 0;
-    interval: any = null;
-
-    animationTime: number = 300;
     updateTimeInterval: number = 1000;
+    interval: any = null;
 
     chartColors = PieChartColors;
 
@@ -105,14 +101,13 @@ export class FlashcardsComponent {
             me.confirmAnswer();
         }
 
-        else if(key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
+        else if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
             me.nextQuestion();
         }
 
-        else if(key == KeysEnum.ENTER && me.showNav && !me.isNextQuestion()) {
+        else if (key == KeysEnum.ENTER && me.showNav && !me.isNextQuestion()) {
             me.endSession(true);
         }
-
 
         else if (key == KeysEnum.SPACE && me.showNav) {
             me.ttsPlay();
@@ -130,14 +125,10 @@ export class FlashcardsComponent {
         me.dictionaries = data;
     }
 
-    confirmAnswer(){
+    confirmAnswer() {
         let me = this;
         me.answerChecked = true;
-        me.showQuestion = false;
         me.endTime = new Date().getTime();
-        if (me.interval) {
-            clearInterval(me.interval);
-        }
         let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
         me.answers.push(new AnswerUpdateModel(
             me.model.gameSessionId,
@@ -146,14 +137,9 @@ export class FlashcardsComponent {
             me.calculateDuration()
         ));
         me.showNav = true;
-        //$('.question').addClass(correct ? 'correct' : 'wrong');
-        //$('.question').blur();
-        debugger;
         me.answerClass = (correct ? 'correct' : 'wrong');
         me.flip = 'active';
-        me.frontReversed = 'reversed';
         me.ttsPlay();
-
 
     }
 
@@ -172,32 +158,21 @@ export class FlashcardsComponent {
         }
     }
 
-nextQuestion() {
+    nextQuestion() {
         let me = this;
 
-        setTimeout(function () {
-            me.showNav = false;
-            me.questionIndex++;
+        me.showNav = false;
+        me.questionIndex++;
 
-            me.model = me.questions.shift();
-            //me.incrementSize = 1; // przy wiekszych slownikach nie da sie odgadnac slowek. zawsze zabiera po jednym zyciu
-            // me.incrementSize = me.model.translation.secondLangWord.length > me.wordLengthLimit ? 1 : 2;
-
-            me.startTime = new Date().getTime();
-            me.flip = 'inactive';
-            me.frontReversed = 'notReversed';
-            me.showQuestion = true;
-            me.answerChecked = false;
-            debugger;
-            me.answerValue = '';
-            //$('.question').removeClass('wrong correct');
-            me.answerClass = '';
-
-            me.interval = setInterval(() => {
-                me.diffTime = me.liveTime();
-            }, me.updateTimeInterval);
-
-        }, me.animationTime);
+        me.model = me.questions.shift();
+        me.startTime = new Date().getTime();
+        me.flip = 'inactive';
+        me.answerChecked = false;
+        me.answerValue = '';
+        me.answerClass = '';
+        me.interval = setInterval(() => {
+            me.diffTime = me.liveTime();
+        }, me.updateTimeInterval);
     }
 
 
@@ -211,7 +186,7 @@ nextQuestion() {
         return me.answerChecked;
     }
 
-    
+
     endSession(loadStats: boolean) {
         let me = this;
 
