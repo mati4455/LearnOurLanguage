@@ -11,6 +11,7 @@ import { ChooserComponent } from './components/chooser/chooser.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HangmanComponent } from './components/hangman/hangman.component';
 import { FlashcardsComponent } from './components/flashcards/flashcards.component';
+import { MemoComponent } from './components/memo/memo.component';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { FlashcardsComponent } from './components/flashcards/flashcards.componen
         ChooserComponent,
         QuizComponent,
         HangmanComponent,
-        FlashcardsComponent
+        FlashcardsComponent,
+        MemoComponent
     ],
 
     exports: [
@@ -39,7 +41,8 @@ import { FlashcardsComponent } from './components/flashcards/flashcards.componen
         ChooserComponent,
         QuizComponent,
         HangmanComponent,
-        FlashcardsComponent
+        FlashcardsComponent,
+        MemoComponent
     ]
 
 })

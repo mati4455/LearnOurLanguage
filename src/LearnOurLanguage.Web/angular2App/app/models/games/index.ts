@@ -13,3 +13,6 @@ export { HangmanParameters } from './hangman-parameters.model';
 
 export { FlashcardsModel } from './flashcards.model';
 export { FlashcardsParameters } from './flashcards-parameters.model';
+
+export { MemoModel } from './memo.model';
+export { MemoParameters } from './memo-parameters.model';
