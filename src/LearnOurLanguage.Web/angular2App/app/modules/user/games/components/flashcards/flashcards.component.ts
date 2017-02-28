@@ -65,6 +65,8 @@ export class FlashcardsComponent {
     startTime: number = 0;
     endTime: number = 0;
     diffTime: number = 0;
+    updateTimeInterval: number = 1000;
+    interval: any = null;
 
     chartColors = PieChartColors;
 
@@ -168,6 +170,9 @@ export class FlashcardsComponent {
         me.answerChecked = false;
         me.answerValue = '';
         me.answerClass = '';
+        me.interval = setInterval(() => {
+            me.diffTime = me.liveTime();
+        }, me.updateTimeInterval);
     }
 
 
