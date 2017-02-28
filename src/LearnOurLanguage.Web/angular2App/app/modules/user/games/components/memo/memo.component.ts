@@ -1,6 +1,6 @@
 import './memo.scss';
 import {
-    DictionaryModel, FlashcardsModel, FlashcardsParameters,
+    DictionaryModel, MemoModel, MemoParametersModel, MemoQuestionModel,
     AnswerUpdateModel, PieChartData, KeysEnum
 } from 'lol/models';
 import { trigger, state, style, transition, animate } from '@angular/core';
@@ -41,14 +41,15 @@ let store = require('store2');
 
 export class MemoComponent {
 
-    parameters: FlashcardsParameters = new FlashcardsParameters();
+    parameters: MemoParametersModel = new MemoParametersModel();
     dictionaries: Array<DictionaryModel> = [];
     userId: number;
     gameSessionId: number;
 
-    questions: Array<FlashcardsModel> = [];
+
+    questions: Array<MemoQuestionModel> = [];
     answers: Array<AnswerUpdateModel> = [];
-    model: FlashcardsModel;
+    model: MemoQuestionModel;
     saved: boolean = false;
     stats: PieChartData = null;
     showNav: boolean = false;
@@ -98,7 +99,7 @@ export class MemoComponent {
         let index = -1;
 
         if (key == KeysEnum.ENTER && !me.showNav) {
-            me.confirmAnswer();
+          //  me.confirmAnswer();
         }
 
         else if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
@@ -110,14 +111,14 @@ export class MemoComponent {
         }
 
         else if (key == KeysEnum.SPACE && me.showNav) {
-            me.ttsPlay();
+           // me.ttsPlay();
         }
     }
 
     startGame() {
         let me = this;
         me.parameters.userId = me.userId;
-        me.gamesService.initializeGameFlashcards(me.parameters, me.initializeGame, me);
+        me.gamesService.initializeGameMemo(me.parameters, me.initializeGame, me);
     }
 
     loadDictionaries(data: any) {
@@ -125,7 +126,7 @@ export class MemoComponent {
         me.dictionaries = data;
     }
 
-    confirmAnswer() {
+   /* confirmAnswer() {
         let me = this;
         me.answerChecked = true;
         me.endTime = new Date().getTime();
@@ -141,14 +142,16 @@ export class MemoComponent {
         me.flip = 'active';
         me.ttsPlay();
 
-    }
+    }*/
 
     initializeGame(data: any) {
         let me = this;
-        me.questions = data;
+        me.questions = me.prepareQuestions(data);
 
+
+        console.log(data);
         if (me.questions.length > 0) {
-            me.gameSessionId = me.questions[0].gameSessionId;
+           // me.gameSessionId = me.questions[0].gameSessionId;
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
@@ -156,6 +159,11 @@ export class MemoComponent {
         } else {
             me._toast.warning('Wybrany słownik nie zawiera słówek. Wybierz inny słownik.');
         }
+    }
+
+    prepareQuestions(data: any): Array<MemoQuestionModel> {
+        console.log(data);
+return null;
     }
 
     nextQuestion() {
@@ -221,10 +229,10 @@ export class MemoComponent {
         return me.gamesHelper.calculateDuration(me.startTime, me.endTime);
     }
 
-    ttsPlay() {
+    /*ttsPlay() {
         let me = this;
         me.gamesHelper.ttsPlay(
             me.model.translation.secondLangWord,
             me.selectedDictionary.secondLanguage.code);
-    }
+    }*/
 }
