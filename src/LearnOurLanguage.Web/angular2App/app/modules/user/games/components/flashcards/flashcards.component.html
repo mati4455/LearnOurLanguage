@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="flipper {{answerClass}}" [@flipState]="flip">          
+        <div class="flipper {{answerClass}}" [@flipState]="flip">
             <div class="front">
                 <div class="word">{{model.translation.firstLangWord}}</div>
             </div>
@@ -50,9 +50,13 @@
         </div>
 
         <div class="answerInput">
-            <form class="form-group right">
-                <input type="text" [(ngModel)]="answerValue" name="answerInput" id="answerInput" placeholder="Twoja odpowiedż" class="form-control" required autofocus>
-                <input type="button" [disabled]="isChecked()" class="btn btn-primary" value="Sprawdź" id = "answerButton" (click) = 'confirmAnswer()'>
+            <form class="form-group">
+                <div class="input-group">
+                    <input type="text" [disabled]="isChecked()" [(ngModel)]="answerValue" name="answerInput" id="answerInput" placeholder="Twoja odpowiedż" class="form-control" required autofocus>
+                    <span class="input-group-btn">
+                        <input type="button" [disabled]="isChecked()" class="btn btn-success" value="Sprawdź" id="answerButton" (click)='confirmAnswer()'>
+                    </span>
+                </div>
             </form>
         </div>
 

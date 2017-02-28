@@ -177,9 +177,10 @@ export class QuizComponent {
 
             $('.animation').removeClass('down').addClass('up');
 
+            me.diffTime = me.liveTime();
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
-            }, 100);
+            }, 1000);
 
         }, me.animationTime);
     }

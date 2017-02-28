@@ -49,7 +49,7 @@ export class GamesHelper {
 
     calculateDuration(d1: number, d2: number) {
         let me = this;
-        return Math.round((d2 - d1) / 1000 * 100) / 100;
+        return +Math.round((d2 - d1) / 1000).toFixed(0);
     }
 
     uniqueArray(a: Array<any>, b: any = null, c: any = null): Array<any> { // array, placeholder, placeholder

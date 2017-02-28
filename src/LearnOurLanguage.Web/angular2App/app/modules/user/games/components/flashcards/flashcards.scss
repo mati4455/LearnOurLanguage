@@ -11,8 +11,7 @@
 	transition: transform 1s;
 	transform-style: preserve-3d;
 	position: relative;
-    height: 100px;
-    width: 500px;
+    min-height: 100px;
     margin: 0 auto;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -28,17 +27,17 @@
     border-radius: 10px;
 }
 
-.flipper {   
+.flipper {
     &.correct {
         border-color: $quiz_correct_background;
-        background: rgba($quiz_correct_background, .2);
-        
+        background: rgba($quiz_correct_background, .5);
+
     }
 
     &.wrong {
         border-color: $quiz_wrong_background;
-        background: rgba($quiz_wrong_background, .2);
-        
+        background: rgba($quiz_wrong_background, .5);
+
     }
 }
 
@@ -76,7 +75,6 @@
     margin: 5px;
 }
 
-#answerButton {
-    margin-top: 5px;
-    background: #a94442;
+.answerInput {
+    margin-top: $half_margin;
 }

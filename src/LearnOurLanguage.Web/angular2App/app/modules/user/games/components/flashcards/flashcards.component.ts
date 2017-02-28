@@ -25,7 +25,7 @@ let store = require('store2');
     animations: [
         trigger('flipState', [
             state('active', style({
-                transform: 'rotateY(179.9deg)'
+                transform: 'rotateY(180deg)'
             })),
             state('inactive', style({
                 transform: 'rotateY(0)'
@@ -128,7 +128,12 @@ export class FlashcardsComponent {
     confirmAnswer() {
         let me = this;
         me.answerChecked = true;
+
         me.endTime = new Date().getTime();
+        if (me.interval) {
+            clearInterval(me.interval);
+        }
+
         let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
         me.answers.push(new AnswerUpdateModel(
             me.model.gameSessionId,
@@ -140,7 +145,8 @@ export class FlashcardsComponent {
         me.answerClass = (correct ? 'correct' : 'wrong');
         me.flip = 'active';
         me.ttsPlay();
-
+        $('#answerButton').blur();
+        $('#answerInput').blur();
     }
 
     initializeGame(data: any) {
@@ -170,9 +176,15 @@ export class FlashcardsComponent {
         me.answerChecked = false;
         me.answerValue = '';
         me.answerClass = '';
+
+        me.diffTime = me.liveTime();
         me.interval = setInterval(() => {
             me.diffTime = me.liveTime();
         }, me.updateTimeInterval);
+
+        setTimeout(() => {
+            $('#answerInput').focus();
+        }, 100);
     }
 
 
