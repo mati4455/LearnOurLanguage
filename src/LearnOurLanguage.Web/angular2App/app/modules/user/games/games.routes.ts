@@ -23,7 +23,6 @@ const routes: Routes = [
                 path: 'hangman',
                 component: HangmanComponent
             },
-            ,
             {
                 path: 'memo',
                 component: MemoComponent
