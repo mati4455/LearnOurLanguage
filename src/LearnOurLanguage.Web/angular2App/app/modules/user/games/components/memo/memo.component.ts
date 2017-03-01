@@ -115,17 +115,19 @@ export class MemoComponent {
 
     confirmAnswer(translationId: number, event: any) {
         let me = this;
-        $(event.target).addClass('chosen');
+        $(event.target).parent().addClass('chosen');
         if (me.chosenAnswer > 0) {
             let correct = me.chosenAnswer == translationId;
-            if(correct) {
-                $(me.chosenTarget).addClass('correct');
-                $(event.target).addClass('correct');
+            if (correct) {
+                $(me.chosenTarget).parent().addClass('correct');
+                $(event.target).parent().addClass('correct');
             }
             console.log(correct);
             me.chosenAnswer = 0;
             me.chosenTarget = null;
-            $('.chosen').removeClass('chosen');
+            setTimeout(function () {
+                $('.chosen').removeClass('chosen');
+            }, 1000);
         } else {
             me.chosenAnswer = translationId;
             me.chosenTarget = event.target;
@@ -149,7 +151,7 @@ export class MemoComponent {
         let availableSize = [3, 4, 6, 2, 1];
         let found = false;
         for (let i = 0; i < availableSize.length && !found; i++) {
-            if ( temp % (12/availableSize[i]) ==0 ) {
+            if (temp % (12 / availableSize[i]) == 0) {
                 me.gridSize = availableSize[i];
                 found = true;
             }
