@@ -46,7 +46,6 @@ export class MemoComponent {
     userId: number;
     gameSessionId: number;
 
-    chosenAnswer: number = 0;
     questions: Array<MemoQuestionModel> = [];
     answers: Array<AnswerUpdateModel> = [];
     model: MemoQuestionModel;
@@ -57,11 +56,9 @@ export class MemoComponent {
     questionsCount: number = 0;
     selDictionaryList: any;
     selectedDictionary: DictionaryModel;
-    speechSupport: boolean;
-    answerChecked: boolean = false;
-    answerValue: string = '';
-    answerClass: string = '';
-    flip: string = 'inactive';
+    chosenAnswer: number = 0;
+    chosenTarget: any = null;
+    gridSize: number = 1; //1 2 3 4 6
 
     startTime: number = 0;
     endTime: number = 0;
@@ -83,7 +80,6 @@ export class MemoComponent {
         let me = this;
         me.userId = +store('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
-        me.speechSupport = me.gamesHelper.speechSupport;
     }
 
     ngOnDestroy() {
@@ -119,12 +115,20 @@ export class MemoComponent {
 
     confirmAnswer(translationId: number, event: any) {
         let me = this;
+        $(event.target).addClass('chosen');
         if (me.chosenAnswer > 0) {
             let correct = me.chosenAnswer == translationId;
+            if(correct) {
+                $(me.chosenTarget).addClass('correct');
+                $(event.target).addClass('correct');
+            }
             console.log(correct);
             me.chosenAnswer = 0;
+            me.chosenTarget = null;
+            $('.chosen').removeClass('chosen');
         } else {
             me.chosenAnswer = translationId;
+            me.chosenTarget = event.target;
         }
         /*me.answers.push(new AnswerUpdateModel(
             me.model.gameSessionId,
@@ -139,10 +143,23 @@ export class MemoComponent {
 
     }
 
+    prepareGridSize() {
+        let me = this;
+        let temp = me.questions[0].answers.length;
+        let availableSize = [3, 4, 6, 2, 1];
+        let found = false;
+        for (let i = 0; i < availableSize.length && !found; i++) {
+            if ( temp % (12/availableSize[i]) ==0 ) {
+                me.gridSize = availableSize[i];
+                found = true;
+            }
+        }
+    }
+
     initializeGame(data: any) {
         let me = this;
         me.prepareQuestions(data);
-
+        me.prepareGridSize();
         if (me.questions.length > 0) {
             me.gameSessionId = me.questions[0].gameSessionId;
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
@@ -186,11 +203,6 @@ export class MemoComponent {
     isNextQuestion() {
         let me = this;
         return me.questions.length > 0;
-    }
-
-    isChecked() {
-        let me = this;
-        return me.answerChecked;
     }
 
     endSession(loadStats: boolean) {

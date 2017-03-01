@@ -49,8 +49,10 @@
 
         <div class="animation">
 
-            <div class="answers">
-                <button *ngFor="let ans of model.answers" type="button" class="btn" (click)="confirmAnswer(ans.translationId, $event)">{{ans.word}} </button>
+            <div class="answers row">
+                <div *ngFor="let ans of model.answers" class="col-xs-6 col-md-{{gridSize}}">
+                    <div  class="answerButton" (click)="confirmAnswer(ans.translationId, $event)">{{ans.word}} </div>
+                </div>
             </div>
         </div>
 
