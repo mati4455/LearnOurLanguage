@@ -97,7 +97,7 @@ export class FlashcardsComponent {
         let key = event.which || event.keyCode;
         let index = -1;
 
-        if (key == KeysEnum.ENTER && !me.showNav) {
+        if (key == KeysEnum.ENTER && !me.showNav && me.answerValue.length > 0) {
             me.confirmAnswer();
         }
 
