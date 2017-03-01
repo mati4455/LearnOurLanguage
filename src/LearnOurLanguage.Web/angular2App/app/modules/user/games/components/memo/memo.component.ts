@@ -1,6 +1,6 @@
 import './memo.scss';
 import {
-    DictionaryModel, MemoModel, MemoParametersModel, MemoQuestionModel,
+    DictionaryModel, MemoModel, MemoParametersModel, MemoQuestionModel, MemoVoModel,
     AnswerUpdateModel, PieChartData, KeysEnum
 } from 'lol/models';
 import { trigger, state, style, transition, animate } from '@angular/core';
@@ -99,7 +99,7 @@ export class MemoComponent {
         let index = -1;
 
         if (key == KeysEnum.ENTER && !me.showNav) {
-          //  me.confirmAnswer();
+            //  me.confirmAnswer();
         }
 
         else if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
@@ -111,7 +111,7 @@ export class MemoComponent {
         }
 
         else if (key == KeysEnum.SPACE && me.showNav) {
-           // me.ttsPlay();
+            // me.ttsPlay();
         }
     }
 
@@ -126,32 +126,30 @@ export class MemoComponent {
         me.dictionaries = data;
     }
 
-   /* confirmAnswer() {
-        let me = this;
-        me.answerChecked = true;
-        me.endTime = new Date().getTime();
-        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
-        me.answers.push(new AnswerUpdateModel(
-            me.model.gameSessionId,
-            me.model.translation.id,
-            correct,
-            me.calculateDuration()
-        ));
-        me.showNav = true;
-        me.answerClass = (correct ? 'correct' : 'wrong');
-        me.flip = 'active';
-        me.ttsPlay();
+    /* confirmAnswer() {
+         let me = this;
+         me.answerChecked = true;
+         me.endTime = new Date().getTime();
+         let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
+         me.answers.push(new AnswerUpdateModel(
+             me.model.gameSessionId,
+             me.model.translation.id,
+             correct,
+             me.calculateDuration()
+         ));
+         me.showNav = true;
+         me.answerClass = (correct ? 'correct' : 'wrong');
+         me.flip = 'active';
+         me.ttsPlay();
 
-    }*/
+     }*/
 
     initializeGame(data: any) {
         let me = this;
-        me.questions = me.prepareQuestions(data);
+        me.prepareQuestions(data);
 
-
-        console.log(data);
         if (me.questions.length > 0) {
-           // me.gameSessionId = me.questions[0].gameSessionId;
+            // me.gameSessionId = me.questions[0].gameSessionId;
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
@@ -161,9 +159,19 @@ export class MemoComponent {
         }
     }
 
-    prepareQuestions(data: any): Array<MemoQuestionModel> {
-        console.log(data);
-return null;
+    prepareQuestions(data: any) {
+        let me = this;
+        for (let i = 0; i < data.length; i++) {
+            let question = new MemoQuestionModel();
+            question.gameSessionId = data[i].gameSessionId;
+            for (let j = 0; j < data[i].translations.length; j++) {
+                let translation = data[i].translations[j];
+                question.answers.push(new MemoVoModel(translation.id, translation.firstLangWord));
+                question.answers.push(new MemoVoModel(translation.id, translation.secondLangWord));
+            }
+            me.gamesHelper.shuffle(question.answers);
+            me.questions.push(question);
+        }
     }
 
     nextQuestion() {
