@@ -46,7 +46,7 @@ export class MemoComponent {
     userId: number;
     gameSessionId: number;
 
-
+    chosenAnswer: number = 0;
     questions: Array<MemoQuestionModel> = [];
     answers: Array<AnswerUpdateModel> = [];
     model: MemoQuestionModel;
@@ -98,20 +98,11 @@ export class MemoComponent {
         let key = event.which || event.keyCode;
         let index = -1;
 
-        if (key == KeysEnum.ENTER && !me.showNav) {
-            //  me.confirmAnswer();
-        }
-
-        else if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
+        if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
             me.nextQuestion();
         }
-
         else if (key == KeysEnum.ENTER && me.showNav && !me.isNextQuestion()) {
             me.endSession(true);
-        }
-
-        else if (key == KeysEnum.SPACE && me.showNav) {
-            // me.ttsPlay();
         }
     }
 
@@ -126,30 +117,34 @@ export class MemoComponent {
         me.dictionaries = data;
     }
 
-    /* confirmAnswer() {
-         let me = this;
-         me.answerChecked = true;
-         me.endTime = new Date().getTime();
-         let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
-         me.answers.push(new AnswerUpdateModel(
-             me.model.gameSessionId,
-             me.model.translation.id,
-             correct,
-             me.calculateDuration()
-         ));
-         me.showNav = true;
-         me.answerClass = (correct ? 'correct' : 'wrong');
-         me.flip = 'active';
-         me.ttsPlay();
+    confirmAnswer(translationId: number, event: any) {
+        let me = this;
+        if (me.chosenAnswer > 0) {
+            let correct = me.chosenAnswer == translationId;
+            console.log(correct);
+            me.chosenAnswer = 0;
+        } else {
+            me.chosenAnswer = translationId;
+        }
+        /*me.answers.push(new AnswerUpdateModel(
+            me.model.gameSessionId,
+            me.model.translation.id,
+            correct,
+            me.calculateDuration()
+        ));
+        me.showNav = true;
+        me.answerClass = (correct ? 'correct' : 'wrong');
+        me.flip = 'active';
+        me.ttsPlay();*/
 
-     }*/
+    }
 
     initializeGame(data: any) {
         let me = this;
         me.prepareQuestions(data);
 
         if (me.questions.length > 0) {
-            // me.gameSessionId = me.questions[0].gameSessionId;
+            me.gameSessionId = me.questions[0].gameSessionId;
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
@@ -182,10 +177,6 @@ export class MemoComponent {
 
         me.model = me.questions.shift();
         me.startTime = new Date().getTime();
-        me.flip = 'inactive';
-        me.answerChecked = false;
-        me.answerValue = '';
-        me.answerClass = '';
         me.interval = setInterval(() => {
             me.diffTime = me.liveTime();
         }, me.updateTimeInterval);
@@ -201,7 +192,6 @@ export class MemoComponent {
         let me = this;
         return me.answerChecked;
     }
-
 
     endSession(loadStats: boolean) {
         let me = this;
@@ -236,11 +226,4 @@ export class MemoComponent {
         let me = this;
         return me.gamesHelper.calculateDuration(me.startTime, me.endTime);
     }
-
-    /*ttsPlay() {
-        let me = this;
-        me.gamesHelper.ttsPlay(
-            me.model.translation.secondLangWord,
-            me.selectedDictionary.secondLanguage.code);
-    }*/
 }
