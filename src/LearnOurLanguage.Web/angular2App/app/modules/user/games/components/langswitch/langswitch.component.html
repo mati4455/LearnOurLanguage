@@ -2,7 +2,6 @@
     <label for="langswitch-dictionaryId">Słownik:</label>
     <select name="langswitch-dictionaryId" id="langswitch-dictionaryId" class="form-control" (change)="setNewDictionaryValue($event)"
         [(ngModel)]="dictionary" required>
-            <option disabled value="0">Wybierz słownik</option>
             <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
                 {{dictionary.name}}
             </option>
