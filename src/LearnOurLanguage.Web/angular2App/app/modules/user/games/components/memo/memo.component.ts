@@ -59,6 +59,7 @@ export class MemoComponent {
     chosenAnswer: number = 0;
     chosenTarget: any = null;
     gridSize: number = 1; //1 2 3 4 6
+    correctCount: number = 0;
 
     startTime: number = 0;
     endTime: number = 0;
@@ -114,40 +115,39 @@ export class MemoComponent {
     }
 
     confirmAnswer(translationId: number, event: any) {
-        let me = this;
-        $(event.target).parent().addClass('chosen');
-        if (me.chosenAnswer > 0) {
-            let correct = me.chosenAnswer == translationId;
-            if (correct) {
-                $(me.chosenTarget).parent().addClass('correct');
-                $(event.target).parent().addClass('correct');
-            }
-            console.log(correct);
-            me.chosenAnswer = 0;
-            me.chosenTarget = null;
-            setTimeout(function () {
-                $('.chosen').removeClass('chosen');
-            }, 700);
-        } else {
-            me.chosenAnswer = translationId;
-            me.chosenTarget = event.target;
-        }
-        /*me.answers.push(new AnswerUpdateModel(
-            me.model.gameSessionId,
-            me.model.translation.id,
-            correct,
-            me.calculateDuration()
-        ));
-        me.showNav = true;
-        me.answerClass = (correct ? 'correct' : 'wrong');
-        me.flip = 'active';
-        me.ttsPlay();*/
 
+        let me = this;
+        console.log(me.correctCount);
+        $(event.target).parent().addClass('chosen');
+        setTimeout(function () {
+            if (me.chosenAnswer > 0) {
+
+                let correct = me.chosenAnswer == translationId;
+                if (correct) {
+                    $(me.chosenTarget).parent().addClass('correct');
+                    $(event.target).parent().addClass('correct');
+                    me.correctCount=me.correctCount-2;
+                    console.log(me.correctCount);
+                    if (me.correctCount==0) {
+                        me.showNav = true;
+                        me.correctCount = me.questions[0].answers.length;
+                    }
+                }
+                me.chosenAnswer = 0;
+                me.chosenTarget = null;
+                $('.chosen').removeClass('chosen');
+
+            } else {
+                me.chosenAnswer = translationId;
+                me.chosenTarget = event.target;
+            }
+        }, 700);
     }
 
     prepareGridSize() {
         let me = this;
         let temp = me.questions[0].answers.length;
+        me.correctCount = me.questions[0].answers.length;
         let availableSize = [3, 4, 6, 2, 1];
         let found = false;
         for (let i = 0; i < availableSize.length && !found; i++) {
@@ -190,7 +190,7 @@ export class MemoComponent {
 
     nextQuestion() {
         let me = this;
-
+        me.correctCount = me.questions[0].answers.length;
         me.showNav = false;
         me.questionIndex++;
 
