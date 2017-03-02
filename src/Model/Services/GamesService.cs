@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model.Core;
 using Model.Models;
@@ -37,10 +38,12 @@ namespace Model.Services
             return TranslationsRepository.GetTranslationsForDictionary(dictionaryId).ToList();
         }
 
-
-        public IList<Translation> GetTranslationsById(IEnumerable<int> ids) {
+        public IList<Translation> GetTranslationsById(IEnumerable<int> ids, bool reverse) {
             var idsList = ids.ToList();
-            return TranslationsRepository.GetAll().Where(x => idsList.Contains(x.Id)).ToList();
+            var data = TranslationsRepository.GetAll().Where(x => idsList.Contains(x.Id));
+            return reverse
+                ? ReverseTranslations(data).ToList()
+                : data.ToList();
         }
 
         public IList<QuestionPair> InitializeGame(int dictionaryId, int userId, GamesEnum gameId, int count)
@@ -180,6 +183,16 @@ namespace Model.Services
                 .Take(maxElements)
                 .Select(x => x.TranslationId)
                 .ToList();
+        }
+
+        public IList<Translation> ReverseTranslations(IEnumerable<Translation> translations) {
+            return translations.ToList().Select(x => new Translation {
+                Id = x.Id,
+                DictionaryId = x.DictionaryId,
+                Dictionary = x.Dictionary,
+                FirstLangWord = x.SecondLangWord,
+                SecondLangWord = x.FirstLangWord
+            }).ToList();
         }
     }
 }

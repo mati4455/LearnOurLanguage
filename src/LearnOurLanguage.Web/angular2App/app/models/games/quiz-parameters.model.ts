@@ -5,6 +5,7 @@ export class QuizParameters {
     constructor(
         public userId = 0,
         public dictionaryId = 0,
+        public reverseLangs = false,
         public maxNumberOfAnswers = 5,
         public maxNumberOfQuestions = 5,
         public maxNumberOfRepeats = 3

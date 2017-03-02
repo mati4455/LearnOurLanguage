@@ -42,7 +42,6 @@ let store = require('store2');
 export class FlashcardsComponent {
 
     parameters: FlashcardsParameters = new FlashcardsParameters();
-    dictionaries: Array<DictionaryModel> = [];
     userId: number;
     gameSessionId: number;
 
@@ -81,7 +80,6 @@ export class FlashcardsComponent {
     ngOnInit() {
         let me = this;
         me.userId = +store('userId');
-        me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
     }
 
@@ -120,11 +118,6 @@ export class FlashcardsComponent {
         me.gamesService.initializeGameFlashcards(me.parameters, me.initializeGame, me);
     }
 
-    loadDictionaries(data: any) {
-        let me = this;
-        me.dictionaries = data;
-    }
-
     confirmAnswer() {
         let me = this;
         me.answerChecked = true;
@@ -155,7 +148,6 @@ export class FlashcardsComponent {
 
         if (me.questions.length > 0) {
             me.gameSessionId = me.questions[0].gameSessionId;
-            me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
             me.nextQuestion();
@@ -238,5 +230,10 @@ export class FlashcardsComponent {
         me.gamesHelper.ttsPlay(
             me.model.translation.secondLangWord,
             me.selectedDictionary.secondLanguage.code);
+    }
+
+    dictionaryChange(value: any) {
+        let me = this;
+        me.selectedDictionary = value;
     }
 }
