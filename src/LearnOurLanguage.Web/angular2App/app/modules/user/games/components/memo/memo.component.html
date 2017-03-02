@@ -51,7 +51,7 @@
 
            <div class="answers row">
                 <div *ngFor="let ans of model.answers" class="col-xs-6 col-md-{{gridSize}}">
-                    <div  class="answerButton flipper" (click)="confirmAnswer(ans.translationId, $event)">
+                    <div  class="answerButton" (click)="confirmAnswer(ans.translationId, $event)">
                         <div class="front">    </div>
                         <div class="back"> {{ans.word}} </div>
                     </div>

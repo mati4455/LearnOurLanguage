@@ -127,7 +127,7 @@ export class MemoComponent {
             me.chosenTarget = null;
             setTimeout(function () {
                 $('.chosen').removeClass('chosen');
-            }, 1000);
+            }, 700);
         } else {
             me.chosenAnswer = translationId;
             me.chosenTarget = event.target;

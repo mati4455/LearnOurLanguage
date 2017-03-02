@@ -1,21 +1,29 @@
 @import "common";
 .memo {
     .answerButton {
+        transform-style: preserve-3d;
+        transition: transform 1s;
         transform: rotateY(0deg);
         border: 1px solid #000;
         height: 100px;
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
         visibility: visible;
         position: relative;
+        box-shadow: 0px 0px 10px #146485;
+        background: rgba(255,255,255,.8);
+        border: 1px solid #146485;
         cursor: pointer;
+        border-radius: 10px;
         margin: $margin 0;
-
         &.chosen {
             transform: rotateY(180deg);
             pointer-events: none;
         }
         &.correct {
             pointer-events: none;
-            background: #3d0;
+            background: #ADFF2F;
             transform: rotateY(180deg);
         }
     }
