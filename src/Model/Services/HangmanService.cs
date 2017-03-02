@@ -22,7 +22,7 @@ namespace Model.Services
         {
             var questionsIds = GamesService.InitializeGame(param.DictionaryId, param.UserId, GamesEnum.Hangman, param.MaxNumberOfQuestions);
             var ids = questionsIds.Select(x => x.TranslationId).ToList();
-            var translations = GamesService.GetTranslationsById(ids);
+            var translations = GamesService.GetTranslationsById(ids, param.ReverseLangs);
 
             return GetQuestions(translations, questionsIds);
         }

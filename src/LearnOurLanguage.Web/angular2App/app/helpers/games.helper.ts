@@ -6,7 +6,7 @@ export class GamesHelper {
     public speechSupport = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
     private window = (<any>window);
 
-    public alphabet: Array<string> = [
+    private alphabet: Array<string> = [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
     ];
@@ -20,7 +20,7 @@ export class GamesHelper {
         let voice = new me.window.SpeechSynthesisUtterance();
         voice.text = word;
         voice.lang = lang;
-        voice.rate = 0.8;
+        voice.rate = 0.9;
 
         me.window.speechSynthesis.speak(voice);
     }
@@ -60,5 +60,10 @@ export class GamesHelper {
 
     isLetter(letter: string) {
         return letter.toLowerCase() != letter.toUpperCase();
+    }
+
+    getAlphabet() {
+        let me = this;
+        return [...me.alphabet];
     }
 }

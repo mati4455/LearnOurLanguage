@@ -4,5 +4,6 @@
     {
         public int UserId { get; set; }
         public int DictionaryId { get; set; }
+        public bool ReverseLangs { get; set; }
     }
 }

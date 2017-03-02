@@ -1,0 +1,26 @@
+<div class="form-group">
+    <label for="langswitch-dictionaryId">Słownik:</label>
+    <select name="langswitch-dictionaryId" id="langswitch-dictionaryId" class="form-control" (change)="setNewDictionaryValue($event)"
+        [(ngModel)]="dictionary" required>
+            <option disabled value="0">Wybierz słownik</option>
+            <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+                {{dictionary.name}}
+            </option>
+    </select>
+</div>
+<div class="form-group changer" *ngIf="dictionary > 0">
+    <label for="langswitch-reverse">Kierunek tłumaczenia:</label>
+    <div class="row center">
+        <div class="col-xs-5">
+            <span>{{firstLang}}</span>
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default" (click)="switchLanguages()" id="langswitch-reverse">
+                <i class="fa fa-exchange" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-xs-5">
+            <span>{{secondLang}}</span>
+        </div>
+    </div>
+</div>
