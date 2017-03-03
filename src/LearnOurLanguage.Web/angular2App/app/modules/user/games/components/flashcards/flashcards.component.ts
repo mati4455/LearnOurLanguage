@@ -22,18 +22,6 @@ let store = require('store2');
         DictionariesService,
         ChartsService
     ],
-    animations: [
-        trigger('flipState', [
-            state('active', style({
-                transform: 'rotateY(180deg)'
-            })),
-            state('inactive', style({
-                transform: 'rotateY(0)'
-            })),
-            transition('active => inactive', animate('500ms ease-out')),
-            transition('inactive => active', animate('500ms ease-in'))
-        ])
-    ],
     host: {
         '(document:keydown)': 'handleKeyboardEvents($event)'
     }
@@ -95,7 +83,7 @@ export class FlashcardsComponent {
         let key = event.which || event.keyCode;
         let index = -1;
 
-        if (key == KeysEnum.ENTER && !me.showNav && me.answerValue.length > 0) {
+        if (key == KeysEnum.ENTER && !me.showNav) {
             me.confirmAnswer();
         }
 
@@ -120,6 +108,8 @@ export class FlashcardsComponent {
 
     confirmAnswer() {
         let me = this;
+        if (me.answerValue.length == 0) return;
+
         me.answerChecked = true;
 
         me.endTime = new Date().getTime();

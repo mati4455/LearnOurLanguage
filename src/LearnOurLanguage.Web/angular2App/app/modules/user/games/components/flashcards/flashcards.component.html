@@ -33,28 +33,28 @@
             </div>
         </div>
 
-        <div class="flipper {{answerClass}}" [@flipState]="flip">
+        <div class="flipper {{answerClass}}">
             <div class="front">
                 <div class="word">{{model.translation.firstLangWord}}</div>
             </div>
             <div class="back">
-                <div class="word" *ngIf="isChecked()">{{model.translation.firstLangWord}} - {{model.translation.secondLangWord}}</div>
+                <div class="word">{{model.translation.firstLangWord}} - {{model.translation.secondLangWord}}</div>
             </div>
 
         </div>
 
         <div class="answerInput">
             <form class="form-group">
-                <div class="input-group">
+                <div class="input-group" (ngSubmit)="confirmAnswer()">
                     <input type="text" [disabled]="isChecked()" [(ngModel)]="answerValue" name="answerInput" id="answerInput" placeholder="Twoja odpowiedż" class="form-control" required autofocus>
                     <span class="input-group-btn">
-                        <input type="button" [disabled]="isChecked()" class="btn btn-success" value="Sprawdź" id="answerButton" (click)='confirmAnswer()'>
+                        <input type="submit" [disabled]="isChecked()" class="btn btn-success" value="Sprawdź" id="answerButton">
                     </span>
                 </div>
             </form>
         </div>
 
-        <div class="nav" *ngIf="showNav">
+        <div class="right" *ngIf="showNav">
             <div class="pull-left left">
                 <button *ngIf="speechSupport" type="button" tabIndex="-1" class="btn btn-default" (click)="ttsPlay()"><i class="fa fa-volume-up" aria-hidden="true"></i>Przeczytaj</button>
                 <span *ngIf="!speechSupport">Twoja przeglądarka nie wspiera wymawiania słówek</span>
