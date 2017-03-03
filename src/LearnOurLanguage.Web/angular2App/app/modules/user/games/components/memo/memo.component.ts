@@ -61,6 +61,7 @@ export class MemoComponent {
     gridSize: number = 1; //1 2 3 4 6
     correctCount: number = 0;
     attemptsCount: number = 0;
+    currentSessionTime: number = 0;
 
     startTime: number = 0;
     endTime: number = 0;
@@ -120,7 +121,6 @@ export class MemoComponent {
         let me = this;
         me.attemptsCount++;
         console.log(me.attemptsCount);
-        console.log(me.correctCount);
         $(event.target).parent().addClass('chosen');
 
         if (me.chosenAnswer > 0) {
@@ -130,10 +130,11 @@ export class MemoComponent {
                     $(me.chosenTarget).parent().addClass('correct');
                     $(event.target).parent().addClass('correct');
                 me.correctCount = me.correctCount - 2;
-                console.log(me.correctCount);
                 if (me.correctCount == 0) {
                     me.showNav = true;
+                    me.currentSessionTime += me.calculateDuration();
                     console.log(me.calculateDuration());
+                    console.log(me.currentSessionTime);
                     me.correctCount = me.questions[0].answers.length;
                 }
             }
