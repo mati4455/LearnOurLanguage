@@ -86,7 +86,7 @@ namespace LearnOurLanguage.Web.Controllers.api
                 DataExchangeService.ImportDictionary(stream, dictionaryId);
             }
 
-            Context.Response.Redirect($"/user/dictionaries/{dictionaryId}");
+            Context.Response.Redirect($"/user/dictionaries/own/{dictionaryId}");
         }
     }
 }
