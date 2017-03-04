@@ -46,36 +46,25 @@ namespace Model.Services
                 : data.ToList();
         }
 
-        public IList<QuestionPair> InitializeGame(int dictionaryId, int userId, GamesEnum gameId, int count)
+        public GameSession InitializeBaseGame(int dictionaryId, int userId, GamesEnum gameId)
         {
-            var questions = GetQuestionsIds(dictionaryId, userId, gameId, count).ToList();
-
-            // dodanie nowej sesji gry
             var gameSession = new GameSession
             {
                 DictionaryId = dictionaryId,
                 UserId = userId,
-                GameId = (int) gameId,
+                GameId = (int)gameId,
                 DateStart = DateTime.Now
             };
             GameSessionsRepository.Insert(gameSession);
             GameSessionsRepository.Save();
 
-            // wstawienie wylosowanych pytań
-            //var gst = new List<GameSessionTranslation>();
-            //questions.ForEach(q =>
-            //{
-            //    gst.Add(new GameSessionTranslation
-            //    {
-            //        GameSessionId = gameSession.Id,
-            //        TranslationId = q,
-            //        Correct = false,
-            //        Duration = 0
-            //    });
-            //});
-            //GameSessionTranslationsRepository.Insert(gst);
-            //GameSessionTranslationsRepository.Save();
+            return gameSession;
+        }
 
+        public IList<QuestionPair> InitializeGame(int dictionaryId, int userId, GamesEnum gameId, int count)
+        {
+            var questions = GetQuestionsIds(dictionaryId, userId, gameId, count).ToList();
+            var gameSession = InitializeBaseGame(dictionaryId, userId, gameId);
             var result = questions.Select(x => new QuestionPair
             {
                 GameSessionId = gameSession.Id,
@@ -83,7 +72,7 @@ namespace Model.Services
             })
             .ToList();
 
-            return result; //Mapper.Map<List<QuestionPair>>(questions);
+            return result; 
         }
 
         public bool InsertAnswers(IList<AnswerUpdateModel> answers)
@@ -102,23 +91,6 @@ namespace Model.Services
 
             return GameSessionTranslationsRepository.Insert(gst) &&
                    GameSessionTranslationsRepository.Save();
-
-            // gst.ForEach(x =>
-            // {
-            //     Context.GameSessionTranslations.Attach(x);
-            //     Context.Entry(x).Property(y => y.Correct).IsModified = true;
-            //     Context.Entry(x).Property(y => y.Duration).IsModified = true;
-            // });
-            // try
-            // {
-            //     Context.SaveChanges();
-            //     return true;
-            // }
-            // catch (Exception ex)
-            // {
-            //     Logger.LogError($"[error] GamesServices: {ex.Message}");
-            //     return false;
-            // }
         }
 
         public void FinishGameSession(int gameSessionId)

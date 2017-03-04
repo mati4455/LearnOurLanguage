@@ -4,6 +4,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { ChooserComponent } from './components/chooser/chooser.component';
 import { HangmanComponent } from './components/hangman/hangman.component';
 import { FlashcardsComponent } from './components/flashcards/flashcards.component';
+import { MemoComponent } from './components/memo/memo.component';
 
 const routes: Routes = [
     {
@@ -22,16 +23,15 @@ const routes: Routes = [
                 path: 'hangman',
                 component: HangmanComponent
             },
-            /*,
             {
                 path: 'memo',
-                component:
-            },*/
+                component: MemoComponent
+            },
             {
                 path: 'flashcards',
                 component: FlashcardsComponent
             }
-            
+
         ]
     }
 ];

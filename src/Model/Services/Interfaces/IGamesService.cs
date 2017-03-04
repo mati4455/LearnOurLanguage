@@ -9,6 +9,7 @@ namespace Model.Services.Interfaces
         IList<Translation> GetDictionaryTranslations(int dictionaryId);
         IList<Translation> GetTranslationsById(IEnumerable<int> ids, bool reverse);
         IList<QuestionPair> InitializeGame(int dictionaryId, int userId, GamesEnum gameId, int count);
+        GameSession InitializeBaseGame(int dictionaryId, int userId, GamesEnum gameId);
         bool InsertAnswers(IList<AnswerUpdateModel> answers);
         void FinishGameSession(int gameSessionId);
         IList<Translation> ReverseTranslations(IEnumerable<Translation> translations);

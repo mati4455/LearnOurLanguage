@@ -11,8 +11,7 @@ import { ChooserComponent } from './components/chooser/chooser.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HangmanComponent } from './components/hangman/hangman.component';
 import { FlashcardsComponent } from './components/flashcards/flashcards.component';
-import { LangSwitchComponent } from './components/langswitch/langswitch.component';
-
+import { LangSwitchComponent } from './components/langswitch/langswitch.component';import { MemoComponent } from './components/memo/memo.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -33,7 +32,8 @@ import { LangSwitchComponent } from './components/langswitch/langswitch.componen
         LangSwitchComponent,
         QuizComponent,
         HangmanComponent,
-        FlashcardsComponent
+        FlashcardsComponent,
+        MemoComponent
     ],
 
     exports: [
@@ -42,7 +42,8 @@ import { LangSwitchComponent } from './components/langswitch/langswitch.componen
         LangSwitchComponent,
         QuizComponent,
         HangmanComponent,
-        FlashcardsComponent
+        FlashcardsComponent,
+        MemoComponent
     ]
 
 })

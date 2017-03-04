@@ -53,6 +53,9 @@ export class GamesHelper {
     }
 
     uniqueArray(a: Array<any>, b: any = null, c: any = null): Array<any> { // array, placeholder, placeholder
+        if (a.length == 0) {
+            return [];
+        }
         b = a.length;
         while (c = --b) while (c--) a[b] !== a[c] || a.splice(c, 1);
         return a;
