@@ -7,7 +7,7 @@ export class DictionaryVoModel {
         public id = 0,
         public name = '',
         public description = '',
-        public Public = false,
+        public isPublic = false,
         public date: Date = null,
         public userId = 0,
         public firstLanguageId: number = null,

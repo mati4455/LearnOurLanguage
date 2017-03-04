@@ -82,7 +82,6 @@ export class DictionariesAddComponent {
     deleteTranslation(id: any) {
         let me = this;
         me.translations.splice(id, 1);
-        // me.translations.pop();
     }
 
     updateDictionary() {
@@ -90,11 +89,11 @@ export class DictionariesAddComponent {
         me.dictionaryVo.userId = me.userId;
         me.dictionaryVo.id = me.dictionary.id;
         me.dictionaryVo.name = me.dictionary.name;
+        me.dictionaryVo.isPublic = me.dictionary.isPublic;
         me.dictionaryVo.description = me.dictionary.description;
         me.dictionaryVo.translationList = me.translations;
         me.dictionaryVo.firstLanguageId = me.dictionary.firstLanguage.id;
         me.dictionaryVo.secondLanguageId = me.dictionary.secondLanguage.id;
-
         me.dictionariesService.post(me.dictionaryVo, me.savedDictionary, me);
     }
 
