@@ -3,7 +3,7 @@ $widthOffset: ($margin + 40) / 2;
 
 .translationWords {
 
-    &::nth-last-child() {
+    &:last-child {
         margin-bottom: $margin;
     }
 

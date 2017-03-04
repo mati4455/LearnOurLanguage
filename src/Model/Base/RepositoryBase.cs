@@ -125,8 +125,14 @@ namespace Model.Base
         {
             try
             {
-                foreach (var entity in entities)
+                foreach (var entity in entities) {
+                    try {
+                        Context.Attach(entity);
+                    } catch(Exception) {
+                        // jest już podpięty więc idziemy dalej
+                    }
                     Context.Entry(entity).State = EntityState.Modified;
+                }
                 return true;
             }
             catch (Exception ex)
