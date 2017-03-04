@@ -13,43 +13,90 @@
         <div class="col-xs-12 center">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 box"><div class="inner">
-                        <h2>Czym jest LoL?</h2>
-                    </div></div>
-                    <div class="col-xs-12 col-md-6 box"><div class="inner">
-                        <h2>Dlaczego warto?</h2>
-                    </div></div>
+                    <div class="col-xs-12 box">
+                        <div class="inner">
+                            <carousel>
+                                <slide>
+                                    <img src="/assets/flashcards_full.gif" alt="First slide">
+                                    <div class="carousel-caption">
+                                        <h3>Fiszki</h3>
+                                        <p>Wpisuj słówka, aby sprawdzić jak dobrze znasz pisownię!</p>
+                                    </div>
+                                </slide>
+                                <slide>
+                                    <img src="/assets/hangman_full.gif" alt="Second slide">
+                                    <div class="carousel-caption">
+                                        <h3>Wisielec</h3>
+                                        <p>Zgaduj literki ulubionych wyrazów, uważaj żebyś nie zawisnął!</p>
+                                    </div>
+                                </slide>
+                                <slide>
+                                    <img src="/assets/memo_full.gif" alt="Third slide">
+                                    <div class="carousel-caption">
+                                        <h3>Memo</h3>
+                                        <p>Znajduj pary i ucz się przez zabawę!</p>
+                                    </div>
+                                </slide>
+                                <slide>
+                                    <img src="/assets/quiz_full.gif" alt="Forth slide">
+                                    <div class="carousel-caption">
+                                        <h3>Quiz</h3>
+                                        <p>Sprawdź się na ile znasz swoje słownictwo!</p>
+                                    </div>
+                                </slide>
+                            </carousel>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12 box"><div class="inner">
-                        <h2>Dołącz do nas już teraz</h2>
-                        <div class="row nav-action">
-                            <div class="col-xs-12 col-sm-6">
-                                <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-success" routerLink="/auth/login">Zaloguj się</a></div>
-                                <div *ngIf="auth.getLoggedIn()"><a class="btn btn-success" routerLink="/user">Moje konto</a></div>                            
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/register">Załóż konto</a></div>
-                                <div *ngIf="auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/logout">Wyloguj</a></div>
-                            </div>
-                        </div>                  
+                    <div class="col-xs-12 col-md-6 box">
+                        <div class="inner">
+                            <h2>Czym jest LoL?</h2>
+                        </div>
                     </div>
-                </div></div>
-                
+                    <div class="col-xs-12 col-md-6 box">
+                        <div class="inner">
+                            <h2>Dlaczego warto?</h2>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 box"><div class="inner">
-                        <h2>Nasz zespół</h2>
-                        <ul class="left">
-                            <li>Anna Hnatkowska</li>
-                            <li>Mateusz Łopusiński</li>
-                            <li>Mateusz Pacholec</li>
-                            <li>Dawid Piechaczek</li>
-                        </ul>
-                    </div></div>
-                    <div class="col-xs-12 col-md-6 box"><div class="inner">
-                        <h2>Kontakt</h2>
-                    </div></div>
+                    <div class="col-xs-12 box">
+                        <div class="inner">
+                            <h2>Dołącz do nas już teraz</h2>
+                            <div class="row nav-action">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-success" routerLink="/auth/login">Zaloguj się</a></div>
+                                    <div *ngIf="auth.getLoggedIn()"><a class="btn btn-success" routerLink="/user">Moje konto</a></div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/register">Załóż konto</a></div>
+                                    <div *ngIf="auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/logout">Wyloguj</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 box">
+                        <div class="inner">
+                            <h2>Nasz zespół</h2>
+                            <ul class="left">
+                                <li>Anna Hnatkowska</li>
+                                <li>Mateusz Łopusiński</li>
+                                <li>Mateusz Pacholec</li>
+                                <li>Dawid Piechaczek</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 box">
+                        <div class="inner">
+                            <h2>Kontakt</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
