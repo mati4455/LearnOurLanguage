@@ -37,7 +37,7 @@ namespace Model.Repositories
             return GetAll()
                 .Include(x => x.FirstLanguage)
                 .Include(x => x.SecondLanguage)
-                .Where(x => x.Public)
+                .Where(x => x.IsPublic)
                 .ToList();
         }
     }

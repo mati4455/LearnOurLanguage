@@ -35,7 +35,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         public ActionResult Get(int id)
         {
             var dictionary = DictionariesRepository.GetById(id);
-            if (dictionary.Public)
+            if (dictionary.IsPublic)
             {
                 AccessGuardian(Roles.AccessUser);
             }
