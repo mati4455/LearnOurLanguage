@@ -60,6 +60,7 @@ export class MemoComponent {
     interval: any = null;
 
     chartColors = PieChartColors;
+    animationTime: number = 300;
 
     constructor(
         private gamesHelper: GamesHelper,
@@ -107,17 +108,23 @@ export class MemoComponent {
     }
 
     confirmAnswer(translationId: number, event: any) {
-
         let me = this;
+        if (me.attemptsCount == 2) return;
+
         me.attemptsCount++;
         $(event.target).parent('.answerButton').addClass('chosen');
 
         if (me.chosenAnswer > 0) {
 
             let correct = me.chosenAnswer == translationId;
+            let temp = me.chosenTarget;
+
             if (correct) {
-                $(me.chosenTarget).parent('.answerButton').addClass('correct');
-                $(event.target).parent('.answerButton').addClass('correct');
+                setTimeout(() => {
+                    $(temp).parent('.answerButton').addClass('correct');
+                    $(event.target).parent('.answerButton').addClass('correct');
+                }, 400);
+
                 me.correctIds.push(me.chosenAnswer);
                 me.correctCount = me.correctCount - 2;
                 if (me.correctCount == 0) {
@@ -126,12 +133,19 @@ export class MemoComponent {
                     clearInterval(me.interval);
                     me.generateAnswers();
                 }
+            } else {
+                setTimeout(() => {
+                    $(temp).parent('.answerButton').addClass('wrong');
+                    $(event.target).parent('.answerButton').addClass('wrong');
+                }, 400);
             }
             me.chosenAnswer = 0;
             me.chosenTarget = null;
             setTimeout(function () {
                 $('.chosen').removeClass('chosen');
-            }, 700);
+                $('.wrong').removeClass('wrong');
+                me.attemptsCount = 0;
+            }, 800);
         } else {
             me.chosenAnswer = translationId;
             me.chosenTarget = event.target;
@@ -187,22 +201,31 @@ export class MemoComponent {
 
     nextQuestion() {
         let me = this;
-        me.correctIds = new Array<number>();
-        me.wrongIds = new Array<number>();
-        me.correctCount = me.questions[0].answers.length;
-        me.showNav = false;
-        me.questionIndex++;
-        me.model = me.questions.shift();
-        me.elapsedSeconds = me.model.answers.length * 1;
-        me.startTime = me.elapsedSeconds;
-        me.interval = setInterval(() => {
-            me.elapsedSeconds--;
-            if (me.elapsedSeconds <= 0) {
-                clearInterval(me.interval);
-                me.generateAnswers();
-                me.showNav = true;
-            }
-        }, me.updateTimeInterval);
+
+        $('.animation').removeClass('up').addClass('down');
+
+        setTimeout(function () {
+
+            me.correctIds = new Array<number>();
+            me.wrongIds = new Array<number>();
+            me.correctCount = me.questions[0].answers.length;
+            me.showNav = false;
+            me.questionIndex++;
+            me.model = me.questions.shift();
+            me.elapsedSeconds = me.model.answers.length * 3;
+            me.startTime = me.elapsedSeconds;
+            me.interval = setInterval(() => {
+                me.elapsedSeconds--;
+                if (me.elapsedSeconds <= 0) {
+                    clearInterval(me.interval);
+                    me.generateAnswers();
+                    me.showNav = true;
+                }
+            }, me.updateTimeInterval);
+
+             $('.animation').removeClass('down').addClass('up');
+
+        }, me.animationTime);
     }
 
 
@@ -235,7 +258,7 @@ export class MemoComponent {
 
     generateAnswers() {
         let me = this;
-        if (!me.model.answers) {
+        if (!me.model || !me.model.answers) {
             return;
         }
         for (let i = 0; i < me.model.answers.length; i++) {

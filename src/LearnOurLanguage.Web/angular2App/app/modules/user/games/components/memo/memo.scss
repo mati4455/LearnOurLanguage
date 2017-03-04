@@ -1,43 +1,4 @@
 @import "common";
-// .memo {
-//     .answerButton {
-//         transform-style: preserve-3d;
-//         transition: transform 0.6s;
-//         letter-spacing: 2px;
-//         transform: rotateY(0deg);
-//         border: 1px solid #000;
-//         height: 100px;
-//         font-size: 15px;
-//         font-weight: 700;
-//         text-align: center;
-//         visibility: visible;
-//         position: relative;
-//         box-shadow: 0px 0px 10px #146485;
-//         background: rgba(255,255,255,.8);
-//         border: 1px solid #146485;
-//         cursor: pointer;
-//         border-radius: 10px;
-//         margin: $half_margin 0;
-
-//         &.correct {
-//             background: $quiz_correct_background;
-//         }
-
-//         &.wrong {
-//             background: $quiz_wrong_background;
-//         }
-
-//         &.chosen, &.correct, &.wrong {
-//             pointer-events: none;
-//             transform: rotateY(180deg);
-//         }
-
-//         &.correct, &.wrong {
-//             color: #fff;
-//             text-shadow: 0 0 2px $shadow;
-//         }
-//     }
-// }
 
 .memo {
     .game-area {
@@ -74,13 +35,13 @@
 
         &.correct {
             border-color: $quiz_correct_background;
-            background: rgba($quiz_correct_background, .5);
+            background: rgba($quiz_correct_background, .7);
 
         }
 
         &.wrong {
             border-color: $quiz_wrong_background;
-            background: rgba($quiz_wrong_background, .5);
+            background: rgba($quiz_wrong_background, .7);
         }
 
         .front, .back {
@@ -114,7 +75,7 @@
         .front { display: flex; }
         .back { display: none; }
 
-        &.correct, &.wrong {
+        &.correct, &.wrong, &.chosen {
             .front { display: none; }
             .back { display: flex; }
         }
@@ -126,6 +87,11 @@
         &.chosen, &.correct, &.wrong {
             pointer-events: none;
         }
+
+         &.correct, &.wrong {
+             color: #fff;
+             text-shadow: 0 0 8px $shadow;
+         }
     }
 
 
