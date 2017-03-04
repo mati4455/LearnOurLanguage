@@ -52,7 +52,7 @@ export class DashboardComponent {
 
     loadDailyStatistics(data: any) {
         let me = this;
-        me.dailyStatistics = data;
+        me.dailyStatistics = new DailyStatistics(data.gamesCount, data.answersRate, data.averageTime, data.totalTime);
     }
 
     initLastSessionChart() {
