@@ -20,12 +20,12 @@
             </div>
             <div class="form-group">
                 <label for="maxNumberOfQuestions">Maksymalna liczba pytań na planszy:</label>
-                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3" type="number" class="form-control"
+                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="1" type="number" class="form-control"
                     id="maxNumberOfQuestions" placeholder="liczba pytań">
             </div>
             <div class="form-group">
                 <label for="numberOfGames">Liczba gier:</label>
-                <input [(ngModel)]="parameters.numberOfGames" required name="numberOfGames" min="3" type="number" class="form-control" id="numberOfGames"
+                <input [(ngModel)]="parameters.numberOfGames" required name="numberOfGames" min="1" type="number" class="form-control" id="numberOfGames"
                     placeholder="liczba odpowiedzi">
             </div>
             <div class="right">
@@ -40,7 +40,7 @@
 
         <div class="row header-info">
             <div class="col-xs-6 left">
-                <div class="timer">Czas: {{diffTime}}s</div>
+                <div class="timer">Pozostały czas: {{elapsedSeconds}}s</div>
             </div>
             <div class="col-xs-6 right">
                 <div class="counter">Pytanie {{questionIndex}} z {{questionsCount}}</div>
@@ -49,10 +49,10 @@
 
         <div class="animation">
 
-           <div class="answers row">
+            <div class="answers row">
                 <div *ngFor="let ans of model.answers" class="col-xs-6 col-md-{{gridSize}}">
-                    <div  class="answerButton" (click)="confirmAnswer(ans.translationId, $event)">
-                        <div class="front">    </div>
+                    <div class="answerButton trans-{{ans.translationId}}" (click)="confirmAnswer(ans.translationId, $event)">
+                        <div class="front"> </div>
                         <div class="back"> {{ans.word}} </div>
                     </div>
                 </div>

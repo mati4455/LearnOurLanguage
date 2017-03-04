@@ -38,7 +38,7 @@ namespace Model.Services
             {
                 result.Add(new MemoModel
                 {
-                    GameSessionId = gameSession.GameId,
+                    GameSessionId = gameSession.Id,
                     Translations = translations.OrderBy(translation => Guid.NewGuid()).Take(min).ToList()
                 });
             }

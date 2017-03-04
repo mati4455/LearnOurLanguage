@@ -62,10 +62,12 @@ export class MemoComponent {
     correctCount: number = 0;
     attemptsCount: number = 0;
     currentSessionTime: number = 0;
+    numberOfAsnwers: number = 0;
+    correctIds: Array<number> = [];
+    wrongIds: Array<number> = [];
 
     startTime: number = 0;
-    endTime: number = 0;
-    diffTime: number = 0;
+    elapsedSeconds: number = 0;
     updateTimeInterval: number = 1000;
     interval: any = null;
 
@@ -120,22 +122,21 @@ export class MemoComponent {
 
         let me = this;
         me.attemptsCount++;
-        console.log(me.attemptsCount);
         $(event.target).parent().addClass('chosen');
 
         if (me.chosenAnswer > 0) {
 
             let correct = me.chosenAnswer == translationId;
             if (correct) {
-                    $(me.chosenTarget).parent().addClass('correct');
-                    $(event.target).parent().addClass('correct');
+                $(me.chosenTarget).parent().addClass('correct');
+                $(event.target).parent().addClass('correct');
+                me.correctIds.push(me.chosenAnswer);
                 me.correctCount = me.correctCount - 2;
                 if (me.correctCount == 0) {
                     me.showNav = true;
-                    me.currentSessionTime += me.calculateDuration();
-                    console.log(me.calculateDuration());
-                    console.log(me.currentSessionTime);
-                    me.correctCount = me.questions[0].answers.length;
+                    me.correctCount = me.numberOfAsnwers;
+                    clearInterval(me.interval);
+                    me.generateAnswers();
                 }
             }
             me.chosenAnswer = 0;
@@ -166,6 +167,7 @@ export class MemoComponent {
 
     initializeGame(data: any) {
         let me = this;
+        me.answers = new Array<AnswerUpdateModel>();
         me.prepareQuestions(data);
         me.prepareGridSize();
         if (me.questions.length > 0) {
@@ -192,18 +194,26 @@ export class MemoComponent {
             me.gamesHelper.shuffle(question.answers);
             me.questions.push(question);
         }
+        me.numberOfAsnwers = me.questions[0].answers.length;
     }
 
     nextQuestion() {
         let me = this;
+        me.correctIds = new Array<number>();
+        me.wrongIds = new Array<number>();
         me.correctCount = me.questions[0].answers.length;
         me.showNav = false;
         me.questionIndex++;
-
         me.model = me.questions.shift();
-        me.startTime = new Date().getTime();
+        me.elapsedSeconds = me.model.answers.length * 1;
+        me.startTime = me.elapsedSeconds;
         me.interval = setInterval(() => {
-            me.diffTime = me.liveTime();
+            me.elapsedSeconds--;
+            if (me.elapsedSeconds <= 0) {
+                clearInterval(me.interval);
+                me.generateAnswers();
+                me.showNav = true;
+            }
         }, me.updateTimeInterval);
     }
 
@@ -215,7 +225,6 @@ export class MemoComponent {
 
     endSession(loadStats: boolean) {
         let me = this;
-
         me.gamesService.finishGameSession(me.gameSessionId, () => { }, me);
         me.gamesService.insertAnswers(me.answers, me.getStatistics, me);
     }
@@ -236,14 +245,26 @@ export class MemoComponent {
         me.stats = data;
     }
 
-    liveTime() {
+    generateAnswers() {
         let me = this;
-        me.endTime = new Date().getTime();
-        return me.calculateDuration();
+        if (!me.model.answers) {
+            return;
+        }
+        for (let i = 0; i < me.model.answers.length; i++) {
+            if (!me.correctIds.find((item) => item == me.model.answers[i].translationId)) {
+                me.wrongIds.push(me.model.answers[i].translationId);
+            }
+        }
+        me.wrongIds = me.gamesHelper.uniqueArray(me.wrongIds);
+        me.correctIds = me.gamesHelper.uniqueArray(me.correctIds);
+        let avg = (me.startTime - me.elapsedSeconds) / (me.model.answers.length / 2);
+        for (let i = 0; i < me.correctIds.length; i++) {
+            me.answers.push(new AnswerUpdateModel(me.gameSessionId, me.correctIds[i], true, avg));
+        }
+        for (let i = 0; i < me.wrongIds.length; i++) {
+            me.answers.push(new AnswerUpdateModel(me.gameSessionId, me.wrongIds[i], false, avg));
+            $('.trans-' + me.wrongIds[i]).addClass('wrong');
+        }
     }
 
-    calculateDuration() {
-        let me = this;
-        return me.gamesHelper.calculateDuration(me.startTime, me.endTime);
-    }
 }
