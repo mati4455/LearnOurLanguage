@@ -116,7 +116,7 @@ namespace Model.Services
             dictionary.ParentDictionaryId = dictionaryId;
             dictionary.User = null;
             dictionary.Date = new DateTime();
-            dictionary.Public = false;
+            dictionary.IsPublic = false;
             DictionariesRepository.Insert(dictionary);
             DictionariesRepository.Save();
 

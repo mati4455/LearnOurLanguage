@@ -37,7 +37,7 @@ namespace LearnOurLanguage.Web.Controllers.api
         public FileResult Export(int dictionaryId)
         {
             var dictionary = DictionariesRepository.GetById(dictionaryId);
-            if (dictionary.Public)
+            if (dictionary.IsPublic)
             {
                 AccessGuardian(Roles.AccessUser);
             }
