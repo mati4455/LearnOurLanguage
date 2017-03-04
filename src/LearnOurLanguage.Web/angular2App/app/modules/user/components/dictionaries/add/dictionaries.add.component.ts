@@ -101,7 +101,8 @@ export class DictionariesAddComponent {
         let me = this;
         if (data > 0) {
             me.toast.success('Operacja przebiegła pomyślnie.');
-            me.router.navigate(['dictionaries', 'own', data]);
+            me.router.navigate(['dictionaries']); // przeladowanie listy slownikow
+            setTimeout(() => me.router.navigate(['/user', 'dictionaries', 'own', data]), 100);
         } else {
             me.toast.warning('Wystąpił błąd podczas zapisywania słownika.');
         }
@@ -117,7 +118,7 @@ export class DictionariesAddComponent {
         let me = this;
         if (data) {
             me.toast.success("Słownik został zaktuałizownay");
-            me.router.navigate(['dictionaries', 'own', me.dictionary.id]);
+            me.router.navigate(['/user', 'dictionaries', 'own', me.dictionary.id]);
         } else {
             me.toast.warning('Wystąpił błąd podczas aktualizowania słownika.');
         }

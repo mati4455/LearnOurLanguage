@@ -5,7 +5,7 @@
         <tab id="ownDictionaries" class="dictionariesTab" heading="Moje" [active]="currTab == 'own'" (select)="selectTab('own')">
             <div class="has-error">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="queryString" placeholder="Szukaj..." name="queryString" [(value)]="queryString"
+                    <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
                         (keyup)="filterList($event)">
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <tab id="publicDictionaries" class="dictionariesTab" heading="Publiczne" [active]="currTab == 'public'" (select)="selectTab('public')">
             <div class="has-error">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="queryString" placeholder="Szukaj..." name="queryString" [(value)]="queryString"
+                    <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
                         (keyup)="filterListPublic($event)">
                 </div>
             </div>

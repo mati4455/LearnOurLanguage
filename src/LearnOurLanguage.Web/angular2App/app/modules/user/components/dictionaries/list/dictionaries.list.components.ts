@@ -36,7 +36,7 @@ export class DictionariesListComponent {
 
     ngOnInit() {
         let me = this;
-        me.dictionariesService.getAllPublic(me.loadPublicDictionaries, me);
+        me.loadPublicDictionaries();
         me.loadOwnDictionaries();
         me.currTab = me.route.snapshot.params['type'];
     }
@@ -57,7 +57,12 @@ export class DictionariesListComponent {
         me.setTabAndScroll();
     }
 
-    loadPublicDictionaries(data: any) {
+    loadPublicDictionaries() {
+        let me = this;
+        me.dictionariesService.getAllPublic(me.loadedPublicDictionaries, me);
+    }
+
+    loadedPublicDictionaries(data: any) {
         let me = this;
         me.dictionariesPublic = data;
         me.dictionariesPublicBase = data;
@@ -67,6 +72,12 @@ export class DictionariesListComponent {
         let me = this;
         if (me.route.snapshot.params['type'] != tab) {
             me.router.navigate(['/user/dictionaries/', tab == 'public' ? 'public' : 'own']);
+
+            if (tab == 'public') {
+                me.loadPublicDictionaries();
+            } else {
+                me.loadOwnDictionaries();
+            }
         }
     }
 
@@ -92,11 +103,10 @@ export class DictionariesListComponent {
     setTabAndScroll() {
         let me = this;
         let id = me.currTab == 'own' ? '#ownDictionaries' : '#publicDictionaries';
-
         setTimeout(() => {
             var container = $(id + ' .list'),
                 scrollTo = $(id + ' .list a.active');
-            if (!container || !scrollTo) return;
+            if (!container || !scrollTo || !scrollTo.offset()) return;
 
             container.scrollTop(
                 scrollTo.offset().top - container.offset().top + container.scrollTop() - 15

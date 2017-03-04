@@ -93,7 +93,7 @@ export class DictionariesFormComponent {
         let me = this;
         if (data) {
             me.toast.success('Słownik został usunięty poprawnie');
-            me.router.navigate(['dictionaries', 'own']);
+            me.router.navigate(['/user/dictionaries/own']);
         } else {
             me.toast.warning('Wystąpił problem podczas usuwania słownika');
         }
