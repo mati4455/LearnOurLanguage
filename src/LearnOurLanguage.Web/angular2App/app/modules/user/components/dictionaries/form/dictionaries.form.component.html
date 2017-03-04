@@ -1,8 +1,8 @@
 <h2 class="section-title">{{dictionary.name}}</h2>
 
 <ul class="nav nav-justified nav-dictionary" *ngIf="ownDictionary">
-    <li><button type="button" class="btn btn-default" [routerLink]="['form']">Edytuj</button></li>
-    <li><button type="button" class="btn btn-default" (click)="deleteDictionary()">Usuń</button></li>
+    <li><label class="btn btn-default" [routerLink]="['form']">Edytuj</label></li>
+    <li><label class="btn btn-default" (click)="deleteDictionary()">Usuń</label></li>
     <li><div id="uploadSpace">
         <form action="/api/DataExchange/Import/{{dictionary.id}}" method="post" enctype="multipart/form-data">
             <div>
