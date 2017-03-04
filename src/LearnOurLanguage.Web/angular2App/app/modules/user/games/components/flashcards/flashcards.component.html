@@ -44,11 +44,11 @@
         </div>
 
         <div class="answerInput">
-            <form class="form-group">
-                <div class="input-group" (ngSubmit)="confirmAnswer()">
+            <form class="form-group" (ngSubmit)="confirmAnswer()">
+                <div class="input-group">
                     <input type="text" [disabled]="isChecked()" [(ngModel)]="answerValue" name="answerInput" id="answerInput" placeholder="Twoja odpowiedż" class="form-control" required autofocus>
                     <span class="input-group-btn">
-                        <input type="submit" [disabled]="isChecked()" class="btn btn-success" value="Sprawdź" id="answerButton">
+                        <button type="submit" [disabled]="isChecked()" class="btn btn-success" id="answerButton">Sprawdź</button>
                     </span>
                 </div>
             </form>
