@@ -14,18 +14,15 @@
                         {{dictionary.name}}
                     </option>
                 </select>
-                <!--
-                <ng-select [(ngModel)]="selDictionaryList" required name="dictionaryId" [allowClear]="false" [items]="dictionaries" idField="id" textField="name" placeholder="wybierz słownik">
-                </ng-select>-->
             </div>
             <div class="form-group">
                 <label for="maxNumberOfQuestions">Maksymalna liczba pytań na planszy:</label>
-                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="1" type="number" class="form-control"
+                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3" type="number" class="form-control"
                     id="maxNumberOfQuestions" placeholder="liczba pytań">
             </div>
             <div class="form-group">
                 <label for="numberOfGames">Liczba gier:</label>
-                <input [(ngModel)]="parameters.numberOfGames" required name="numberOfGames" min="1" type="number" class="form-control" id="numberOfGames"
+                <input [(ngModel)]="parameters.numberOfGames" required name="numberOfGames" min="3" type="number" class="form-control" id="numberOfGames"
                     placeholder="liczba odpowiedzi">
             </div>
             <div class="right">
@@ -51,8 +48,8 @@
 
             <div class="answers row">
                 <div *ngFor="let ans of model.answers" class="col-xs-6 col-md-{{gridSize}}">
-                    <div class="answerButton trans-{{ans.translationId}}" (click)="confirmAnswer(ans.translationId, $event)">
-                        <div class="front"> </div>
+                    <div class="answerButton trans-{{ans.translationId}}" >
+                        <div class="front" (click)="confirmAnswer(ans.translationId, $event)"> </div>
                         <div class="back"> {{ans.word}} </div>
                     </div>
                 </div>

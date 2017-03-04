@@ -22,18 +22,6 @@ let store = require('store2');
         DictionariesService,
         ChartsService
     ],
-    animations: [
-        trigger('flipState', [
-            state('active', style({
-                transform: 'rotateY(179.9deg)'
-            })),
-            state('inactive', style({
-                transform: 'rotateY(0)'
-            })),
-            transition('active => inactive', animate('500ms ease-out')),
-            transition('inactive => active', animate('500ms ease-in'))
-        ])
-    ],
     host: {
         '(document:keydown)': 'handleKeyboardEvents($event)'
     }
@@ -122,14 +110,14 @@ export class MemoComponent {
 
         let me = this;
         me.attemptsCount++;
-        $(event.target).parent().addClass('chosen');
+        $(event.target).parent('.answerButton').addClass('chosen');
 
         if (me.chosenAnswer > 0) {
 
             let correct = me.chosenAnswer == translationId;
             if (correct) {
-                $(me.chosenTarget).parent().addClass('correct');
-                $(event.target).parent().addClass('correct');
+                $(me.chosenTarget).parent('.answerButton').addClass('correct');
+                $(event.target).parent('.answerButton').addClass('correct');
                 me.correctIds.push(me.chosenAnswer);
                 me.correctCount = me.correctCount - 2;
                 if (me.correctCount == 0) {
