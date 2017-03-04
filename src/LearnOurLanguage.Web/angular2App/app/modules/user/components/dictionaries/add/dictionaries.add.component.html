@@ -34,6 +34,18 @@
                     [value]="dictionary.description" placeholder="opis słownika">
             </div>
 
+            <div class="form-group">
+                <label for="isPublic">Typ słownika:</label>
+                <select name="isPublic" id="isPublic" class="form-control" [(ngModel)]="dictionary.isPublic" required placeholder="wybierz język">
+                    <option [value]="true">
+                        publiczny
+                    </option>
+                    <option [value]="false">
+                        prywatny
+                    </option>
+                    </select>
+            </div>
+
             <div *ngIf="translations.length != 0">
                 <label>Słówka:</label>
             </div>
