@@ -23,11 +23,8 @@ export class DictionariesListComponent {
     public dictionariesBase: Array<DictionaryModel> = [];
     public dictionariesPublic: Array<DictionaryModel> = [];
     public dictionariesPublicBase: Array<DictionaryModel> = [];
-    public flagAdd: boolean = false;
-    public flagEdit: boolean = true;
     public dictionaryId: number = 0;
-
-    public publicTabActive: boolean = false;
+    public currTab: string;
 
     constructor(
         private dictionariesService: DictionariesService,
@@ -41,6 +38,7 @@ export class DictionariesListComponent {
         let me = this;
         me.dictionariesService.getAllPublic(me.loadPublicDictionaries, me);
         me.loadOwnDictionaries();
+        me.currTab = me.route.snapshot.params['type'];
     }
 
     loadOwnDictionaries() {
@@ -65,21 +63,16 @@ export class DictionariesListComponent {
         me.dictionariesPublicBase = data;
     }
 
-    deleteDictionary(id: any) {
+    selectTab(tab: any) {
         let me = this;
-        console.log(id[0]);
-        me.dictionariesService.delete(id[0], me.deleteSuccessfully, me);
+        if (me.route.snapshot.params['type'] != tab) {
+            me.router.navigate(['/user/dictionaries/', tab == 'public' ? 'public' : 'own']);
+        }
     }
 
-    deleteSuccessfully(data: any) {
+    isEditing() {
         let me = this;
-        if (data) {
-            me.toast.success('Słownik został usunięty poprawnie');
-            me.router.navigate(['dictionaries']);
-            me.loadOwnDictionaries();
-        } else {
-            me.toast.warning('Wystąpił problem podczas usuwania słownika');
-        }
+        return me.router.url.indexOf('new') !== -1;
     }
 
     filterList(event: any) {
@@ -96,54 +89,19 @@ export class DictionariesListComponent {
         me.dictionariesPublic = me.dictionariesPublicBase.filter((element) => element.name.includes(me.queryString));
     }
 
-    setAddFlag() {
-        let me = this;
-        me.flagAdd = !me.flagAdd;
-    }
-
-    setEditFlag() {
-        let me = this;
-        me.flagEdit = !me.flagEdit;
-    }
-
-    setDictionaryId(id: any) {
-        console.log(id);
-        let me = this;
-        me.dictionaryId = id;
-        me.flagAdd = false;
-        me.flagEdit = false;
-    }
-
-    copyDictionary() {
-        let me = this;
-        let userId = +store('userId');
-        me.dictionariesService.copyDictionary(userId, me.dictionaryId, me.finalizeCopy, me);
-    }
-
-    finalizeCopy(data: any) {
-        let me = this;
-
-        if (data > 0) {
-            me.toast.success('Słownik został skopiowany poprawnie');
-            me.router.navigate(['dictionaries', data]);
-            me.loadOwnDictionaries();
-        } else {
-            me.toast.warning('Wystąpił problem podczas kopiowania słownika');
-        }
-    }
-
     setTabAndScroll() {
         let me = this;
+        let id = me.currTab == 'own' ? '#ownDictionaries' : '#publicDictionaries';
 
-        // setTimeout(() => {
-        //     var container = $('#ownDictionaries .list, #publicDictionaries .list'),
-        //         scrollTo = $('.dictionariesTab .list a.active');
-        //     if (!container || !scrollTo) return;
+        setTimeout(() => {
+            var container = $(id + ' .list'),
+                scrollTo = $(id + ' .list a.active');
+            if (!container || !scrollTo) return;
 
-        //     container.scrollTop(
-        //         scrollTo.offset().top - container.offset().top + container.scrollTop()
-        //     );
-        // }, 200);
+            container.scrollTop(
+                scrollTo.offset().top - container.offset().top + container.scrollTop() - 15
+            );
+        }, 200);
 
     }
 }

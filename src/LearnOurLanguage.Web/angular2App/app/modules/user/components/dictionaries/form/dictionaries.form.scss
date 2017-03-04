@@ -1,40 +1,46 @@
 @import "common";
 
 .wrap {
-    a {
-        display: block;
-        color: $dictionary_link_color;
-        background: $dictionary_link_background;
-        font-size: 1.3em;
+    background: rgba(221, 221, 221, .9);
+    font-size: 18px;
+    margin: 0 0 $half_margin;
 
-        &:hover,
-        &.active {
-            text-decoration: none;
-            color: $menu_hover_dictionaries;
-            background: $dictionary_link_background_hover;
-            text-shadow: $shadow;
-        }
+    & > div {
+        font-size: 18px;
+        text-align: center;
+        padding: 7px 0;
     }
 
-    .col {
-        font-size: 20px;
-        background: rgba(255, 255, 255, .65);
-        padding-top: $half_margin;
-        padding-bottom: $half_margin;
-        margin-bottom: $half_margin;
-        text-align: center;
+    &:last-child {
+        margin: 0;
+    }
+
+    &:hover,
+    &.active {
+        background: darken($menu_hover_dictionaries, 5%);
+        text-shadow: 0 0 1px $shadow;
+        text-decoration: none;
+        color: #fff;
     }
 }
 
-#common_col{
+.common_col {
     font-size: 20px;
     padding: $half_margin;
-    margin-bottom: $half_margin;
-    background: rgba(255, 255, 255, .65);
-    div{
-        font-size: 20px;
-        padding: 1px;
-        margin-bottom: 1px;
+    margin-top: $margin;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 1px #6a6b6b;
+    border-radius: 3px;
+}
+
+.details {
+    div {
+        font-size: 18px;
+        margin-bottom: 4px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
@@ -63,5 +69,32 @@
             width: 100%;
             padding: $half_margin;
         }
+    }
+}
+
+#uploadSpace h3 {
+    margin: 0;
+}
+
+.nav-dictionary,
+.nav-dictionary-public {
+     @media (max-width: 768px) { li { margin: $half_margin 0; } }
+}
+
+.nav-dictionary {
+    li {
+        padding: 0 $half_margin 0 0;
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            padding: 0;
+        }
+    }
+    button, input, label {
+        display: block;
+        width: 100%;
     }
 }

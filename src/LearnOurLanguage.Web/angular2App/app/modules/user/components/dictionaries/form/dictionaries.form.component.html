@@ -1,32 +1,26 @@
 <h2 class="section-title">{{dictionary.name}}</h2>
 
-<div class="exchange-nav">
-    <div class="right">
-        <button type="button" class="btn btn-link link" (click)="isCollapsed = !isCollapsed">import / eksport słówek</button>
-    </div>
-    <div class="exchange-panel well well-lg" [collapse]="isCollapsed">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <div id="uploadSpace">
-                    <form action="/api/DataExchange/Import/{{dictionary.id}}" method="post" enctype="multipart/form-data">
-                        <div>
-                            <h3><label for="fileChooser" class="btn btn-default">Importuj słówka</label></h3>
-                            <input type="file" required id="fileChooser" class="hidden" name="files" (change)="sendFile($event)" />
-                        </div>
-                    </form>
-                </div>
+<ul class="nav nav-justified nav-dictionary" *ngIf="ownDictionary">
+    <li><button type="button" class="btn btn-default" [routerLink]="['form']">Edytuj</button></li>
+    <li><button type="button" class="btn btn-default" (click)="deleteDictionary()">Usuń</button></li>
+    <li><div id="uploadSpace">
+        <form action="/api/DataExchange/Import/{{dictionary.id}}" method="post" enctype="multipart/form-data">
+            <div>
+                <h3><label for="fileChooser" class="btn btn-default">Importuj słówka</label></h3>
+                <input type="file" required id="fileChooser" class="hidden" name="files" (change)="sendFile($event)" />
             </div>
-            <div class="col-xs-12 col-md-6">
-                <label class="btn btn-default" (click)="exportDictionary()">Eksportuj słówka</label>
-            </div>
-        </div>
-    </div>
-</div>
+        </form>
+    </div></li>
+    <li><label class="btn btn-default" (click)="exportDictionary()">Eksportuj słówka</label></li>
+</ul>
 
+<ul class="nav nav-dictionary-public right" *ngIf="!ownDictionary">
+    <li><button type="button" class="btn btn-default" (click)="copyDictionary()">Kopiuj</button></li>
+</ul>
 <div>
-    <div class="col-xs-12" id="common_col">
+    <div class="col-xs-12 common_col details">
         <h3>Szczegóły:</h3>
-        <div class="col-xs-12">
+        <div class="row">
             <div class="col-xs-6">
                 <div>Języki:</div>
             </div>
@@ -34,7 +28,7 @@
                 <div>{{dictionary.firstLanguage.name}} - {{dictionary.secondLanguage.name}}</div>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="row">
             <div class="col-xs-6">
                 <div>Opis:</div>
             </div>
@@ -42,7 +36,7 @@
                 <div>{{dictionary.description}}</div>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="row">
             <div class="col-xs-6">
                 <div>Data utworzenia:</div>
             </div>
@@ -50,7 +44,7 @@
                 <div>{{dictionary.date}}</div>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="row">
             <div class="col-xs-6">
                 <div>Liczba tłumaczeń:</div>
             </div>
@@ -60,18 +54,14 @@
         </div>
     </div>
 
-    <div class="col-xs-12">
+    <div class="col-xs-12 common_col">
         <h3>Słówka:</h3>
-        <div *ngFor="let translation of translations">
-            <div class="wrap row">
-                <a routerLinkActive="active">
-                    <div class="col-xs-6 col">
-                        {{translation.firstLangWord}}
-                    </div>
-                    <div class="col-xs-6 col">
-                        {{translation.secondLangWord}}
-                    </div>
-                </a>
+        <div class="wrap row" *ngFor="let translation of translations">
+            <div class="col-xs-6">
+                {{translation.firstLangWord}}
+            </div>
+            <div class="col-xs-6">
+                {{translation.secondLangWord}}
             </div>
         </div>
     </div>

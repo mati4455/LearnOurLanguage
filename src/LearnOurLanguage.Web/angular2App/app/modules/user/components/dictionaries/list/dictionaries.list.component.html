@@ -2,10 +2,10 @@
     <!-- tutaj będzie lista -->
 
     <tabset [justified]="true">
-        <tab id="ownDictionaries" class="dictionariesTab" heading="Moje">
+        <tab id="ownDictionaries" class="dictionariesTab" heading="Moje" [active]="currTab == 'own'" (select)="selectTab('own')">
             <div class="has-error">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
+                    <input type="text" class="form-control" id="queryString" placeholder="Szukaj..." name="queryString" [(value)]="queryString"
                         (keyup)="filterList($event)">
                 </div>
             </div>
@@ -14,28 +14,20 @@
             </div>
             <div class="list">
                 <div *ngFor="let dictionary of dictionaries">
-                    <a (click)="setDictionaryId([dictionary.id])" [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
+                    <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
                 </div>
             </div>
-
             <div class="buttons row">
-                <div class="col-xs-4">
-                    <button [disabled]="flagAdd" (click)="setEditFlag()" routerLink="/user/dictionaries/add/0" type="button" class="btn btn-default">Dodaj</button>
-                </div>
-                <div class="col-xs-4">
-                    <button [disabled]="dictionaryId==0 || flagEdit" (click)="setAddFlag()" routerLink="/user/dictionaries/add/{{dictionaryId}}"
-                        class="btn btn-default">Edytuj</button>
-                </div>
-                <div class="col-xs-4">
-                    <button [disabled]="dictionaryId==0 || flagEdit" type="button" (click)="deleteDictionary(dictionaryId)" class="btn btn-default">Usuń</button>
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-default" [disabled]="isEditing()" [routerLink]="['new']">Dodaj słownik</button>
                 </div>
             </div>
         </tab>
 
-        <tab id="publicDictionaries" class="dictionariesTab" heading="Publiczne">
+        <tab id="publicDictionaries" class="dictionariesTab" heading="Publiczne" [active]="currTab == 'public'" (select)="selectTab('public')">
             <div class="has-error">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="queryString" placeholder="szukaj..." name="queryString" [(value)]="queryString"
+                    <input type="text" class="form-control" id="queryString" placeholder="Szukaj..." name="queryString" [(value)]="queryString"
                         (keyup)="filterListPublic($event)">
                 </div>
             </div>
@@ -44,13 +36,7 @@
             </div>
             <div class="list">
                 <div *ngFor="let dictionary of dictionariesPublic">
-                    <a (click)="setDictionaryId([dictionary.id])" [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
-                </div>
-            </div>
-
-            <div class="buttons row">
-                <div class="col-xs-12">
-                    <button [disabled]="dictionaryId == 0 || flagEdit" type="button" class="btn btn-default" (click)="copyDictionary()">Kopiuj zaznaczony</button>
+                    <a [routerLink]="[dictionary.id]" routerLinkActive="active">{{dictionary.name}}</a>
                 </div>
             </div>
         </tab>

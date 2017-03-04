@@ -21,9 +21,9 @@ namespace Model.Services
 
         public DictionariesService(
             DatabaseContext context,
-            ITranslationsRepository translationsRepository, 
-            IDictionariesRepository dictionariesRepository, 
-            IGameSessionsRepository gameSessionsRepository, 
+            ITranslationsRepository translationsRepository,
+            IDictionariesRepository dictionariesRepository,
+            IGameSessionsRepository gameSessionsRepository,
             IGameSessionTranslationsRepository gameSessionTranslationsRepository)
         {
             Context = context;
@@ -46,8 +46,10 @@ namespace Model.Services
                         Context.Entry(dictionary).State = EntityState.Modified;
                         DictionariesRepository.Update(dictionary);
                     }
-                    else
+                    else {
+                        dictionary.Date = new DateTime();
                         DictionariesRepository.Insert(dictionary);
+                    }
                     DictionariesRepository.Save();
 
                     dictionaryVo.TranslationList.ToList().ForEach(x => x.DictionaryId = dictionary.Id);
