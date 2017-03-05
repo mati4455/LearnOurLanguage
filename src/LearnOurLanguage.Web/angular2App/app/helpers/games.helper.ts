@@ -44,7 +44,7 @@ export class GamesHelper {
 
     equalsWords(s1: string, s2: string) {
         let me = this;
-        return s1.toUpperCase() == s2.toUpperCase();
+        return s1.trim().toUpperCase() == s2.trim().toUpperCase();
     }
 
     calculateDuration(d1: number, d2: number) {
@@ -62,7 +62,7 @@ export class GamesHelper {
     }
 
     isLetter(letter: string) {
-        return letter.toLowerCase() != letter.toUpperCase();
+        return letter.trim().toLowerCase() != letter.trim().toUpperCase();
     }
 
     getAlphabet() {
