@@ -58,6 +58,7 @@ export class MemoComponent {
     elapsedSeconds: number = 0;
     updateTimeInterval: number = 1000;
     interval: any = null;
+    timeout: any = null;
 
     chartColors = PieChartColors;
     animationTime: number = 300;
@@ -141,7 +142,7 @@ export class MemoComponent {
             }
             me.chosenAnswer = 0;
             me.chosenTarget = null;
-            setTimeout(function () {
+            me.timeout = setTimeout(function () {
                 $('.chosen').removeClass('chosen');
                 $('.wrong').removeClass('wrong');
                 me.attemptsCount = 0;
@@ -272,6 +273,7 @@ export class MemoComponent {
         for (let i = 0; i < me.correctIds.length; i++) {
             me.answers.push(new AnswerUpdateModel(me.gameSessionId, me.correctIds[i], true, avg));
         }
+        clearTimeout(me.timeout);
         for (let i = 0; i < me.wrongIds.length; i++) {
             me.answers.push(new AnswerUpdateModel(me.gameSessionId, me.wrongIds[i], false, avg));
             $('.trans-' + me.wrongIds[i]).addClass('wrong');

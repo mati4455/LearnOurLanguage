@@ -69,8 +69,8 @@
 
         .front {
             z-index: 20;
-            margin: $half_margin;
             cursor: pointer;
+            margin: $half_margin 0;
         }
 
         .front { display: flex; }

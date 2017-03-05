@@ -78,9 +78,11 @@ export class QuizComponent {
         let me = this;
         let key = event.which || event.keyCode;
 
+        if (!me.model) return;
+
         if (key >= KeysEnum.NUM1 && key <= KeysEnum.NUM9) {
             let index = key - KeysEnum.NUM1;
-            if (index < me.model.answers.length) {
+            if (!me.showNav && index < me.model.answers.length) {
                 $('.answers button')[index].click();
             }
         }
