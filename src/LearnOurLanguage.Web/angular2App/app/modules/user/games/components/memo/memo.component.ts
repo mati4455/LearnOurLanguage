@@ -1,6 +1,6 @@
 import './memo.scss';
 import {
-    DictionaryModel, MemoModel, MemoParameters,
+    DictionaryModel, MemoModel, MemoParametersModel, MemoQuestionModel, MemoVoModel,
     AnswerUpdateModel, PieChartData, KeysEnum
 } from 'lol/models';
 import { trigger, state, style, transition, animate } from '@angular/core';
@@ -22,18 +22,6 @@ let store = require('store2');
         DictionariesService,
         ChartsService
     ],
-    animations: [
-        trigger('flipState', [
-            state('active', style({
-                transform: 'rotateY(179.9deg)'
-            })),
-            state('inactive', style({
-                transform: 'rotateY(0)'
-            })),
-            transition('active => inactive', animate('500ms ease-out')),
-            transition('inactive => active', animate('500ms ease-in'))
-        ])
-    ],
     host: {
         '(document:keydown)': 'handleKeyboardEvents($event)'
     }
@@ -41,14 +29,14 @@ let store = require('store2');
 
 export class MemoComponent {
 
-    parameters: MemoParameters = new MemoParameters();
+    parameters: MemoParametersModel = new MemoParametersModel();
     dictionaries: Array<DictionaryModel> = [];
     userId: number;
     gameSessionId: number;
 
-    questions: Array<MemoModel> = [];
+    questions: Array<MemoQuestionModel> = [];
     answers: Array<AnswerUpdateModel> = [];
-    model: MemoModel;
+    model: MemoQuestionModel;
     saved: boolean = false;
     stats: PieChartData = null;
     showNav: boolean = false;
@@ -56,19 +44,24 @@ export class MemoComponent {
     questionsCount: number = 0;
     selDictionaryList: any;
     selectedDictionary: DictionaryModel;
-    speechSupport: boolean;
-    answerChecked: boolean = false;
-    answerValue: string = '';
-    answerClass: string = '';
-    flip: string = 'inactive';
+    chosenAnswer: number = 0;
+    chosenTarget: any = null;
+    gridSize: number = 1; //1 2 3 4 6
+    correctCount: number = 0;
+    attemptsCount: number = 0;
+    currentSessionTime: number = 0;
+    numberOfAsnwers: number = 0;
+    correctIds: Array<number> = [];
+    wrongIds: Array<number> = [];
 
     startTime: number = 0;
-    endTime: number = 0;
-    diffTime: number = 0;
+    elapsedSeconds: number = 0;
     updateTimeInterval: number = 1000;
     interval: any = null;
+    timeout: any = null;
 
     chartColors = PieChartColors;
+    animationTime: number = 300;
 
     constructor(
         private gamesHelper: GamesHelper,
@@ -82,7 +75,6 @@ export class MemoComponent {
         let me = this;
         me.userId = +store('userId');
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
-        me.speechSupport = me.gamesHelper.speechSupport;
     }
 
     ngOnDestroy() {
@@ -97,20 +89,11 @@ export class MemoComponent {
         let key = event.which || event.keyCode;
         let index = -1;
 
-        if (key == KeysEnum.ENTER && !me.showNav) {
-            me.confirmAnswer();
-        }
-
-        else if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
+        if (key == KeysEnum.ENTER && me.showNav && me.isNextQuestion()) {
             me.nextQuestion();
         }
-
         else if (key == KeysEnum.ENTER && me.showNav && !me.isNextQuestion()) {
             me.endSession(true);
-        }
-
-        else if (key == KeysEnum.SPACE && me.showNav) {
-            me.ttsPlay();
         }
     }
 
@@ -125,28 +108,71 @@ export class MemoComponent {
         me.dictionaries = data;
     }
 
-    confirmAnswer() {
+    confirmAnswer(translationId: number, event: any) {
         let me = this;
-        me.answerChecked = true;
-        me.endTime = new Date().getTime();
-        let correct = me.gamesHelper.equalsWords(me.model.translation.secondLangWord, me.answerValue);
-        me.answers.push(new AnswerUpdateModel(
-            me.model.gameSessionId,
-            me.model.translation.id,
-            correct,
-            me.calculateDuration()
-        ));
-        me.showNav = true;
-        me.answerClass = (correct ? 'correct' : 'wrong');
-        me.flip = 'active';
-        me.ttsPlay();
+        if (me.attemptsCount == 2) return;
 
+        me.attemptsCount++;
+        $(event.target).parent('.answerButton').addClass('chosen');
+
+        if (me.chosenAnswer > 0) {
+
+            let correct = me.chosenAnswer == translationId;
+            let temp = me.chosenTarget;
+
+            if (correct) {
+                setTimeout(() => {
+                    $(temp).parent('.answerButton').addClass('correct');
+                    $(event.target).parent('.answerButton').addClass('correct');
+                }, 400);
+
+                me.correctIds.push(me.chosenAnswer);
+                me.correctCount = me.correctCount - 2;
+                if (me.correctCount == 0) {
+                    me.showNav = true;
+                    me.correctCount = me.numberOfAsnwers;
+                    clearInterval(me.interval);
+                    me.generateAnswers();
+                }
+            } else {
+                setTimeout(() => {
+                    $(temp).parent('.answerButton').addClass('wrong');
+                    $(event.target).parent('.answerButton').addClass('wrong');
+                }, 400);
+            }
+            me.chosenAnswer = 0;
+            me.chosenTarget = null;
+            me.timeout = setTimeout(function () {
+                $('.chosen').removeClass('chosen');
+                $('.wrong').removeClass('wrong');
+                me.attemptsCount = 0;
+            }, 800);
+        } else {
+            me.chosenAnswer = translationId;
+            me.chosenTarget = event.target;
+        }
+
+    }
+
+    prepareGridSize() {
+        let me = this;
+        let temp = me.questions[0].answers.length;
+        me.correctCount = me.questions[0].answers.length;
+        let availableSize = [3, 4, 6, 2, 1];
+        let found = false;
+        for (let i = 0; i < availableSize.length && !found; i++) {
+            if (temp % (12 / availableSize[i]) == 0) {
+                me.gridSize = availableSize[i];
+                found = true;
+            }
+        }
     }
 
     initializeGame(data: any) {
         let me = this;
-        me.questions = data;
-
+        me.answers = new Array<AnswerUpdateModel>();
+        me.prepareQuestions(data);
+        me.prepareGridSize();
         if (me.questions.length > 0) {
             me.gameSessionId = me.questions[0].gameSessionId;
             me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
@@ -158,21 +184,49 @@ export class MemoComponent {
         }
     }
 
+    prepareQuestions(data: any) {
+        let me = this;
+        for (let i = 0; i < data.length; i++) {
+            let question = new MemoQuestionModel();
+            question.gameSessionId = data[i].gameSessionId;
+            for (let j = 0; j < data[i].translations.length; j++) {
+                let translation = data[i].translations[j];
+                question.answers.push(new MemoVoModel(translation.id, translation.firstLangWord));
+                question.answers.push(new MemoVoModel(translation.id, translation.secondLangWord));
+            }
+            me.gamesHelper.shuffle(question.answers);
+            me.questions.push(question);
+        }
+        me.numberOfAsnwers = me.questions[0].answers.length;
+    }
+
     nextQuestion() {
         let me = this;
 
-        me.showNav = false;
-        me.questionIndex++;
+        $('.animation').removeClass('up').addClass('down');
 
-        me.model = me.questions.shift();
-        me.startTime = new Date().getTime();
-        me.flip = 'inactive';
-        me.answerChecked = false;
-        me.answerValue = '';
-        me.answerClass = '';
-        me.interval = setInterval(() => {
-            me.diffTime = me.liveTime();
-        }, me.updateTimeInterval);
+        setTimeout(function () {
+
+            me.correctIds = new Array<number>();
+            me.wrongIds = new Array<number>();
+            me.correctCount = me.questions[0].answers.length;
+            me.showNav = false;
+            me.questionIndex++;
+            me.model = me.questions.shift();
+            me.elapsedSeconds = me.model.answers.length * 3;
+            me.startTime = me.elapsedSeconds;
+            me.interval = setInterval(() => {
+                me.elapsedSeconds--;
+                if (me.elapsedSeconds <= 0) {
+                    clearInterval(me.interval);
+                    me.generateAnswers();
+                    me.showNav = true;
+                }
+            }, me.updateTimeInterval);
+
+             $('.animation').removeClass('down').addClass('up');
+
+        }, me.animationTime);
     }
 
 
@@ -181,15 +235,8 @@ export class MemoComponent {
         return me.questions.length > 0;
     }
 
-    isChecked() {
-        let me = this;
-        return me.answerChecked;
-    }
-
-
     endSession(loadStats: boolean) {
         let me = this;
-
         me.gamesService.finishGameSession(me.gameSessionId, () => { }, me);
         me.gamesService.insertAnswers(me.answers, me.getStatistics, me);
     }
@@ -210,21 +257,27 @@ export class MemoComponent {
         me.stats = data;
     }
 
-    liveTime() {
+    generateAnswers() {
         let me = this;
-        me.endTime = new Date().getTime();
-        return me.calculateDuration();
+        if (!me.model || !me.model.answers) {
+            return;
+        }
+        for (let i = 0; i < me.model.answers.length; i++) {
+            if (!me.correctIds.find((item) => item == me.model.answers[i].translationId)) {
+                me.wrongIds.push(me.model.answers[i].translationId);
+            }
+        }
+        me.wrongIds = me.gamesHelper.uniqueArray(me.wrongIds);
+        me.correctIds = me.gamesHelper.uniqueArray(me.correctIds);
+        let avg = (me.startTime - me.elapsedSeconds) / (me.model.answers.length / 2);
+        for (let i = 0; i < me.correctIds.length; i++) {
+            me.answers.push(new AnswerUpdateModel(me.gameSessionId, me.correctIds[i], true, avg));
+        }
+        clearTimeout(me.timeout);
+        for (let i = 0; i < me.wrongIds.length; i++) {
+            me.answers.push(new AnswerUpdateModel(me.gameSessionId, me.wrongIds[i], false, avg));
+            $('.trans-' + me.wrongIds[i]).addClass('wrong');
+        }
     }
 
-    calculateDuration() {
-        let me = this;
-        return me.gamesHelper.calculateDuration(me.startTime, me.endTime);
-    }
-
-    ttsPlay() {
-        let me = this;
-        me.gamesHelper.ttsPlay(
-            me.model.translation.secondLangWord,
-            me.selectedDictionary.secondLanguage.code);
-    }
 }

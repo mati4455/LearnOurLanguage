@@ -43,4 +43,21 @@
             padding: 10px 20px;
         }
     }
+
+      .carousel-caption{
+        background: rgba(255, 255, 255, 0.6);
+        
+        h3 {
+            font-size:      2em;
+            color: #333;
+            text-shadow: 0 0 10px $home_title_shadow;
+            font-weight: bold;
+        }
+        
+        p {
+            font-size:      1em;
+            color: #333;
+            text-shadow: 0 0 10px $home_title_shadow;
+        }
+    }
 }

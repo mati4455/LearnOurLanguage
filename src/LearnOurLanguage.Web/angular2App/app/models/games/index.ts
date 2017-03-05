@@ -15,4 +15,6 @@ export { FlashcardsModel } from './flashcards.model';
 export { FlashcardsParameters } from './flashcards-parameters.model';
 
 export { MemoModel } from './memo.model';
-export { MemoParameters } from './memo-parameters.model';
+export { MemoParametersModel } from './memo-parameters.model';
+export { MemoQuestionModel } from './memo-question.model';
+export { MemoVoModel } from './memo-vo.model';

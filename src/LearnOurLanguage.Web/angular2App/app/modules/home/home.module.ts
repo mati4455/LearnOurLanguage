@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 
 import { HomeRoutes } from './home.routes';
 import { HomeComponent } from './components/home/home.component';
+import { CarouselModule } from 'ng2-bootstrap/carousel';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         HttpModule,
-        HomeRoutes
+        HomeRoutes,
+        CarouselModule.forRoot()
     ],
 
     declarations: [

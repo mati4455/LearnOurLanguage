@@ -9,21 +9,17 @@
             display: block;
             color: #333;
             background: #ddd;
-            //color: $dictionary_link_color;
-            //background: $dictionary_link_background;
             font-size: 1.3em;
             padding: $half_margin;
             margin-bottom: $half_margin;
+            transition: all .2s;
 
             &:hover,
             &.active {
                 color: #fff;
-                text-shadow: #333;
+                text-shadow: 0 0 2px $shadow;
                 background: $menu_hover_dictionaries;
                 text-decoration: none;
-                //color: $dictionary_link_color_hover;
-                //background: $dictionary_link_background_hover;
-                //text-shadow: $shadow;
             }
         }
     }
@@ -36,11 +32,11 @@
         padding: $half_margin;
         margin-top: $half_margin;
         }
-        
+
     button {
         width: 100%;
         background: rgba(255, 255, 255, .65);
-        padding: $half_margin;
+        padding: $half_margin 0;
         margin-top: $half_margin;
-        }
+    }
 }

@@ -103,7 +103,7 @@ module.exports = {
                 './wwwroot/assets'
             ]
         ),
-        
+
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -116,7 +116,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin(
             {
                 name: ['vendor', 'polyfills']
-            }),        
+            }),
 
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -125,7 +125,8 @@ module.exports = {
         }),
 
         new CopyWebpackPlugin([
-            { from: './angular2App/images/*.*', to: 'assets/', flatten: true }
+            { from: './angular2App/images/*.*', to: 'assets/', flatten: true },
+            { from: './angular2App/images/games/*.*', to: 'assets/games/', flatten: true }
         ])
     ]
 

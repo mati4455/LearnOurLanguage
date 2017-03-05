@@ -29,7 +29,6 @@ let store = require('store2');
 export class HangmanComponent {
 
     parameters: HangmanParameters = new HangmanParameters();
-    dictionaries: Array<DictionaryModel> = [];
     userId: number;
     gameSessionId: number;
 
@@ -75,7 +74,6 @@ export class HangmanComponent {
     ngOnInit() {
         let me = this;
         me.userId = +store('userId');
-        me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
     }
 
@@ -120,18 +118,12 @@ export class HangmanComponent {
         me.gamesService.initializeGameHangman(me.parameters, me.initializeGame, me);
     }
 
-    loadDictionaries(data: any) {
-        let me = this;
-        me.dictionaries = data;
-    }
-
     initializeGame(data: any) {
         let me = this;
         me.questions = data;
 
         if (me.questions.length > 0) {
             me.gameSessionId = me.questions[0].gameSessionId;
-            me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
             me.questions = me.gamesHelper.shuffle(me.questions);
             me.questionsCount = me.questions.length;
             me.prepareCharacters();
@@ -176,7 +168,7 @@ export class HangmanComponent {
 
     prepareCharacters(): void {
         let me = this;
-        let tempChars = me.gamesHelper.alphabet;
+        let tempChars = me.gamesHelper.getAlphabet();
 
         for (let q = 0; q < me.questions.length; q++) {
             let upperWord = me.questions[q].translation.secondLangWord.toUpperCase();
@@ -289,5 +281,10 @@ export class HangmanComponent {
         me.gamesHelper.ttsPlay(
             me.model.translation.secondLangWord,
             me.selectedDictionary.secondLanguage.code);
+    }
+
+    dictionaryChange(value: any) {
+        let me = this;
+        me.selectedDictionary = value;
     }
 }

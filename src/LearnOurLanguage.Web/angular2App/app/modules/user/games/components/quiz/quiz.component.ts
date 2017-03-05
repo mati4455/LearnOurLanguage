@@ -29,7 +29,6 @@ let store = require('store2');
 export class QuizComponent {
 
     parameters: QuizParameters = new QuizParameters();
-    dictionaries: Array<DictionaryModel> = [];
     userId: number;
     gameSessionId: number;
 
@@ -65,7 +64,6 @@ export class QuizComponent {
     ngOnInit() {
         let me = this;
         me.userId = +store('userId');
-        me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.speechSupport = me.gamesHelper.speechSupport;
     }
 
@@ -80,9 +78,11 @@ export class QuizComponent {
         let me = this;
         let key = event.which || event.keyCode;
 
+        if (!me.model) return;
+
         if (key >= KeysEnum.NUM1 && key <= KeysEnum.NUM9) {
             let index = key - KeysEnum.NUM1;
-            if (index < me.model.answers.length) {
+            if (!me.showNav && index < me.model.answers.length) {
                 $('.answers button')[index].click();
             }
         }
@@ -99,13 +99,7 @@ export class QuizComponent {
     startGame() {
         let me = this;
         me.parameters.userId = me.userId;
-        // me.parameters.dictionaryId = me.selDictionaryList[0].id;
         me.gamesService.initializeGameQuiz(me.parameters, me.initializeGame, me);
-    }
-
-    loadDictionaries(data: any) {
-        let me = this;
-        me.dictionaries = data;
     }
 
     initializeGame(data: any) {
@@ -114,8 +108,6 @@ export class QuizComponent {
 
         if (me.questions.length > 0) {
             me.gameSessionId = me.questions[0].gameSessionId;
-            me.selectedDictionary = me.dictionaries.find((item) => item.id == me.parameters.dictionaryId);
-
             me.prepareQuestions();
             me.nextQuestion();
         } else {
@@ -177,9 +169,10 @@ export class QuizComponent {
 
             $('.animation').removeClass('down').addClass('up');
 
+            me.diffTime = me.liveTime();
             me.interval = setInterval(() => {
                 me.diffTime = me.liveTime();
-            }, 100);
+            }, 1000);
 
         }, me.animationTime);
     }
@@ -223,5 +216,10 @@ export class QuizComponent {
         me.gamesHelper.ttsPlay(
             me.model.translation.secondLangWord,
             me.selectedDictionary.secondLanguage.code);
+    }
+
+    dictionaryChange(value: any) {
+        let me = this;
+        me.selectedDictionary = value;
     }
 }

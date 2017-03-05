@@ -21,9 +21,9 @@ namespace Model.Services
 
         public DictionariesService(
             DatabaseContext context,
-            ITranslationsRepository translationsRepository, 
-            IDictionariesRepository dictionariesRepository, 
-            IGameSessionsRepository gameSessionsRepository, 
+            ITranslationsRepository translationsRepository,
+            IDictionariesRepository dictionariesRepository,
+            IGameSessionsRepository gameSessionsRepository,
             IGameSessionTranslationsRepository gameSessionTranslationsRepository)
         {
             Context = context;
@@ -33,7 +33,7 @@ namespace Model.Services
             GameSessionTranslationsRepository = gameSessionTranslationsRepository;
         }
 
-        public bool InsertOrUpdate(DictionaryDTO dictionaryVo)
+        public int InsertOrUpdate(DictionaryDTO dictionaryVo)
         {
             using (var transaction = Context.Database.BeginTransaction())
             {
@@ -46,9 +46,13 @@ namespace Model.Services
                         Context.Entry(dictionary).State = EntityState.Modified;
                         DictionariesRepository.Update(dictionary);
                     }
-                    else
+                    else {
+                        dictionary.Date = new DateTime();
                         DictionariesRepository.Insert(dictionary);
+                    }
                     DictionariesRepository.Save();
+
+                    dictionaryVo.TranslationList.ToList().ForEach(x => x.DictionaryId = dictionary.Id);
 
                     var translations = dictionaryVo.TranslationList.Select(x => x.Id).ToList();
                     var currentTranslations = TranslationsRepository
@@ -61,7 +65,10 @@ namespace Model.Services
                     var toUpdate = dictionaryVo.TranslationList?.Where(x => ids.Contains(x.Id)).ToList() ?? new List<Translation>();
 
                     foreach (var trans in toDelete)
+                    {
+                        GameSessionTranslationsRepository.DeleteByTranslationId(trans.Id);
                         TranslationsRepository.Delete(trans);
+                    }
 
                     foreach (var trans in toUpdate)
                         TranslationsRepository.Update(trans);
@@ -72,12 +79,12 @@ namespace Model.Services
                     TranslationsRepository.Save();
 
                     transaction.Commit();
-                    return true;
+                    return dictionary.Id;
                 }
                 catch (Exception)
                 {
                     transaction.Rollback();
-                    return false;
+                    return -1;
                 }
             }
         }
@@ -99,29 +106,33 @@ namespace Model.Services
             return true;
         }
 
-        public bool CopyDictionary(int dictionaryId, int userId)
+        public int CopyDictionary(int dictionaryId, int userId)
         {
             var translations = TranslationsRepository.GetTranslationsForDictionary(dictionaryId).ToList();
             var dictionary = DictionariesRepository.GetById(dictionaryId);
 
             Context.Entry(dictionary).State = EntityState.Detached;
-            translations.ForEach(translation => Context.Entry(translation).State = EntityState.Detached);
 
+            dictionary.Id = 0;
             dictionary.UserId = userId;
             dictionary.ParentDictionaryId = dictionaryId;
             dictionary.User = null;
             dictionary.Date = new DateTime();
-            dictionary.Public = false;
+            dictionary.IsPublic = false;
             DictionariesRepository.Insert(dictionary);
             DictionariesRepository.Save();
 
             translations.ForEach(translation =>
             {
+                Context.Entry(translation).State = EntityState.Detached;
+                translation.Id = 0;
                 translation.DictionaryId = dictionary.Id;
                 translation.Dictionary = null;
             });
 
-            return TranslationsRepository.Insert(translations) && TranslationsRepository.Save();
+            var check = TranslationsRepository.Insert(translations) && TranslationsRepository.Save();
+
+            return check ? dictionary.Id : -1;
         }
 
         public bool UpdateDictionary(int dictionaryId)
@@ -129,8 +140,8 @@ namespace Model.Services
             var dictionary = DictionariesRepository.GetById(dictionaryId);
             if (dictionary.ParentDictionaryId == null) return false;
 
-            var currentTranslations = TranslationsRepository.GetTranslationsForDictionary(dictionaryId);
-            var parentTranslations = TranslationsRepository.GetTranslationsForDictionary(dictionary.ParentDictionaryId.Value);
+            var currentTranslations = TranslationsRepository.GetTranslationsForDictionary(dictionaryId).ToList();
+            var parentTranslations = TranslationsRepository.GetTranslationsForDictionary(dictionary.ParentDictionaryId.Value).ToList();
             var toAdd = parentTranslations.Except(currentTranslations).ToList();
 
             toAdd.ForEach(trans =>
@@ -139,13 +150,12 @@ namespace Model.Services
                 {
                     DictionaryId = dictionaryId,
                     FirstLangWord = trans.FirstLangWord,
-                    SecondLangWord = trans.FirstLangWord
+                    SecondLangWord = trans.SecondLangWord
                 };
                 TranslationsRepository.Insert(translation);
-                TranslationsRepository.Save();
             });
 
-            return true;
+            return TranslationsRepository.Save(); ;
         }
     }
 }

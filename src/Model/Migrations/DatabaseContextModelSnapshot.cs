@@ -28,13 +28,13 @@ namespace Model.Migrations
 
                     b.Property<int>("FirstLanguageId");
 
+                    b.Property<bool>("IsPublic");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128);
 
                     b.Property<int?>("ParentDictionaryId");
-
-                    b.Property<bool>("Public");
 
                     b.Property<int>("SecondLanguageId");
 

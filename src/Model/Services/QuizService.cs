@@ -18,12 +18,15 @@ namespace Model.Services
             Context = db;
             GamesService = gamesService;
         }
-        
+
         public IList<QuizModel> InitializeQuestions(QuizParameters param)
         {
             var translations = GamesService.GetDictionaryTranslations(param.DictionaryId);
+            if (param.ReverseLangs) {
+                translations = GamesService.ReverseTranslations(translations).ToList();
+            }
             var questionsIds = GamesService.InitializeGame(param.DictionaryId, param.UserId, GamesEnum.Quiz, param.MaxNumberOfQuestions);
-            
+
             return GetQuestions(param.MaxNumberOfAnswers, translations, questionsIds);
         }
 

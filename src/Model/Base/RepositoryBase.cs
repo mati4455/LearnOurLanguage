@@ -94,8 +94,13 @@ namespace Model.Base
                 foreach (var id in ids)
                 {
                     var e = new T {Id = id};
-                    Context.Attach(e);
-                    Context.Remove(e);
+                    try {
+                        Context.Attach(e);
+                        Context.Remove(e);
+                    } catch (Exception ex) {
+                        Context.Entry(e).State = EntityState.Deleted;
+                        // Logger.LogError("Obiekt jest już podpięty. Usuniecie przez State na modelu.");
+                    }
                 }
                 return true;
             }
@@ -120,8 +125,14 @@ namespace Model.Base
         {
             try
             {
-                foreach (var entity in entities)
+                foreach (var entity in entities) {
+                    try {
+                        Context.Attach(entity);
+                    } catch(Exception) {
+                        // jest już podpięty więc idziemy dalej
+                    }
                     Context.Entry(entity).State = EntityState.Modified;
+                }
                 return true;
             }
             catch (Exception ex)

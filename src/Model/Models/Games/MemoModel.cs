@@ -1,3 +1,4 @@
+﻿using System.Collections.Generic;
 using Model.Models.Database;
 
 namespace Model.Models.Games
@@ -5,6 +6,6 @@ namespace Model.Models.Games
     public class MemoModel
     {
         public int GameSessionId { get; set; }
-        public Translation Translation { get; set; }
+        public IList<Translation> Translations { get; set; }
     }
 }

@@ -13,9 +13,15 @@ namespace LearnOurLanguage.Web.Controllers.api
         private IGamesService GamesService { get; }
         private IQuizService QuizService { get; }
         private IHangmanService HangmanService { get; }
+        private IMemoService MemoService { get; }
         private IFlashcardsService FlashcardsService {get; }
-        private IMemoService MemoService {get; }
-        public GamesController(IGamesService gamesService, IQuizService quizService, IHangmanService hangmanService, IFlashcardsService flashcardsService, IMemoService memoService)
+
+        public GamesController(
+            IGamesService gamesService, 
+            IQuizService quizService, 
+            IHangmanService hangmanService, 
+            IFlashcardsService flashcardsService, 
+            IMemoService memoService)
         {
             GamesService = gamesService;
             QuizService = quizService;
@@ -55,7 +61,6 @@ namespace LearnOurLanguage.Web.Controllers.api
 
             return JsonHelper.Success(MemoService.InitializeQuestions(param));
         }
-
         [HttpPost("InsertAnswers")]
         public ActionResult InsertAnswers([FromBody] IList<AnswerUpdateModel> answers)
         {

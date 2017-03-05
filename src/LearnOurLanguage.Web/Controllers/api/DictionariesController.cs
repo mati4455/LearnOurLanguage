@@ -34,8 +34,15 @@ namespace LearnOurLanguage.Web.Controllers.api
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            AccessGuardian(new AccessRole(Roles.AccessUser, DictionariesRepository.GetById(id).UserId));
-
+            var dictionary = DictionariesRepository.GetById(id);
+            if (dictionary.IsPublic)
+            {
+                AccessGuardian(Roles.AccessUser);
+            }
+            else
+            {
+                AccessGuardian(Roles.AccessUser, dictionary.UserId);
+            }
             return JsonHelper.Success(DictionariesRepository.GetById(id));
         }
 
@@ -55,14 +62,30 @@ namespace LearnOurLanguage.Web.Controllers.api
             return JsonHelper.Success(DictionariesRepository.GetForUser(userId));
         }
 
+        [HttpGet("CopyDictionary")]
+        public ActionResult CopyDictionary(int dictionaryId, int userId)
+        {
+            AccessGuardian(new AccessRole(Roles.AccessUser));
+
+            return JsonHelper.Success(DictionariesService.CopyDictionary(dictionaryId, userId));
+        }
+
+        [HttpGet("UpdateDictionary")]
+        public ActionResult UpdateDictionary(int dictionaryId)
+        {
+            AccessGuardian(new AccessRole(Roles.AccessUser));
+
+            return JsonHelper.Success(DictionariesService.UpdateDictionary(dictionaryId));
+        }
+
         [HttpPost]
         public ActionResult Post([FromBody] DictionaryDTO input)
         {
             AccessGuardian(new AccessRole(Roles.AccessUser));
 
-            return JsonHelper.Response(DictionariesService.InsertOrUpdate(input));
+            return JsonHelper.Success(DictionariesService.InsertOrUpdate(input));
         }
-        
+
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

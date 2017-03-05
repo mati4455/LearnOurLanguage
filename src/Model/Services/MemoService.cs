@@ -1,8 +1,10 @@
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Models;
 using Model.Models.Database;
 using Model.Models.Games;
+using Model.Repositories.Interfaces;
 using Model.Services.Interfaces;
 
 namespace Model.Services
@@ -10,33 +12,38 @@ namespace Model.Services
     public class MemoService : IMemoService
     {
         private DatabaseContext Context { get; set; }
-        private IGamesService GamesService { get; set; }
+        private IGamesService GamesService { get; }
 
-        public MemoService(DatabaseContext db, IGamesService gamesService)
+        private ITranslationsRepository TranslationsRepository { get; set; }
+
+        public MemoService(DatabaseContext db, IGamesService gamesService, ITranslationsRepository translationsRepository)
         {
             Context = db;
             GamesService = gamesService;
+            TranslationsRepository = translationsRepository;
         }
 
         public IList<MemoModel> InitializeQuestions(MemoParameters param)
         {
-            var questionsIds = GamesService.InitializeGame(param.DictionaryId, param.UserId, GamesEnum.Memo, param.MaxNumberOfQuestions);
-            var ids = questionsIds.Select(x => x.TranslationId).ToList();
-            var translations = GamesService.GetTranslationsById(ids);
-
-            return GetQuestions(translations, questionsIds);
+            var gameSession = GamesService.InitializeBaseGame(param.DictionaryId, param.UserId, GamesEnum.Memo);
+            var translations = TranslationsRepository.GetTranslationsForDictionary(param.DictionaryId).ToList();
+            return GetQuestions(translations, gameSession, param);
         }
 
-        private IList<MemoModel> GetQuestions(IList<Translation> translations, IList<QuestionPair> questionsIds)
+        private IList<MemoModel> GetQuestions(IList<Translation> translations, GameSession gameSession, MemoParameters param)
         {
-            var questions = questionsIds.Select(q => new MemoModel
+            var result = new List<MemoModel>();
+            var min = Math.Min(param.MaxNumberOfQuestions, translations.Count);
+            for (var i = 0; i < param.NumberOfGames; i++)
             {
-                GameSessionId = q.GameSessionId,
-                Translation = translations.Single(x => x.Id == q.TranslationId)
-            })
-            .ToList();
+                result.Add(new MemoModel
+                {
+                    GameSessionId = gameSession.Id,
+                    Translations = translations.OrderBy(translation => Guid.NewGuid()).Take(min).ToList()
+                });
+            }
 
-            return questions;
+            return result;
         }
     }
 }

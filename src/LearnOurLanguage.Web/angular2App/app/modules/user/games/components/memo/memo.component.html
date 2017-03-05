@@ -16,29 +16,55 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="maxNumberOfQuestions">Maksymalna liczba pytań:</label>
+                <label for="maxNumberOfQuestions">Maksymalna liczba pytań na planszy:</label>
                 <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3" type="number" class="form-control"
                     id="maxNumberOfQuestions" placeholder="liczba pytań">
             </div>
+            <div class="form-group">
+                <label for="numberOfGames">Liczba gier:</label>
+                <input [(ngModel)]="parameters.numberOfGames" required name="numberOfGames" min="3" type="number" class="form-control" id="numberOfGames"
+                    placeholder="liczba odpowiedzi">
+            </div>
             <div class="right">
-                <button type="submit" class="btn btn-primary">Rozpocznij grę</button>
+                <button type="submit" class="btn btn-primary">rozpocznij grę</button>
             </div>
         </form>
     </div>
     <!-- koniec formularza -->
 
-        <!-- główna gra -->
+    <!-- główna gra -->
     <div *ngIf="model && !stats" class="game-area col-xs-12 col-md-8 col-md-push-2">
 
         <div class="row header-info">
             <div class="col-xs-6 left">
-                <div class="timer">Czas: {{diffTime}}s</div>
+                <div class="timer">Pozostały czas: {{elapsedSeconds}}s</div>
+            </div>
+            <div class="col-xs-6 right">
+                <div class="counter">Pytanie {{questionIndex}} z {{questionsCount}}</div>
             </div>
         </div>
 
+        <div class="animation">
+            <div class="answers row">
+                <div *ngFor="let ans of model.answers; let i = index;">
+                    <div class="col-xs-6 col-md-{{gridSize}}">
+                        <div class="answerButton trans-{{ans.translationId}}">
+                            <div class="front" (click)="confirmAnswer(ans.translationId, $event)">&nbsp;</div>
+                            <div class="back">{{ans.word}}</div>
+                        </div>
+                    </div>
+                    <div *ngIf="(i + 1) % (12 / gridSize) == 0" class="clearboth"></div>
+                </div>
+            </div>
+        </div>
 
-        <div class="nav" >
-            <button typse="button" class="btn btn-primary right-margin" (click)="endSession(true)">Zakończ sesję</button>
+        <div class="legend">
+            <span><span class="b">enter</span> - następna rozgrywka</span>
+        </div>
+
+        <div class="nav right" *ngIf="showNav">
+            <button *ngIf="isNextQuestion()" type="button" class="btn btn-primary right-margin" (click)="nextQuestion()">następna rozgrywka</button>
+            <button type="button" class="btn btn-primary" (click)="endSession(true)">zakończ sesję</button>
         </div>
 
     </div>

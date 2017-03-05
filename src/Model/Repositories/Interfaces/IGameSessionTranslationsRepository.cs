@@ -6,5 +6,6 @@ namespace Model.Repositories.Interfaces
     public interface IGameSessionTranslationsRepository : IRepositoryBase<GameSessionTranslation>
     {
         void DeleteByDictionaryId(int dictionaryId);
+        void DeleteByTranslationId(int translationId);
     }
 }

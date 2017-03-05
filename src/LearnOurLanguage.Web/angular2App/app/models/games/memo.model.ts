@@ -3,7 +3,7 @@ export class MemoModel {
 
     constructor(
         public gameSessionId: number = 0,
-        public translation: TranslationModel = null
+        public translations: Array<TranslationModel> = null
     ) { }
 
 }

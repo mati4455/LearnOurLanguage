@@ -7,4 +7,13 @@ export class DailyStatistics {
         public totalTime: number = 0
     ) { }
 
+    public minutes() {
+        let me = this;
+        return Math.floor(me.totalTime / 60);
+    }
+
+    public seconds() {
+        let me = this;
+        return me.totalTime % 60;
+    }
 }

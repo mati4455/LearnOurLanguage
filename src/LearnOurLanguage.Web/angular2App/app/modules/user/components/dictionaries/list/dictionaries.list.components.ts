@@ -4,7 +4,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import './dictionaries.list.scss';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 let store = require('store2');
+let $ = require('jquery');
 
 @Component({
     selector: 'dictionaries-list',
@@ -21,45 +23,67 @@ export class DictionariesListComponent {
     public dictionariesBase: Array<DictionaryModel> = [];
     public dictionariesPublic: Array<DictionaryModel> = [];
     public dictionariesPublicBase: Array<DictionaryModel> = [];
-    public flagAdd: boolean = false;
-    public flagEdit: boolean = true;
     public dictionaryId: number = 0;
+    public currTab: string;
 
     constructor(
         private dictionariesService: DictionariesService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private toast: ToastsManager) {
         let me = this;
     }
 
     ngOnInit() {
         let me = this;
+        me.loadPublicDictionaries();
+        me.loadOwnDictionaries();
+        me.currTab = me.route.snapshot.params['type'];
+    }
+
+    loadOwnDictionaries() {
+        let me = this;
         let userId = +store('userId');
-
-        me.dictionariesService.getAllPublic(me.loadPublicDictionaries, me);
-
         if (userId > 0) {
             me.dictionariesService.getForUser(userId, me.loadDictionaries, me);
         }
-
     }
 
     loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
         me.dictionariesBase = data;
+
+        me.setTabAndScroll();
     }
 
-    loadPublicDictionaries(data: any) {
+    loadPublicDictionaries() {
+        let me = this;
+        me.dictionariesService.getAllPublic(me.loadedPublicDictionaries, me);
+    }
+
+    loadedPublicDictionaries(data: any) {
         let me = this;
         me.dictionariesPublic = data;
         me.dictionariesPublicBase = data;
     }
 
-    deleteDictionary(id: any) {
+    selectTab(tab: any) {
         let me = this;
-        console.log(id[0]);
-        me.dictionariesService.delete(id[0], me.loadDictionaries, me);
+        if (me.route.snapshot.params['type'] != tab) {
+            me.router.navigate(['/user/dictionaries/', tab == 'public' ? 'public' : 'own']);
+
+            if (tab == 'public') {
+                me.loadPublicDictionaries();
+            } else {
+                me.loadOwnDictionaries();
+            }
+        }
+    }
+
+    isEditing() {
+        let me = this;
+        return me.router.url.indexOf('new') !== -1;
     }
 
     filterList(event: any) {
@@ -76,21 +100,18 @@ export class DictionariesListComponent {
         me.dictionariesPublic = me.dictionariesPublicBase.filter((element) => element.name.includes(me.queryString));
     }
 
-    setAddFlag() {
+    setTabAndScroll() {
         let me = this;
-        me.flagAdd = !me.flagAdd;
-    }
+        let id = me.currTab == 'own' ? '#ownDictionaries' : '#publicDictionaries';
+        setTimeout(() => {
+            var container = $(id + ' .list'),
+                scrollTo = $(id + ' .list a.active');
+            if (!container || !scrollTo || !scrollTo.offset()) return;
 
-    setEditFlag() {
-        let me = this;
-        me.flagEdit = !me.flagEdit;
-    }
+            container.scrollTop(
+                scrollTo.offset().top - container.offset().top + container.scrollTop() - 15
+            );
+        }, 200);
 
-    setDictionaryId(id: any) {
-        console.log(id);
-        let me = this;
-        me.dictionaryId = id;
-        me.flagAdd = false;
-        me.flagEdit = false;
     }
 }

@@ -25,10 +25,19 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
+                        redirectTo: 'own',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: ':type',
                         component: DictionariesListComponent,
                         children: [
                             {
-                                path: 'add/:dictionaryId',
+                                path: 'new',
+                                component: DictionariesAddComponent
+                            },
+                            {
+                                path: ':dictionaryId/form',
                                 component: DictionariesAddComponent
                             },
                             {
