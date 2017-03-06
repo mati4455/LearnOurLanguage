@@ -8,14 +8,30 @@
 
     .image  {
         transition: all .5s ease;
+        text-align: center;
+        cursor: pointer;
     }
 
-    .image:hover {
-        transform:scale(2);
+    .image.active {
+        //transform:scale(2);
         background: rgba(255, 255,255, 1);
-        position: absolute;
         z-index: 1000;
-        margin: auto;
+
+
+        position: fixed;
+
+        @media (min-width: 769px) {
+            width: 700px;
+            margin: -300px 0 0 -350px;
+            top: 50%;
+            left: 50%;
+        }
+
+        @media (max-width: 768px) {
+            width: 96%;
+            left: 2%;
+            top: 10%;
+        }
     }
 
     .title {
@@ -30,12 +46,10 @@
         position: relative;
         padding: 0 0;
         background: $home_header_background;
-        box-shadow: 0 0 $margin $home_header_shadow;
-        background: url('/assets/world_map.png') center $margin no-repeat;
-        height: 600px;
+        //box-shadow: 0 0 $margin $home_header_shadow;
+        background: url('/assets/world_map.png') center 0 no-repeat;
 
         & > div {
-            height: 600px;
             background: rgba(255, 255,255, .8);
             margin: 0 auto;
         }
@@ -43,7 +57,7 @@
     .content {
         margin: 50px auto;
     }
-    .box {
+    .boxImg {
         box-shadow: none;
         margin: 0;
         padding: $half_margin;
@@ -76,13 +90,14 @@
         text-align: center;
     }
     .margin-top {
-        margin-top: 180px;
+        margin-top: 100px;
+        margin-bottom: 100px;
     }
     .button {
         display: inline-block;
     }
     .caption{
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 1);
 
         h3 {
             font-size: 2em;
