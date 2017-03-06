@@ -46,7 +46,8 @@
         <div class="answerInput">
             <form class="form-group" (ngSubmit)="confirmAnswer()">
                 <div class="input-group">
-                    <input type="text" [disabled]="isChecked()" [(ngModel)]="answerValue" name="answerInput" id="answerInput" placeholder="Twoja odpowiedż" class="form-control" required autofocus>
+                    <input type="text" [disabled]="isChecked()" [(ngModel)]="answerValue" name="answerInput" id="answerInput"
+                           placeholder="Twoja odpowiedż" class="form-control" autocomplete="off" required autofocus>
                     <span class="input-group-btn">
                         <button type="submit" [disabled]="isChecked()" class="btn btn-success" id="answerButton">Sprawdź</button>
                     </span>
