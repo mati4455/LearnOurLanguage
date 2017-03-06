@@ -1,28 +1,23 @@
 ﻿<div id="home">
-    <div class="container-fluid header">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 margin-top">
-                    <div class="shadow"></div>
-                    <h1 class="title center">Learn our Language</h1>
-                    <div class="row centered-text">
-                        <h2>Jakiś tam tekst</h2>
-                    </div>
-                    <div class="nav-action">
-                        <div class="button">
-                            <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-success" routerLink="/auth/login">Zaloguj się</a></div>
-                            <div *ngIf="auth.getLoggedIn()"><a class="btn btn-success" routerLink="/user">Moje konto</a></div>
-                        </div>
-                        <div class="button">
-                            <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/register">Załóż konto</a></div>
-                            <div *ngIf="auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/logout">Wyloguj</a></div>
-                        </div>
-                    </div>
+    <div class="container-fluid header"><div>
+        <div class="margin-top">
+            <h1 class="title center">Learn our Language</h1>
+            <div class="centered-text">
+                <h2>Jakiś tam tekst</h2>
+            </div>
+            <div class="nav-action">
+                <div class="button">
+                    <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-success" routerLink="/auth/login">Zaloguj się</a></div>
+                    <div *ngIf="auth.getLoggedIn()"><a class="btn btn-success" routerLink="/user">Moje konto</a></div>
+                </div>
+                <div class="button">
+                    <div *ngIf="!auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/register">Załóż konto</a></div>
+                    <div *ngIf="auth.getLoggedIn()"><a class="btn btn-primary" routerLink="/auth/logout">Wyloguj</a></div>
                 </div>
             </div>
+        </div>
 
-            <div class="sep30"></div>
-
+        <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-3 boxImg">
                     <div class="image" (click)="togglePreview($event)">
@@ -72,4 +67,4 @@
             </div>
         </div>
     </div>
-</div>
+</div></div>
