@@ -1,0 +1,30 @@
+<div class="static-background"><div>
+
+    <div id="userModule" class="container layout-v2">
+        <div class="row">
+            <div class="menu-tiles background-color">
+                <a routerLink="/user/home" routerLinkActive="active">
+                    <div><i class="fa fa-home" aria-hidden="true"></i><span>Tablica</span></div>
+                </a>
+                <a routerLink="/user/dictionaries" routerLinkActive="active">
+                    <div><i class="fa fa-book" aria-hidden="true"></i><span>Słowniki</span></div>
+                </a>
+                <a routerLink="/user/games" routerLinkActive="active">
+                    <div><i class="fa fa-trophy" aria-hidden="true"></i><span>Gry</span></div>
+                </a>
+                <a routerLink="/user/statistics" routerLinkActive="active">
+                    <div><i class="fa fa-pie-chart" aria-hidden="true"></i><span>Statystyki</span></div>
+                </a>
+                <a routerLink="/auth/logout" routerLinkActive="active">
+                    <div><i class="fa fa-power-off" aria-hidden="true"></i><span>Wyloguj</span></div>
+                </a>
+            </div>
+            <div class="content col-xs-12">
+                <div class="box-tile">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div></div>

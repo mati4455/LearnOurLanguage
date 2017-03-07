@@ -1,0 +1,124 @@
+@import "common";
+
+.game-area {
+    position: relative;
+}
+
+.hangman {
+
+    .nav {
+        text-align: right;
+        margin: $margin 0;
+    }
+
+    .question {
+        margin: $half_margin 0 0;
+        font-size: 30px;
+        font-weight: 700;
+        font-style: italic;
+        letter-spacing: 4px;
+        display: inline-block;
+        border: 2px solid #146485;
+        padding: 15px 30px;
+        box-shadow: 0px 0px 10px #146485;
+        background: rgba(255,255,255,.8);
+        border-radius: 10px;
+    }
+
+    .right-margin {
+        margin-right: $half_margin;
+    }
+
+    .header-info {
+        font-size: 24px;
+    }
+
+    .questionMask {
+        text-align: center;
+
+        label {
+            display: inline-block;
+            font-size: 32px;
+            line-height: 36px;
+            width: 36px;
+            height: 36px;
+            color: $text_color;
+            text-align: center;
+            margin: $half_margin auto;
+
+            transition: all .3s;
+        }
+    }
+
+    .availableChars {
+        text-align: center;
+        margin: $margin 0;
+
+        &.disabled {
+            pointer-events: none;
+        }
+
+        label {
+            display: inline-block;
+            font-size: 19px;
+            line-height: 32px;
+            width: 32px;
+            height: 32px;
+            border: 1px solid $shadow;
+            border-radius: 6px;
+            background: rgba(255,255,255,.6);
+            color: $text_color;
+            box-shadow: 0 0 2px $shadow;
+            margin: 5px;
+            text-align: center;
+
+            transition: all .3s;
+
+            &:hover {
+                color: #fff;
+                background: $menu_hover_games;
+                cursor: pointer;
+            }
+
+            &.selected {
+                color: $disabled_color;
+                box-shadow: 0 0 2px $disabled_color;
+                border: 1px solid $disabled_color;
+                pointer-events: none;
+                user-select: none;
+            }
+        }
+    }
+}
+
+.hangmanArea {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+
+    border: 6px dotted $shadow;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .6);
+
+    padding: 50px 0 0 80px;
+
+    &.correct {
+        border-color: $quiz_correct_background;
+        background: rgba($quiz_correct_background, .2);
+    }
+
+    &.wrong {
+        border-color: $quiz_wrong_background;
+        background: rgba($quiz_wrong_background, .2);
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+        transform: scale(1.4);
+        path {
+            fill: $hangman_color;
+            stroke: $hangman_color;
+        }
+    }
+}

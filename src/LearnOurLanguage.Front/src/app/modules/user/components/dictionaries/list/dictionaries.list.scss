@@ -1,0 +1,42 @@
+@import "common";
+
+.list {
+    max-height: 500px;
+    overflow-y: auto;
+
+    & > div {
+        a {
+            display: block;
+            color: #333;
+            background: #ddd;
+            font-size: 1.3em;
+            padding: $half_margin;
+            margin-bottom: $half_margin;
+            transition: all .2s;
+
+            &:hover,
+            &.active {
+                color: #fff;
+                text-shadow: 0 0 2px $shadow;
+                background: $menu_hover_dictionaries;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.buttons {
+    a {
+        width: 100%;
+        background: rgba(255, 255, 255, .65);
+        padding: $half_margin;
+        margin-top: $half_margin;
+        }
+
+    button {
+        width: 100%;
+        background: rgba(255, 255, 255, .65);
+        padding: $half_margin 0;
+        margin-top: $half_margin;
+    }
+}
