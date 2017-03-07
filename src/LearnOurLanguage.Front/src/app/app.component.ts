@@ -10,7 +10,7 @@ import { AuthService } from './services';
 //import '../style/app.scss';
 
 @Component({
-    selector: 'my-app',
+    selector: 'app-root',
     templateUrl: 'app.component.html',
     providers: [AuthService]
 })

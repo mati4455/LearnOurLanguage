@@ -18,21 +18,22 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": [
-        "style/fonts.scss",
-        "style/font-awesome.min.scss",
-        "style/common.scss",
-        "styles.scss"
-      ],
       "stylePreprocessorOptions": {
         "includePaths": [
-          "app/style"
+          "style"
         ]
       },
+      "styles": [
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+        "style/fonts.scss",
+        "style/font-awesome.min.scss",
+        "styles.scss"
+      ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.js",
         "../node_modules/chart.js/dist/Chart.min.js",
+        "../node_modules/store2/dist/app.js",
         "../node_modules/store2/dist/store2.min.js"
       ],
       "environmentSource": "environments/environment.ts",

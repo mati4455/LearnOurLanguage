@@ -1,5 +1,5 @@
 /** style dla strony głównej panelu gier **/
-@import "common";
+$margin: 30px; $half_margin: $margin / 2; $shadow: #222; $text_color: #333; $text_gray: #999; $hr_color: #a29e9e;  $box_tile_background: rgba(255, 255, 255, .6); $box_tile_shadow: 0px 2px 6px rgba(0,0,0,0.16), 0px 2px 6px rgba(0,0,0,0.23);  $menu_hover_board: #c16126; $menu_hover_dictionaries: #a5294d; $menu_hover_games: #146485; $menu_hover_statistics: #7fa339; $menu_hover_logout: #688691;  $home_header_background: #e8e8e8; $home_title_color: #333; $home_title_shadow: #ccc; $home_header_shadow: #b7b7b7;  $dictionary_link_background: rgba(230, 230, 230, .7); $dictionary_link_color: #333; $dictionary_link_background_hover: lighter($menu_hover_statistics, 15%); $dictionary_link_color_hover: #fff;  $quiz_question_size: 30px; $quiz_button_background: rgba(235, 235, 235, 0.75); $quiz_button_background_hover: $menu_hover_games; $quiz_button_color: #333; $quiz_button_color_hover: #fff; $quiz_button_shadow_hover: 1px 1px 2px $shadow; $quiz_correct_background: #82b95a; $quiz_wrong_background: #c75959; $disabled_color: #999;  $hangman_color: #444;
 
 .box-game {
     text-align: center;
@@ -11,7 +11,7 @@
         color: $text_color;
         text-decoration: none;
         transition: scale .3s, transform .3s, color .3s;
-        
+
         i {
             display: block;
             font-size: 100px;
