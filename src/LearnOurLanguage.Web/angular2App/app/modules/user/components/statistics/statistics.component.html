@@ -1,0 +1,49 @@
+<div class="col-xs-12">
+    <h3>Parametry</h3>
+    <form (ngSubmit)="generate()">
+        <div class="form-group" *ngIf="languages">
+            <label for="languageId">Język:</label>
+            <select [(ngModel)]="languageId" required name="languageId" class="form-control" id="languageId">
+                    <option *ngFor="let language of languages" [value]="language.id">
+                        {{language.name}}
+                    </option>
+                </select>
+        </div>
+        <div class="form-group" *ngIf="dictionaries">
+            <label for="dictionaryId">Słownik:</label>
+            <select [(ngModel)]="dictionaryId" required name="dictionaryId" class="form-control" id="dictionaryId">
+                    <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+                        {{dictionary.name}}
+                    </option>
+                </select>
+        </div>
+        <div class="form-group" *ngIf="games">
+            <label for="gameId">Gry:</label>
+            <select [(ngModel)]="gameId" required name="gameId" class="form-control" id="gameId">
+                    <option *ngFor="let game of games" [value]="game.id">
+                        {{game.name}}
+                    </option>
+                </select>
+        </div>
+
+        <div class="right">
+            <button type="submit" class="btn btn-primary">Rysuj</button>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-md-5">
+        <h2>Statystyki użytkownika</h2>
+        <div *ngIf="lastSessionStatistics">
+            <canvas baseChart [data]="lastSessionStatistics.data" [labels]="lastSessionStatistics.labels" [colors]="pieChartColors" chartType="doughnut"></canvas>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-5 col-md-push-2">
+        <h2>Popularność gier</h2>
+        <div *ngIf="gamesRankStatistics">
+            <canvas baseChart [data]="gamesRankStatistics.data" [labels]="gamesRankStatistics.labels" [colors]="pieChartColors" chartType="doughnut"></canvas>
+        </div>
+    </div>
+</div>
