@@ -1,6 +1,6 @@
 import {
     DictionaryModel, MemoModel, MemoParametersModel, MemoQuestionModel, MemoVoModel,
-    AnswerUpdateModel, PieChartData, KeysEnum
+    AnswerUpdateModel, PieChartData, KeysEnum, FlashcardsModel
 } from 'lol/models';
 import { trigger, state, style, transition, animate } from '@angular/core';
 import { GamesService, DictionariesService, ChartsService } from 'lol/services';

@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class LearnOurLanguage.FrontPage {
+export class LearnOurLanguage.Web.FrontPage {
   navigateTo() {
     return browser.get('/');
   }

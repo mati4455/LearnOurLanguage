@@ -1,14 +1,71 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>LearnOurLanguage.Front</title>
-  <base href="/">
+    <base href="/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Learn our Language</title>
+    <style><!--
+        /** loader inline, aby był widoczny od razu po włączeniu strony **/
+        #loader {
+            display: none;
+            position: fixed;
+            width: 100%; height: 100%;
+            top: 0; left: 0; z-index: 10000;
+            background: rgba(255, 255, 255, .7);
+            align-items: center;
+            justify-content: center;
+        }
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+        /** paski **/
+        #loader > div{width:120px;height:65px;text-align:center;font-size:25px}
+        #loader > div div{background-color:#146485;height:100%;width:7px;display:inline-block;-webkit-animation:sk-stretchdelay 1.2s infinite ease-in-out;animation:sk-stretchdelay 1.2s infinite ease-in-out}
+        #loader .rect2{-webkit-animation-delay:-1.1s;animation-delay:-1.1s}
+        #loader .rect3{-webkit-animation-delay:-1s;animation-delay:-1s}
+        #loader .rect4{-webkit-animation-delay:-.9s;animation-delay:-.9s}
+        #loader .rect5{-webkit-animation-delay:-.8s;animation-delay:-.8s}
+        @-webkit-keyframes sk-stretchdelay {
+            0%,40%,100%{-webkit-transform:scaleY(0.4)}
+            20%{-webkit-transform:scaleY(1.0)}
+        }
+        @keyframes sk-stretchdelay {
+            0%,40%,100%{transform:scaleY(0.4);-webkit-transform:scaleY(0.4)}
+            20%{transform:scaleY(1.0);-webkit-transform:scaleY(1.0)}
+        }
+
+        /** kwadrat **/
+        /*
+        #loader > div{width:80px;height:80px;background-color:#146485;-webkit-animation:sk-rotateplane 1.2s infinite ease-in-out;animation:sk-rotateplane 1.2s infinite ease-in-out}
+        @-webkit-keyframes sk-rotateplane {
+            0%{-webkit-transform:perspective(120px)}
+            50%{-webkit-transform:perspective(120px) rotateY(180deg)}
+            100%{-webkit-transform:perspective(120px) rotateY(180deg) rotateX(180deg)}
+        }
+        @keyframes sk-rotateplane {
+            0%{transform:perspective(120px) rotateX(0deg) rotateY(0deg);-webkit-transform:perspective(120px) rotateX(0deg) rotateY(0deg)}
+            50%{transform:perspective(120px) rotateX(-180.1deg) rotateY(0deg);-webkit-transform:perspective(120px) rotateX(-180.1deg) rotateY(0deg)}
+            100%{transform:perspective(120px) rotateX(-180deg) rotateY(-179.9deg);-webkit-transform:perspective(120px) rotateX(-180deg) rotateY(-179.9deg)}
+        }
+        */
+    --></style>
 </head>
 <body>
-  <app-root>Loading...</app-root>
+    <app-root>
+        <div id="loader" style="display: flex;"><div>
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div></div>
+    </app-root>
+    <div id="loader"><div>
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div></div>
 </body>
 </html>
