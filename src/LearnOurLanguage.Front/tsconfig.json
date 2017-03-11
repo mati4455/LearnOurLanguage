@@ -14,8 +14,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "lol/*": ["./app/*"],
-      "shared/*": ["./app/modules/shared/*"]
+      "lol/*": ["./src/app/*"],
+      "shared/*": ["./src/app/modules/shared/*"]
     }
   }
 }
