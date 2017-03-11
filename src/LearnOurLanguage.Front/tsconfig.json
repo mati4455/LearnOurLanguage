@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "outDir": "../LearnOurLanguage.Web/wwwroot/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -11,6 +11,11 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "lol/*": ["./app/*"],
+      "shared/*": ["./app/modules/shared/*"]
+    }
   }
 }
