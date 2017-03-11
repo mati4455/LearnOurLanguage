@@ -26,19 +26,20 @@ Aby przetestować migrację, należy w `Package Manager Console` (dalej nazywane
 Aby zbudować nasz front musimy pobrać NodeJs.
 
 Prawdopodobnie Visual Studio odzyska za nas pakiety, jednak ja proponuje odpalić skrypt `scripts/first_build.bat`, 
-który pobierze wszystkie moduły Node potrzebne dla naszego projektu.
+który pobierze wszystkie moduły Node potrzebne dla naszego projektu. Skrypt należy uruchomić jako Administrator.
 
 Teraz pora na zbudowanie aplikacji. W tym celu będziemy uruchamiać skrypt `scripts/build_front_watch.bat`
 
 Podczas produkcji będziemy używać WebPacka a trybie `watch`. Oznacza to, że będzie on nasłuchiwał zmian w plikach 
 i od razu je kompilował.
 
+Dodatkowo w projekcie `LearnOurLanguage.Front` można uruchomić polecenie `npm start` - nasłuchiwanie zmian, `npm build` - zbudowanie w trybie dev, `npm build --watch` - zbudowanie i nasłuchiwanie, `npm build-production` - zbudowanie do produkcji.
+Te komendy są przydatne, gdy budujemy aplikacje z PowerShella, np. w `VS Code` w zakładce `Console`.
 
 ## Tworzenie front-endu
 Do tworzenia frontu będziemy używać Visual Studio Code (w żadnym wypadku pełnego Visual Studio).
 
-W repozytorium znajdują się podpięte taski pod VS Code. Aby rozpocząć pracę z tworzeniem należy uruchomić VS Code, a następnie otworzyć folder -> `src/LearnOurLanguage.Web/angular2App`
+Aby rozpocząć pracę z tworzeniem należy uruchomić VS Code, a następnie otworzyć folder -> `src/LearnOurLanguage.Front/src` lub główny folder projektu.
 
-Będzie to nasz wejściowy folder. Po edycji pliku `app.scss`, wymagane jest jego skompilowanie -> skrót `CTRL + SHIFT + B`
 
 
