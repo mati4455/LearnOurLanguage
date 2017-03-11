@@ -1,2 +1,2 @@
-cd "../src/LearnOurLanguage.Web"
-npm install sass-loader node-sass webpack -g && npm install
+cd "../src/LearnOurLanguage.Front"
+npm install @angular/cli -g && npm install
