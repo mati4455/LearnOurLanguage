@@ -41,4 +41,10 @@ W repozytorium znajdują się podpięte taski pod VS Code. Aby rozpocząć prac�
 
 Będzie to nasz wejściowy folder. Po edycji pliku `app.scss`, wymagane jest jego skompilowanie -> skrót `CTRL + SHIFT + B`
 
+## Adresy
+Serwer: localhost na porcie 5000
+
+Front: localhost na porcie 4200
+
+Czyli po nowemu uruchamiamy stronkę na porcie 4200, a nie jak poprzednio 5000.
 
