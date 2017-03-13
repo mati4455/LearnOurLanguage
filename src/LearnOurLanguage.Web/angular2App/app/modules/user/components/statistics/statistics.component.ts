@@ -21,9 +21,9 @@ export class StatisticsComponent {
 
     periodStatistics: LineChartData;
     periodTimeStatistics: LineChartData;
-    lastSessionStatistics: PieChartData;
-    gamesRankStatistics: PieChartData;
-    dailyStatistics: DailyStatistics;
+    dictionariesStatistics: PieChartData;
+    dictionariesDetailsStatistics: LineChartData;
+
     dictionaries: Array<DictionaryModel> = null;
     dictionariesFiltered: Array<DictionaryModel> = null;
     languages: Array<LanguageModel> = null;
@@ -34,7 +34,8 @@ export class StatisticsComponent {
     gameId: number = 0;
     startDate: Date;
     endDate: Date;
-
+    gameDicId: number = 0;
+    dicId: number = 0;
 
     barChartColors = BarChartColors;
     pieChartColors = PieChartColors;
@@ -72,6 +73,18 @@ export class StatisticsComponent {
         me.chartsService.getTimeChartForUserByPeriod(params, me.loadTimePeriod, me);
     }
 
+    generateForDictionaries() {
+        let me = this;
+        let params = {
+            userId: me.userId,
+            dictionaryId: me.dicId,
+            gameId: me.gameDicId
+        };
+        console.log(params);
+        me.chartsService.getStatisticsForDictionary(params, me.loadDictionariesStats, me);
+        me.chartsService.getDetailsStatisticsForDictionary(params, me.loadDictionariesDetailsStats, me);
+    }
+
     loadPeriodUser(data: any) {
         let me = this;
         me.periodStatistics = data;
@@ -80,6 +93,16 @@ export class StatisticsComponent {
     loadTimePeriod(data: any) {
         let me = this;
         me.periodTimeStatistics = data;
+    }
+
+    loadDictionariesStats(data: any) {
+        let me = this;
+        me.dictionariesStatistics = data;
+    }
+
+    loadDictionariesDetailsStats(data: any) {
+        let me = this;
+        me.dictionariesDetailsStatistics = data;
     }
 
     filterDictionaries(event: any) {

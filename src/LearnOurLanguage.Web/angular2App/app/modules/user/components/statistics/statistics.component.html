@@ -65,3 +65,54 @@
         </p>
     </div>
 </div>
+
+<div class="sep30"></div>
+
+<div class="statistics col-xs-12">
+    <h2>Statystyki słownika</h2>
+    <h3>Parametry</h3>
+    <form (ngSubmit)="generateForDictionaries()">
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="dictionaries">
+                <label for="dicId">Słownik:</label>
+                <select [(ngModel)]="dicId" required name="dicId" class="form-control" id="dicId" [disabled]="dictionaries.length==0">
+                    <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+                        {{dictionary.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="games">
+                <label for="gameDicId">Gra:</label>
+                <select [(ngModel)]="gameDicId" name="gameDicId" class="form-control" id="gameDicId">
+                    <option *ngFor="let game of games" [value]="game.id">
+                        {{game.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group right col-xs-12 col-sm-6 col-md-4">
+                <label>&nbsp;</label>
+                <input type="submit" class="btn btn-primary" value="Rysuj"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        <div *ngIf="dictionariesStatistics">
+            <canvas baseChart [data]="dictionariesStatistics.data" [labels]="dictionariesStatistics.labels" [colors]="pieChartColors" chartType="pie"></canvas>
+        </div>
+        <p *ngIf="!dictionariesStatistics">
+            Nie znaleziono statystyk dla podanych parametrów
+        </p>
+    </div>
+    <div class="col-xs-12 col-md-8">
+        <div *ngIf="dictionariesDetailsStatistics">
+            <canvas baseChart [datasets]="dictionariesDetailsStatistics.data" [labels]="dictionariesDetailsStatistics.labels" [colors]="barChartColors"
+                chartType="bar"></canvas>
+        </div>
+        <p *ngIf="!dictionariesDetailsStatistics">
+            Nie znaleziono statystyk dla podanych parametrów
+        </p>
+    </div>
+</div>
