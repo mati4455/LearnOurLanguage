@@ -7,7 +7,6 @@ import 'rxjs/Rx';
 
 declare let $: any;
 declare let store: any;
-
 let interval: any;
 
 /**

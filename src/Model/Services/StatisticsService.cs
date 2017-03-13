@@ -195,7 +195,7 @@ namespace Model.Services
                     return new TranslationStatistics
                     {
                         Word = firstEl.Translation.SecondLangWord,
-                        ProcentOfCorrectAnswers = dataList.Count(x => x.Correct) / dataList.Count
+                        ProcentOfCorrectAnswers = (decimal) Math.Round( dataList.Count(x => x.Correct) * 100.0 / dataList.Count, 2)
                     };
                 })
                 .ToList();
@@ -286,9 +286,11 @@ namespace Model.Services
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.UserId == userId)
-                .Where(gst => langId == null || langId == 0 || langId == gst.GameSession.Dictionary.SecondLanguageId
-                           || langId == gst.GameSession.Dictionary.FirstLanguageId)
-                .Where(gst => gameId == null || gameId ==0 || gameId == gst.GameSession.GameId)
+                .Where(gst => langId == null ||
+                              langId == 0 ||
+                              langId == gst.GameSession.Dictionary.SecondLanguageId ||
+                              langId == gst.GameSession.Dictionary.FirstLanguageId)
+                .Where(gst => gameId == null || gameId == 0 || gameId == gst.GameSession.GameId)
                 .Where(gst => gst.GameSession.DateStart.Date >= startDate.Date)
                 .Where(gst => gst.GameSession.DateEnd != null && gst.GameSession.DateEnd.Value.Date <= endDate.Date)
                 .ToList();

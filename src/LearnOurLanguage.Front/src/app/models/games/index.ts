@@ -4,6 +4,7 @@ export { KeysEnum } from './keys.enum';
 export { BaseGameParameters } from './base-game-parameters.model';
 export { AnswerUpdateModel } from './answer-update.model';
 export { QuestionPair } from './questions-pair.model';
+export { GameModel } from './game.model';
 
 export { QuizModel } from './quiz.model';
 export { QuizParameters } from './quiz-parameters.model';

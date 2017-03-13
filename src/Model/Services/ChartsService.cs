@@ -16,7 +16,7 @@ namespace Model.Services
         const string MinTime = "Minimalny czas odpowiedzi";
         const string MaxTime = "Maksymalny czas odpowiedzi";
         const string AverageTime = "Średni czas odpowiedzi";
-        const string WordName = "Słówka";
+        const string WordName = "Procent poprawnych odpowiedzi słówka";
         #endregion
 
         #region Context, Serwisy i konstruktor

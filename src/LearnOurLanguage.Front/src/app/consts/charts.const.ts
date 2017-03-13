@@ -1,8 +1,8 @@
-let color1 = '#7fa339';
-let color2 = '#a5294d';
-let color3 = '#146485';
-let color4 = '#c16126';
-let color5 = '#688691';
+let color1 = 'rgba(127, 163, 57, 0.75)';
+let color2 = 'rgba(165, 41, 77, 0.75)';
+let color3 = 'rgba(20, 100, 133, 0.75)';
+let color4 = 'rgba(193, 97, 38, 0.75)';
+let color5 = 'rgba(104, 134, 145, 0.75)';
 
 export const PieChartColors: any = [
     {
