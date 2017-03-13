@@ -5,6 +5,7 @@ import { DictionariesAddComponent} from './components/dictionaries/add/dictionar
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './components/layout/layout.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -51,6 +52,10 @@ const routes: Routes = [
             {
                 path: 'games',
                 loadChildren: './games/games.module#GamesModule'
+            },
+            {
+                path: 'statistics',
+                component: StatisticsComponent
             }
         ]
     }

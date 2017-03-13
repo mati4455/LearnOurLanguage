@@ -13,6 +13,7 @@ import { CollapseModule } from 'ng2-bootstrap/collapse';
 import { UserRoutes } from './user.routes';
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         DictionariesComponent,
         DictionariesListComponent,
         DictionariesFormComponent,
-        DictionariesAddComponent
+        DictionariesAddComponent,
+        StatisticsComponent
     ],
 
     exports: [
@@ -43,7 +45,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         DictionariesComponent,
         DictionariesListComponent,
         DictionariesFormComponent,
-        DictionariesAddComponent
+        DictionariesAddComponent,
+        StatisticsComponent
     ]
 })
 
