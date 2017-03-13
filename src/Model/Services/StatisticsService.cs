@@ -285,10 +285,11 @@ namespace Model.Services
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.UserId == userId)
-                .Where(gst => langId == null || langId == gst.GameSession.Dictionary.SecondLanguageId)
+                .Where(gst => langId == null || langId == gst.GameSession.Dictionary.SecondLanguageId
+                           || langId == gst.GameSession.Dictionary.FirstLanguageId)
                 .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
                 .Where(gst => gst.GameSession.DateStart.Date >= startDate.Date)
-                .Where(gst => gst.GameSession.DateStart.Date <= endDate.Date)
+                .Where(gst => gst.GameSession.DateEnd != null && gst.GameSession.DateEnd.Value.Date <= endDate.Date)
                 .ToList();
             return data;
         }

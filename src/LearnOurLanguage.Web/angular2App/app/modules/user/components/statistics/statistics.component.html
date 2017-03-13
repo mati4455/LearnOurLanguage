@@ -1,49 +1,67 @@
-<div class="col-xs-12">
+<div class="statistics col-xs-12">
+    <h2>Statystyki czasowe i poprawności odpowiedzi</h2>
     <h3>Parametry</h3>
     <form (ngSubmit)="generate()">
-        <div class="form-group" *ngIf="languages">
-            <label for="languageId">Język:</label>
-            <select [(ngModel)]="languageId" required name="languageId" class="form-control" id="languageId">
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="languages">
+                <label for="languageId">Język:</label>
+                <select [(ngModel)]="languageId" (change)="filterDictionaries($event)" required name="languageId" class="form-control" id="languageId">
                     <option *ngFor="let language of languages" [value]="language.id">
                         {{language.name}}
                     </option>
                 </select>
-        </div>
-        <div class="form-group" *ngIf="dictionaries">
-            <label for="dictionaryId">Słownik:</label>
-            <select [(ngModel)]="dictionaryId" required name="dictionaryId" class="form-control" id="dictionaryId">
-                    <option *ngFor="let dictionary of dictionaries" [value]="dictionary.id">
+            </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="dictionariesFiltered">
+                <label for="dictionaryId">Słownik:</label>
+                <select [(ngModel)]="dictionaryId" name="dictionaryId" class="form-control" id="dictionaryId" [disabled]="dictionariesFiltered.length==0">
+                    <option *ngFor="let dictionary of dictionariesFiltered" [value]="dictionary.id">
                         {{dictionary.name}}
                     </option>
                 </select>
-        </div>
-        <div class="form-group" *ngIf="games">
-            <label for="gameId">Gry:</label>
-            <select [(ngModel)]="gameId" required name="gameId" class="form-control" id="gameId">
+            </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="games">
+                <label for="gameId">Gra:</label>
+                <select [(ngModel)]="gameId" required name="gameId" class="form-control" id="gameId">
                     <option *ngFor="let game of games" [value]="game.id">
                         {{game.name}}
                     </option>
                 </select>
-        </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <label for="startDate">Data od:</label>
+                <input [(ngModel)]="startDate" type="date" class="form-control" id="startDate" name="startDate">
+            </div>
 
-        <div class="right">
-            <button type="submit" class="btn btn-primary">Rysuj</button>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <label for="endDate">Data do:</label>
+                <input [(ngModel)]="endDate" type="date" class="form-control" id="endDate" name="endDate" />
+            </div>
+
+            <div class="form-group right col-xs-12 col-sm-6 col-md-4">
+                <label for="rysujButton">&nbsp;</label>
+                <input type="submit" class="btn btn-primary" id="rysujButton" value="Rysuj"/>
+            </div>
         </div>
     </form>
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-md-5">
-        <h2>Statystyki użytkownika</h2>
-        <div *ngIf="lastSessionStatistics">
-            <canvas baseChart [data]="lastSessionStatistics.data" [labels]="lastSessionStatistics.labels" [colors]="pieChartColors" chartType="doughnut"></canvas>
+    <div class="col-xs-12">
+        <div *ngIf="periodStatistics && periodStatistics.labels.length > 0">
+            <canvas baseChart [datasets]="periodStatistics.data" [labels]="periodStatistics.labels" [colors]="barChartColors" chartType="bar"></canvas>
         </div>
+        <p *ngIf="periodStatistics &&  periodStatistics.labels.length == 0">
+            Nie znaleziono statystyk dla podanych parametrów
+        </p>
     </div>
-
-    <div class="col-xs-12 col-md-5 col-md-push-2">
-        <h2>Popularność gier</h2>
-        <div *ngIf="gamesRankStatistics">
-            <canvas baseChart [data]="gamesRankStatistics.data" [labels]="gamesRankStatistics.labels" [colors]="pieChartColors" chartType="doughnut"></canvas>
+    <div class="col-xs-12">
+        <div *ngIf="periodTimeStatistics && periodTimeStatistics.labels.length > 0">
+            <canvas baseChart [datasets]="periodTimeStatistics.data" [labels]="periodTimeStatistics.labels" [colors]="barChartColors"
+                chartType="bar"></canvas>
         </div>
+        <p *ngIf="periodTimeStatistics &&  periodTimeStatistics.labels.length == 0">
+            Nie znaleziono statystyk dla podanych parametrów
+        </p>
     </div>
 </div>

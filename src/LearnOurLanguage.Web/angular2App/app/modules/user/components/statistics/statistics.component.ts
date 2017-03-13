@@ -25,14 +25,15 @@ export class StatisticsComponent {
     gamesRankStatistics: PieChartData;
     dailyStatistics: DailyStatistics;
     dictionaries: Array<DictionaryModel> = null;
+    dictionariesFiltered: Array<DictionaryModel> = null;
     languages: Array<LanguageModel> = null;
     games: Array<GamesModel> = null;
 
     languageId: number = 0;
     dictionaryId: number = 0;
     gameId: number = 0;
-    startDate: Date = null;
-    endDate: Date = null;
+    startDate: Date;
+    endDate: Date;
 
 
     barChartColors = BarChartColors;
@@ -49,23 +50,48 @@ export class StatisticsComponent {
         let me = this;
         me.userId = +store('userId');
 
-        me.initDailyStatistics();
-        me.initLastSessionChart();
-        me.initGamesRankChart();
-        me.initPeriodChart();
-        me.initPeriodTimeChart();
+
         me.dictionariesService.getForUser(me.userId, me.loadDictionaries, me);
         me.languageService.getAll(me.loadLanguages, me);
         me.prepareGames();
     }
 
     generate() {
+        let me = this;
+        me.endDate = new Date();
+        me.startDate = new Date();
+        me.startDate.setDate(me.endDate.getDate() - 100);
+        let params = {
+            userId: me.userId,
+            langId: me.languageId,
+            gameId: me.gameId,
+            startDate: me.dateFormat(me.startDate),
+            endDate: me.dateFormat(me.endDate)
+        };
+        me.chartsService.getChartForUserByPeriod(params, me.loadPeriodUser, me);
+        me.chartsService.getTimeChartForUserByPeriod(params, me.loadTimePeriod, me);
+    }
+
+    loadPeriodUser(data: any) {
+        let me = this;
+        me.periodStatistics = data;
+    }
+
+    loadTimePeriod(data: any) {
+        let me = this;
+        me.periodTimeStatistics = data;
+    }
+
+    filterDictionaries(event: any) {
+        let me = this;
+        me.dictionariesFiltered = me.dictionaries.filter((element) => element.firstLanguage.id == event.target.value || element.secondLanguage.id == event.target.value);
 
     }
 
     loadDictionaries(data: any) {
         let me = this;
         me.dictionaries = data;
+        me.dictionariesFiltered = new Array<DictionaryModel>();
     }
 
     prepareGames() {
@@ -76,89 +102,11 @@ export class StatisticsComponent {
             new GamesModel(3, "Memo"),
             new GamesModel(4, "Hangman")
         ];
-        console.log(me.games);
     }
 
     loadLanguages(data: any) {
         let me = this;
         me.languages = data;
-    }
-
-    initDailyStatistics() {
-        let me = this;
-        me.chartsService.getDailyStatistics({
-            userId: me.userId
-        }, me.loadDailyStatistics, me);
-    }
-
-    loadDailyStatistics(data: any) {
-        let me = this;
-        me.dailyStatistics = new DailyStatistics(data.gamesCount, data.answersRate, data.averageTime, data.totalTime);
-    }
-
-    initLastSessionChart() {
-        let me = this;
-        me.chartsService.getLastSessionStatistics({
-            userId: me.userId
-        }, me.loadLastSessionChart, me);
-    }
-
-    loadLastSessionChart(data: any) {
-        let me = this;
-        me.lastSessionStatistics = data;
-    }
-
-    initGamesRankChart() {
-        let me = this;
-        me.chartsService.getGamesStatisticsForUser({
-            userId: me.userId,
-            langId: null
-        }, me.loadGamesRankChart, me);
-    }
-
-    loadGamesRankChart(data: any) {
-        let me = this;
-        me.gamesRankStatistics = data;
-    }
-
-    initPeriodChart() {
-        let me = this;
-        let start = new Date();
-        start.setDate(start.getDate() - 6);
-        let end = new Date();
-
-        me.chartsService.getChartForUserByPeriod({
-            userId: me.userId,
-            langId: null,
-            gameId: null,
-            startDate: me.dateFormat(start),
-            endDate: me.dateFormat(end)
-        }, me.loadPeriodChart, me);
-    }
-
-    loadPeriodChart(data: any) {
-        let me = this;
-        me.periodStatistics = data;
-    }
-
-    initPeriodTimeChart() {
-        let me = this;
-        let start = new Date();
-        start.setDate(start.getDate() - 6);
-        let end = new Date();
-
-        me.chartsService.getTimeChartForUserByPeriod({
-            userId: me.userId,
-            langId: null,
-            gameId: null,
-            startDate: me.dateFormat(start),
-            endDate: me.dateFormat(end)
-        }, me.loadPeriodTimeChart, me);
-    }
-
-    loadPeriodTimeChart(data: any) {
-        let me = this;
-        me.periodTimeStatistics = data;
     }
 
     dateFormat(date: Date) {
