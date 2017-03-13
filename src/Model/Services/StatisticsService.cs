@@ -45,7 +45,7 @@ namespace Model.Services
             var data = Context.GameSessions
                 .Include(gs => gs.Game)
                 .Where(gs => gs.UserId == userId)
-                .Where(gs => langId == null || langId == gs.Dictionary.SecondLanguageId)
+                .Where(gs => langId == null || langId == 0 || langId == gs.Dictionary.SecondLanguageId)
                 .ToList();
             var groups = data.GroupBy(x => x.GameId, (key, list) =>
                 {
@@ -170,7 +170,7 @@ namespace Model.Services
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.Dictionary.Id == dictionaryId)
-                .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
+                .Where(gst => gameId == null || gameId == 0 || gameId == gst.GameSession.GameId)
                 .ToList();
             return ConvertGameSessionsToStatistics(data);
         }
@@ -245,9 +245,10 @@ namespace Model.Services
         {
             return Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
+                .Include(gst => gst.Translation)
                 .Where(gst => gst.GameSession.UserId == userId)
                 .Where(gst => gst.GameSession.Dictionary.Id == dictionaryId)
-                .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
+                .Where(gst => gameId == null || gameId == 0 || gameId == gst.GameSession.GameId)
                 .OrderBy(gst => gst.Translation.SecondLangWord)
                 .ToList();
         }
@@ -285,10 +286,11 @@ namespace Model.Services
             var data = Context.GameSessionTranslations
                 .Include(gst => gst.GameSession.Game)
                 .Where(gst => gst.GameSession.UserId == userId)
-                .Where(gst => langId == null || langId == gst.GameSession.Dictionary.SecondLanguageId)
-                .Where(gst => gameId == null || gameId == gst.GameSession.GameId)
+                .Where(gst => langId == null || langId == 0 || langId == gst.GameSession.Dictionary.SecondLanguageId
+                           || langId == gst.GameSession.Dictionary.FirstLanguageId)
+                .Where(gst => gameId == null || gameId ==0 || gameId == gst.GameSession.GameId)
                 .Where(gst => gst.GameSession.DateStart.Date >= startDate.Date)
-                .Where(gst => gst.GameSession.DateStart.Date <= endDate.Date)
+                .Where(gst => gst.GameSession.DateEnd != null && gst.GameSession.DateEnd.Value.Date <= endDate.Date)
                 .ToList();
             return data;
         }
