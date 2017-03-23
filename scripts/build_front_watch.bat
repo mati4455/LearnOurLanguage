@@ -1,2 +1,2 @@
-cd "../src/LearnOurLanguage.Web"
-webpack --progress --colors --watch
+cd "../src/LearnOurLanguage.Front"
+npm start
