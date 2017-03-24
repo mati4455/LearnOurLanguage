@@ -21,7 +21,7 @@ export class HttpRequestHelper {
 
 export class ODataConfig extends RequestOptions { // BaseRequestOptions
     private options: RequestOptions = new RequestOptions();
-    private params: URLSearchParams = new URLSearchParams();
+    public params: URLSearchParams = new URLSearchParams();
 
     public get requestOptions() {
         let me = this;
