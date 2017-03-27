@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router } from '@angular/router';
+import { FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'my-app',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class AuthRegisterComponent {
-
+    complexForm: FormGroup;
     model: User;
 
     constructor(
@@ -28,6 +29,7 @@ export class AuthRegisterComponent {
 
     register() {
         let me = this;
+
         me.service.post(me.model, me.registered, me);
     }
 

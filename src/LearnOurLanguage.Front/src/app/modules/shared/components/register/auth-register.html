@@ -5,10 +5,6 @@
                 <h1>Rejestracja</h1>
                 <form (ngSubmit)="register()">
                     <div class="form-group">
-                        <label for="login">Login</label>
-                        <input type="text" class="form-control" id="login" name="login" [(ngModel)]="model.login" required>
-                    </div>
-                    <div class="form-group">
                         <label for="firstName">Imię</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" required>
                     </div>
@@ -18,7 +14,11 @@
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="model.email" required>
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input type="text" class="form-control" id="login" name="login" [(ngModel)]="model.login" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Hasło</label>
@@ -28,10 +28,10 @@
                         <label for="rePassword">Powtórz hasło</label>
                         <input type="password" class="form-control" id="rePassword" name="rePassword" [(ngModel)]="model.rePassword" required>
                     </div>
-                    
+
                     <a class="btn btn-default pull-left" routerLink="/">Powrót</a>
-                    <button type="submit" class="btn btn-primary pull-right">Zarejestruj</button>
-                    <div class="clearboth"></div>          
+                    <button type="submit" class="btn btn-primary pull-right">Załóż konto</button>
+                    <div class="clearboth"></div>
                 </form>
             </div>
         </div>

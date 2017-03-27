@@ -51,6 +51,7 @@ img {
     & > div {
         background: rgba(255, 255,255, .8);
         overflow: auto;
+        min-height: 600px;
     }
 }
 

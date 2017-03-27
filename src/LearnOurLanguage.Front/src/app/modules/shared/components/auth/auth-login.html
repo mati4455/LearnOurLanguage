@@ -6,7 +6,7 @@
                 <form (ngSubmit)="logIn()">
                     <div class="form-group">
                         <label for="login">Login</label>
-                        <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" name="login">
+                        <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" [ngClass]="model.login.valid ? '' : 'has-error'" name="login">
                     </div>
                     <div class="form-group">
                         <label for="password">Hasło</label>
