@@ -3,13 +3,14 @@
 .wrap {
     background: rgba(221, 221, 221, .9);
     font-size: 18px;
-    margin: 0 0 $half_margin;
+    // margin: 0 0 $half_margin;
+    margin: 0 0 2px; // zgodnie z zaleceniami p. Mazur
 
     & > div {
         font-size: 18px;
         text-align: center;
-        padding-top: 7px;
-        padding-bottom: 7px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     &:last-child {

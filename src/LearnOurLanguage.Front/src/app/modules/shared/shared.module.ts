@@ -1,5 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedRoutes } from './shared.routes';
@@ -16,6 +17,7 @@ import { Configuration } from '../../app.constants';
 
     imports: [
         FormsModule,
+        CustomFormsModule,
         CommonModule,
         RouterModule,
         SharedRoutes

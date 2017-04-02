@@ -4,7 +4,7 @@
         <form (ngSubmit)="updateDictionary()">
             <div class="form-group">
                 <label for="name">Nazwa słownika:</label>
-                <input [(ngModel)]="dictionary.name" required name="name" min="3" type="text" class="form-control" id="name" [value]="dictionary.name"
+                <input [(ngModel)]="dictionary.name" required name="name" type="text" class="form-control" id="name" [value]="dictionary.name"
                     placeholder="nazwa słownika">
             </div>
 
@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label for="description">Opis słownika:</label>
-                <input [(ngModel)]="dictionary.description" required name="description" min="3" type="text" class="form-control" id="description"
+                <input [(ngModel)]="dictionary.description" required name="description" type="text" class="form-control" id="description"
                     [value]="dictionary.description" placeholder="opis słownika">
             </div>
 
@@ -48,11 +48,11 @@
 
             <div *ngFor="let translation of translations; let i = index;" class="form-group translationWords">
                 <div class="leftWord">
-                    <input [(ngModel)]="translation.firstLangWord" required name="firstLangWord-{{i}}" min="3" type="text" class="form-control"
+                    <input [(ngModel)]="translation.firstLangWord" required name="firstLangWord-{{i}}" type="text" class="form-control"
                         [value]="translation.firstLangWord" placeholder="słówko">
                 </div>
                 <div class="rightWord">
-                    <input [(ngModel)]="translation.secondLangWord" required name="secondLangWord-{{i}}" min="3" type="text" class="form-control"
+                    <input [(ngModel)]="translation.secondLangWord" required name="secondLangWord-{{i}}" type="text" class="form-control"
                         [value]="translation.secondLangWord" placeholder="tłumaczenie">
                 </div>
                 <div class="removeWord">

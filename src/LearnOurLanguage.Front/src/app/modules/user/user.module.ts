@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { CollapseModule } from 'ng2-bootstrap/collapse';
@@ -19,6 +20,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     imports: [
         CommonModule,
         FormsModule,
+        CustomFormsModule,
         HttpModule,
         UserRoutes,
         ChartsModule,

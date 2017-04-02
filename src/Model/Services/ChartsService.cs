@@ -11,12 +11,12 @@ namespace Model.Services
     public class ChartsService : IChartsService
     {
         #region Stałe, Etykiety
-        const string NumberOfCorrectAnswers = "Poprawne odpowiedzi";
-        const string NumberOfWrongAnswers = "Błędne odpowiedzi";
-        const string MinTime = "Minimalny czas odpowiedzi";
-        const string MaxTime = "Maksymalny czas odpowiedzi";
-        const string AverageTime = "Średni czas odpowiedzi";
-        const string WordName = "Procent poprawnych odpowiedzi słówka";
+        const string NumberOfCorrectAnswers = "Poprawne odpowiedzi [liczba]";
+        const string NumberOfWrongAnswers = "Błędne odpowiedzi [liczba]";
+        const string MinTime = "Minimalny czas odpowiedzi [s]";
+        const string MaxTime = "Maksymalny czas odpowiedzi [s]";
+        const string AverageTime = "Średni czas odpowiedzi [s]";
+        const string WordName = "Procent poprawnych odpowiedzi słówka [%]";
         #endregion
 
         #region Context, Serwisy i konstruktor

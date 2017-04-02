@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 
+import { CustomFormsModule } from 'ng2-validation';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
@@ -29,6 +30,7 @@ let optionsForNotification: any = {
         BrowserModule,
         AppRoutes,
         FormsModule,
+        CustomFormsModule,
         ToastModule.forRoot(),
         ChartsModule,
         SharedModule.forRoot(),

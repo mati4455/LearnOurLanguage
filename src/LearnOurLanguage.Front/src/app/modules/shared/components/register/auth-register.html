@@ -6,27 +6,33 @@
                 <form (ngSubmit)="register()">
                     <div class="form-group">
                         <label for="firstName">Imię</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" required>
+                        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName"
+                            [rangeLength]="[2, 50]" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Nazwisko</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" required>
+                        <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName"
+                            [rangeLength]="[2, 50]" required>
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" required>
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email"
+                            [rangeLength]="[4, 256]" required>
                     </div>
                     <div class="form-group">
                         <label for="login">Login</label>
-                        <input type="text" class="form-control" id="login" name="login" [(ngModel)]="model.login" required>
+                        <input type="text" class="form-control" id="login" name="login" [(ngModel)]="model.login"
+                            [rangeLength]="[3, 50]" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Hasło</label>
-                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="model.password" required>
+                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="model.password"
+                            [rangeLength]="[5, 50]" required #password="ngModel">
                     </div>
                     <div class="form-group">
                         <label for="rePassword">Powtórz hasło</label>
-                        <input type="password" class="form-control" id="rePassword" name="rePassword" [(ngModel)]="model.rePassword" required>
+                        <input type="password" class="form-control" id="rePassword" name="rePassword" [(ngModel)]="model.rePassword"
+                            [rangeLength]="[5, 50]" required #rePassword="ngModel" [equalTo]="password" >
                     </div>
 
                     <a class="btn btn-default pull-left" routerLink="/">Powrót</a>

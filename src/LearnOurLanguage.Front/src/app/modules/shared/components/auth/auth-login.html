@@ -6,11 +6,11 @@
                 <form (ngSubmit)="logIn()">
                     <div class="form-group">
                         <label for="login">Login</label>
-                        <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" [ngClass]="model.login.valid ? '' : 'has-error'" name="login">
+                        <input type="text" class="form-control" id="login" [rangeLength]="[3, 50]"  required [(ngModel)]="model.login" name="login">
                     </div>
                     <div class="form-group">
                         <label for="password">Hasło</label>
-                        <input type="password" class="form-control" id="password" required [(ngModel)]="model.password" name="password">
+                        <input type="password" class="form-control" id="password" [rangeLength]="[5, 50]" required [(ngModel)]="model.password" name="password">
                     </div>
                     <a class="btn btn-default pull-left" routerLink="/">Powrót</a>
                     <button type="submit" class="btn btn-primary pull-right">Zaloguj</button>

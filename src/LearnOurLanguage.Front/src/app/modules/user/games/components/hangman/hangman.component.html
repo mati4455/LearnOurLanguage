@@ -11,7 +11,7 @@
 
             <div class="form-group">
                 <label for="maxNumberOfQuestions">Maksymalna liczba pytań:</label>
-                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" min="3" type="number" class="form-control"
+                <input [(ngModel)]="parameters.maxNumberOfQuestions" required name="maxNumberOfQuestions" [min]="3" type="number" class="form-control"
                     id="maxNumberOfQuestions" placeholder="liczba pytań">
             </div>
             <div class="right">
