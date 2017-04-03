@@ -12,6 +12,7 @@ export class DictionaryVoModel {
         public userId = 0,
         public firstLanguageId: number = null,
         public secondLanguageId: number = null,
+        public parentDictionaryId: number = null,
         public translationList: Array<TranslationModel> = []
     ) { }
 

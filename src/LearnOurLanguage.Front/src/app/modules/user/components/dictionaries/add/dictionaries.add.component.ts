@@ -95,6 +95,7 @@ export class DictionariesAddComponent {
         me.dictionaryVo.translationList = me.translations;
         me.dictionaryVo.firstLanguageId = me.dictionary.firstLanguage.id;
         me.dictionaryVo.secondLanguageId = me.dictionary.secondLanguage.id;
+        me.dictionaryVo.parentDictionaryId = me.dictionary.parentDictionaryId;
         me.dictionariesService.post(me.dictionaryVo, me.savedDictionary, me);
     }
 
