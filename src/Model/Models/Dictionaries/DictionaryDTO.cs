@@ -14,7 +14,7 @@ namespace Model.Models.Dictionaries
         public virtual int UserId { get; set; }
         public virtual int FirstLanguageId { get; set; }
         public virtual int SecondLanguageId { get; set; }
-        public virtual int ParentDictionaryId { get; set; }
+        public virtual int? ParentDictionaryId { get; set; }
         public virtual IList<Translation> TranslationList { get; set; }
     }
 }

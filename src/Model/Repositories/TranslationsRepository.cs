@@ -19,7 +19,8 @@ namespace Model.Repositories
             return GetAll()
                 //.Include(x => x.Dictionary.FirstLanguage)
                 //.Include(x => x.Dictionary.SecondLanguage)
-                .Where(x => x.DictionaryId == dictionaryId);
+                .Where(x => x.DictionaryId == dictionaryId)
+                .OrderBy(x => x.FirstLangWord);
         }
 
         public void DeleteByDictionaryId(int dictionaryId)

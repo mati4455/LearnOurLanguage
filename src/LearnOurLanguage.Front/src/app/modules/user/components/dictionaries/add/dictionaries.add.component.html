@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-xs-12">
-        <h2 class="section-title">Tworzenie nowego słownika</h2>
+        <h2 class="section-title" *ngIf="dictionary.id == 0">Dodawanie nowego słownika</h2>
+        <h2 class="section-title" *ngIf="dictionary.id != 0">Edycja słownika</h2>
         <form (ngSubmit)="updateDictionary()">
             <div class="form-group">
                 <label for="name">Nazwa słownika:</label>

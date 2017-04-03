@@ -12,7 +12,7 @@ namespace Model.Repositories
     {
         public DictionariesRepository(DatabaseContext db) : base(db)
         {
-            
+
         }
 
         public override Dictionary GetById(int id)
@@ -22,7 +22,7 @@ namespace Model.Repositories
                .Include(x => x.SecondLanguage)
                .FirstOrDefault(x => x.Id == id);
         }
-        
+
         public IList<Dictionary> GetForUser(int userId)
         {
             return GetAll()
