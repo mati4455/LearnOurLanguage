@@ -88,6 +88,7 @@ export class DictionariesAddComponent {
         let me = this;
         me.dictionaryVo.userId = me.userId;
         me.dictionaryVo.id = me.dictionary.id;
+        me.dictionaryVo.date = me.dictionary.date;
         me.dictionaryVo.name = me.dictionary.name;
         me.dictionaryVo.isPublic = me.dictionary.isPublic;
         me.dictionaryVo.description = me.dictionary.description;
