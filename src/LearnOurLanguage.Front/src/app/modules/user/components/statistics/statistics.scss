@@ -5,3 +5,15 @@ label {
 .drawButton {
     width: 50%;
 }
+
+.picker {
+    .datepicker-container,
+    .datepicker-input-container {
+        display: block !important;
+    }
+
+    .datepicker-input {
+        width: calc(100% - 26px) !important;
+        height: 34px !important;
+    }
+}

@@ -3,6 +3,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { ChartsService, DictionariesService, LanguageService } from 'lol/services';
 import { LineChartData, PieChartData, DailyStatistics, DictionaryModel, LanguageModel, GameModel } from 'lol/models';
 import { BarChartColors, BasicChartOptions, PieChartColors } from 'lol/consts';
+import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
 declare let store: any;
 
@@ -35,8 +36,11 @@ export class StatisticsComponent {
     languageId: number = 0;
     dictionaryId: number = 0;
     gameId: number = 0;
-    startDate: Date;
-    endDate: Date;
+
+    options: DatePickerOptions;
+    startDate: DateModel;
+    endDate: DateModel;
+
     gameDicId: number = 0;
     dicId: number = 0;
 
@@ -48,6 +52,9 @@ export class StatisticsComponent {
 
     constructor(private chartsService: ChartsService, private dictionariesService: DictionariesService, private languageService: LanguageService) {
         let me = this;
+        me.options = new DatePickerOptions();
+        me.options.todayText = "Dzisiaj";
+        me.options.clearText = "Wyczyść";
     }
 
     ngOnInit() {
@@ -61,16 +68,17 @@ export class StatisticsComponent {
 
     generate() {
         let me = this;
-        me.endDate = new Date();
-        me.startDate = new Date();
-        me.startDate.setDate(me.endDate.getDate() - 100);
+
+        if (!me.startDate || !me.endDate) return;
+
         let params = {
             userId: me.userId,
             langId: me.languageId,
             gameId: me.gameId,
-            startDate: me.dateFormat(me.startDate),
-            endDate: me.dateFormat(me.endDate)
+            startDate: me.startDate.formatted, // me.dateFormat(me.startDate),
+            endDate: me.endDate.formatted //me.dateFormat(me.endDate)
         };
+
         me.chartsService.getChartForUserByPeriod(params, me.loadPeriodUser, me);
         me.chartsService.getTimeChartForUserByPeriod(params, me.loadTimePeriod, me);
     }
@@ -88,6 +96,7 @@ export class StatisticsComponent {
 
     loadPeriodUser(data: any) {
         let me = this;
+        debugger;
         me.periodStatistics = data;
         me.updateChart();
     }
@@ -123,8 +132,7 @@ export class StatisticsComponent {
 
     filterDictionaries(event: any) {
         let me = this;
-        me.dictionariesFiltered = me.dictionaries.filter((element) => element.firstLanguage.id == event.target.value || element.secondLanguage.id == event.target.value);
-
+        // me.dictionariesFiltered = me.dictionaries.filter((element) => element.firstLanguage.id == event.target.value || element.secondLanguage.id == event.target.value);
     }
 
     loadDictionaries(data: any) {

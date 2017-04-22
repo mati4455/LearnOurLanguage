@@ -3,14 +3,16 @@
     <h3>Parametry</h3>
     <form (ngSubmit)="generate()">
         <div class="row">
-            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="languages">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3" *ngIf="languages">
                 <label for="languageId">Język:</label>
-                <select [(ngModel)]="languageId" (change)="filterDictionaries($event)" required name="languageId" class="form-control" id="languageId">
+                <select [(ngModel)]="languageId" (change)="filterDictionaries($event)" name="languageId" class="form-control" id="languageId">
+                    <option value="0">Wszystkie</option>
                     <option *ngFor="let language of languages" [value]="language.id">
                         {{language.name}}
                     </option>
                 </select>
             </div>
+            <!--
             <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="dictionariesFiltered">
                 <label for="dictionaryId">Słownik:</label>
                 <select [(ngModel)]="dictionaryId" name="dictionaryId" class="form-control" id="dictionaryId" [disabled]="dictionariesFiltered.length==0">
@@ -20,27 +22,29 @@
                     </option>
                 </select>
             </div>
-            <div class="form-group col-xs-12 col-sm-6 col-md-4" *ngIf="games">
+            -->
+            <div class="form-group col-xs-12 col-sm-6 col-md-3" *ngIf="games">
                 <label for="gameId">Gra:</label>
-                <select [(ngModel)]="gameId" required name="gameId" class="form-control" id="gameId">
+                <select [(ngModel)]="gameId" name="gameId" class="form-control" id="gameId">
                     <option value="0">Wszystkie</option>
                     <option *ngFor="let game of games" [value]="game.id">
                         {{game.name}}
                     </option>
                 </select>
             </div>
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="startDate">Data od:</label>
-                <input [(ngModel)]="startDate" type="date" class="form-control" id="startDate" name="startDate">
+                <ng2-datepicker [options]="options" required id="startDate" name="startDate" [(ngModel)]="startDate" class="picker form-control"></ng2-datepicker>
             </div>
 
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="endDate">Data do:</label>
-                <input [(ngModel)]="endDate" type="date" class="form-control" id="endDate" name="endDate" />
+                <ng2-datepicker [options]="options" required id="endDate" name="endDate" [(ngModel)]="endDate" class="picker form-control"></ng2-datepicker>
             </div>
-
-            <div class="form-group right col-xs-12 col-sm-6 col-md-4">
+        </div>
+        <div class="row">
+            <div class="form-group right col-md-push-8 col-xs-12 col-sm-6 col-md-4">
                 <label for="rysujButton">&nbsp;</label>
                 <input type="submit" class="btn btn-primary form-control drawButton" id="rysujButton" value="Rysuj wykresy"/>
             </div>
@@ -50,12 +54,12 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <div *ngIf="periodStatistics && periodStatistics.labels.length > 0">
+        <div *ngIf="periodStatistics && periodStatistics != undefined && periodStatistics.labels.length > 0">
             <canvas baseChart #periodChart [datasets]="periodStatistics.data" [labels]="periodStatistics.labels" [colors]="barChartColors" chartType="bar"></canvas>
         </div>
     </div>
     <div class="col-xs-12">
-        <div *ngIf="periodTimeStatistics && periodTimeStatistics.labels.length > 0">
+        <div *ngIf="periodTimeStatistics && periodTimeStatistics != undefined && periodTimeStatistics.labels.length > 0">
             <canvas baseChart #periodTimeChart [datasets]="periodTimeStatistics.data" [labels]="periodTimeStatistics.labels" [colors]="barChartColors"
                 chartType="bar"></canvas>
         </div>

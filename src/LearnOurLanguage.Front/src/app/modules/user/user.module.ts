@@ -10,6 +10,7 @@ import { CustomFormsModule } from 'ng2-validation';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { CollapseModule } from 'ng2-bootstrap/collapse';
+import { DatePickerModule } from 'ng2-datepicker';
 
 import { UserRoutes } from './user.routes';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -24,6 +25,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
         HttpModule,
         UserRoutes,
         ChartsModule,
+        DatePickerModule,
         TabsModule.forRoot(),
         CollapseModule.forRoot()
     ],
