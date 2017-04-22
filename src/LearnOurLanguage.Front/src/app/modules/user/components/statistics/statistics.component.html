@@ -54,17 +54,17 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <div *ngIf="periodStatistics && periodStatistics != undefined && periodStatistics.labels.length > 0">
+        <div *ngIf="periodStatistics?.labels?.length > 0">
             <canvas baseChart #periodChart [datasets]="periodStatistics.data" [labels]="periodStatistics.labels" [colors]="barChartColors" chartType="bar"></canvas>
         </div>
     </div>
     <div class="col-xs-12">
-        <div *ngIf="periodTimeStatistics && periodTimeStatistics != undefined && periodTimeStatistics.labels.length > 0">
+        <div *ngIf="periodTimeStatistics?.labels?.length > 0">
             <canvas baseChart #periodTimeChart [datasets]="periodTimeStatistics.data" [labels]="periodTimeStatistics.labels" [colors]="barChartColors"
                 chartType="bar"></canvas>
         </div>
     </div>
-    <p class="col-xs-12" *ngIf="(!periodStatistics || periodStatistics.labels.length == 0) || (!periodTimeStatistics && periodTimeStatistics.labels.length == 0)">
+    <p class="col-xs-12" *ngIf="(!periodStatistics || periodStatistics.labels.length == 0) || (!periodTimeStatistics || periodTimeStatistics.labels.length == 0)">
         Nie znaleziono statystyk dla podanych parametrów
     </p>
 </div>

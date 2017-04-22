@@ -120,7 +120,10 @@ export class StatisticsComponent {
 
     updateChart() {
         let me = this;
-        if (me.charts) {
+        if (me.charts && (
+            (me.periodStatistics && me.periodTimeStatistics) ||
+            (me.dictionariesStatistics && me.dictionariesDetailsStatistics)
+        )) {
             setTimeout(() => {
                 me.charts.forEach((chart) => {
                     chart.ngOnChanges({} as SimpleChanges);
