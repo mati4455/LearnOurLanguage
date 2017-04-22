@@ -185,7 +185,7 @@ export class QuizComponent {
      *
      * @memberOf QuizComponent
      */
-    chartColors = PieChartColors;
+    chartColors: any = PieChartColors;
 
     /**
      * Creates an instance of QuizComponent

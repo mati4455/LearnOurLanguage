@@ -55,7 +55,7 @@ export class FlashcardsComponent {
     updateTimeInterval: number = 1000;
     interval: any = null;
 
-    chartColors = PieChartColors;
+    chartColors: any = PieChartColors;
 
     constructor(
         private gamesHelper: GamesHelper,

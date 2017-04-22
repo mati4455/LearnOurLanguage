@@ -60,7 +60,7 @@ export class MemoComponent {
     interval: any = null;
     timeout: any = null;
 
-    chartColors = PieChartColors;
+    chartColors: any = PieChartColors;
     animationTime: number = 300;
 
     constructor(

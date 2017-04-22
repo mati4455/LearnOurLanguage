@@ -61,7 +61,7 @@ export class HangmanComponent {
     animationTime: number = 300;
     updateTimeInterval: number = 1000;
 
-    chartColors = PieChartColors;
+    chartColors: any = PieChartColors;
 
     constructor(
         private gamesHelper: GamesHelper,

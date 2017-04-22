@@ -15,7 +15,7 @@ export class HomeComponent {
     public isLogged: boolean;
     public accessLevel: number;
 
-    constructor(private auth: AuthLoginComponent) {
+    constructor(public auth: AuthLoginComponent) {
         let me = this;
         me.accessLevel = me.auth.getAccessLevel();
         me.isLogged = me.auth.getLoggedIn();

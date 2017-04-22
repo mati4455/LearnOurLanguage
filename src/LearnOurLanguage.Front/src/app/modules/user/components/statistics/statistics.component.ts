@@ -96,7 +96,6 @@ export class StatisticsComponent {
 
     loadPeriodUser(data: any) {
         let me = this;
-        debugger;
         me.periodStatistics = data;
         me.updateChart();
     }
