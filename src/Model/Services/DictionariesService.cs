@@ -47,7 +47,8 @@ namespace Model.Services
                         DictionariesRepository.Update(dictionary);
                     }
                     else {
-                        dictionary.Date = new DateTime();
+                        dictionary.Date = DateTime.Now;
+                        dictionary.ParentDictionaryId = null;
                         DictionariesRepository.Insert(dictionary);
                     }
                     DictionariesRepository.Save();
