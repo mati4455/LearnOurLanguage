@@ -3,10 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'game-chooser',
     templateUrl: 'chooser.component.html',
-    styleUrls: ['./chooser.scss'],
-    providers: [
-
-    ]
+    styleUrls: ['./chooser.scss']
 })
 
 export class ChooserComponent {
