@@ -23,15 +23,11 @@ Aby przetestować migrację, należy w `Package Manager Console` (dalej nazywane
 + Wykonać komendę `Update-Database`
 
 ### Budowanie front-endu
-Aby zbudować nasz front musimy pobrać NodeJs.
+Lokalizacja projektu FrontEndu: `src\LearnOurLanguage.Front`.
 
-Prawdopodobnie Visual Studio odzyska za nas pakiety, jednak ja proponuje odpalić skrypt `scripts/first_build.bat`,
-który pobierze wszystkie moduły Node potrzebne dla naszego projektu.
+Aby zbudować nasz front musimy pobrać NodeJs. Najnowsza wersja aplikacji do budowania używa zalecanego `angular cli`.
 
-Teraz pora na zbudowanie aplikacji. W tym celu będziemy uruchamiać skrypt `scripts/build_front_watch.bat`
-
-Podczas produkcji będziemy używać WebPacka a trybie `watch`. Oznacza to, że będzie on nasłuchiwał zmian w plikach
-i od razu je kompilował.
+Przy pierwszym budowaniu należy uruchomić polecenie `npm install`. Przy codziennej pracy uruchamiamy `npm start`.
 
 
 ## Tworzenie front-endu
