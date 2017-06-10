@@ -22,20 +22,16 @@ Aby przetestować migrację, należy w `Package Manager Console` (dalej nazywane
 + Wybrać `Default project` na `src\Model`
 + Wykonać komendę `Update-Database`
 
-### Budowanie front-endu
+### Budowanie i tworzenie front-endu
 Lokalizacja projektu FrontEndu: `src\LearnOurLanguage.Front`.
 
 Aby zbudować nasz front musimy pobrać NodeJs. Najnowsza wersja aplikacji do budowania używa zalecanego `angular cli`.
 
-Przy pierwszym budowaniu należy uruchomić polecenie `npm install`. Przy codziennej pracy uruchamiamy `npm start`.
+Przy pierwszym budowaniu należy uruchomić polecenie `npm install`. 
 
+Do zbudowania frontu wystarczy polecenie `npm run build`.
 
-## Tworzenie front-endu
-Do tworzenia frontu będziemy używać Visual Studio Code (w żadnym wypadku pełnego Visual Studio).
-
-W repozytorium znajdują się podpięte taski pod VS Code. Aby rozpocząć pracę z tworzeniem należy uruchomić VS Code, a następnie otworzyć folder -> `src/LearnOurLanguage.Web/angular2App`
-
-Będzie to nasz wejściowy folder. Po edycji pliku `app.scss`, wymagane jest jego skompilowanie -> skrót `CTRL + SHIFT + B`
+Przy codziennej pracy uruchamiamy `npm start`.
 
 ## Adresy
 Serwer: localhost na porcie 5000
