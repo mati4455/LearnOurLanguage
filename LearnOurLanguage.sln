@@ -1,22 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{599448E5-ED3D-44C2-93DA-46650CE8B1CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14F7F195-ABA8-42B3-9C78-B4B6B7F13DB6}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LearnOurLanguage.Web", "src\LearnOurLanguage.Web\LearnOurLanguage.Web.xproj", "{99279475-BE89-4DC3-AD47-9A9D139915B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnOurLanguage.Web", "src\LearnOurLanguage.Web\LearnOurLanguage.Web.csproj", "{99279475-BE89-4DC3-AD47-9A9D139915B0}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Model", "src\Model\Model.xproj", "{9CC768F4-AB51-4295-BC61-B2098F8FE168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "src\Model\Model.csproj", "{9CC768F4-AB51-4295-BC61-B2098F8FE168}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "UnitTests", "src\UnitTests\UnitTests.xproj", "{C82A8655-4C4C-4D77-910B-AD35D155A1F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "src\UnitTests\UnitTests.csproj", "{C82A8655-4C4C-4D77-910B-AD35D155A1F9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SeleniumTests", "src\SeleniumTests\SeleniumTests.xproj", "{C162D20D-FCDE-403A-8DAF-9AB3F4A8A3C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumTests", "src\SeleniumTests\SeleniumTests.csproj", "{C162D20D-FCDE-403A-8DAF-9AB3F4A8A3C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
