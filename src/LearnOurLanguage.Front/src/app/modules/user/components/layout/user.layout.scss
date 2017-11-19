@@ -40,8 +40,9 @@
                 &:nth-child(1) { &:hover, &.active { i { color: $menu_hover_board; } } }
                 &:nth-child(2) { &:hover, &.active { i { color: $menu_hover_dictionaries; } } }
                 &:nth-child(3) { &:hover, &.active { i { color: $menu_hover_games; } } }
-                &:nth-child(4) { &:hover, &.active { i { color: $menu_hover_statistics; } } }
-                &:nth-child(5) { &:hover, &.active { i { color: $menu_hover_logout; } } }
+                &:nth-child(4) { &:hover, &.active { i { color: $menu_hover_stories; } } }
+                &:nth-child(5) { &:hover, &.active { i { color: $menu_hover_statistics; } } }
+                &:nth-child(6) { &:hover, &.active { i { color: $menu_hover_logout; } } }
             }
         }
 
@@ -51,8 +52,9 @@
                 &:nth-child(1) { &:hover, &.active { background: $menu_hover_board; } }
                 &:nth-child(2) { &:hover, &.active { background: $menu_hover_dictionaries; } }
                 &:nth-child(3) { &:hover, &.active { background: $menu_hover_games; } }
-                &:nth-child(4) { &:hover, &.active { background: $menu_hover_statistics; } }
-                &:nth-child(5) { &:hover, &.active { background: $menu_hover_logout; } }
+                &:nth-child(4) { &:hover, &.active { background: $menu_hover_stories; } }
+                &:nth-child(5) { &:hover, &.active { background: $menu_hover_statistics; } }
+                &:nth-child(6) { &:hover, &.active { background: $menu_hover_logout; } }
             }
         }
     }

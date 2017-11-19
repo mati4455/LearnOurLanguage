@@ -16,6 +16,7 @@ import { UserRoutes } from './user.routes';
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StoriesComponent } from './components/stories/stories.component';
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
         DictionariesListComponent,
         DictionariesFormComponent,
         DictionariesAddComponent,
-        StatisticsComponent
+        StatisticsComponent,
+        StoriesComponent
     ],
 
     exports: [

@@ -1,12 +1,13 @@
 import { DictionariesListComponent } from './components/dictionaries/list/dictionaries.list.components';
 import { DictionariesFormComponent } from './components/dictionaries/form/dictionaries.form.component';
 import { DictionariesComponent } from './components/dictionaries/layout/dictionaries.component';
-import { DictionariesAddComponent} from './components/dictionaries/add/dictionaries.add.component'
+import { DictionariesAddComponent} from './components/dictionaries/add/dictionaries.add.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StoriesComponent } from './components/stories/stories.component';
 
 const routes: Routes = [
     {
@@ -52,6 +53,10 @@ const routes: Routes = [
             {
                 path: 'games',
                 loadChildren: './games/games.module#GamesModule'
+            },
+            {
+                path: 'stories',
+                component: StoriesComponent
             },
             {
                 path: 'statistics',

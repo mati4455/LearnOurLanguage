@@ -1,0 +1,29 @@
+.stories {
+    margin-top: 30px;
+}
+
+.menu {
+    text-align: center;
+
+    button {
+        display: inline-block;
+        margin: 30px;
+        padding: 30px;
+        text-align: center;
+        font-size: 40px;
+        border-radius: 30px;
+        border: none;
+        background: rgba(255,255,255, .2);
+        box-shadow: 0 0 4px 1px #999;
+        cursor: pointer;
+        outline: none;
+        transition: .2s all ease-in-out;
+
+        &:hover,
+        &.active {
+            background: #81a339;
+            color: #fff;
+            box-shadow: 0 0 6px 1px #444;
+        }
+    }
+}

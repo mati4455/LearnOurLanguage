@@ -1,0 +1,26 @@
+<h1 class="page-title">Historyjki</h1>
+
+<div class="menu">
+
+    <button type="button" (click)="selectTab(0)" [class.active]="checkClass(0)">
+        <i class="fa fa-plane" aria-hidden="true"></i>
+        <span>Lotnisko</span>
+    </button>
+    <button type="button" (click)="selectTab(1)" [class.active]="checkClass(1)">
+        <i class="fa fa-coffee" aria-hidden="true"></i>
+        <span>Kawiarnia</span>
+    </button>
+    <button type="button" (click)="selectTab(2)" [class.active]="checkClass(2)">
+        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+        <span>Sklep</span>
+    </button>
+
+</div>
+
+<div class="stories">
+    <tabset #staticTabs>
+        <tab heading="Lotnisko">Zawartość lotniska</tab>
+        <tab heading="Kawiarnia">Zawartość kawiarni</tab>
+        <tab heading="Sklep">Zawartość sklepu</tab>
+    </tabset>
+</div>
