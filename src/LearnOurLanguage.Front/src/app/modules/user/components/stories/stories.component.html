@@ -19,8 +19,29 @@
 
 <div class="stories">
     <tabset #staticTabs>
-        <tab heading="Lotnisko">Zawartość lotniska</tab>
-        <tab heading="Kawiarnia">Zawartość kawiarni</tab>
-        <tab heading="Sklep">Zawartość sklepu</tab>
+        <tab heading="Lotnisko">
+            <img class="img-responsive" src="/assets/stories/airport.svg" />
+            <div class="answers" id="question0">
+                <button type="button" class="btn" (click)="checkAnswer($event, 0, 0)">Yes, I travel to Germany and I don't find my gate.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 0, 1)">Yes, I'm traveling to Germany and I can't find my gate.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 0, 2)">Yes, I'm traveling to Germany and I don't know which gate.</button>
+            </div>
+        </tab>
+        <tab heading="Kawiarnia">
+            <img class="img-responsive" src="/assets/stories/coffee.svg" />
+            <div class="answers" id="question1">
+                <button type="button" class="btn" (click)="checkAnswer($event, 1, 0)">Large coffee with cream and a chocolate biscuit, please.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 1, 1)">I order large coffee with cream and chocolate biscuit.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 1, 2)">Big coffee with cream and a chocolate biscuit, please.</button>
+            </div>
+        </tab>
+        <tab heading="Sklep">
+            Zawartość sklepu
+            <div class="answers" id="question2">
+                <button type="button" class="btn" (click)="checkAnswer($event, 2, 0)">I'm looking for canned tomatoes and frozen fish.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 2, 1)">I'm looking for tomato in can and frozen fish.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 2, 2)">I'm looking for canned tomatoes and frozen fishes.</button>
+            </div>
+        </tab>
     </tabset>
 </div>

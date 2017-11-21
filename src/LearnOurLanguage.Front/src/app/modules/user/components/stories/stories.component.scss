@@ -1,3 +1,5 @@
+@import "src/style/common";
+
 .stories {
     margin-top: 30px;
 }
@@ -25,5 +27,60 @@
             color: #fff;
             box-shadow: 0 0 6px 1px #444;
         }
+    }
+}
+
+.stories {
+    tab {
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}
+
+.answers {
+    button {
+        display: block;
+        font-size: 20px;
+        width: 100%;
+        text-align: center;
+        margin: $half_margin 0;
+        color: $quiz_button_color;
+        background: $quiz_button_background;
+        box-shadow: 1px 1px 4px $shadow;
+
+        &:hover {
+            box-shadow: 1px 1px 3px $shadow;
+            text-shadow: $quiz_button_shadow_hover;
+            color: $quiz_button_color_hover;
+            background: $quiz_button_background_hover;
+        }
+    }
+
+    button {
+        &.correct,
+        &.correct:hover,
+        &.wrong,
+        &.wrong:hover {
+            color: #fff;
+            text-shadow: 1px 1px 2px #333;
+        }
+
+        &.correct,
+        &.correct:hover {
+            background: $quiz_correct_background;
+        }
+
+        &.wrong,
+        &.wrong:hover {
+            background: $quiz_wrong_background;
+        }
+    }
+
+    &.disabled .correctAnswer {
+        color: #fff;
+        text-shadow: 1px 1px 2px #333;
+        background: $quiz_correct_background;
     }
 }
