@@ -21,6 +21,7 @@
     <tabset #staticTabs>
         <tab heading="Lotnisko">
             <img class="img-responsive" src="/assets/stories/airport.svg" />
+            <h2>Odpowiedz na pytanie:</h2>
             <div class="answers" id="question0">
                 <button type="button" class="btn" (click)="checkAnswer($event, 0, 0)">Yes, I travel to Germany and I don't find my gate.</button>
                 <button type="button" class="btn" (click)="checkAnswer($event, 0, 1)">Yes, I'm traveling to Germany and I can't find my gate.</button>
@@ -29,6 +30,7 @@
         </tab>
         <tab heading="Kawiarnia">
             <img class="img-responsive" src="/assets/stories/coffee.svg" />
+            <h2>Odpowiedz na pytanie:</h2>
             <div class="answers" id="question1">
                 <button type="button" class="btn" (click)="checkAnswer($event, 1, 0)">Large coffee with cream and a chocolate biscuit, please.</button>
                 <button type="button" class="btn" (click)="checkAnswer($event, 1, 1)">I order large coffee with cream and chocolate biscuit.</button>
@@ -36,11 +38,12 @@
             </div>
         </tab>
         <tab heading="Sklep">
-            Zawartość sklepu
+            <img class="img-responsive" src="/assets/stories/shop.svg" />
+            <h2>Odpowiedz na pytanie:</h2>
             <div class="answers" id="question2">
-                <button type="button" class="btn" (click)="checkAnswer($event, 2, 0)">I'm looking for canned tomatoes and frozen fish.</button>
-                <button type="button" class="btn" (click)="checkAnswer($event, 2, 1)">I'm looking for tomato in can and frozen fish.</button>
-                <button type="button" class="btn" (click)="checkAnswer($event, 2, 2)">I'm looking for canned tomatoes and frozen fishes.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 2, 0)">I'm not sure if this color fit me.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 2, 1)">I'm not sure if this color matches me.</button>
+                <button type="button" class="btn" (click)="checkAnswer($event, 2, 2)">I'm not sure if this color fits me.</button>
             </div>
         </tab>
     </tabset>

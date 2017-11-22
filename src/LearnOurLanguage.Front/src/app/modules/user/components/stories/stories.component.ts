@@ -24,6 +24,12 @@ export class StoriesComponent implements OnInit {
     }
 
     selectTab(tab_id: number) {
+        const buttons = document.querySelectorAll('.answers button');
+        [].forEach.call(buttons, function (button) {
+            button.classList = ['btn'];
+            button.style.pointerEvents = 'auto';
+        });
+
         this.staticTabs.tabs[tab_id].active = true;
     }
 
